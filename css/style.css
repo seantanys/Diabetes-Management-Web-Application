@@ -1,7 +1,13 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
-    background-color:#fbfbfb;
+    background-color:rgb(185,218,235);
+  }
+
+  .team{
+    margin-bottom: 15px;
+    text-align: center;
+    color: rgb(23, 7, 250);
   }
   
   html {
@@ -18,16 +24,19 @@ body {
     margin-bottom: 16px;
     padding: 0 8px;
   }
+
+  .column p ,h2{
+    color: rgb(23, 7, 250);
+  }
   
   .card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px 0 rgba(247, 245, 245, 0.2);
     margin: 8px;
   }
   
   .about-section {
     padding: 50px;
     text-align: center;
-    background-color: #b6caf5f5;
     color: rgb(23, 7, 250);
   }
   
@@ -36,7 +45,8 @@ body {
   }
 
   .container {
-    padding: 0 16px;
+    padding: 16px 0;
+    width: 80%;
   }
   
   .container::after, .row::after {
@@ -58,7 +68,7 @@ body {
     background-color: #000;
     text-align: center;
     cursor: pointer;
-    width: 100%;
+    width: 80%;
   }
   
   .button:hover {
@@ -94,9 +104,12 @@ a {
 
 .header{
   border-bottom: 1px solid #E2E8F0;
+  background-color: white;
+  margin-left: 0px;
+  margin-right: 0px;
 }
 
-.navbar {
+.navbar { 
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -168,7 +181,7 @@ display: block;
 }
 
 .footer {
-position: fixed;
+
 left: 0;
 bottom: 0;
 width: 100%;
@@ -183,4 +196,5 @@ font-weight: 500;
 color: rgb(23, 7, 250);
 text-align: right;
 }
+
 
