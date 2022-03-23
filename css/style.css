@@ -1,7 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+:root {
+  --text-h1: 80px;
+  --text-h2: 50px;
+  --text-h3: 35px;
+  --text-p: 22px;
+  --font-family-body: 'Poppins', sans-serif;
+  --font-family-heading: 'Poppins', sans-serif;
+  --colour-h1: rgba(1, 58, 99, 1);
+  --colour-background-teal: rgba(185, 218, 235, 1);
+  --colour-text: rgba(28, 70, 89, 1);
+  --colour-h2: rgba(5, 85, 142, 1);
+  --colour-background: rgba(255, 255, 255, 0);
+  --colour-black: rgba(0, 0, 0, 0);
+}
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: var(--font-family-body);
     margin: 0;
-    background-color:rgb(185,218,235);
+    background-color: var(--colour-background);
   }
 
   .team{
@@ -34,13 +50,19 @@ body {
     margin: 8px;
   }
   
-  .about-section {
+  .text-section {
     padding: 50px;
     text-align: center;
-    color: rgb(23, 7, 250);
+    font-size: var(--text-p);
+    background-color: var(--colour-background-teal);
+    color: var(--colour-text);
   }
   
-  .about-section h1{
+  .text-section h1{
+    padding-bottom: 25px;
+  }
+
+  .text-section h2{
     padding-bottom: 25px;
   }
 
