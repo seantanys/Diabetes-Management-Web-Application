@@ -17,10 +17,11 @@
 body {
     font-family: var(--font-family-body);
     margin: 0;
-    background-color: var(--colour-background);
+    background-color: var(--colour-background-teal);
   }
 
   .team{
+    position: relative;
     margin-bottom: 15px;
     text-align: center;
     color: rgb(23, 7, 250);
@@ -219,4 +220,12 @@ color: rgb(23, 7, 250);
 text-align: right;
 }
 
+.content-img {
+  float: left;
+  margin-bottom: 42px;
+  border-style: solid;
+  border-width: 10px;
+  border-color: rgba(28, 70, 89, 1);
+  box-shadow: 51px 51px 114px 0 rgba(18, 31, 62, 0.05);
+}
 
