@@ -13,6 +13,27 @@
     <header id="header">
         <nav class="navbar">
             <a href="#" class="logo"><span style="color:black">D</span>@H</a>
+            <section class="nav-menu">
+                <li>
+                    <a href="#" class="nav-link">Home</a>
+                </li>
+                <li>
+                    <div class="dropdown">
+                        <a href="#" class="nav-link">About</a>
+                        <div class="dropdown-content">
+                          <a href="#">About Diabetes</a>
+                          <a href="#">About this website</a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <a href="#" class="nav-link">Login</a>
+                </li>
+            </section>
+
+
+
+            <!--
             <ul class="nav-menu">
                 <li class="nav-item">
                     <a href="#" class="nav-link">Home</a>
@@ -24,33 +45,20 @@
                           <a href="#">About Diabetes</a>
                           <a href="#">About this website</a>
                         </div>
-                      </div>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">Login</a>
                 </li>
             </ul>
+        -->
             <div id="menuToggle">
-                <!--
-                A fake / hidden checkbox is used as click reciever,
-                so you can use the :checked selector on it.
-                -->
+
                 <input type="checkbox" />
-                
-                <!--
-                Some spans to act as a hamburger.
-                
-                They are acting like a real hamburger,
-                not that McDonalds stuff.
-                -->
                 <span></span>
                 <span></span>
                 <span></span>
                 
-                <!--
-                Too bad the menu has to be inside of the button
-                but hey, it's pure CSS magic.
-                -->
                 <ul id="menu">
                   <a href="#"><li>Home</li></a>
                   <hr class="solid">
@@ -77,139 +85,50 @@
         <section class="container">
             <li>
                 <img src = "../images/Kian.jpg">
-                <section class="info">
-                    <br>
+                    <p><b>Developer</b></p>
                     <p><b>Kian Dsouza</b></p>
-                    <p>Developer</p>
+                    <p>kiandsouza@me.com</p>
                     <br>
                     <p>I am Kian, a marketing technology enthusiast and I love walking my imaginary dog.</p>
-                    <br>
-                    <p>kiandsouza@me.com</p>
-                    <p><button class="button">Contact</button></p>
-                </section>
             </li>
             <li>
                 <img src = "../images/Sans.jpg">
-                <br>
+                <p><b>Developer</b></p>
                 <p><b>Sanskar Agarwal</b></p>
-                <p>Developer</p>
+                <p>sanskaraagarwal@me.com</p>
                 <br>
                 <p>My name is Sanskar and I am interested in software development, watching soccer(Manchester United) and listening to music</p>
-                <br>
-                <p>sanskaraagarwal@me.com</p>
-                <p><button class="button">Contact</button></p>
             </li>
             <li>
                 <img src = "../images/sean-pic.jpg">
-                <br>
+                <p><b>Developer</b></p>
                 <p><b>Yi Sheon Tan (Sean)</b></p>
-                <p>Developer</p>
-                <br>
-                <p>I am Yi Sheon, but you can call me Sean. My interests include software development, playing the guitar, playing video games (PC master race) and John Mayer.</p>
-                <br>
                 <p>seantan@me.com</p>
-                <p><button class="button">Contact</button></p>
+                <br>
+                <p>I am Yi Sheon, but you can call me Sean. My interests include software development, playing the guitar, playing video games (PC master race) and John Mayer.</p>               
             </li>
             <li>
                 <img src = "../images/Anh.jpg">
-                <br>
+                <p><b>Developer</b></p>
                 <p><b>Anh Pham</b></p>
-                <p>Developer</p>
-                <br>
-                <p>I am Anh. Grab me when you want to try out a new foodie place or kdrama!</p>
-                <br>
                 <p>anhpham@me.com</p>
-                <p><button class="button">Contact</button></p>
+                <br>
+                <p>I am Anh. Grab me when you want to try out a new foodie place or kdrama!</p>               
             </li>
             <li>
                 <img src = "../images/Nick.jpg">
-                <br>
+                <p><b>Developer</b></p>
                 <p><b>Nicholas Dun</b></p>
-                <p>Developer</p>
+                <p>nicdun@me.com</p>
                 <br>
                 <p>Hi, I'm Nic. I like programming, videogames and walking my dog.</p>
-                <br>
-                <p>nicdun@me.com</p>
-                <p><button class="button">Contact</button></p>
             </li>
         </section>
     </div>
 
-    <!--
-    <div class="row">
-        <div class="column">
-            <div class="profile">
-                <img src = "../images/Kian.jpg" alt="Kian" style="width:50%">
-                <div class="container">
-                    <h2>Kian Dsouza</h2>
-                    <p class="title">developer</p>
-                    <p>I am Kian, a marketing technology enthusiast and I love walking my imaginary dog.</p>
-                    <p>kiandsouza@me.com</p>
-                    <p><button class="button">Contact</button></p>
-                </div>
-            </div>
-        </div>
-
-        <div class="column">
-            <div class="profile">
-                <img src = "../images/Sans.jpg" alt="Sanskar">
-                <div class="container">
-                    <h2>Sanskar Agarwal</h2>
-                    <p class="title">Full Stack Developer</p>
-                    <p>My name is Sanskar and I am interested in software development, watching soccer (Manchester United) and listening to music</p>
-                    <p>sanskaraagarwal@me.com</p>
-                    <p><button class="button">Contact</button></p>
-                </div>
-            </div>
-        </div>
-
-        <div class="column">
-            <div class="profile">
-                <img src = "../images/sean-pic.jpg" alt="Sean">
-                <div class="container">
-                    <h2>Yi Sheon Tan (Sean)</h2>
-                    <p class="title">Future Full Stack Developer</p>
-                    <p>I am Yi Sheon, but you can call me Sean. My interests include software development, playing the guitar, playing video games (PC master race) and John Mayer.</p>
-                    <p>seantan@me.com</p>
-                    <p><button class="button">Contact</button></p>
-                </div>
-            </div>
-        </div>
-
-        <div class="column">
-            <div class="profile">
-                <img src = "../images/Anh.jpg" alt="anh">
-                <div class="container">
-                    <h2>Anh Pham</h2>
-                    <p class="title">developer</p>
-                    <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-                    <p>anhpham@me.com</p>
-                    <p><button class="button">Contact</button></p>
-                </div>
-            </div>
-        </div>
-
-        <div class="column">
-            <div class="profile">
-                <img src = "../images/Nick.jpg" alt="nic">
-                <div class="container">
-                    <h2>Nicholas Dun</h2>
-                    <p class="title">developer</p>
-                    <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-                    <p>nicdun@me.com</p>
-                    <p><button class="button">Contact</button></p>
-                </div>
-            </div>
-        </div>
-   
-
-    </div>
-    -->
-
-
     <div class="footer">
-        <p>Powered by INFO30005</p>
         <a href="#" class="logo"><span style="color:black">D</span>@H</a>
+        <p>Powered by INFO30005</p>
     </div>
 
 </body>
