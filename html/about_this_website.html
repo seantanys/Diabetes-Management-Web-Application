@@ -11,7 +11,6 @@
 <body>
  
     <header id="header">
-
         <nav class="navbar">
             <a href="#" class="logo"><span style="color:black">D</span>@H</a>
             <ul class="nav-menu">
@@ -31,13 +30,38 @@
                     <a href="#" class="nav-link">Login</a>
                 </li>
             </ul>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+            <div id="menuToggle">
+                <!--
+                A fake / hidden checkbox is used as click reciever,
+                so you can use the :checked selector on it.
+                -->
+                <input type="checkbox" />
+                
+                <!--
+                Some spans to act as a hamburger.
+                
+                They are acting like a real hamburger,
+                not that McDonalds stuff.
+                -->
+                <span></span>
+                <span></span>
+                <span></span>
+                
+                <!--
+                Too bad the menu has to be inside of the button
+                but hey, it's pure CSS magic.
+                -->
+                <ul id="menu">
+                  <a href="#"><li>Home</li></a>
+                  <hr class="solid">
+                  <a href="#"><li>About Diabetes</li></a>
+                  <hr class="solid">
+                  <a href="#"><li>About this Website</li></a>
+                  <hr class="solid">
+                  <a href="#"><li>Login</li></a>
+                </ul>
             </div>
         </nav>
-
     </header>
 
     <div class="text-section">
@@ -54,6 +78,7 @@
             <li>
                 <img src = "../images/Kian.jpg">
                 <section class="info">
+                    <br>
                     <p><b>Kian Dsouza</b></p>
                     <p>Developer</p>
                     <br>
@@ -65,6 +90,7 @@
             </li>
             <li>
                 <img src = "../images/Sans.jpg">
+                <br>
                 <p><b>Sanskar Agarwal</b></p>
                 <p>Developer</p>
                 <br>
@@ -75,6 +101,7 @@
             </li>
             <li>
                 <img src = "../images/sean-pic.jpg">
+                <br>
                 <p><b>Yi Sheon Tan (Sean)</b></p>
                 <p>Developer</p>
                 <br>
@@ -85,6 +112,7 @@
             </li>
             <li>
                 <img src = "../images/Anh.jpg">
+                <br>
                 <p><b>Anh Pham</b></p>
                 <p>Developer</p>
                 <br>
@@ -95,12 +123,13 @@
             </li>
             <li>
                 <img src = "../images/Nick.jpg">
+                <br>
                 <p><b>Nicholas Dun</b></p>
                 <p>Developer</p>
                 <br>
                 <p>Hi, I'm Nic. I like programming, videogames and walking my dog.</p>
-                <p>nicdun@me.com</p>
                 <br>
+                <p>nicdun@me.com</p>
                 <p><button class="button">Contact</button></p>
             </li>
         </section>
