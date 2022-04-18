@@ -31,6 +31,10 @@ const clinicianRouter = require('./routes/clinicianRouter')
 
 app.use('/clinician', clinicianRouter)
 
+const patientRouter = require('./routes/patientRouter')
+
+app.use('/patient', patientRouter)
+
 // Tells the app to send the string: "Our demo app is working!" when you hit the '/' endpoint.
 // app.get('/', (req,res) => {
 //     res.send('Our demo app is working!')
@@ -50,15 +54,6 @@ app.use((req,res,next) => {
 
 // the demo routes are added to the end of the '/demo-management' path
 // app.use('/people', peopleRouter)
-
-
-
-
-
-
-
-
- 
 
 
 // Tells the app to listen on port 3000 and logs tha tinformation to the console.
