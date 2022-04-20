@@ -92,6 +92,199 @@ body {
     box-sizing: border-box;
 }
 
+lottie-player {
+  width: 800px;
+  height: 800px;
+  margin-right: -50px
+}
+
+.hero-section {
+  height: 75vh;
+  background-color: var(--colour-background-teal);
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  }
+
+.hero-text button {
+  font-size: var(--text-h3);
+}
+
+.hero-text h1 {
+    font-size: var(--text-h1);
+    color: var(--colour-h1);
+}
+
+.hero-text h2 {
+    font-size: var(--text-h2);
+    font-weight: 400;
+    color: var(--colour-h1);
+    margin-bottom: 20px;
+}
+
+.sect-header {
+    background-color: var(--colour-background-teal);
+    background-position: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    box-shadow:inset 0 0 0 2000px rgba(14, 13, 13, 0.452);
+    padding-top: 3em;
+    padding-bottom: 3em;
+}
+
+.sect-header h1 {
+    font-size: var(--text-h1);
+    color: white;
+    text-align: center;
+    padding: 35px 0px;
+}
+
+.sect-header h2 {
+  color: black;
+  font-weight: 300;
+}
+
+.feature-section {
+    background-color: var(--colour-h1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 4em;
+    padding-bottom: 4em;
+}
+
+.feature-list-item {
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+    display: flex;
+    align-items: center;
+    max-width: 70%;
+    padding: 1em;
+}
+
+.caption {
+  margin-left: 25px;
+  font-size: var(--text-h3);
+  padding: 0.5em 1em;
+}
+
+.icon {
+    width: 30px;
+    height: 30px;
+}
+
+.contact-section {
+    background-color: var(--colour-background-teal);
+    color: var(--colour-h1);
+    display: flex;
+    flex-direction: column;
+    padding-top: 3em;
+    padding-bottom: 3em;
+}
+
+.contact-section h1 {
+    width: 50%;
+    margin-right: 25%;
+    margin-left: 25%;
+    font-size: var(--text-h1);
+    font-weight: 600;
+    text-align: center;
+}
+
+.contact-section h3 {
+    font-size: var(--text-h3);
+    font-weight: 300;
+    text-align: center;
+}
+
+/* RECORD/MEASUREMENT PAGE */
+/*  */
+/*  */
+
+.page-heading-1 {
+  background-color: var(--colour-background-teal);
+  padding-top: 3em;
+  padding-bottom: 3em;
+}
+
+.page-heading-1 h1 {
+  font-size: var(--text-h1);
+  color: var(--colour-h1);
+  text-align: center;
+  padding: 35px 0px;
+}
+
+.page-heading-1 h2 {
+  width: 50%;
+  margin-right: 25%;
+  margin-left: 25%;
+  font-size: var(--text-h3);
+  font-weight: 300;
+  color: black;
+  text-align: center;
+  padding: 35px 0px;
+}
+
+.divider {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+  width: 40%;
+  margin-right: 30%;
+  margin-left: 30%;
+}
+
+.requirement-section {
+  background-color: var(--colour-background-teal);
+}
+
+.checklist-container {
+  background-color: rgba(128, 128, 128, 0.568);
+  width: 30%;
+  height: 300px;
+  margin-right: 35%;
+  margin-left: 35%;
+  border-radius: 25px;
+  padding: 15px;
+}
+
+.checklist-container h3 {
+  color: var(--colour-h1);
+  font-size: var(--text-h3);
+  text-align: center;
+}
+
+.requirement-checklist-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 20%;
+  margin-right: 20%;
+  padding-top: 20px;
+}
+
+.requirement-checklist-item p{
+  color: var(--colour-h1);
+  font-size: var(--text-p);
+}
+
+button {
+  font-family: var(--font-family-body);
+  font-weight: 600;
+  font-size: var(--text-p);
+  border: none;
+  color: white;
+  background-color: var(--colour-h1);
+  padding: 5px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 999em;
+}
+
 html {
     font-size: 62.5%;
     font-family: 'Roboto', sans-serif;
