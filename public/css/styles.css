@@ -335,8 +335,7 @@ a {
 }
 
 .nav-link:hover{
-  background-color: rgb(28, 33, 36);
-  color: white;
+  background-color: rgba(197, 194, 194, 0.301);
 }
 
 .dropdown {
