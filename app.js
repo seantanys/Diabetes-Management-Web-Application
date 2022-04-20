@@ -47,6 +47,10 @@ app.get('/measure', (req, res) => {
     res.render('recordMeasurement.hbs')
 })
 
+app.get('*', (req, res) => {
+    res.render('notfound')
+})
+
 // link to our router
 // const peopleRouter = require('./routes/peopleRouter')
 

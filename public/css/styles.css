@@ -269,6 +269,21 @@ lottie-player {
   font-size: var(--text-p);
 }
 
+/* 404 PAGE */
+.notfound {
+  height: 100vh;
+  background-color: var(--colour-background-teal);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center;
+}
+
+.notfound h1 {
+  font-size: var(--text-h1);
+  color: var(--colour-h1);
+}
+
 button {
   font-family: var(--font-family-body);
   font-weight: 600;
