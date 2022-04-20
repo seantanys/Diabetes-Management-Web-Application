@@ -450,9 +450,79 @@ body
 }
 
 @media screen and (max-width: 768px) {
+
+  .logo {
+    font-size: var(--text-h2);
+  }
+
   .navbar ul:not(:first-child) {
     display: none;
   }
+
+  .nav-menu {
+    display:none;
+}
+
+.hero-section {
+    flex-direction: column-reverse;
+    align-items: center;
+}
+
+lottie-player {
+    margin: -50px 0px 0px 0px;
+    width: 375px;
+    height: 375px;
+}
+
+.hero-text {
+    /* padding: 0px 0px 0px 60px; */
+    margin: -50px 0px 0px 0px;
+    width: 50%;
+}
+
+.hero-text h1 {
+font-size: var(--text-h2);
+font-weight: 600;
+line-height: 1.0;
+}
+
+.hero-text h2 {
+margin-top: 15px;
+font-size: var(--text-h3);
+font-weight: 400;
+line-height: 25px;
+}
+
+.feature-list-item {
+width: 100%;
+}
+
+.caption {
+margin-left: 25px;
+font-size: var(--text-p);
+padding: 0.5em 1em;
+}
+
+.icon {
+width: 75px;
+height: 75px;
+}
+
+.contact-section h1 {
+font-size: var(--text-h3);
+}
+
+.contact-section h3 {
+font-size: var(--text-p);
+}
+
+#login {
+  display: none;
+}
+
+#logout {
+    display:none;
+}
     
   #menuToggle {
     display: block;
