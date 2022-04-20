@@ -6,7 +6,13 @@ const getAboutWebsite = (req,res) => {
     res.render('aboutWebsite.hbs')
 }
 
+const returnHome = (req, res) => {
+    res.render('index')
+}
+
+
 module.exports = {
     getAboutDiabetes,
-    getAboutWebsite
+    getAboutWebsite,
+    returnHome
 }

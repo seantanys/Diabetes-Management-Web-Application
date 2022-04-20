@@ -6,6 +6,8 @@ const aboutRouter = express.Router()
 // require our controller
 const aboutController = require('../controllers/aboutController')
 
+aboutRouter.get('/', aboutController.returnHome)
+
 // add a route to handle the GET request for all demo data
 aboutRouter.get('/diabetes', aboutController.getAboutDiabetes)
 

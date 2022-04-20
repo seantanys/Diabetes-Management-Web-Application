@@ -29,15 +29,225 @@ body {
   *, *:before, *:after {
     box-sizing: inherit;
   }
+
+  .about-header {
+    background: url('../images/doctor-phone.jpg');
+    background-color: var(--colour-background-teal);
+    background-position: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    box-shadow:inset 0 0 0 2000px rgba(14, 13, 13, 0.452);
+    padding-top: 3em;
+    padding-bottom: 3em;
+  }
+
+  .about-header h1 {
+    font-size: var(--text-h1);
+    color: white;
+    text-align: center;
+    padding: 35px 0px;
+  }
+
+  .what-is-diabetes {
+    background: var(--colour-h1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 25px;
+    padding-bottom: 50px;
+  }
+
+  .what-is-diabetes h2 {
+    font-size: var(--text-h2);
+    font-weight: 600;
+    margin-top: 25px;
+    margin-bottom: 25px;
+  }
+
+  .what-is-diabetes p {
+    margin-right: 25%;
+    margin-left: 25%;
+    font-size: var(--text-p);
+    font-weight: 400;
+    text-align: center;
+  }
+
+  .what-is-diabetes iframe{
+    width: 100%;
+    height: 400px;
+  }
+  
+  .what-is-diabetes .video-mask{
+      width: 50%;
+      height: 300px;
+      border-radius: var(--curved_corners); 
+      overflow: hidden; 
+      margin: 0 auto;
+      /* margin-left: auto;   
+      margin-right: auto; */
+  }
+
+  .filler-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden
+  }
+
+  .filler-image img {
+    flex-shrink: 0;
+    min-width: 100%;
+    min-height: 100%;
+  }
+
+  .diabetes-type {
+    background-color: var(--colour-background-teal);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 25px;
+    padding-bottom: 50px;
+    text-align: center;
+  }
+
+  .diabetes-type h2 {
+    color: var(--colour-h1);
+    font-size: var(--text-h2);
+    font-weight: 600;
+  }
+
+  .diabetes-type h3 {
+    color: white;
+    font-size: var(--text-h3);
+    font-weight: 400;
+  }
+
+  .diabetes-type p{
+    padding-top: 25px;
+    padding-bottom: 25px;
+  }
+
+  .diabetes-type p {
+    font-size: var(--text-p);
+    color: var(--colour-h1);
+  }
+
+  .diabetes-type input {
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+  }
+
+  .accordion {
+    width: 50%;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 4px -2px rgba(0,0,0,0.5);
+  }
+
+  .accordion-item {
+    color: white;
+    overflow: hidden;
+  }
+
+  .accordion-label {
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+    background: var(--colour-h1);
+    font-weight: bold;
+    cursor: pointer;
+   /* Icon */
+ }
+
+  .accordion-label:hover {
+    background: darken(var(--colour-h1), 10%);
+ }
+
+  .accordion-label::after {
+    content: "\276F";
+    width: 1em;
+    height: 1em;
+    text-align: center;
+    transition: all 0.35s;
+ }
+
+  .accordion-content {
+    max-height: 0;
+    padding: 0 1em;
+    color: var(--colour-h1);
+    background: white;
+    transition: all 0.35s;
+ }
+
+  .accordion-close {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1em;
+    font-size: 0.75em;
+    background: var(--colour-h1);
+    cursor: pointer;
+ }
+
+  .accordion-close:hover {
+    background: darken(var(--colour-h1), 10%);
+ }
+
+ .diabetes-type input:checked + .accordion-label {
+  background: #1a252f;
+}
+
+.diabetes-type input:checked + .accordion-label::after {
+  transform: rotate(90deg);
+}
+
+.diabetes-type input:checked ~ .accordion-content {
+  max-height: 100vh;
+  padding: 1em;
+}
+
+
+.learn-more {
+  background-color: var(--colour-background-teal);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.learn-more h2 {
+  font-size: var(--text-h2);
+  color: var(--colour-h1);
+
+}
+
+.learn-more ul{
+  text-align: center;
+  list-style: outside;
+}
+
+.learn-more ul li a{
+  color: var(--colour-text);
+}
+
+
+
+
+
+
+
   
   .text-section {
-    padding: 30px;
+    /* padding: 30px; */
     text-align: center;
     font-size: var(--text-p);
     font-weight: 400;
     background-color: var(--colour-background-teal);
-    color: var(--colour-text);
   }
+
+  .text-section p {
+    color: white;
+  }
+
   
     .text-section h1{
       padding-bottom: 25px;
@@ -55,14 +265,7 @@ body {
       padding-bottom: 25px;
     }
 
-    .text-section ul{
-      text-align: centre;
-      list-style: outside;
-    }
-
-    .text-section ul li a{
-      color: var(--colour-text);
-    }
+    
 
     .text-section img{
       border-radius: var(--curved_corners);
@@ -72,19 +275,7 @@ body {
       height: auto;
     }
 
-    .text-section iframe{
-      width: 100%;
-      height: 300px;
-    }
     
-    .text-section .video-mask{
-        width: 100%;
-        height: 300px;
-        border-radius: var(--curved_corners); 
-        overflow: hidden; 
-        margin-left: auto;   
-        margin-right: auto;
-    }
 
   * {
     margin: 0;

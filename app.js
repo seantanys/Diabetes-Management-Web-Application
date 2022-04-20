@@ -43,10 +43,6 @@ app.get('/', (req,res) => {
     res.render('index.hbs')
 })
 
-app.get('/measure', (req, res) => {
-    res.render('recordMeasurement.hbs')
-})
-
 app.get('*', (req, res) => {
     res.render('notfound')
 })
