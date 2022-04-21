@@ -1,7 +1,6 @@
 // this file models a database table storing patient data
 
-module.exports =
-[
+module.exports = [
     {
         id: '10001',
         first_name: 'Alice',
@@ -13,7 +12,7 @@ module.exports =
         bloodGluc: false,
         weight: true,
         exercise: true,
-        insulin: false
+        insulin: false,
     },
     {
         id: '10002',
@@ -39,7 +38,7 @@ module.exports =
         bloodGluc: true,
         weight: true,
         exercise: false,
-        insulin: false
+        insulin: false,
     },
     {
         id: '10004',
@@ -52,6 +51,6 @@ module.exports =
         bloodGluc: false,
         weight: false,
         exercise: true,
-        insulin: true
-    }
+        insulin: true,
+    },
 ]

@@ -4,6 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
+    "prettier": "prettier --single-quote --no-semi --tab-width 4 --write **/*.js *.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -11,5 +13,8 @@
   "dependencies": {
     "express": "^4.17.3",
     "express-handlebars": "^6.0.4"
+  },
+  "devDependencies": {
+    "prettier": "^2.6.2"
   }
 }
