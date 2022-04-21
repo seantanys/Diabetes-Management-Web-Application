@@ -40,6 +40,10 @@ const patientRouter = require('./routes/patientRouter')
 
 app.use('/patient', patientRouter)
 
+const loginRouter = require('./routes/loginRouter')
+
+app.use('/login', loginRouter)
+
 // Tells the app to send the string: "Our demo app is working!" when you hit the '/' endpoint.
 // app.get('/', (req,res) => {
 //     res.send('Our demo app is working!')

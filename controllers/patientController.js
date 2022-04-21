@@ -1,4 +1,4 @@
-const peopleData = require('../models/peopleModel')
+const patientData = require('../models/patientModel')
 
 // // handle request to get all people data instances
 // const getAllPeopleData = (req, res) => {
@@ -26,8 +26,17 @@ const peopleData = require('../models/peopleModel')
 //     return res.redirect('back')
 // }
 
+
 const getMeasurementPage = (req, res) => {
-    res.render('recordMeasurement.hbs')
+    const patientId = '10002'; // HARD CODED PATIENT ID
+    const data = patientData.find((data) => data.id === patientId)
+
+    if (data) {
+        res.render('record.hbs', { singlePatient: data })
+    } else {
+        console.log("patient data not found")
+        res.render('notfound')
+    }
 }
 
 // exports an object, which contain functions imported by router
