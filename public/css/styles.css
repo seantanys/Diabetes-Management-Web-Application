@@ -241,6 +241,92 @@ body {
   font-size: var(--text-p);
 }
 
+.about-website {
+  background-color: var(--colour-h1);
+  display: flex;
+  flex-direction: column;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.about-website p {
+  width: 50%;
+  margin-left: 25%;
+  margin-right: 25%;
+  font-size: var(--text-h3);
+  font-weight: 400;
+  color: white;
+  text-align: center;
+}
+
+.team-section {
+  background-color: var(--colour-background-teal);
+  font-size: var(--text-h2);
+  text-align: center;
+  padding: 50px 0px;
+}
+
+.team-section h2:first-of-type {
+  color: var(--colour-h1);
+}
+
+.team-section h2 ~ p {
+  color: var(--colour-h1);
+  font-weight: 300;
+}
+
+.team-container {
+  background-color: var(--colour-background-teal);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+
+  padding-top: 50px;
+  padding-bottom: 50px;
+
+}
+
+.card {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  background-color: rgba(1, 58, 99, 0.938);
+  text-align: center;
+  padding: 25px;
+  margin: 25px
+}
+
+.card img {
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  margin-bottom: 25px;
+}
+
+.card h3 {
+  font-size: var(--text-h3);
+}
+
+.card p{
+  font-size: var(--text-p);
+  font-weight: 300;
+  width: 50%;
+
+  margin-left: 25%;
+  margin-right: 25%;
+  margin-top: 10px;
+}
+
+.card p:nth-child(-n+3) {
+  font-weight: 600;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
 .log-in-section {
   background-color: var(--colour-background-teal);
   padding-top: 50px;
@@ -291,51 +377,10 @@ input {
   flex: 1;
 }
 
-  .text-section {
-    /* padding: 30px; */
-    text-align: center;
-    font-size: var(--text-p);
-    font-weight: 400;
-    background-color: var(--colour-background-teal);
-  }
-
-  .text-section p {
-    color: white;
-  }
-
-  
-    .text-section h1{
-      padding-bottom: 25px;
-      font-size: var(--text-h1);
-      color: var(--colour-h1);
-    }
-
-    .text-section h2{
-      padding-bottom: 25px;
-      font-size: var(--text-h2);
-      color: var(--colour-h2);
-    }
-
-    .text-section h3{
-      padding-bottom: 25px;
-    }
-
-    
-
-    .text-section img{
-      border-radius: var(--curved_corners);
-      padding: 5px;
-      max-width: 500px;
-      width: 80%;
-      height: auto;
-    }
-
-    
-
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 lottie-player {
@@ -350,7 +395,7 @@ lottie-player {
   display: flex;
   justify-content: center;
   align-items:center;
-  }
+}
 
 .hero-text button {
   font-size: var(--text-h3);
@@ -649,46 +694,6 @@ background-color: #fdfbfb;
 color: black;
 text-align: center;
 }
-
-.content-img {
-  float: centre;
-  margin-bottom: 10px;
-  border-style: solid;
-  border-width: 10px;
-  border-color: rgba(28, 70, 89, 1);
-  box-shadow: 51px 51px 114px 0 rgba(18, 31, 62, 0.05);
-  width: 350;
-  height: 350;
-}
-
-.container {
-  display: flex;
-  flex-flow: wrap;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: stretch;
-}
-
-.container li {
-  list-style-type: none;
-  display: flex;
-  flex-direction: column;
-  justify-content: centre;
-  align-items: centre;
-  width: 350px;
-  padding: 20px;
-}
-
-.container li img{
-  border-radius: 50%;
-  width: 300px;
-  height: 300px;
-  background-size: cover;
-  background-position: centre;
-  align-items: centre;
-}
-
-
 
 /* moving nav icon */
 /* https://codepen.io/erikterwan/pen/EVzeRP */
