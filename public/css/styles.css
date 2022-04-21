@@ -800,6 +800,27 @@ font-size: var(--text-p);
   height: 250px;
 }
 
+.about-website p{
+  font-size: var(--text-p);
+  width: 80%;
+  margin-right: 10%;
+  margin-left: 10%;
+}
+
+.team-section h2 ~ p {
+  width: 80%;
+  margin-right: 10%;
+  margin-left: 10%;
+  font-size: var(--text-h3);
+}
+
+.card p{
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 10px;
+}
+
 #login {
   display: none;
 }
