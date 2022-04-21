@@ -46,6 +46,10 @@ app.get('/', (req, res) => {
     res.render('index.hbs')
 })
 
+app.get('/login', (req, res) => {
+    res.render('login.hbs')
+})
+
 app.get('*', (req, res) => {
     res.render('notfound')
 })
