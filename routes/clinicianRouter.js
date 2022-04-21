@@ -13,7 +13,8 @@ clinicianRouter.get('/', clinicianController.getAllPeopleData)
 clinicianRouter.get('/:patient_id', clinicianController.getDataById)
 
 // add a new JSON object to the database
-// clinicianRouter.post('/', clinicianController.insertData)
+clinicianRouter.post('/', clinicianController.insertData)
 
 // export the router
 module.exports = clinicianRouter
+

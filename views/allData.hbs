@@ -1,14 +1,17 @@
-<h1>Displaying all data</h1>
-<ul>
+<h1>Displaying all current patients for clinician</h1>
+<ul class = "content-section">
 {{!-- loops over the data set --}}
 {{#each data}}
     <li><a href="/clinician/{{this._id}}">{{this.first_name}} {{this.last_name}}</a></li>
+    <p>{{this.age}}</p>
+    <p>{{this.join_date}}</p>
 {{/each}}
 </ul>
 
-{{!-- <form action="/people" method="POST">
-    <input type="number" placeholder="ID" name="id" min="0" max="999" />
+<form action="/clinician/" method="POST">
     <input type="text" placeholder="First name" name="first_name" />
     <input type="text" placeholder="Last name" name="last_name" />
+    <input type="number" placeholder="age" name="age" />
+    <input type="date" placeholder="join_date" name="join_date" />
     <input type="submit" />
-</form> --}}
+</form>

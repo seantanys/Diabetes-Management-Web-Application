@@ -32,8 +32,8 @@
 //     getDataById,
 //     insertData,
 // }
+const {Patient} = require('../models/patient')
 
-const Patient = require('../models/patient')
 const getAllPeopleData = async (req, res, next) => {
     try {
         const patients = await Patient.find().lean()
@@ -55,7 +55,23 @@ const getDataById = async(req, res, next) => {
         return next(err)
     }
 }
+
+const insertData = (req, res) => {
+    const newPatient = new Patient({
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        age: req.body.age,
+        join_date: req.body.join_date
+        })
+    newPatient.save( (err, result) => { // callback-style error-handler
+        if (err) res.send(err)
+        return res.send(result)
+    })
+}
+
+
 module.exports = {
     getAllPeopleData,
     getDataById,
+    insertData
 }
