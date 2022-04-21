@@ -7,6 +7,8 @@ const exphbs = require('express-handlebars')
 // Set your app up as an express app
 const app = express()
 
+require('./models')
+
 // configure Handlebars
 app.engine(
     'hbs',
