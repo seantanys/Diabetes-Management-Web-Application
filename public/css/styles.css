@@ -92,7 +92,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url('/images/girl-walking.jpg');
+    /* background-image: url('/images/girl-walking.jpg'); */
     background-position: center;
     background-size: 100%;
     background-repeat: no-repeat;
