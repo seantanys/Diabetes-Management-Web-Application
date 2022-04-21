@@ -31,7 +31,7 @@ body {
   }
 
   .about-header {
-    background: url('../images/doctor-phone.jpg');
+    background: url('../images/header-img-1.jpg');
     background-color: var(--colour-background-teal);
     background-position: center;
     background-size: 100%;
@@ -60,6 +60,7 @@ body {
   .what-is-diabetes h2 {
     font-size: var(--text-h2);
     font-weight: 600;
+    color: white;
     margin-top: 25px;
     margin-bottom: 25px;
   }
@@ -68,7 +69,8 @@ body {
     margin-right: 25%;
     margin-left: 25%;
     font-size: var(--text-p);
-    font-weight: 400;
+    color: white;
+    font-weight: 300;
     text-align: center;
   }
 
@@ -161,7 +163,7 @@ body {
  }
 
   .accordion-label:hover {
-    background: darken(var(--colour-h1), 10%);
+    background: rgb(4, 84, 141);
  }
 
   .accordion-label::after {
@@ -720,6 +722,15 @@ font-size: var(--text-h3);
 
 .contact-section h3 {
 font-size: var(--text-p);
+}
+
+.what-is-diabetes p {
+  margin-right: 10%;
+  margin-left: 10%;
+}
+
+.accordion {
+  width: 85%
 }
 
 #login {
