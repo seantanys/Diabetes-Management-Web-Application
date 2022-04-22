@@ -1,8 +1,10 @@
 <h1>Displaying one item</h1>
 {{#with oneItem}}
 <ul>
-    <li>{{this.id}}</li>
+    <li>{{this._id}}</li>
     <li>{{this.first_name}}</li>
     <li>{{this.last_name}} </li>
+    <li>{{this.measurements}} </li>
+    
 </ul>
 {{/with}}

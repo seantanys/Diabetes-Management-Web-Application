@@ -10,10 +10,13 @@ const clinicianController = require('../controllers/clinicianController')
 clinicianRouter.get('/', clinicianController.getAllPeopleData)
 
 // add a route to handle the GET request for one data instance
-clinicianRouter.get('/:id', clinicianController.getDataById)
+// clinicianRouter.get('/:patient_id', clinicianController.getDataById)
 
 // add a new JSON object to the database
 clinicianRouter.post('/', clinicianController.insertData)
 
+clinicianRouter.get('/BCG', clinicianController.getBloodGlucoseMeasurement)
+
 // export the router
 module.exports = clinicianRouter
+

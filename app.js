@@ -7,6 +7,8 @@ const exphbs = require('express-handlebars')
 // Set your app up as an express app
 const app = express()
 
+require('./models')
+
 // configure Handlebars
 app.engine(
     'hbs',
@@ -24,7 +26,7 @@ app.use(express.static('public'))
 
 // Set up to handle POST requests
 app.use(express.json()) // needed if POST data is in JSON format
-// app.use(express.urlencoded())  // only needed for URL-encoded input
+app.use(express.urlencoded(extended=true))  // only needed for URL-encoded input
 
 const aboutRouter = require('./routes/aboutRouter')
 
