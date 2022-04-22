@@ -1,17 +1,43 @@
 <h1>Displaying all current patients for clinician</h1>
 <ul class = "content-section">
 {{!-- loops over the data set --}}
-{{#each data}}
-    <li><a href="/clinician/{{this._id}}">{{this.first_name}} {{this.last_name}}</a></li>
-    <p>{{this.age}}</p>
-    <p>{{this.join_date}}</p>
-{{/each}}
-</ul>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>age</th>
+            <th>join date</th>
+            <th>record BCG</th>
+            <th>record weight</th>
+            <th>record insulin</th>
+            <th>record exercise</th>
+        </tr>
+    </thead>
+    {{!-- loops over the data set --}}
+    <tbody>
+    {{#each data}}
+        <tr>
+        <th><a href="/clinician/{{this._id}}">{{this.first_name}} {{this.last_name}}</a></th>
+        <th>{{this.age}}</th>
+        <th>{{this.join_date}}</th>
+        <th>{{this.recordBCG}}</th>
+        <th>{{this.recordWeight}}</th>
+        <th>{{this.recordInsulin}}</th>
+        <th>{{this.recordExercise}}</th>
+        </tr>
+    {{/each}}
+    </tbody>
+</table>
 
 <form action="/clinician/" method="POST">
     <input type="text" placeholder="First name" name="first_name" />
     <input type="text" placeholder="Last name" name="last_name" />
     <input type="number" placeholder="age" name="age" />
     <input type="date" placeholder="join_date" name="join_date" />
+    <input type="boolean" placeholder="Record BCG" name="recordBCG" />
+    <input type="boolean" placeholder="Record Weight" name="recordWeight" />
+    <input type="boolean" placeholder="Record Insulin" name="recordInsulin" />
+    <input type="boolean" placeholder="Record Steps" name="recordExercise" />
     <input type="submit" />
 </form>
