@@ -1,39 +1,13 @@
-// const peopleData = require('../models/peopleModel')
+const {Patient} = require('../models/patient')
+const {Measurement} = require('../models/patient')
+const {CurrentMeasurement} = require('../models/patient')
 
-// // handle request to get all people data instances
-// const getAllPeopleData = (req, res) => {
-//     res.render('allData', { data: peopleData })
-// }
+const m = new Measurement({
+    type: "BCG",
+    value: 404,
+    comment: "today i recorded 404 error ",
+  });
 
-// // handle request to get one data instance
-// const getDataById = (req, res) => {
-//     // search the database by ID
-//     const data = peopleData.find((data) => data.id === req.params.id)
-
-//     // return data if this ID exists
-//     if (data) {
-//         res.render('oneData', { oneItem: data })
-//     } else {
-//         // You can decide what to do if the data is not found.
-//         // Currently, an empty list will be returned.
-//         res.sendStatus(404)
-//     }
-// }
-
-// const insertData = (req, res) => {
-//     const { id, first_name, last_name } = req.body
-//     peopleData.push({ id, first_name, last_name })
-//     return res.redirect('back')
-// }
-
-// // exports an object, which contain functions imported by router
-// module.exports = {
-//     getAllPeopleData,
-//     getDataById,
-//     insertData,
-// }
-
-const Patient = require('../models/patient')
 const getAllPeopleData = async (req, res, next) => {
     try {
         const patients = await Patient.find().lean()
@@ -55,7 +29,50 @@ const getDataById = async(req, res, next) => {
         return next(err)
     }
 }
+
+const getBloodGlucoseMeasurement = async(req,res,next) => {
+
+    //find pat
+    let thisUser = await Patient.findOne( {first_name: 'John'})
+
+    //find BCG reading
+    let BCGMeasurement = await Measurement.findById("62629354c5f744df352601f6")
+    // BCGReading = new CurrentMeasurement({measurementId: BCGMeasurement._id})
+    // thisUser.measurements = thisUser.measurements || [];
+    thisUser.measurements.push(BCGMeasurement)
+
+    await thisUser.save()
+    result = await Patient.findOne( {nameGiven: 'John'})
+    res.send(result)
+}
+
+const insertData = async (req, res, next) => {
+    try {
+        const newPatient = new Patient({
+            first_name: req.body.first_name,
+            last_name: req.body.last_name,
+            age: req.body.age,
+            join_date: req.body.join_date,
+            recordBCG: req.body.recordBCG,
+            recordWeight: req.body.recordWeight,
+            recordInsulin: req.body.recordInsulin,
+            recordExercise: req.body.recordExercise,
+            measurement:{
+                type: "BCG",
+                value: 404,
+                comment: "today i recorded 404 error ",
+              },
+        })
+        await newPatient.save();
+        return res.redirect('/clinician')
+    }catch (err) {
+        return next(err)
+    }
+}
+
 module.exports = {
     getAllPeopleData,
     getDataById,
+    insertData,
+    getBloodGlucoseMeasurement
 }
