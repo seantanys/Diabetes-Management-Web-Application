@@ -37,6 +37,7 @@ const getBloodGlucoseMeasurement = async(req,res,next) => {
 
     //find BCG reading
     let BCGMeasurement = await Measurement.findOne({type: req.params.type})
+    // let BCGMeasurement = await Measurement.findById("62629354c5f744df352601f6")
     // BCGReading = new CurrentMeasurement({measurementId: BCGMeasurement._id})
     // thisUser.measurements = thisUser.measurements || [];
     thisUser.measurements.push(BCGMeasurement)
