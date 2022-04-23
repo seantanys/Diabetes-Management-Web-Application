@@ -584,7 +584,7 @@ display: block;
 }
 
 .footer {
-position: relative;
+position: fixed;
 left: 0;
 bottom: 0;
 width: 100%;
@@ -871,10 +871,17 @@ font-size: var(--text-p);
   }
 
 }
+
+.create-patient-secion {
+  height: 75vh;
+  background-color: var(--colour-background-teal);
+  display: flex;
+  justify-content: center;
+  }
+
 table {
   border-collapse: collapse;
-  background-color: aqua;
-  color: #232323;
+  color: #fdfdfd;
 }
 td, th {
   border: 1px solid #999;

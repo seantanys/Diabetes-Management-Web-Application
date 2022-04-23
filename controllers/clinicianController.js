@@ -46,6 +46,14 @@ const getBloodGlucoseMeasurement = async(req,res,next) => {
     res.send(result)
 }
 
+const getNewPatientForm = async (req, res, next) => {
+    try {
+        return res.render('newPatient')
+    } catch (err) {
+        return next(err)
+    }
+}
+
 const insertData = async (req, res, next) => {
     try {
         const newPatient = new Patient({
@@ -74,5 +82,6 @@ module.exports = {
     getAllPeopleData,
     getDataById,
     insertData,
-    getBloodGlucoseMeasurement
+    getBloodGlucoseMeasurement,
+    getNewPatientForm
 }

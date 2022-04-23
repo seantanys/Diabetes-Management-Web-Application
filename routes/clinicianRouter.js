@@ -17,6 +17,7 @@ clinicianRouter.post('/', clinicianController.insertData)
 
 clinicianRouter.get('/BCG', clinicianController.getBloodGlucoseMeasurement)
 
+clinicianRouter.get('/createPatient', clinicianController.getNewPatientForm)
 // export the router
 module.exports = clinicianRouter
 
