@@ -29,12 +29,18 @@ const {Measurement} = require('../models/patient')
 // }
 
 
-const getMeasurementPage = (req, res) => {
-    const patientId = '10002'; // HARD CODED PATIENT ID
-    const data = patientData.find((data) => data.id === patientId)
+const getMeasurementPage = async (req, res) => {
+    const id = "62640dd547975600730c38d7"; // HARD CODED PATIENT ID
+    const data = await Patient.findById(id).lean();
+    const todayData = await Measurement.find({patientId: id, date: { $lte: new Date()}}).lean();
 
+    console.log(todayData)
+
+    // find data in measurements, by id, then filter it to show only the current date's measurements.
+    // store it to a data structure
+    
     if (data) {
-        res.render('record.hbs', { singlePatient: data })
+        res.render('record.hbs', { singlePatient: data, todayData: todayData })
     } else {
         console.log("patient data not found")
         res.render('notfound')
@@ -42,13 +48,11 @@ const getMeasurementPage = (req, res) => {
 }
 
 const submitMeasurement = async (req, res) => {
-    console.log(req.body)
-    console.log(req.body.value);
 
     try {
         const newMeasurement = new Measurement ({
             type: req.body.type,
-            patientId: "6262b66d2aac41953124dd11",
+            patientId: "62640dd547975600730c38d7",
             value: parseFloat(req.body.value),
             date: Date.now(),
             comment: req.body.comment

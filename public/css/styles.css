@@ -548,11 +548,11 @@ lottie-player {
 
 .checklist-container {
   background-color: rgba(128, 128, 128, 0.568);
-  width: 50%;
+  width: 40%;
   display: flex;
   flex-direction: column;
-  margin-right: 25%;
-  margin-left: 25%;
+  margin-right: 30%;
+  margin-left: 30%;
   border-radius: 25px;
   padding: 15px;
 }
