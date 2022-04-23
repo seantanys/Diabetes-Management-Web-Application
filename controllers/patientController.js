@@ -39,10 +39,15 @@ const getMeasurementPage = (req, res) => {
     }
 }
 
+const getPatientPage = (req, res) => {
+    res.render('patientDashboard')
+}
+
 // exports an object, which contain functions imported by router
 module.exports = {
     // getAllPeopleData,
     // getDataById,
     // insertData,
     getMeasurementPage,
+    getPatientPage
 }
