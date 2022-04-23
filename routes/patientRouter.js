@@ -14,6 +14,8 @@ const patientController = require('../controllers/patientController')
 
 patientRouter.get('/record', patientController.getMeasurementPage)
 
+patientRouter.post('/record', patientController.submitMeasurement)
+
 // add a new JSON object to the database
 // patientRouter.post('/', patientController.insertData)
 

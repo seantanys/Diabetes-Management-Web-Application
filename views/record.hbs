@@ -48,22 +48,28 @@
 <div class="record-container">
     <h2>Input your placeholder</h2>
     <div class="record-form">
-        <form action="">
+        <form action="/patient/record" method="post">  
+            <div class="type-input">
+                <input type="text" name="type" value="weight" readonly>
+            </div>
             <span class="label">Weight</span>
             <div class="record-input">
-                <input type="number" placeholder="Enter Weight" required>
+                <input name="value" type="text" placeholder="Enter Weight" required>
             </div>
             <br>
             <span class="label">Comment</span>
             <div class="comment-input">
-                <textarea name="" id="comment" cols="30" rows="5"></textarea>
+                <textarea name="comment" id="comment" cols="30" rows="5" placeholder="Enter comment here"></textarea>
             </div>
-            <button>Submit</button>
+            <button class="record-button">Submit</button>
         </form>
     </div>
 </div>
 
-{{!-- TODO: RESPONSIVE DESIGN --}}
+{{!-- TODO: RESPONSIVE DESIGN
+            MAKE BUTTON DISABLED BY DEFAULT (GREYED OUT) AND ENABLE AND TURN BLUE WHEN INPUT TYPED.
+            REMINDER TO INPUT MEASUREMENT
+ --}}
 
 
 

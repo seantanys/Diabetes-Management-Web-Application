@@ -384,6 +384,14 @@ input {
   flex: 1;
 }
 
+textarea {
+  border: none;
+  outline: none;
+  padding: 10px 5px;
+  background-color: #f6f6f6;
+  flex: 1;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -508,7 +516,7 @@ lottie-player {
 
 .page-heading-1 h1 {
   font-size: var(--text-h1);
-  color: white;
+  color: var(--colour-h1);
   text-align: center;
   padding: 35px 0px;
 }
@@ -535,6 +543,7 @@ lottie-player {
 
 .requirement-section {
   background-color: var(--colour-background-teal);
+  padding: 50px;
 }
 
 .checklist-container {
@@ -566,6 +575,51 @@ lottie-player {
 .requirement-checklist-item p{
   color: var(--colour-h1);
   font-size: var(--text-h3);
+}
+
+.record-container {
+  background-color: var(--colour-h1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.record-container h2 {
+  font-size: var(--text-h2);
+  color: white;
+}
+
+.record-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 25px;
+}
+
+.record-form span {
+  font-size: var(--text-p);
+}
+
+.type-input {
+  display: none;
+}
+
+.record-button {
+  font-family: var(--font-family-body);
+  font-weight: 600;
+  font-size: var(--text-p);
+  border: none;
+  color: white;
+  background-color: grey;
+  padding: 5px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 999em;
 }
 
 /* 404 PAGE */
