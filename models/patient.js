@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 const measurementSchema = new mongoose.Schema({
     type: { type: String, required: [true, "input is required bruv"] },
-    patientId: { type: String, required: true }, // when patient enters data, use _id = (new ObjectId).toString() to convert id to string
+    patientId: { type: String, required: true },
     value: { type: Number, required: [true, "value is required bruv"] },
     date: {type: Date, default: Date.now},
     comment: {type: String, default: ""}
