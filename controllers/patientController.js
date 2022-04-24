@@ -1,7 +1,6 @@
 const patientData = require('../models/patientModel')
 const {Patient} = require('../models/patient')
 const {Measurement} = require('../models/patient')
-const measurements = ["weight", "bcg", "insulin", "exercise"];
 
 const id = "6264cb2ce90f5d55cbad445d"; // HARD CODED PATIENT ID
 
@@ -43,11 +42,6 @@ const getMeasurementPage = async (req, res) => {
     const reqMeasurements = Object.keys(data["measurements"])
     const alreadyMeasured = getMeasurementTypes(todayData);
     const notMeasured = reqMeasurements.filter(x => !alreadyMeasured.includes(x));
-
-    // console.log(reqMeasurements)
-    // console.log(todayData)
-    // console.log(todayData[0].type)
-    // find data in measurements, by id, then filter it to show only the current date's measurements.
 
     if (data) {
         res.render('record.hbs', { singlePatient: data, measured: alreadyMeasured, notMeasured: notMeasured })

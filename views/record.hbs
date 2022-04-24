@@ -1,4 +1,4 @@
- <div class="page-heading-1">
+<div class="page-heading-1">
     <h1>Record</h1>
     <hr class="divider">
     <h2>        
@@ -64,7 +64,7 @@
 </div>
 
 <div class="reminder-section">
-    <div class="reminder-container">
+    <div {{#if (isEmpty notMeasured)}} class="reminder-done" {{else}} class="reminder-container" {{/if}}>
          <div class="reminder-heading">          
             {{#if (isEmpty notMeasured)}}
             <img src="../images/icons/smiley.svg" alt="smiley">
@@ -87,8 +87,11 @@
              {{/if}}        
         </div>
     </div>
-    
 </div>
+
+{{#if (isEmpty notMeasured)}}
+
+{{/if}}
 
 {{#if singlePatient.measurements.bcg}}
 {{#if (isIn "bcg" notMeasured)}}
