@@ -4,7 +4,7 @@ const measurementSchema = new mongoose.Schema({
     type: { type: String, required: [true, "input is required bruv"] },
     patientId: { type: String, required: true }, // when patient enters data, use _id = (new ObjectId).toString() to convert id to string
     value: { type: Number, required: [true, "value is required bruv"] },
-    date: Date,
+    date: {type: Date, default: Date.now},
     comment: {type: String, default: ""}
 });
 
@@ -27,18 +27,27 @@ const measurementSchema = new mongoose.Schema({
 const patientSchema = new mongoose.Schema({
     first_name: {type: String, required: true},
     last_name: {type: String, required: true},
-    dob: {type: Date, default: Date.now},
-    req_measurements: {
-        bcg: {type: Boolean, required:true, default:false},
-        weight: {type: Boolean, required:true, default:false},
-        insulin: {type: Boolean, required:true, default:false},
-        exercise: {type: Boolean, required:true, default:false},
-    },
-    thresholds: {
-        bcg: {type: Number, required:true, default:0},
-        weight: {type: Number, required:true, default:0},
-        insulin: {type: Number, required:true, default:0},
-        exercise: {type: Number, required:true, default:0},
+    dob: {type: Date, required: true},
+    join_date: {type: Date, default: Date.now},
+    measurements: {
+        bcg: {
+            // required: {type: Boolean, required:true, default:false},
+            minimum: Number,
+            maximum: Number
+        },
+        weight: {
+            minimum: Number,
+            maximum: Number
+        },
+        insulin: {
+            minimum: Number,
+            maximum: Number
+        },
+        exercise: {
+            minimum: Number,
+            maximum: Number
+        },
+        required: false
     }
 });
 

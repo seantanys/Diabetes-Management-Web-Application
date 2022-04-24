@@ -15,6 +15,10 @@ app.engine(
     exphbs.engine({
         defaultlayout: 'main',
         extname: 'hbs',
+        helpers: {
+            isIn: (str, array) => array.includes(str),
+            isEmpty: array => array.length === 0
+        }
     })
 )
 

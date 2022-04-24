@@ -1,6 +1,9 @@
 const patientData = require('../models/patientModel')
 const {Patient} = require('../models/patient')
 const {Measurement} = require('../models/patient')
+const measurements = ["weight", "bcg", "insulin", "exercise"];
+
+const id = "6264cb2ce90f5d55cbad445d"; // HARD CODED PATIENT ID
 
 // // handle request to get all people data instances
 // const getAllPeopleData = (req, res) => {
@@ -30,29 +33,43 @@ const {Measurement} = require('../models/patient')
 
 
 const getMeasurementPage = async (req, res) => {
-    const id = "62640dd547975600730c38d7"; // HARD CODED PATIENT ID
+    const currentTime = new Date()
+    // const localTime = currentTime.toLocaleString("en-US", {timeZone: "Australia/Melbourne"});
+    // console.log(localTime)
+    currentTime.setHours(0, 0, 0);
     const data = await Patient.findById(id).lean();
-    const todayData = await Measurement.find({patientId: id, date: { $lte: new Date()}}).lean();
+    const todayData = await Measurement.find({patientId: id, date: { $gte: currentTime}}).lean();
 
-    console.log(todayData)
+    const reqMeasurements = Object.keys(data["measurements"])
+    const alreadyMeasured = getMeasurementTypes(todayData);
+    const notMeasured = reqMeasurements.filter(x => !alreadyMeasured.includes(x));
 
+    // console.log(reqMeasurements)
+    // console.log(todayData)
+    // console.log(todayData[0].type)
     // find data in measurements, by id, then filter it to show only the current date's measurements.
-    // store it to a data structure
-    
+
     if (data) {
-        res.render('record.hbs', { singlePatient: data, todayData: todayData })
+        res.render('record.hbs', { singlePatient: data, measured: alreadyMeasured, notMeasured: notMeasured })
     } else {
         console.log("patient data not found")
         res.render('notfound')
     }
 }
 
-const submitMeasurement = async (req, res) => {
+function getMeasurementTypes(arr) {
+    const types = []
+    for (let i = 0; i < arr.length; i++) {
+        types.push(arr[i].type);
+    }
+    return types;
+}
 
+const submitMeasurement = async (req, res) => {
     try {
         const newMeasurement = new Measurement ({
             type: req.body.type,
-            patientId: "62640dd547975600730c38d7",
+            patientId: id,
             value: parseFloat(req.body.value),
             date: Date.now(),
             comment: req.body.comment
