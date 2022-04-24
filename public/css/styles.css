@@ -873,7 +873,6 @@ font-size: var(--text-p);
 }
 
 .create-patient-secion {
-  height: 75vh;
   background-color: var(--colour-background-teal);
   display: flex;
   justify-content: center;

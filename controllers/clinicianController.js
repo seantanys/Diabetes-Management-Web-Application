@@ -19,12 +19,16 @@ const getAllPeopleData = async (req, res, next) => {
 const getDataById = async(req, res, next) => {
     try {
         const patient = await Patient.findById(req.params.patient_id).lean()
+        const measurement = await Measurement.findOne({patientId: "6264bb53a06831441fe0b973"}).lean()
+        console.log(req.params.patient_id)
+        console.log(measurement)
         if (!patient) {
             // no author found in database
             return res.sendStatus(404)
         }
         // found person
-        return res.render('oneData', { oneItem: patient })
+        return res.render('oneData', { oneItem: measurement })
+        // return res.send(measurement)
     } catch (err) {
         return next(err)
     }
@@ -65,11 +69,11 @@ const insertData = async (req, res, next) => {
             recordWeight: req.body.recordWeight,
             recordInsulin: req.body.recordInsulin,
             recordExercise: req.body.recordExercise,
-            measurement:{
-                type: "BCG",
-                value: 404,
-                comment: "today i recorded 404 error ",
-              },
+            // measurement:{
+            //     type: "BCG",
+            //     value: 404,
+            //     comment: "today i recorded 404 error ",
+            //   },
         })
         await newPatient.save();
         return res.redirect('/clinician')
@@ -77,6 +81,7 @@ const insertData = async (req, res, next) => {
         return next(err)
     }
 }
+
 
 module.exports = {
     getAllPeopleData,

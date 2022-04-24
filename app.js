@@ -4,6 +4,8 @@ const express = require('express')
 // include Handlebars module
 const exphbs = require('express-handlebars')
 
+var helpers = require('handlebars-helpers')();
+
 // Set your app up as an express app
 const app = express()
 
@@ -15,6 +17,7 @@ app.engine(
     exphbs.engine({
         defaultlayout: 'main',
         extname: 'hbs',
+        helpers: helpers
     })
 )
 

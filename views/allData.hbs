@@ -19,8 +19,8 @@
     {{#each data}}
         <tr>
         <th><a href="/clinician/{{this._id}}">{{this.first_name}} {{this.last_name}}</a></th>
-        <th>{{this.age}}</th>
-        <th>{{this.join_date}}</th>
+        <th>{{#if (gte this.age 20)}}<p style="color: green;">{{this.age}}</p>{{else}}{{this.age}}{{/if}}</th>
+        <th>{{moment this.join_date format = "YYYY-MM-DD"}}</th>
         <th>{{this.recordBCG}}</th>
         <th>{{this.recordWeight}}</th>
         <th>{{this.recordInsulin}}</th>
@@ -29,83 +29,4 @@
     {{/each}}
     </tbody>
 </table>
-<br>
-<br>
-<br>
 
-<h1> Create New Patient</h1>
-<form action="/clinician/" method="POST">
-	<table>
-		<tr>
-			<td>
-				First Name:
-			</td>
-
-			<td>
-				<input type="text" placeholder="First name" name="first_name" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				Last Name:
-			</td>
-
-			<td>
-				<input type="text" placeholder="Last name" name="last_name" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				Age:
-			</td>
-
-			<td>
-				<input type="number" placeholder="age" name="age" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				Date Of Birth:
-			</td>
-
-			<td>
-				<input type="date" placeholder="join_date" name="join_date" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				Email Address:
-			</td>
-
-			<td>
-				<input type=”mail”  placeholder=”Email” name=””>
-			</td>
-		</tr>
-        <tr>
-        <td>
-				Password:
-			</td>
-
-			<td>
-				<input type=”Password” placeholder=”Password” name=””>
-			</td>
-		</tr>
-	</table>
-</form> 
-
-<form action="/clinician/" method="POST">
-    <input type="text" placeholder="First name" name="first_name" />
-    <input type="text" placeholder="Last name" name="last_name" />
-    <input type="number" placeholder="age" name="age" />
-    <input type="date" placeholder="join_date" name="join_date" />
-
-    <br>
-    <input type="checkbox" id="recordBCG" name="recordBCG" value="BCG">
-    <label for="recordBCG"> BCG </label>
-    <br>
-    
-    <input type="boolean" placeholder="Record Weight" name="recordWeight" />
-    <input type="boolean" placeholder="Record Insulin" name="recordInsulin" />
-    <input type="boolean" placeholder="Record Steps" name="recordExercise" />
-    <input type="submit" />
-</form>
