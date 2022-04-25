@@ -10,6 +10,8 @@
     <hr class="divider">
 </div>
 
+<script src="../scripts/recordInput.js"></script>
+
 <div class="requirement-section">
     <div class="checklist-container">
         <h3>Today's required measurements</h3>
@@ -119,14 +121,14 @@
             </div>
             <span class="label">Blood Glucose Level</span>
             <div class="record-input">
-                <input name="value" type="text" placeholder="Enter Blood Glucose Level" required>
+                <input name="value" type="text" placeholder="Enter Blood Glucose Level" id="bcg" required>
             </div>
             <br>
             <span class="label">Comment</span>
             <div class="comment-input">
                 <textarea name="comment" id="comment" cols="30" rows="5" placeholder="Enter comment here"></textarea>
             </div>
-            <button class="record-button">Submit</button>
+            <button class="record-button" id="bcg-btn">Submit</button>
         </form>
     </div>
 </div>
@@ -144,7 +146,7 @@
             </div>
             <span class="label">Weight</span>
             <div class="record-input">
-                <input name="value" type="text" placeholder="Enter Weight" required>
+                <input name="value" type="text" placeholder="Enter Weight" id="weight" required>
             </div>
             <br>
             <span class="label">Comment</span>
@@ -169,7 +171,7 @@
             </div>
             <span class="label">Insulin Doses</span>
             <div class="record-input">
-                <input name="value" type="text" placeholder="Enter Insulin doses" required>
+                <input name="value" type="text" placeholder="Enter Insulin doses" id="insulin" required>
             </div>
             <br>
             <span class="label">Comment</span>
@@ -194,7 +196,7 @@
             </div>
             <span class="label">Number Of Steps</span>
             <div class="record-input">
-                <input name="value" type="text" placeholder="Enter number of steps" required>
+                <input name="value" type="text" placeholder="Enter number of steps" id="exercise" required>
             </div>
             <br>
             <span class="label">Comment</span>

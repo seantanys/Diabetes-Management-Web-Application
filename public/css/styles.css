@@ -369,7 +369,7 @@ body {
 }
 
 .validation-fail {
-  border-bottom: 2px solid red;
+  border-bottom: 3px solid rgba(163, 17, 17, 0.904);
 }
 
 .validation-pass {
@@ -682,6 +682,11 @@ lottie-player {
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 999em;
+}
+
+.record-button-valid {
+  background-color: var(--colour-background-teal);
+  color: var(--colour-h1);
 }
 
 /* 404 PAGE */
