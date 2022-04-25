@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="/css/styles.css" />
     {{!-- <link rel="stylesheet" type="text/css" href="/themes/styles.css" /> --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="../scripts/home.js"></script>
     <title>Diabetes@Home</title>
 </head>
 <body> 
@@ -32,21 +33,22 @@
                     </form>
                 </li>
             </ul>
+            
             <div id="menuToggle">
 
-                <input type="checkbox" />
+                <input type="checkbox" id="menuToggleCheckbox"/>
                 <span></span>
                 <span></span>
                 <span></span>
                 
                 <ul id="menu">
-                  <a href="#"><li>Home</li></a>
+                  <a href="/"><li>Home</li></a>
                   <hr class="solid">
-                  <a href="../aboutDiabetes.hbs"><li>About Diabetes</li></a>
+                  <a href="/about/diabetes"><li>About Diabetes</li></a>
                   <hr class="solid">
-                  <a href="../aboutWebsite.hbs"><li>About this Website</li></a>
+                  <a href="/about/website"><li>About this Website</li></a>
                   <hr class="solid">
-                  <a href="#"><li>Login</li></a>
+                  <a href="/login"><li>Login</li></a>
                 </ul>
             </div>
         </nav>
