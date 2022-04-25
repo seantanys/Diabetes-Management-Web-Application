@@ -2,7 +2,7 @@ const patientData = require('../models/patientModel')
 const {Patient} = require('../models/patient')
 const {Measurement} = require('../models/patient')
 
-const id = "6264cb2ce90f5d55cbad445d"; // HARD CODED PATIENT ID
+const id = "6265e740332717bb9fe3eb4c"; // HARD CODED PATIENT ID
 
 // // handle request to get all people data instances
 // const getAllPeopleData = (req, res) => {

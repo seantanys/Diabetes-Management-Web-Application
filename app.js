@@ -17,7 +17,8 @@ app.engine(
         extname: 'hbs',
         helpers: {
             isIn: (str, array) => array.includes(str),
-            isEmpty: array => array.length === 0
+            isEmpty: array => array.length === 0,
+            equals: (str1, str2) => str1 === str2
         }
     })
 )

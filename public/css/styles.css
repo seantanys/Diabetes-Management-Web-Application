@@ -543,7 +543,7 @@ lottie-player {
 
 .requirement-section {
   background-color: var(--colour-background-teal);
-  padding: 50px;
+  padding: 25px;
 }
 
 .checklist-container {
@@ -584,8 +584,10 @@ lottie-player {
 }
 
 .reminder-section {
+  display: flex;
+  align-items: center;
   background-color: var(--colour-background-teal);
-  height: 150px;
+  height: 200px;
   border: none;
 }
 
@@ -647,6 +649,7 @@ lottie-player {
   font-size: var(--text-h2);
   color: white;
   margin-top: 25px;
+  text-align: center;
 }
 
 .record-form {
@@ -940,6 +943,89 @@ font-size: var(--text-p);
   margin-right: 10%;
   margin-top: 10px;
 }
+
+.page-heading-1 h2 {
+  width: 70%;
+  margin-right: 15%;
+  margin-left: 15%;
+  font-size: var(--text-p);
+  font-weight: 300;
+  color: black;
+  text-align: center;
+  padding: 35px 0px;
+}
+
+.requirement-section {
+  padding: 15px;
+}
+
+.checklist-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-right: 0%;
+  margin-left: 0%;
+  padding: 15px;
+}
+
+.checklist-container h3 {
+  font-size: var(--text-p);
+}
+
+.checklist-container p {
+  font-size: var(--text-p);
+}
+
+.checklist-container img {
+  width: 20px;
+  height: 20px;
+}
+
+.requirement-checklist-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 10%;
+  margin-right: 10%;
+  padding-top: 20px;
+}
+
+.reminder-section {
+  height: 250px;
+  border: none;
+}
+
+.reminder-container {
+  width: 90%;
+  margin-right: 5%;
+  margin-left: 5%;
+}
+
+.reminder-done {
+  width: 90%;
+  margin-right: 5%;
+  margin-left: 5%;
+}
+
+.reminder-heading {
+  color: white;
+  font-size: var(--text-p);
+}
+
+.reminder-text {
+  margin-left: 40px;
+  color: white;
+  font-size: var(--text-p);
+  font-weight: 300;
+}
+
+.record-container h2 {
+  font-size: var(--text-h3);
+  color: white;
+  margin-top: 25px;
+}
+
 
 #login {
   display: none;

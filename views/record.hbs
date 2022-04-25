@@ -68,10 +68,10 @@
          <div class="reminder-heading">          
             {{#if (isEmpty notMeasured)}}
             <img src="../images/icons/smiley.svg" alt="smiley">
-            <h2>Good Job!</h2>
+            <h3>Good Job!</h3>
             {{else}}
             <img src="../images/icons/warning.svg" alt="warning-sign">
-            <h2>Reminder</h2>
+            <h3>Reminder</h3>
             {{/if}}          
         </div>
     
@@ -81,9 +81,11 @@
                 You have recorded all your measurements today.
              </p>
              {{else}}
+             {{#each notMeasured}}
              <p>
-                placeholder not yet recorded for today.
+                - {{#if (equals this "bcg")}} blood glucose level not yet recorded for today. {{else}} {{this}} not yet recorded for today. {{/if}}
              </p>
+             {{/each}}
              {{/if}}        
         </div>
     </div>
