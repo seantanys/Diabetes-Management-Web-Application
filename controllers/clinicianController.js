@@ -4,26 +4,58 @@ const {CurrentMeasurement} = require('../models/patient')
 
 const id = "6265e740332717bb9fe3eb4c";
 
-const getAllPeopleData = async (req, res, next) => {
-    try {
-        const patients = await Patient.find({},{}).lean()
+// const getAllPeopleData = async (req, res, next) => {
+//     try {
+//         const patients = await Patient.find({},{}).lean()
         
-        let patientDashboard = []
-        patients.forEach(async patient => {
-            const currentTime = new Date()
-            currentTime.setHours(0, 0, 0);
-            bcgMeasurement = await Measurement.findOne({patientId: patient._id.toString(), type:'bcg', date: { $gte: currentTime}}).lean();
+//         let patientDashboard = []
+//         patients.forEach(async patient => {
+//             const currentTime = new Date()
+//             currentTime.setHours(0, 0, 0);
+//             bcgMeasurement = await Measurement.findOne({patientId: patient._id.toString(), type:'bcg', date: { $gte: currentTime}}).lean();
             
-            // const currentTime = new Date()
-            // currentTime.setHours(0, 0, 0);
-            // console.log(patient._id.toString())
-            //const bcgMeasurement = await Promise.all(Measurement.findOne({patientId: patient._id.toString(), type:'bcg', date: { $gte: currentTime}}).lean());
+//             // const currentTime = new Date()
+//             // currentTime.setHours(0, 0, 0);
+//             // console.log(patient._id.toString())
+//             //const bcgMeasurement = await Promise.all(Measurement.findOne({patientId: patient._id.toString(), type:'bcg', date: { $gte: currentTime}}).lean());
 
             
-            console.log(bcgMeasurement)
+//             console.log(bcgMeasurement)
 
-        });
-        //console.log(patientDashboard)
+//         });
+//         //console.log(patientDashboard)
+//         return res.send(patientDashboard)
+//         // return res.render('allData', { data: patients })
+//     } catch (err) {
+//         return next(err)
+//     }
+// }
+
+const getAllPeopleData = async (req, res, next) => {
+    const patientDashboard = []
+    const patientIds = []
+    const allMeasurements = []
+    const currentTime = new Date()
+    currentTime.setHours(0, 0, 0);
+
+    try {
+        const patients = await Patient.find().lean()
+        for (let i = 0; i < patients.length; i++) {
+            patientIds.push([patients[i]._id.toString(), patients[i].first_name.toString()]);
+        }
+
+        for (let i = 0; i < patientIds.length; i++) {
+            bcgMeasurement = await Measurement.find({patientId: patientIds[i][0], type:'bcg', date: { $gte: currentTime}}).lean()
+            
+            if (bcgMeasurement.length > 0) {
+                allMeasurements.push(bcgMeasurement)
+                for (let j = 0; j < bcgMeasurement.length; j++) {
+                    // console.log(bcgMeasurement[j]['type'])
+                    patientDashboard.push({first_name: patientIds[i][1], type: bcgMeasurement[j]['type'], value: bcgMeasurement[j]['value'], date: bcgMeasurement[j]['date'], comment:  bcgMeasurement[j]['comment']})
+                }
+            }     
+        }
+        // console.log(patientDashboard)
         return res.send(patientDashboard)
         // return res.render('allData', { data: patients })
     } catch (err) {
