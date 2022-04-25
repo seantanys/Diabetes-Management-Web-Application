@@ -14,13 +14,30 @@
     <div class="checklist-container">
         <h3>Today's required measurements</h3>
 
-        {{!-- {{#if todayData.type.localCompare("bcg") }} --}}
+        {{!-- {{#each required}}
+        <div class="requirement-checklist-item">
+            {{#if (equals this "bcg")}}
+            <p>blood glucose level</p>
+            {{/if}}
+            {{#if (equals this "insulin")}}
+            <p>insulin doses</p>
+            {{else}}
+            <p>{{this}}</p>
+            {{/if}}          
+            {{#if (isIn this measured)}}
+                <img src="../images/icons/checked.svg" alt="circle">
+            {{else}}
+                <img src="../images/icons/circle.svg" alt="circle">
+            {{/if}}
+        </div>
+        {{/each}} --}}
+
 
         {{#if singlePatient.measurements.bcg}}
         <div class="requirement-checklist-item">
             <p>blood glucose level</p>
             {{#if (isIn "bcg" measured)}}
-                <img src="../images/icons/checked.svg" alt="circle">
+                <img src="../images/icons/checked-2.svg" alt="circle">
             {{else}}
                 <img src="../images/icons/circle.svg" alt="circle">
             {{/if}}
@@ -31,7 +48,7 @@
         <div class="requirement-checklist-item">
             <p>weight</p>
             {{#if (isIn "weight" measured)}}
-                <img src="../images/icons/checked.svg" alt="circle">
+                <img src="../images/icons/checked-2.svg" alt="circle">
             {{else}}
                 <img src="../images/icons/circle.svg" alt="circle">
             {{/if}}
@@ -42,7 +59,7 @@
         <div class="requirement-checklist-item">
             <p>exercise</p>
             {{#if (isIn "exercise" measured)}}
-                <img src="../images/icons/checked.svg" alt="circle">
+                <img src="../images/icons/checked-2.svg" alt="circle">
             {{else}}
                 <img src="../images/icons/circle.svg" alt="circle">
             {{/if}}
@@ -53,7 +70,7 @@
         <div class="requirement-checklist-item">
             <p>insulin doses</p>
             {{#if (isIn "insulin" measured)}}
-                <img src="../images/icons/checked.svg" alt="circle">
+                <img src="../images/icons/checked-2.svg" alt="circle">
             {{else}}
                 <img src="../images/icons/circle.svg" alt="circle">
             {{/if}}
@@ -190,12 +207,6 @@
 </div>
 {{/if}}
 {{/if}}
-
-{{!-- TODO: RESPONSIVE DESIGN
-            MAKE BUTTON DISABLED BY DEFAULT (GREYED OUT) AND ENABLE AND TURN BLUE WHEN INPUT TYPED.
-            REMINDER TO INPUT MEASUREMENT
- --}}
-
 
 
     

@@ -44,7 +44,7 @@ const getMeasurementPage = async (req, res) => {
     const notMeasured = reqMeasurements.filter(x => !alreadyMeasured.includes(x));
 
     if (data) {
-        res.render('record.hbs', { singlePatient: data, measured: alreadyMeasured, notMeasured: notMeasured })
+        res.render('record.hbs', { singlePatient: data, measured: alreadyMeasured, notMeasured: notMeasured, required: reqMeasurements})
     } else {
         console.log("patient data not found")
         res.render('notfound')
