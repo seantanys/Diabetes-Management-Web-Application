@@ -1,12 +1,12 @@
 const mongoose = require('mongoose')
 
 const measurementSchema = new mongoose.Schema({
-    patientId : { type: String },
-    type: { type: String, required: true },
-    value: Number,
-    date: Date,
-    comment: String
-})
+    type: { type: String, required: [true, "input is required bruv"] },
+    patientId: { type: String, required: true },
+    value: { type: Number, required: [true, "value is required bruv"] },
+    date: {type: Date, default: Date.now},
+    comment: {type: String, default: ""}
+});
 
 // const currentMeasurementSchema = new mongoose.Schema({
 //     measurementId: {type: mongoose.Schema.Types.ObjectId, ref: 'Measurement'}
@@ -15,29 +15,26 @@ const measurementSchema = new mongoose.Schema({
 const patientSchema = new mongoose.Schema({
     first_name: {type: String, required: true},
     last_name: {type: String, required: true},
-    dob : {type: Date, required: true},
+    dob: {type: Date, required: true},
     join_date: {type: Date, default: Date.now},
-    measurements:{
-        recordBCG: {
-            record: {type: Boolean, required:true, default:false},
+    measurements: {
+        bcg: {
             minimum: Number,
-            maximum: Number,
+            maximum: Number
         },
-        recordWeight: {
-            record: {type: Boolean, required:true, default:false},
+        weight: {
             minimum: Number,
-            maximum: Number,
+            maximum: Number
         },
-        recordInsulin: {
-            record: {type: Boolean, required:true, default:false},
+        insulin: {
             minimum: Number,
-            maximum: Number,
+            maximum: Number
         },
-        recordExercise: {
-            record: {type: Boolean, required:true, default:false},
+        exercise: {
             minimum: Number,
-            maximum: Number,
-        }
+            maximum: Number
+        },
+        required: false
     }
     // recordWeight: {type: Boolean, required:true, default:false},
     // recordInsulin: {type: Boolean, required:true, default:false},

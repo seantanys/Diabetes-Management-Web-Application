@@ -2,9 +2,14 @@
 {{#with oneItem}}
 <ul>
     <li>{{this._id}}</li>
-    <li>{{this.value}}</li>
-    <li>{{this.date}} </li>
-    <li>{{this.comment}} </li> 
+    <li>{{this.first_name}}</li>
+    {{!-- <li>bcg is {{bcg.value}} </li>
+    <li>weight is {{weight.value}} </li> 
+    <li>insulin is {{insulin.value}} </li> 
+    <li>exercise is {{exercise.value}} </li>  --}}
     
 </ul>
+{{/with}}
+{{#with bcg}}
+<p>{{this.value}}</p>
 {{/with}}

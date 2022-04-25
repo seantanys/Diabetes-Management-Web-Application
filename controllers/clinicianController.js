@@ -2,37 +2,135 @@ const {Patient} = require('../models/patient')
 const {Measurement} = require('../models/patient')
 const {CurrentMeasurement} = require('../models/patient')
 
-const m = new Measurement({
-    type: "BCG",
-    value: 404,
-    comment: "today i recorded 404 error ",
-  });
+const id = "6265e740332717bb9fe3eb4c";
 
 const getAllPeopleData = async (req, res, next) => {
     try {
-        const patients = await Patient.find().lean()
-        return res.render('allData', { data: patients })
+        const patients = await Patient.find({},{}).lean()
+        
+        let patientDashboard = []
+        patients.forEach(async patient => {
+            const currentTime = new Date()
+            currentTime.setHours(0, 0, 0);
+            bcgMeasurement = await Measurement.findOne({patientId: patient._id.toString(), type:'bcg', date: { $gte: currentTime}}).lean();
+            
+            // const currentTime = new Date()
+            // currentTime.setHours(0, 0, 0);
+            // console.log(patient._id.toString())
+            //const bcgMeasurement = await Promise.all(Measurement.findOne({patientId: patient._id.toString(), type:'bcg', date: { $gte: currentTime}}).lean());
+
+            
+            console.log(bcgMeasurement)
+
+        });
+        //console.log(patientDashboard)
+        return res.send(patientDashboard)
+        // return res.render('allData', { data: patients })
     } catch (err) {
         return next(err)
     }
 }
+
+
+
+// const getAllPeopleData = async (req, res, next) => {
+//     try {
+//         const patients = await Patient.find({},{}).lean()
+//         bcgmeasurement = await Measurement.findOne({patientId: patient._id.toString(), type:'bcg', date: { $gte: currentTime}}).lean();
+//         let patientDashboard = []
+//         // patients.forEach(async patient => {
+//         //     const currentTime = new Date()
+//         //     currentTime.setHours(0, 0, 0);
+//         //     bcgMeasurement = await Measurement.findOne({patientId: patient._id.toString(), type:'bcg', date: { $gte: currentTime}}).lean();
+//         //     const patientData = {patient:patient.first_name,bcg:bcgMeasurement};
+//         //     patientDashboard.push(patientData);
+//         //     // const currentTime = new Date()
+//         //     // currentTime.setHours(0, 0, 0);
+//         //     // console.log(patient._id.toString())
+//         //     //const bcgMeasurement = await Promise.all(Measurement.findOne({patientId: patient._id.toString(), type:'bcg', date: { $gte: currentTime}}).lean());
+//         //     // const weightMeasurement = await Measurement.findOne({patientId: patient._id.toString(), type:'weight', date: { $gte: currentTime}},{value:true}).lean();
+//         //     // const exerciseMeasurement = await Measurement.findOne({patientId: patient._id.toString(), type:'exercise', date: { $gte: currentTime}},{value:true}).lean();
+//         //     // const insulinMeasurement = await Measurement.findOne({patientId: patient._id.toString(), type:'insulin', date: { $gte: currentTime}},{value:true}).lean();
+//         //     // console.log([patient._id.toString(),bcgMeasurement,weightMeasurement,exerciseMeasurement,insulinMeasurement])
+            
+//         //     console.log(patientData)
+//         //     patientDashboard.push(patientData);
+//         // });
+//         //console.log(patientDashboard)
+//         return res.send(patientDashboard)
+//         // return res.render('allData', { data: patients })
+//     } catch (err) {
+//         return next(err)
+//     }
+// }
+
+
+
+
 const getDataById = async(req, res, next) => {
     try {
-        const patient = await Patient.findById(req.params.patient_id).lean()
-        const measurement = await Measurement.findOne({patientId: "6264bb53a06831441fe0b973"}).lean()
-        console.log(req.params.patient_id)
-        console.log(measurement)
+
+        const currentTime = new Date()
+        currentTime.setHours(0, 0, 0);
+
+        const patient = await Patient.findById(id).lean()
+        const measurement = await Measurement.find({patientId: id, type:'bcg',date: { $gte: currentTime}}).lean();
+
+        const bcgMeasurement = getBCGMeasurement(measurement);
+        // const weightMeasurement = getWeightMeasurement(measurement);
+        // const insulinMeasurement = getInsulinMeasurement(measurement);
+        // const exerciseMeasurement = getExerciseMeasurement(measurement);
+
+        // console.log(req.params.patient_id)
+        console.log(bcgMeasurement)
         if (!patient) {
             // no author found in database
             return res.sendStatus(404)
         }
         // found person
-        return res.render('oneData', { oneItem: measurement })
-        // return res.send(measurement)
+        return res.render('oneData', { oneItem: patient, bcg: bcgMeasurement,})
+        // return res.send(weightMeasurement)
     } catch (err) {
         return next(err)
     }
 }
+
+function getBCGMeasurement(arr) {
+    for (let i = 0; i < arr.length; i++) {
+        if(arr[i].type == 'bcg'){
+            return arr[i]
+        }
+    }
+    return "";
+}
+
+function getWeightMeasurement(arr) {
+    for (let i = 0; i < arr.length; i++) {
+        if(arr[i].type == 'weight'){
+            return arr[i]
+        }
+    }
+    return "";
+}
+
+function getInsulinMeasurement(arr) {
+    for (let i = 0; i < arr.length; i++) {
+        if(arr[i].type == 'insulin'){
+            return arr[i]
+        }
+    }
+    return "";
+}
+
+function getExerciseMeasurement(arr) {
+    for (let i = 0; i < arr.length; i++) {
+        if(arr[i].type == 'exercise'){
+            return arr[i]
+        }
+    }
+    return "";
+}
+
 
 const getBloodGlucoseMeasurement = async(req,res,next) => {
 
@@ -81,7 +179,6 @@ const insertData = async (req, res, next) => {
         return next(err)
     }
 }
-
 
 module.exports = {
     getAllPeopleData,
