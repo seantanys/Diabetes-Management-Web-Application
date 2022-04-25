@@ -9,7 +9,22 @@
         <br>     
         <div class="about-lottie">
             <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-            <lottie-player src="../images/lottie/mobile-app.json"  background="transparent"  speed="1"  style="width: 300px; height: 300px;"  loop  autoplay></lottie-player>
+            <script src="https://unpkg.com/@lottiefiles/lottie-interactivity@latest/dist/lottie-interactivity.min.js"></script>
+            {{!-- <lottie-player id="screenLottie" src="../images/lottie/mobile-app.json"  background="transparent"  speed="1"  style="width: 300px; height: 300px;" autoplay loop></lottie-player> --}}
+            <lottie-player id="screenLottie" src="../images/lottie/mobile-app.json" style="width: 300px; height: 300px;" loop></lottie-player>
+            <script>
+                LottieInteractivity.create({
+                    player: "#screenLottie",
+                    mode:"cursor",
+                    actions: [
+                        {
+                            position: { x: [0, 1], y: [0, 1] },
+                            type: "seek",
+                            frames: [1, 180]
+                        }
+                    ]
+                });
+            </script> 
         </div>
         <br>
         <br>
