@@ -1016,6 +1016,12 @@ td, th {
   border-radius: 5em;
 }
 
+@media screen and (max-width: 768px) {
+  #patient-dashboard-content {
+    background-color: var(--colour-background-teal);
+  }
+}
+
 #patient-details {
   background-color: var(--colour-background-teal);
   color: var(--colour-text);
@@ -1066,8 +1072,7 @@ td, th {
   border-radius: 10%;
   height: 20em;
   width: 25em;
-  padding-left: 10%;
-  padding-top: 10%;
+  padding: 5%;
   font-size: var(--text-p);
   margin-top: -15%;
   display: flex;
@@ -1085,10 +1090,36 @@ td, th {
 }
 
 .patient-card-content ul {
-  margin-top: -20%;
   margin-left: 15%;
 }
 
 .patient-card-content ul li {
   list-style-type: circle;
+}
+
+#patient-badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.patient-badge {
+  display: flex;
+  flex-direction: column;
+  width: 27%;
+}
+
+.patient-badge img {
+  width: 90%;
+}
+
+.patient-badge p {
+  font-size: 15px;
+  text-align: center;
+  color: var(--colour-text);
+  background-color: var(--colour-background);
+  height: fit-content;
+  padding: 4%;
+  margin-top: 10%;
+  border-radius: 2em;
 }
