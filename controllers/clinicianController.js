@@ -41,23 +41,28 @@ const getAllPeopleData = async (req, res, next) => {
     try {
         const patients = await Patient.find().lean()
         for (let i = 0; i < patients.length; i++) {
-            patientIds.push([patients[i]._id.toString(), patients[i].first_name.toString()]);
+            patientIds.push([patients[i]._id.toString(), patients[i].first_name.toString()+" "+patients[i].last_name.toString()]);
         }
 
         for (let i = 0; i < patientIds.length; i++) {
-            bcgMeasurement = await Measurement.find({patientId: patientIds[i][0], type:'bcg', date: { $gte: currentTime}}).lean()
+            bcgmeasurement = await Measurement.findOne({patientId: patientIds[i][0], type:'bcg', date: { $gte: currentTime}}).lean()
+            weightmeasurement = await Measurement.findOne({patientId: patientIds[i][0], type:'weight', date: { $gte: currentTime}}).lean()
+            insulinmeasurement = await Measurement.findOne({patientId: patientIds[i][0], type:'insulin', date: { $gte: currentTime}}).lean()
+            exercisemeasurement = await Measurement.findOne({patientId: patientIds[i][0], type:'exercise', date: { $gte: currentTime}}).lean()
             
-            if (bcgMeasurement.length > 0) {
-                allMeasurements.push(bcgMeasurement)
-                for (let j = 0; j < bcgMeasurement.length; j++) {
+            // if (measurement.length > 0) {
+            //     allMeasurements.push(measurement)
+                // for (let j = 0; j < measurement.length; j++) {
                     // console.log(bcgMeasurement[j]['type'])
-                    patientDashboard.push({first_name: patientIds[i][1], type: bcgMeasurement[j]['type'], value: bcgMeasurement[j]['value'], date: bcgMeasurement[j]['date'], comment:  bcgMeasurement[j]['comment']})
-                }
-            }     
+                    patientDashboard.push({patient: patients[i],bcg: (bcgmeasurement)?bcgmeasurement['value']:"",
+                    weight: (weightmeasurement)?weightmeasurement['value']:"",insulin: (insulinmeasurement)?insulinmeasurement['value']:"",
+                    exercise: (exercisemeasurement)?exercisemeasurement['value']:""})
+                //}
+            //}     
         }
         // console.log(patientDashboard)
-        return res.send(patientDashboard)
-        // return res.render('allData', { data: patients })
+        //return res.send(patientDashboard)
+        return res.render('allData', { data: patientDashboard })
     } catch (err) {
         return next(err)
     }

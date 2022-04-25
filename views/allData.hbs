@@ -6,25 +6,23 @@
     <thead>
         <tr>
             <th>Name</th>
-            <th>age</th>
-            <th>join date</th>
-            <th>record BCG</th>
-            <th>record weight</th>
-            <th>record insulin</th>
-            <th>record exercise</th>
+            <th>BCG</th>
+            <th>weight</th>
+            <th>insulin</th>
+            <th>exercise</th>
         </tr>
     </thead>
     {{!-- loops over the data set --}}
     <tbody>
     {{#each data}}
         <tr>
-        <th><a href="/clinician/{{this._id}}">{{this.first_name}} {{this.last_name}}</a></th>
-        <th>{{#if (gte this.age 20)}}<p style="color: green;">{{this.age}}</p>{{else}}{{this.age}}{{/if}}</th>
-        <th>{{moment this.join_date format = "YYYY-MM-DD"}}</th>
-        <th>{{this.recordBCG}}</th>
-        <th>{{this.recordWeight}}</th>
-        <th>{{this.recordInsulin}}</th>
-        <th>{{this.recordExercise}}</th>
+        <th><a href="/clinician/{{this.patient._id}}">{{this.patient.first_name}} {{this.patient.last_name}}</a></th>
+        {{!-- <th>{{#if (gte this.age 20)}}<p style="color: green;">{{this.age}}</p>{{else}}{{this.age}}{{/if}}</th>
+        <th>{{moment this.join_date format = "YYYY-MM-DD"}}</th> --}}
+        <th>{{this.bcg}}</th>
+        <th>{{this.weight}}</th>
+        <th>{{this.insulin}}</th>
+        <th>{{this.exercise}}</th>
         </tr>
     {{/each}}
     </tbody>
