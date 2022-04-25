@@ -19,7 +19,9 @@
 body {
     font-family: var(--font-family-body);
     margin: 0;
+    padding: 0;
     background-color: var(--colour-background-teal);
+    color: #cdcdcd;
   }
   
   html {
@@ -826,21 +828,7 @@ text-align: center;
 /* moving nav icon */
 /* https://codepen.io/erikterwan/pen/EVzeRP */
 
-body
-{
-  margin: 0;
-  padding: 0;
-  
-  background: #232323;
-  color: #cdcdcd;
-}
-
-
 #menuToggle {
-  display: none;
-}
-
-#menu {
   display: none;
 }
 
@@ -1142,9 +1130,9 @@ font-size: var(--text-p);
   * at the top left of the screen
   */
   #menu {
-    display: block;
     position: absolute;
     width: 300px;
+    height: 100vh;
     margin: 25px 0 0 -250px;
     padding: 40px;
     padding-bottom: 300px;
@@ -1181,6 +1169,7 @@ font-size: var(--text-p);
   }
 
 }
+
 table {
   border-collapse: collapse;
   background-color: aqua;
