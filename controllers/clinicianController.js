@@ -16,6 +16,38 @@ const getAllPeopleData = async (req, res, next) => {
         return next(err)
     }
 }
+
+// const getAllMeasurements = async (req, res) => {
+//     const patientDashboard = []
+//     const patientIds = []
+//     const allMeasurements = []
+//     const currentTime = new Date()
+//     currentTime.setHours(0, 0, 0);
+
+//     try {
+//         const patients = await Patient.find().lean()
+//         for (let i = 0; i < patients.length; i++) {
+//             patientIds.push([patients[i]._id.toString(), patients[i].first_name.toString()]);
+//         }
+
+//         for (let i = 0; i < patientIds.length; i++) {
+//             bcgMeasurement = await Measurement.find({patientId: patientIds[i][0], type:'bcg', date: { $gte: currentTime}}).lean()
+            
+//             if (bcgMeasurement.length > 0) {
+//                 allMeasurements.push(bcgMeasurement)
+//                 for (let j = 0; j < bcgMeasurement.length; j++) {
+//                     // console.log(bcgMeasurement[j]['type'])
+//                     patientDashboard.push({first_name: patientIds[i][1], type: bcgMeasurement[j]['type'], value: bcgMeasurement[j]['value'], date: bcgMeasurement[j]['date'], comment:  bcgMeasurement[j]['comment']})
+//                 }
+//             }     
+//         }
+
+//         res.send(patientDashboard)
+//     } catch (e) {
+//         console.log(e)
+//     }
+// }
+
 const getDataById = async(req, res, next) => {
     try {
         const patient = await Patient.findById(req.params.patient_id).lean()
@@ -74,5 +106,6 @@ module.exports = {
     getAllPeopleData,
     getDataById,
     insertData,
-    getBloodGlucoseMeasurement
+    getBloodGlucoseMeasurement,
+    // getAllMeasurements
 }

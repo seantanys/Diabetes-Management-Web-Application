@@ -34,8 +34,17 @@ const patientSchema = new mongoose.Schema({
     }
 });
 
+patientSchema.virtual('fullName').get(function () {
+    return `${this.first_name} ${this.last_name}`
+})
+
+patientSchema.virtual('age').get(function () {
+    currentDate = new Date()
+    return `${currentDate.getYear() - this.dob.getYear()}`
+})
+
 const Patient = mongoose.model('Patient', patientSchema)
 const Measurement = mongoose.model('Measurement', measurementSchema)
-// const CurrentMeasurement = mongoose.model('CurrentMeasurement',currentMeasurementSchema)
+
 
 module.exports = {Patient, Measurement}
