@@ -862,7 +862,7 @@ text-align: center;
     align-items: center;
 }
 
-lottie-player {
+#hero-lottie {
     margin: -50px 0px 0px 0px;
     width: 375px;
     height: 375px;
