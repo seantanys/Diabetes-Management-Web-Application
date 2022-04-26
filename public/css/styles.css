@@ -16,8 +16,9 @@
   --colour-first: rgb(204, 255, 197);
   --colour-second: rgba(252, 245, 147, 1);
   --colour-third: rgba(255, 175, 95, 1);
-  --colour-fourth: rgb(255, 179, 179);;
-  --colour-fifth: rgb(223, 167, 255);;
+  --colour-fourth: rgb(255, 179, 179);
+  --colour-fifth: rgb(223, 167, 255);
+  --colour-measured: rgb(141, 141, 141);
   --curved_corners: 20px;
 }
 
@@ -1308,6 +1309,12 @@ td, th {
 
 .patient-card-content ul li {
   list-style-type: circle;
+}
+
+.patient-card-content .measured {
+  color: var(--colour-measured);
+  text-decoration: line-through;
+  list-style-type: disc;
 }
 
 #patient-badges {

@@ -4,9 +4,9 @@
         
         <div id="patient-details">
             <img src="\images\male-profile.jpg">
-            <p>John Smith</p>
-            <p>Username123</p>
-            <p>DOB: 10/10/1990</p>
+            <p>{{singlePatient.first_name}} {{singlePatient.last_name}}</p>
+            <p>Pat123</p>
+            <p>DOB: {{dob}}</p>
         </div>
 
         <div class="patient-card">
@@ -16,9 +16,34 @@
             <div class="patient-card-content">
                 <p>Today you need to:</p>
                 <ul>
-                    <li>Enter your blood glucose level</li>
-                    <li>Enter your weight</li>
-                    <li>Enter your insulin doses</li>
+                    {{#if singlePatient.measurements.bcg}}
+                        {{#if (isIn "bcg" notMeasured)}}
+                            <li>Enter your blood glucose level</li>
+                        {{else}}
+                            <li class="measured">Enter your blood glucose level</li>
+                        {{/if}}
+                    {{/if}}
+                    {{#if singlePatient.measurements.weight}}
+                        {{#if (isIn "weight" notMeasured)}}
+                            <li>Enter your weight</li>
+                        {{else}}
+                            <li class="measured">Enter your weight</li>
+                        {{/if}}
+                    {{/if}}
+                    {{#if singlePatient.measurements.exercise}}
+                        {{#if (isIn "exercise" notMeasured)}}
+                            <li>Enter step count</li>
+                        {{else}}
+                            <li class="measured">Enter step count</li>
+                        {{/if}}
+                    {{/if}}
+                    {{#if singlePatient.measurements.insulin}}
+                        {{#if (isIn "insulin" notMeasured)}}
+                            <li>Enter your insulin doses</li>
+                        {{else}}
+                            <li class="measured">Enter your insulin doses</li>
+                        {{/if}}
+                    {{/if}}
                 </ul>
                 <a href="/patient/record">Record measurements</a>
             </div>

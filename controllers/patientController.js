@@ -79,8 +79,24 @@ const submitMeasurement = async (req, res) => {
     // add loading bar
 }
 
-const getPatientPage = (req, res) => {
-    res.render('patientDashboard')
+const getPatientPage = async (req, res) => {
+    const currentTime = new Date()
+    // const localTime = currentTime.toLocaleString("en-US", {timeZone: "Australia/Melbourne"});
+    // console.log(localTime)
+    currentTime.setHours(0, 0, 0);
+    const data = await Patient.findById(id).lean();
+    const todayData = await Measurement.find({patientId: id, date: { $gte: currentTime}}).lean();
+
+    const reqMeasurements = Object.keys(data["measurements"])
+    const alreadyMeasured = getMeasurementTypes(todayData);
+    const notMeasured = reqMeasurements.filter(x => !alreadyMeasured.includes(x));
+    const dob = data.dob.getDate().toString().padStart(2,"0") + "/" + (data.dob.getMonth() + 1).toString().padStart(2,"0") + "/" + data.dob.getFullYear().toString()
+    if (data) {
+        res.render('patientDashboard.hbs', {dob, singlePatient: data, measured: alreadyMeasured, notMeasured: notMeasured, required: reqMeasurements})
+    } else {
+        console.log("patient data not found")
+        res.render('notfound')
+    }
 }
 
 // exports an object, which contain functions imported by router
