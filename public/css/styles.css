@@ -637,16 +637,6 @@ text-align: center;
 /* moving nav icon */
 /* https://codepen.io/erikterwan/pen/EVzeRP */
 
-body
-{
-  margin: 0;
-  padding: 0;
-  
-  background: #232323;
-  color: #cdcdcd;
-}
-
-
 #menuToggle {
   display: none;
 }

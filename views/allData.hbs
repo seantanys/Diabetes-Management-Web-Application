@@ -19,10 +19,42 @@
         <th><a href="/clinician/{{this.patient._id}}">{{this.patient.first_name}} {{this.patient.last_name}}</a></th>
         {{!-- <th>{{#if (gte this.age 20)}}<p style="color: green;">{{this.age}}</p>{{else}}{{this.age}}{{/if}}</th>
         <th>{{moment this.join_date format = "YYYY-MM-DD"}}</th> --}}
-        <th>{{this.bcg}}</th>
-        <th>{{this.weight}}</th>
-        <th>{{this.insulin}}</th>
-        <th>{{this.exercise}}</th>
+        <th>
+            {{#if this.patient.measurements.bcg}}
+                {{#if (and (gte this.bcg this.patient.measurements.bcg.minimum) (lte this.bcg this.patient.measurements.bcg.maximum))}}
+                    {{this.bcg}}
+                {{else}}
+                    <p style="color: red;">{{this.bcg}}</p>
+                {{/if}}
+            {{/if}}
+        </th>
+        <th>
+            {{#if this.patient.measurements.weight}}
+                {{#if (and (gte this.weight this.patient.measurements.weight.minimum) (lte this.weight this.patient.measurements.weight.maximum))}}
+                    {{this.weight}}
+                {{else}}
+                    <p style="color: red;">{{this.weight}}</p>
+                {{/if}}
+            {{/if}}
+        </th>
+        <th>
+            {{#if this.patient.measurements.insulin}}
+                {{#if (and (gte this.insulin this.patient.measurements.insulin.minimum) (lte this.insulin this.patient.measurements.insulin.maximum))}}
+                    {{this.insulin}}
+                {{else}}
+                    <p style="color: red;">{{this.insulin}}</p>
+                {{/if}}
+            {{/if}}
+        </th>
+        <th>
+            {{#if this.patient.measurements.exercise}}
+                {{#if (and (gte this.exercise this.patient.measurements.exercise.minimum) (lte this.exercise this.patient.measurements.exercise.maximum))}}
+                    {{this.exercise}}
+                {{else}}
+                    <p style="color: red;">{{this.exercise}}</p>
+                {{/if}}
+            {{/if}}
+        </th>
         </tr>
     {{/each}}
     </tbody>

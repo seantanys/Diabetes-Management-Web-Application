@@ -45,10 +45,11 @@ const getAllPeopleData = async (req, res, next) => {
         }
 
         for (let i = 0; i < patientIds.length; i++) {
-            bcgmeasurement = await Measurement.findOne({patientId: patientIds[i][0], type:'bcg', date: { $gte: currentTime}}).lean()
-            weightmeasurement = await Measurement.findOne({patientId: patientIds[i][0], type:'weight', date: { $gte: currentTime}}).lean()
-            insulinmeasurement = await Measurement.findOne({patientId: patientIds[i][0], type:'insulin', date: { $gte: currentTime}}).lean()
-            exercisemeasurement = await Measurement.findOne({patientId: patientIds[i][0], type:'exercise', date: { $gte: currentTime}}).lean()
+            bcgmeasurement = await Measurement.findOne({patientId: patientIds[i][0], type:'bcg'}).sort({"date": -1}).lean()
+            weightmeasurement = await Measurement.findOne({patientId: patientIds[i][0], type:'weight'}).sort({"date": -1}).lean()
+            insulinmeasurement = await Measurement.findOne({patientId: patientIds[i][0], type:'insulin'}).sort({"date": -1}).lean()
+            exercisemeasurement = await Measurement.findOne({patientId: patientIds[i][0], type:'exercise'}).sort({"date": -1}).lean()
+            // exercisemeasurement = await Measurement.findOne({patientId: patientIds[i][0], type:'exercise', date: { $gte: currentTime}}).lean()
             
             // if (measurement.length > 0) {
             //     allMeasurements.push(measurement)
