@@ -13,6 +13,9 @@
   --colour-h2: rgba(5, 85, 142, 1);
   --colour-background: rgba(255, 255, 255, 1);
   --colour-black: rgba(0, 0, 0, 0);
+  --colour-gold: rgba(238,232,170);
+  --colour-silver: rgba(192,192,192);
+  --colour-bronze: rgba(205, 127, 50);
   --curved_corners: 20px;
 }
 
@@ -1016,12 +1019,6 @@ td, th {
   border-radius: 5em;
 }
 
-@media screen and (max-width: 768px) {
-  #patient-dashboard-content {
-    background-color: var(--colour-background-teal);
-  }
-}
-
 #patient-details {
   background-color: var(--colour-background-teal);
   color: var(--colour-text);
@@ -1111,6 +1108,7 @@ td, th {
 
 .patient-badge img {
   width: 90%;
+  color: var(--colour-gold);
 }
 
 .patient-badge p {
@@ -1122,4 +1120,50 @@ td, th {
   padding: 4%;
   margin-top: 10%;
   border-radius: 2em;
+}
+
+.leaderboard {
+  background-color: transparent;
+  width: 100%;
+  text-align: center;
+}
+
+.leaderboard th {
+  border: 0px;
+  border-radius: 10em;
+  background-color: var(--colour-background);
+}
+
+.leaderboard td {
+  border: 0px;
+}
+
+.leaderboard #first {
+  background-color: var(--colour-gold);
+  border-radius: 10em;
+}
+
+.leaderboard #second {
+  background-color: var(--colour-silver);
+  border-radius: 10em;
+}
+
+.leaderboard #third {
+  background-color: var(--colour-bronze);
+  border-radius: 10em;
+}
+
+@media screen and (max-width: 768px) {
+  #patient-dashboard-content {
+    background-color: var(--colour-background-teal);
+  }
+  #patient-details {
+    background-color: var(--colour-background);
+  }
+  .patient-card-content {
+    background-color: var(--colour-background);
+  }
+  .leaderboard th {
+    background-color: var(--colour-background-teal);
+  }
 }
