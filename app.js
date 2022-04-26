@@ -4,6 +4,8 @@ const express = require('express')
 // include Handlebars module
 const exphbs = require('express-handlebars')
 
+var helpers = require('handlebars-helpers')();
+
 // Set your app up as an express app
 const app = express()
 
@@ -18,7 +20,12 @@ app.engine(
         helpers: {
             isIn: (str, array) => array.includes(str),
             isEmpty: array => array.length === 0,
-            equals: (str1, str2) => str1 === str2
+            equals: (str1, str2) => str1 === str2,
+            lte: (v1, v2) => v1 <= v2,
+            gte: (v1, v2) => v1 >= v2,
+            and() {
+                return Array.prototype.every.call(arguments, Boolean);
+            }
         }
     })
 )

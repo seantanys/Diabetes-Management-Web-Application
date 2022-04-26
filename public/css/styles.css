@@ -820,7 +820,7 @@ display: block;
 }
 
 .footer {
-position: relative;
+position: fixed;
 left: 0;
 bottom: 0;
 width: 100%;
@@ -1183,14 +1183,19 @@ hr.solid {
   border-top: 0.1px solid white;
   width: 150px;
 }
+}
 
+.create-patient-secion {
+  background-color: var(--colour-background-teal);
+  display: flex;
+  justify-content: center;
 }
 
 table {
   border-collapse: collapse;
-  background-color: aqua;
-  color: #232323;
+  color: #fdfdfd;
 }
+
 td, th {
   border: 1px solid #999;
   padding: 0.5rem;

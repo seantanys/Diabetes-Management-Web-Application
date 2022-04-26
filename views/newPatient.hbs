@@ -1,0 +1,138 @@
+<h1> Create New Patient</h1>
+
+
+<form action="/clinician/" method="POST">
+	<table>
+		<tr>
+			<td>
+				First Name:
+			</td>
+
+			<td>
+				<input type="text" placeholder="First name" name="first_name" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Last Name:
+			</td>
+
+			<td>
+				<input type="text" placeholder="Last name" name="last_name" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Age:
+			</td>
+
+			<td>
+				<input type="number" placeholder="age" name="age" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Date Of Birth:
+			</td>
+
+			<td>
+				<input type="date" placeholder="join_date" name="join_date" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Email Address:
+			</td>
+
+			<td>
+				<input type=”mail”  placeholder=”Email” name=””>
+			</td>
+		</tr>
+        <tr>
+            <td>
+				Password:
+			</td>
+
+			<td>
+				<input type=”Password” placeholder=”Password” name=””>
+			</td>
+		</tr>
+	</table>
+
+    <br>
+
+    <table>
+		<tr>
+			<td>
+
+			</td>
+
+			<td>
+				MIN
+			</td>
+
+            <td>
+				MAX
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input type="checkbox" id="recordBCG" name="recordBCG" value="Boolean">
+                <label for="recordBCG"> BCG </label>
+			</td>
+
+			<td>
+				<input type="text" placeholder="minimum" name="BCGmin" />
+			</td>
+
+            <td>
+				<input type="text" placeholder="maxmimum" name="BCGmax" />
+			</td>
+		</tr>
+        <tr>
+			<td>
+				<input type="checkbox" id="recordWeight" name="recordWeight" value="Weight">
+                <label for="recordWeight"> Weight </label>
+			</td>
+
+			<td>
+				<input type="text" placeholder="minimum" name="Weightmin" />
+			</td>
+
+            <td>
+				<input type="text" placeholder="maxmimum" name="Weightmax" />
+			</td>
+		</tr>
+        		<tr>
+			<td>
+				<input type="checkbox" id="recordInsulin" name="recordInsulin" value="Insulin">
+                <label for="recordInsulin"> Insulin </label>
+			</td>
+
+			<td>
+				<input type="text" placeholder="minimum" name="Insulinmin" />
+			</td>
+
+            <td>
+				<input type="text" placeholder="maxmimum" name="Insulinmax" />
+			</td>
+		</tr>
+        		<tr>
+			<td>
+				<input type="checkbox" id="recordExercise" name="recordExercise" value="Exercise">
+                <label for="recordExercise"> Exercise </label>
+			</td>
+
+			<td>
+				<input type="text" placeholder="minimum" name="Exercisemin" />
+			</td>
+
+            <td>
+				<input type="text" placeholder="maxmimum" name="Exercisemax" />
+			</td>
+		</tr>
+
+	</table>
+
+    <input type="submit" />
+</form> 

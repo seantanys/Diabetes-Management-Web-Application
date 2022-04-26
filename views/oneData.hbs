@@ -3,8 +3,13 @@
 <ul>
     <li>{{this._id}}</li>
     <li>{{this.first_name}}</li>
-    <li>{{this.last_name}} </li>
-    <li>{{this.measurements}} </li>
+    {{!-- <li>bcg is {{bcg.value}} </li>
+    <li>weight is {{weight.value}} </li> 
+    <li>insulin is {{insulin.value}} </li> 
+    <li>exercise is {{exercise.value}} </li>  --}}
     
 </ul>
+{{/with}}
+{{#with bcg}}
+<p>{{this.value}}</p>
 {{/with}}
