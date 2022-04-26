@@ -77,7 +77,10 @@ const submitMeasurement = async (req, res) => {
 
     
     // add loading bar
-    
+}
+
+const getPatientPage = (req, res) => {
+    res.render('patientDashboard')
 }
 
 // exports an object, which contain functions imported by router
@@ -86,5 +89,6 @@ module.exports = {
     // getDataById,
     // insertData,
     getMeasurementPage,
-    submitMeasurement
+    submitMeasurement,
+    getPatientPage
 }
