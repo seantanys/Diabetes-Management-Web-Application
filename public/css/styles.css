@@ -13,9 +13,11 @@
   --colour-h2: rgba(5, 85, 142, 1);
   --colour-background: rgba(255, 255, 255, 1);
   --colour-black: rgba(0, 0, 0, 0);
-  --colour-gold: rgba(238,232,170);
-  --colour-silver: rgba(192,192,192);
-  --colour-bronze: rgba(205, 127, 50);
+  --colour-first: rgb(204, 255, 197);
+  --colour-second: rgba(252, 245, 147, 1);
+  --colour-third: rgba(255, 175, 95, 1);
+  --colour-fourth: rgb(255, 179, 179);;
+  --colour-fifth: rgb(223, 167, 255);;
   --curved_corners: 20px;
 }
 
@@ -1126,31 +1128,48 @@ td, th {
   background-color: transparent;
   width: 100%;
   text-align: center;
+  border-collapse: separate;
+  border-spacing: 0 0.5em;
 }
 
-.leaderboard th {
+.leaderboard th, td {
   border: 0px;
+}
+
+.leaderboard th p {
   border-radius: 10em;
   background-color: var(--colour-background);
+  padding: 0.5em;
 }
 
-.leaderboard td {
-  border: 0px;
+.leaderboard td:first-child {
+  border-top-left-radius: 10em;
+  border-bottom-left-radius: 10em;
+}
+
+.leaderboard td:last-child {
+  border-top-right-radius: 10em;
+  border-bottom-right-radius: 10em;
 }
 
 .leaderboard #first {
-  background-color: var(--colour-gold);
-  border-radius: 10em;
+  background-color: var(--colour-first);
 }
 
 .leaderboard #second {
-  background-color: var(--colour-silver);
-  border-radius: 10em;
+  background-color: var(--colour-second);
 }
 
 .leaderboard #third {
-  background-color: var(--colour-bronze);
-  border-radius: 10em;
+  background-color: var(--colour-third);
+}
+
+.leaderboard #fourth {
+  background-color: var(--colour-fourth);
+}
+
+.leaderboard #fifth {
+  background-color: var(--colour-fifth);
 }
 
 @media screen and (max-width: 768px) {
@@ -1163,7 +1182,10 @@ td, th {
   .patient-card-content {
     background-color: var(--colour-background);
   }
-  .leaderboard th {
+  .patient-badge p {
+    background-color: var(--colour-background-teal);
+  }
+  .leaderboard th p {
     background-color: var(--colour-background-teal);
   }
 }
