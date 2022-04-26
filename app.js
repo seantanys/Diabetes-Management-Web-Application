@@ -61,7 +61,7 @@ app.use('/login', loginRouter)
 //     res.send('Our demo app is working!')
 // })
 app.get('/', (req, res) => {
-    res.render('index.hbs')
+    res.render('index.hbs', {layout: 'patient-logged-out.hbs'})
 })
 
 app.get('*', (req, res) => {
