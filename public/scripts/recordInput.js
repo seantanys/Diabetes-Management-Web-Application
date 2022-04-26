@@ -1,7 +1,5 @@
 const isEmpty = str => !str.trim().length;
 
-console.log("lol")
-
 window.onload = function () {
     const input = document.getElementById("bcg")
     const btn = document.getElementById("bcg-btn")

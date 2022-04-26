@@ -953,6 +953,12 @@ font-size: var(--text-p);
   padding: 35px 0px;
 }
 
+.contact-section h1 {
+  width: 80%;
+  margin-right: 10%;
+  margin-left: 10%;
+}
+
 .requirement-section {
   padding: 15px;
 }

@@ -7,7 +7,7 @@ const getAboutWebsite = (req, res) => {
 }
 
 const returnHome = (req, res) => {
-    res.render('index')
+    // res.render('index')
 }
 
 module.exports = {
