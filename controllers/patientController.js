@@ -99,6 +99,10 @@ const getPatientPage = async (req, res) => {
     }
 }
 
+const getPatientAccountPage = async (req, res) => {
+    res.render('account')
+}
+
 // exports an object, which contain functions imported by router
 module.exports = {
     // getAllPeopleData,
@@ -106,5 +110,6 @@ module.exports = {
     // insertData,
     getMeasurementPage,
     submitMeasurement,
-    getPatientPage
+    getPatientPage,
+    getPatientAccountPage
 }

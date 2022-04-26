@@ -1,0 +1,87 @@
+<div class="page-heading-1">
+    <h1>My Account</h1>
+</div>
+
+{{!-- https://codepen.io/markcaron/pen/MvGRYV --}}
+
+<div class="patient-account-section">
+    <div class="patient-account-dashboard">
+        <div class="tabset">
+            <!-- Tab 1 -->
+            <input type="radio" name="tabset" id="tab1" aria-controls="account-details" checked>
+            <label for="tab1">Account Details</label>
+            <!-- Tab 2 -->
+            <input type="radio" name="tabset" id="tab2" aria-controls="change-password">
+            <label for="tab2">Change Password</label>
+            <!-- Tab 3 -->
+            <input type="radio" name="tabset" id="tab3" aria-controls="change-theme">
+            <label for="tab3">Change Theme</label>
+            
+            <div class="tab-panels">
+                <section id="account-details" class="tab-panel">
+                    <h2>Basic Details</h2>
+                    <img src="\images\male-profile.jpg">
+                    <p>Username: Bruh123</p>
+                    <p>Family Name: Bruh</p>
+                    <p>Given Name: Bruh</p>
+                    <p>Date Of Birth: 10/03/1998</p>
+                    <p>Bio: Bruh bruh bruh</p>
+                </section>
+                <section id="change-password" class="tab-panel">
+                    <h2>Change Password</h2>
+                    <form action="/patient/account" class="log-in-form">
+                        <div class="input-box">
+                            <span class="label">Current Password</span>
+                            <div class="input">
+                                <input type="password" placeholder="Enter current password" id="opw" required>
+                            </div>
+                        </div>
+
+                        <div class="input-box">
+                            <span class="label">New Password</span>
+                            <div class="input">
+                            <input type="password" placeholder="Enter new Password" id="npw" required>
+                            </div>
+                        </div>
+
+                        <div class="input-box">
+                            <span class="label">Confirm New Password</span>
+                            <div class="input">
+                            <input type="password" placeholder="Confirm new Password" id="npw" required>
+                            </div>
+                        </div>
+                        <button type="submit">Submit</button>
+                    </form>
+                </section>
+                <section id="change-theme" class="tab-panel">
+                    <h2>Change Theme</h2>
+                    <div class="theme-container">
+                        <label class="theme">
+                            <input type="radio" name="test" value="small" checked>
+                            <img src="https://images.unsplash.com/photo-1515462277126-2dd0c162007a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZGFyayUyMHRoZW1lfGVufDB8fDB8fA%3D%3D&w=1000&q=80">
+                            <h3>Dark</h3>
+                        </label>
+                        <label class="theme">
+                            <input type="radio" name="test" value="big">
+                            <img src="https://media.istockphoto.com/photos/blue-gradient-soft-background-picture-id1093513194?k=20&m=1093513194&s=170667a&w=0&h=Te14UkjvQeBBii6b2eD9GQcslk0NazN3LoNXl7BPDQg=">
+                        <h3>Original</h3>
+                        </label>
+                        <label class="theme">
+                            <input type="radio" name="test" value="big">
+                            <img src="https://assets-eu-01.kc-usercontent.com/bcd02f72-b50c-0179-8b4b-5e44f5340bd4/7a0b8947-d971-444f-9287-e11fd0d2c421/autumn-poems-header-min.jpg">
+                        <h3>Autumn</h3>
+                        </label>
+                        <label class="theme">
+                            <input type="radio" name="test" value="big">
+                            <img src="https://www.nj.com/resizer/LZ0Y3O0GrmrSsOw4MYbrEYh-ypg=/1280x0/smart/cloudfront-us-east-1.images.arcpublishing.com/advancelocal/A7TFEUUSRJBAZHOCLPWPMXAM2E.jpg">
+                        <h3>Spring</h3>
+                        </label>
+                    </div>
+                    <h2>Your Current Theme: Original</h2>
+                    <h2>Selected Theme:</h2>
+                    <button>Save</button>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>

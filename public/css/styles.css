@@ -27,7 +27,7 @@ body {
   margin: 0;
   padding: 0;
   background-color: var(--colour-background-teal);
-  color: #cdcdcd;
+  color: #ffffff;
 }
 
 /* used when mobile menu is clicked to prevent scrolling */
@@ -1393,6 +1393,154 @@ td, th {
 .leaderboard #fifth {
   background-color: var(--colour-fifth);
 }
+
+/* Patient account stuff */
+
+.patient-account-dashboard {
+  background-color: var(--colour-h1);
+  height: 1500px;
+  width: 60%;
+  margin-left: 20%;
+  margin-right: 20%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+  border-radius: 5em;
+  border: none;
+}
+
+.patient-account-dashboard p {
+  font-size: var(--text-p);
+  text-align: center;
+}
+
+.patient-account-dashboard h2 {
+  font-size: var(--text-h2);
+  text-align: center;
+}
+
+.patient-account-dashboard label {
+  font-size: var(--text-h3)
+}
+
+.tabset > input[type="radio"] {
+  position: absolute;
+  left: -200vw;
+}
+
+.tabset .tab-panel {
+  display: none;
+}
+
+.tabset > input:first-child:checked ~ .tab-panels > .tab-panel:first-child,
+.tabset > input:nth-child(3):checked ~ .tab-panels > .tab-panel:nth-child(2),
+.tabset > input:nth-child(5):checked ~ .tab-panels > .tab-panel:nth-child(3),
+.tabset > input:nth-child(7):checked ~ .tab-panels > .tab-panel:nth-child(4),
+.tabset > input:nth-child(9):checked ~ .tab-panels > .tab-panel:nth-child(5),
+.tabset > input:nth-child(11):checked ~ .tab-panels > .tab-panel:nth-child(6) {
+  display: block;
+}
+
+.tabset > label {
+  position: relative;
+  display: inline-block;
+  padding: 15px 15px 25px;
+  /* border: 1px solid transparent;
+  border-bottom: 0; */
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.tabset > label::after {
+  content: "";
+  position: absolute;
+  left: 15px;
+  bottom: 10px;
+  width: 22px;
+  height: 4px;
+  background: #8d8d8d;
+}
+
+.tabset > label:hover,
+.tabset > input:focus + label {
+  color: var(--colour-background-teal);
+}
+
+.tabset > label:hover::after,
+.tabset > input:focus + label::after,
+.tabset > input:checked + label::after {
+  background: #06c;
+}
+
+.tabset > input:checked + label {
+  border-color: #ccc;
+  border-bottom: 1px solid #fff;
+  margin-bottom: -1px;
+}
+
+.tab-panel {
+  padding: 30px 0;
+  border-top: 1px solid #ccc;
+  height: 300px;
+  width: 100%;
+}
+
+.tabset {
+  width: 100%;
+}
+
+.theme-color {
+  height: 200px;
+  width: 200px;
+  background-color: rgb(0, 0, 0);
+  border-radius: 50%;
+}
+
+.theme-container {
+  display: flex;
+  flex-direction: column;
+  justify-content:space-between;
+  flex-wrap: wrap;
+  width: 60%;
+  margin-right: 20%;
+  margin-left: 20%;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.theme {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+
+  margin: 25px 0px 25px 0px;
+}
+
+/* HIDE RADIO */
+[type=radio] { 
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* IMAGE STYLES */
+[type=radio] + img {
+  cursor: pointer;
+}
+
+/* CHECKED STYLES */
+[type=radio]:checked + img {
+  outline: 3px solid var(--colour-background-teal);
+}
+
+.theme-container img {
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+}
+
 
 @media screen and (max-width: 768px) {
   #patient-dashboard-content {
