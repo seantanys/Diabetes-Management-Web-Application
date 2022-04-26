@@ -1420,6 +1420,9 @@ td, th {
   padding-top: 50px;
 }
 
+/* 
+Please dont do shit like this, give your elements class names.
+
 .table,th,tr{
   color: white;
   text-align: center;
@@ -1436,7 +1439,7 @@ th{
 
 tr:hover{
   background-color: white;
-}
+} */
 
 #red{
   color: red;
