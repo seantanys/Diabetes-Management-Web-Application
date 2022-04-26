@@ -1344,6 +1344,7 @@ td, th {
   text-align: center;
   border-collapse: separate;
   border-spacing: 0 0.5em;
+  color: var(--colour-text);
 }
 
 .leaderboard th, td {
