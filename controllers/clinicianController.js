@@ -63,7 +63,7 @@ const getAllPeopleData = async (req, res, next) => {
         }
         // console.log(patientDashboard)
         //return res.send(patientDashboard)
-        return res.render('allData', { data: patientDashboard })
+        return res.render('allData', { layout: "clinician.hbs", data: patientDashboard })
     } catch (err) {
         return next(err)
     }
