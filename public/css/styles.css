@@ -13,14 +13,27 @@
   --colour-h2: rgba(5, 85, 142, 1);
   --colour-background: rgba(255, 255, 255, 1);
   --colour-black: rgba(0, 0, 0, 0);
+  --colour-first: rgb(204, 255, 197);
+  --colour-second: rgba(252, 245, 147, 1);
+  --colour-third: rgba(255, 175, 95, 1);
+  --colour-fourth: rgb(255, 179, 179);
+  --colour-fifth: rgb(223, 167, 255);
+  --colour-measured: rgb(141, 141, 141);
   --curved_corners: 20px;
 }
 
 body {
-    font-family: var(--font-family-body);
-    margin: 0;
-    background-color: var(--colour-background-teal);
-  }
+  font-family: var(--font-family-body);
+  margin: 0;
+  padding: 0;
+  background-color: var(--colour-background-teal);
+  color: #cdcdcd;
+}
+
+/* used when mobile menu is clicked to prevent scrolling */
+.fixed-position {
+  position: fixed;
+}
   
   html {
     box-sizing: border-box;
@@ -92,7 +105,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url('/images/girl-walking.jpg');
+    /* background-image: url('/images/girl-walking.jpg'); */
     background-position: center;
     background-size: 100%;
     background-repeat: no-repeat;
@@ -241,6 +254,99 @@ body {
   font-size: var(--text-p);
 }
 
+.about-website {
+  background-color: var(--colour-h1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.about-lottie {
+  display: flex;
+  justify-content: center;
+}
+
+.about-website p {
+  width: 50%;
+  margin-left: 25%;
+  margin-right: 25%;
+  font-size: var(--text-h3);
+  font-weight: 400;
+  color: white;
+  text-align: center;
+}
+
+.team-section {
+  background-color: var(--colour-background-teal);
+  font-size: var(--text-h2);
+  text-align: center;
+  padding: 50px 0px;
+}
+
+.team-section h2:first-of-type {
+  color: var(--colour-h1);
+}
+
+.team-section h2 ~ p {
+  color: var(--colour-h1);
+  font-weight: 300;
+}
+
+.team-container {
+  background-color: var(--colour-background-teal);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+
+  padding-top: 50px;
+  padding-bottom: 50px;
+
+}
+
+.card {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  background-color: rgba(1, 58, 99, 0.938);
+  text-align: center;
+  padding: 25px;
+  margin: 25px
+}
+
+.card img {
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  margin-bottom: 25px;
+}
+
+.card h3 {
+  font-size: var(--text-h3);
+}
+
+.card p{
+  font-size: var(--text-p);
+  font-weight: 300;
+  width: 50%;
+
+  margin-left: 25%;
+  margin-right: 25%;
+  margin-top: 10px;
+}
+
+.card p:nth-child(-n+3) {
+  font-weight: 600;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
 .log-in-section {
   background-color: var(--colour-background-teal);
   padding-top: 50px;
@@ -276,7 +382,7 @@ body {
 }
 
 .validation-fail {
-  border-bottom: 2px solid red;
+  border-bottom: 3px solid rgba(163, 17, 17, 0.904);
 }
 
 .validation-pass {
@@ -291,51 +397,18 @@ input {
   flex: 1;
 }
 
-  .text-section {
-    /* padding: 30px; */
-    text-align: center;
-    font-size: var(--text-p);
-    font-weight: 400;
-    background-color: var(--colour-background-teal);
-  }
+textarea {
+  border: none;
+  outline: none;
+  padding: 10px 5px;
+  background-color: #f6f6f6;
+  flex: 1;
+}
 
-  .text-section p {
-    color: white;
-  }
-
-  
-    .text-section h1{
-      padding-bottom: 25px;
-      font-size: var(--text-h1);
-      color: var(--colour-h1);
-    }
-
-    .text-section h2{
-      padding-bottom: 25px;
-      font-size: var(--text-h2);
-      color: var(--colour-h2);
-    }
-
-    .text-section h3{
-      padding-bottom: 25px;
-    }
-
-    
-
-    .text-section img{
-      border-radius: var(--curved_corners);
-      padding: 5px;
-      max-width: 500px;
-      width: 80%;
-      height: auto;
-    }
-
-    
-
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 lottie-player {
@@ -350,7 +423,7 @@ lottie-player {
   display: flex;
   justify-content: center;
   align-items:center;
-  }
+}
 
 .hero-text button {
   font-size: var(--text-h3);
@@ -483,15 +556,16 @@ lottie-player {
 
 .requirement-section {
   background-color: var(--colour-background-teal);
+  padding: 25px;
 }
 
 .checklist-container {
   background-color: rgba(128, 128, 128, 0.568);
-  width: 50%;
+  width: 40%;
   display: flex;
   flex-direction: column;
-  margin-right: 25%;
-  margin-left: 25%;
+  margin-right: 30%;
+  margin-left: 30%;
   border-radius: 25px;
   padding: 15px;
 }
@@ -506,6 +580,7 @@ lottie-player {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   margin-left: 20%;
   margin-right: 20%;
   padding-top: 20px;
@@ -514,6 +589,117 @@ lottie-player {
 .requirement-checklist-item p{
   color: var(--colour-h1);
   font-size: var(--text-h3);
+}
+
+.requirement-checklist-item img {
+  height: 25px;
+  width: 25px;
+}
+
+.reminder-section {
+  display: flex;
+  align-items: center;
+  background-color: var(--colour-background-teal);
+  height: 200px;
+  border: none;
+}
+
+.reminder-section img {
+  height: 25px;
+  width: 25px;
+  margin-right: 15px;
+}
+
+.reminder-container {
+  background-color: rgba(235, 125, 0, 0.568);
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  margin-right: 30%;
+  margin-left: 30%;
+  border-radius: 25px;
+  padding: 15px;
+}
+
+.reminder-done {
+  background-color: rgba(21, 85, 5, 0.568);
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  margin-right: 30%;
+  margin-left: 30%;
+  border-radius: 25px;
+  padding: 15px;
+}
+
+.reminder-heading {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+
+  color: white;
+  font-size: var(--text-p);
+}
+
+.reminder-text {
+  margin-left: 40px;
+
+  color: white;
+  font-size: var(--text-p);
+  font-weight: 300;
+}
+
+.record-container {
+  background-color: var(--colour-h1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.record-container h2 {
+  font-size: var(--text-h2);
+  color: white;
+  margin-top: 25px;
+  text-align: center;
+}
+
+.record-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 25px;
+}
+
+.record-form span {
+  font-size: var(--text-p);
+}
+
+.type-input {
+  display: none;
+}
+
+.record-button {
+  font-family: var(--font-family-body);
+  font-weight: 600;
+  font-size: var(--text-p);
+  border: none;
+  color: white;
+  background-color: grey;
+  padding: 5px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 999em;
+}
+
+.record-button-valid {
+  background-color: var(--colour-background-teal);
+  color: var(--colour-h1);
 }
 
 /* 404 PAGE */
@@ -650,79 +836,25 @@ color: black;
 text-align: center;
 }
 
-.content-img {
-  float: centre;
-  margin-bottom: 10px;
-  border-style: solid;
-  border-width: 10px;
-  border-color: rgba(28, 70, 89, 1);
-  box-shadow: 51px 51px 114px 0 rgba(18, 31, 62, 0.05);
-  width: 350;
-  height: 350;
-}
-
-.container {
-  display: flex;
-  flex-flow: wrap;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: stretch;
-}
-
-.container li {
-  list-style-type: none;
-  display: flex;
-  flex-direction: column;
-  justify-content: centre;
-  align-items: centre;
-  width: 350px;
-  padding: 20px;
-}
-
-.container li img{
-  border-radius: 50%;
-  width: 300px;
-  height: 300px;
-  background-size: cover;
-  background-position: centre;
-  align-items: centre;
-}
-
-
-
 /* moving nav icon */
 /* https://codepen.io/erikterwan/pen/EVzeRP */
-
-body
-{
-  margin: 0;
-  padding: 0;
-  
-  background: #232323;
-  color: #cdcdcd;
-}
-
 
 #menuToggle {
   display: none;
 }
 
-#menu {
+@media screen and (max-width: 768px) {
+
+.logo {
+  font-size: var(--text-h2);
+}
+
+.navbar ul:not(:first-child) {
   display: none;
 }
 
-@media screen and (max-width: 768px) {
-
-  .logo {
-    font-size: var(--text-h2);
-  }
-
-  .navbar ul:not(:first-child) {
-    display: none;
-  }
-
-  .nav-menu {
-    display:none;
+.nav-menu {
+  display:none;
 }
 
 .hero-section {
@@ -730,7 +862,7 @@ body
     align-items: center;
 }
 
-lottie-player {
+#hero-lottie {
     margin: -50px 0px 0px 0px;
     width: 375px;
     height: 375px;
@@ -795,6 +927,116 @@ font-size: var(--text-p);
   height: 250px;
 }
 
+.about-website p{
+  font-size: var(--text-p);
+  width: 80%;
+  margin-right: 10%;
+  margin-left: 10%;
+}
+
+.team-section h2 ~ p {
+  width: 80%;
+  margin-right: 10%;
+  margin-left: 10%;
+  font-size: var(--text-h3);
+}
+
+.card p{
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 10px;
+}
+
+.page-heading-1 h2 {
+  width: 70%;
+  margin-right: 15%;
+  margin-left: 15%;
+  font-size: var(--text-p);
+  font-weight: 300;
+  color: black;
+  text-align: center;
+  padding: 35px 0px;
+}
+
+.contact-section h1 {
+  width: 80%;
+  margin-right: 10%;
+  margin-left: 10%;
+}
+
+.requirement-section {
+  padding: 15px;
+}
+
+.checklist-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-right: 0%;
+  margin-left: 0%;
+  padding: 15px;
+}
+
+.checklist-container h3 {
+  font-size: var(--text-p);
+}
+
+.checklist-container p {
+  font-size: var(--text-p);
+}
+
+.checklist-container img {
+  width: 20px;
+  height: 20px;
+}
+
+.requirement-checklist-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 10%;
+  margin-right: 10%;
+  padding-top: 20px;
+}
+
+.reminder-section {
+  height: 250px;
+  border: none;
+}
+
+.reminder-container {
+  width: 90%;
+  margin-right: 5%;
+  margin-left: 5%;
+}
+
+.reminder-done {
+  width: 90%;
+  margin-right: 5%;
+  margin-left: 5%;
+}
+
+.reminder-heading {
+  color: white;
+  font-size: var(--text-p);
+}
+
+.reminder-text {
+  margin-left: 40px;
+  color: white;
+  font-size: var(--text-p);
+  font-weight: 300;
+}
+
+.record-container h2 {
+  font-size: var(--text-h3);
+  color: white;
+  margin-top: 25px;
+}
+
+
 #login {
   display: none;
 }
@@ -803,144 +1045,443 @@ font-size: var(--text-p);
     display:none;
 }
     
-  #menuToggle {
-    display: block;
-    position: relative;
-    z-index: 1;
-    -webkit-user-select: none;
-    user-select: none;
+#menuToggle {
+  display: block;
+  position: relative;
+  z-index: 1;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#menuToggle a{
+  text-decoration: none;
+  color: white;
+  
+  transition: color 0.3s ease;
+}
+
+#menuToggle a:hover{
+  color: var(--colour-background-teal);
+}
+
+
+#menuToggle input{
+  display: block;
+  width: 40px;
+  height: 32px;
+  position: absolute;
+  top: -7px;
+  right: -5px;
+  
+  cursor: pointer;
+  
+  opacity: 0; /* hide this */
+  z-index: 2; /* and place it over the hamburger */
+  
+  -webkit-touch-callout: none;
+}
+
+/*
+* Just a quick hamburger
+*/
+#menuToggle span
+{
+  display: block;
+  width: 33px;
+  height: 4px;
+  margin-bottom: 5px;
+  position: relative;
+  
+  background: black;
+  border-radius: 3px;
+  
+  z-index: 1;
+  
+  transform-origin: 4px 0px;
+  
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              opacity 0.55s ease;
+}
+
+#menuToggle span:first-child
+{
+  transform-origin: 0% 0%;
+}
+
+#menuToggle span:nth-last-child(2)
+{
+  transform-origin: 0% 100%;
+}
+
+/* 
+* Transform all the slices of hamburger
+* into a crossmark.
+*/
+#menuToggle input:checked ~ span
+{
+  opacity: 1;
+  transform: rotate(45deg) translate(-2px, -1px);
+  background: black;
+}
+
+/*
+* But let's hide the middle one.
+*/
+#menuToggle input:checked ~ span:nth-last-child(3)
+{
+  opacity: 0;
+  transform: rotate(0deg) scale(0.2, 0.2);
+}
+
+/*
+* Ohyeah and the last one should go the other direction
+*/
+#menuToggle input:checked ~ span:nth-last-child(2)
+{
+  transform: rotate(-45deg) translate(0, -1px);
+}
+
+/*
+* Make this absolute positioned
+* at the top left of the screen
+*/
+#menu {
+  position: absolute;
+  width: 300px;
+  height: 100vh;
+  margin: 18px 0 0 -250px;
+  padding: 40px;
+  padding-bottom: 300px;
+  
+  background: black;
+  opacity: 0.85;
+  list-style-type: none;
+  -webkit-font-smoothing: antialiased;
+  /* to stop flickering of text in safari */
+  
+  transform-origin: 0% 0%;
+  transform: translate(100%, 0);
+  
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+}
+
+#menu li
+{
+  padding: 10px 0;
+  font-size: var(--text-h3);
+}
+
+/*
+* And let's slide it in from the left
+*/
+#menuToggle input:checked ~ ul
+{
+  transform: none;
+}
+
+#menuToggle input:checked ~ #menu {
+  transform: scale(1.0, 1.0);
+  display: block;
+}
+
+hr.solid {
+  border-top: 0.1px solid white;
+  width: 150px;
+}
+}
+
+.create-patient-secion {
+  background-color: var(--colour-background-teal);
+  display: flex;
+  justify-content: center;
+}
+
+table {
+  border-collapse: collapse;
+  color: #fdfdfd;
+}
+
+td, th {
+  border: 1px solid #999;
+  padding: 0.5rem;
+}
+
+/* Patient dashboard stuff */
+
+#patient-dashboard {
+  background-color: var(--colour-background-teal);
+  min-height: 86vh;
+  max-height: fit-content;
+  display: flex;
+  flex-flow: column wrap;
+}
+
+#patient-dashboard h1 {
+  font-size: var(--text-h1);
+  color: var(--colour-h1);
+  text-align: center;
+}
+
+#patient-dashboard-content {
+  background-color: var(--colour-background);
+  width: 85vw;
+  margin-top: 1%;
+  margin-bottom: 5%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  border-radius: 5em;
+}
+
+#patient-details {
+  background-color: var(--colour-background-teal);
+  color: var(--colour-text);
+  border-radius: 10%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  margin-left: 3em;
+  margin-right: 3em;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  font-size: var(--text-p);
+}
+
+#patient-details img {
+  max-width: 60%;
+  height: auto;
+  margin-bottom: 5%;
+}
+
+.patient-card {
+  margin-bottom: 5em;
+  border-radius: 5em;
+  margin-left: 3em;
+  margin-right: 3em;
+  width: fit-content;
+  height: fit-content;
+  margin-top: 2%;
+}
+
+.patient-card-label {
+  width: 10em;
+  height: 5em;
+  text-align: center;
+  padding-top: 0.5em;
+  margin-left: 5%;
+  border-radius: 1em;
+  background-color: var(--colour-text);
+  font-size: var(--text-h3);
+  color: var(--colour-background);
+}
+
+.patient-card-content {
+  background-color: var(--colour-background-teal);
+  color: var(--colour-text);
+  border-radius: 10%;
+  height: 20em;
+  width: 25em;
+  padding: 5%;
+  font-size: var(--text-p);
+  margin-top: -15%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.patient-card-content a {
+  background-color: var(--colour-text);
+  color: var(--colour-background);
+  border-radius: 10em;
+  width: 15em;
+  height: 2.5em;
+  text-align: center;
+  padding-top: 0.5em;
+}
+
+.patient-card-content ul {
+  margin-left: 15%;
+}
+
+.patient-card-content ul li {
+  list-style-type: circle;
+}
+
+.patient-card-content .measured {
+  color: var(--colour-measured);
+  text-decoration: line-through;
+  list-style-type: disc;
+}
+
+#patient-badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.patient-badge {
+  display: flex;
+  flex-direction: column;
+  width: 27%;
+}
+
+.patient-badge img {
+  width: 90%;
+  color: var(--colour-gold);
+}
+
+.patient-badge p {
+  font-size: 15px;
+  text-align: center;
+  color: var(--colour-text);
+  background-color: var(--colour-background);
+  height: fit-content;
+  padding: 4%;
+  margin-top: 10%;
+  border-radius: 2em;
+}
+
+.leaderboard {
+  background-color: transparent;
+  width: 100%;
+  text-align: center;
+  border-collapse: separate;
+  border-spacing: 0 0.5em;
+  color: var(--colour-text);
+}
+
+.leaderboard th, td {
+  border: 0px;
+}
+
+.leaderboard th p {
+  border-radius: 10em;
+  background-color: var(--colour-background);
+  padding: 0.5em;
+}
+
+.leaderboard td:first-child {
+  border-top-left-radius: 10em;
+  border-bottom-left-radius: 10em;
+}
+
+.leaderboard td:last-child {
+  border-top-right-radius: 10em;
+  border-bottom-right-radius: 10em;
+}
+
+.leaderboard #first {
+  background-color: var(--colour-first);
+}
+
+.leaderboard #second {
+  background-color: var(--colour-second);
+}
+
+.leaderboard #third {
+  background-color: var(--colour-third);
+}
+
+.leaderboard #fourth {
+  background-color: var(--colour-fourth);
+}
+
+.leaderboard #fifth {
+  background-color: var(--colour-fifth);
+}
+
+@media screen and (max-width: 768px) {
+  #patient-dashboard-content {
+    background-color: var(--colour-background-teal);
   }
-
-  #menuToggle a{
-    text-decoration: none;
-    color: white;
-    
-    transition: color 0.3s ease;
+  #patient-details {
+    background-color: var(--colour-background);
   }
-
-  #menuToggle a:hover{
-    color: var(--colour-background-teal);
+  .patient-card-content {
+    background-color: var(--colour-background);
   }
-
-
-  #menuToggle input{
-    display: block;
-    width: 40px;
-    height: 32px;
-    position: absolute;
-    top: -7px;
-    right: -5px;
-    
-    cursor: pointer;
-    
-    opacity: 0; /* hide this */
-    z-index: 2; /* and place it over the hamburger */
-    
-    -webkit-touch-callout: none;
+  .patient-badge p {
+    background-color: var(--colour-background-teal);
   }
-
-  /*
-  * Just a quick hamburger
-  */
-  #menuToggle span
-  {
-    display: block;
-    width: 33px;
-    height: 4px;
-    margin-bottom: 5px;
-    position: relative;
-    
-    background: black;
-    border-radius: 3px;
-    
-    z-index: 1;
-    
-    transform-origin: 4px 0px;
-    
-    transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-                background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-                opacity 0.55s ease;
+  .leaderboard th p {
+    background-color: var(--colour-background-teal);
   }
+}
 
-  #menuToggle span:first-child
-  {
-    transform-origin: 0% 0%;
-  }
+.clinician-style{
+  color: rgba(1, 58, 99, 1);
+  width:35%;
+  display:table-cell;
+  text-align:center;
+  padding-top: 50px;
+}
 
-  #menuToggle span:nth-last-child(2)
-  {
-    transform-origin: 0% 100%;
-  }
+.table,th,tr{
+  color: white;
+  text-align: center;
+  background-color: #081F65;
+  border-collapse: collapse;
+  font:arial;
+}
 
-  /* 
-  * Transform all the slices of hamburger
-  * into a crossmark.
-  */
-  #menuToggle input:checked ~ span
-  {
-    opacity: 1;
-    transform: rotate(45deg) translate(-2px, -1px);
-    background: black;
-  }
+th{
+  width:180px;
+  height:50px ;
+  font-size: 15px;
+}
 
-  /*
-  * But let's hide the middle one.
-  */
-  #menuToggle input:checked ~ span:nth-last-child(3)
-  {
-    opacity: 0;
-    transform: rotate(0deg) scale(0.2, 0.2);
-  }
+tr:hover{
+  background-color: white;
+}
 
-  /*
-  * Ohyeah and the last one should go the other direction
-  */
-  #menuToggle input:checked ~ span:nth-last-child(2)
-  {
-    transform: rotate(-45deg) translate(0, -1px);
-  }
+#red{
+  color: red;
+}
 
-  /*
-  * Make this absolute positioned
-  * at the top left of the screen
-  */
-  #menu {
-    display: block;
-    position: absolute;
-    width: 300px;
-    margin: 25px 0 0 -250px;
-    padding: 40px;
-    padding-bottom: 300px;
-    
-    background: black;
-    opacity: 0.85;
-    list-style-type: none;
-    -webkit-font-smoothing: antialiased;
-    /* to stop flickering of text in safari */
-    
-    transform-origin: 0% 0%;
-    transform: translate(100%, 0);
-    
-    transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
-  }
+.clinician-info{
+  text-align:center;
+}
 
-  #menu li
-  {
-    padding: 10px 0;
-    font-size: var(--text-h3);
-  }
+.clinician-table{
+  position:absolute;
+  left:40%;
+  top:20%;
+  display: table-cell;
+}
 
-  /*
-  * And let's slide it in from the left
-  */
-  #menuToggle input:checked ~ ul
-  {
-    transform: none;
-  }
+.clinician-icon {
+  width: 20px;
+  height: 20px;
+}
 
-  hr.solid {
-    border-top: 0.1px solid white;
-    width: 150px;
-  }
+#clinician-button {
+  color: #081F65;
+  background-color: white;
+  padding: 15px 32px;
+  margin: 30px 20px;
+  cursor: pointer;
+  position: absolute;
+  bottom:10%;
+  left:150px;
 
+}
+
+.clinician-nav {
+  vertical-align: center;
+  text-align: center;
+  font-size: var(--text-h1);
+  font-weight: 950;
+  color: var(--colour-h1);
+}
+
+#clinician-lottie {
+  position:absolute;
+  left:100px;
+  top:30%;
+  width: 400px;
+  height: 400px;
 }
