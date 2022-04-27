@@ -1,62 +1,77 @@
-<h1>Displaying all current patients for clinician</h1>
-<ul class = "content-section">
-{{!-- loops over the data set --}}
 
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>BCG</th>
-            <th>weight</th>
-            <th>insulin</th>
-            <th>exercise</th>
-        </tr>
-    </thead>
-    {{!-- loops over the data set --}}
-    <tbody>
-    {{#each data}}
-        <tr>
-        <th><a href="/clinician/{{this.patient._id}}">{{this.patient.first_name}} {{this.patient.last_name}}</a></th>
-        {{!-- <th>{{#if (gte this.age 20)}}<p style="color: green;">{{this.age}}</p>{{else}}{{this.age}}{{/if}}</th>
-        <th>{{moment this.join_date format = "YYYY-MM-DD"}}</th> --}}
-        <th>
-            {{#if this.patient.measurements.bcg}}
-                {{#if (and (gte this.bcg this.patient.measurements.bcg.minimum) (lte this.bcg this.patient.measurements.bcg.maximum))}}
-                    {{this.bcg}}
-                {{else}}
-                    <p style="color: red;">{{this.bcg}}</p>
-                {{/if}}
-            {{/if}}
-        </th>
-        <th>
-            {{#if this.patient.measurements.weight}}
-                {{#if (and (gte this.weight this.patient.measurements.weight.minimum) (lte this.weight this.patient.measurements.weight.maximum))}}
-                    {{this.weight}}
-                {{else}}
-                    <p style="color: red;">{{this.weight}}</p>
-                {{/if}}
-            {{/if}}
-        </th>
-        <th>
-            {{#if this.patient.measurements.insulin}}
-                {{#if (and (gte this.insulin this.patient.measurements.insulin.minimum) (lte this.insulin this.patient.measurements.insulin.maximum))}}
-                    {{this.insulin}}
-                {{else}}
-                    <p style="color: red;">{{this.insulin}}</p>
-                {{/if}}
-            {{/if}}
-        </th>
-        <th>
-            {{#if this.patient.measurements.exercise}}
-                {{#if (and (gte this.exercise this.patient.measurements.exercise.minimum) (lte this.exercise this.patient.measurements.exercise.maximum))}}
-                    {{this.exercise}}
-                {{else}}
-                    <p style="color: red;">{{this.exercise}}</p>
-                {{/if}}
-            {{/if}}
-        </th>
-        </tr>
-    {{/each}}
-    </tbody>
-</table>
+<div style="width: 100%; display: table;">
+    <div style="display: table-row">
+        <div class="clinician-style">  
+            <h1>Hello Dr.Frank Huth</h1>
+            <h2>Date: 23/02/2022</h2>
+            <h3>You are currently incharge of 12 patients</h3>
+            <h3>Please find todays's log. Click on</h3>
+            <h3>patient name to access individual profile</h3>
+            <div>
+                <lottie-player id="clinician-lottie" src="https://assets6.lottiefiles.com/packages/lf20_ibbakwps.json"  background="transparent"  speed="1"  loop  autoplay></lottie-player>
+            </div>
+            <button type="clinician-button" id="clinician-button"> Create New Patient </button>
+        </div>
+
+        <div class="clinician-table"> 
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Blood Glucose(nmol/L)</th>
+                        <th>Weight(Kg)</th>
+                        <th> Doses of Insulin</th>
+                        <th>Step Count</th>
+                    </tr>
+                </thead>
+                {{!-- loops over the data set --}}
+                <tbody>
+                {{#each data}}
+                    <tr>
+                    <th><a href="/clinician/{{this.patient._id}}">{{this.patient.first_name}} {{this.patient.last_name}}</a></th>
+                    {{!-- <th>{{#if (gte this.age 20)}}<p style="color: green;">{{this.age}}</p>{{else}}{{this.age}}{{/if}}</th>
+                    <th>{{moment this.join_date format = "YYYY-MM-DD"}}</th> --}}
+                    <th>
+                        {{#if this.patient.measurements.bcg}}
+                            {{#if (and (gte this.bcg this.patient.measurements.bcg.minimum) (lte this.bcg this.patient.measurements.bcg.maximum))}}
+                                {{this.bcg}}
+                            {{else}}
+                                <p style="color: red;">{{this.bcg}}</p>
+                            {{/if}}
+                        {{/if}}
+                    </th>
+                    <th>
+                        {{#if this.patient.measurements.weight}}
+                            {{#if (and (gte this.weight this.patient.measurements.weight.minimum) (lte this.weight this.patient.measurements.weight.maximum))}}
+                                {{this.weight}}
+                            {{else}}
+                                <p style="color: red;">{{this.weight}}</p>
+                            {{/if}}
+                        {{/if}}
+                    </th>
+                    <th>
+                        {{#if this.patient.measurements.insulin}}
+                            {{#if (and (gte this.insulin this.patient.measurements.insulin.minimum) (lte this.insulin this.patient.measurements.insulin.maximum))}}
+                                {{this.insulin}}
+                            {{else}}
+                                <p style="color: red;">{{this.insulin}}</p>
+                            {{/if}}
+                        {{/if}}
+                    </th>
+                    <th>
+                        {{#if this.patient.measurements.exercise}}
+                            {{#if (and (gte this.exercise this.patient.measurements.exercise.minimum) (lte this.exercise this.patient.measurements.exercise.maximum))}}
+                                {{this.exercise}}
+                            {{else}}
+                                <p style="color: red;">{{this.exercise}}</p>
+                            {{/if}}
+                        {{/if}}
+                    </th>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 

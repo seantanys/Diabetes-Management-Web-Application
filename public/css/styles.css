@@ -826,7 +826,7 @@ display: block;
   padding-right: 20px;
 }
 
-.footer {
+#footer {
 position: relative;
 left: 0;
 bottom: 0;
