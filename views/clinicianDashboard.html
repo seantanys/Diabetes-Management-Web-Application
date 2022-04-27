@@ -1,167 +1,115 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <link rel="stylesheet" type="text/css" href="../css/styles2.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-</head>
-
-<body>
- 
-    <header id="header">
-        <nav class="navbar">
-            <a href="#" class="logo"><span style="color:black">Diabetes</span>@Home</a>
-            <a href="#" class="clinician-nav">Dr.Frank Huth</a>
-            <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href=# class="nav-link">Dashboard</a>
-
-                </li>
-                <li class="nav-item">      
-                    <a href="#" class="nav-link">Messages</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Logout</a>
-                </li>
-            </ul>
-            <div id="menuToggle">
-        
-                <input type="checkbox" />
-                        
-                <ul id="menu">
-                    <a href="#"><li>Home</li></a>
-                    <hr class="solid">
-                    <a href="#"><li>About Diabetes</li></a>
-                    <hr class="solid">
-                    <a href="#"><li>About this Website</li></a>
-                    <hr class="solid">
-                    <a href="#"><li>Login</li></a>
-                </ul>
+<div class="clinician-dashboard">
+        <div class="clinician-style">  
+            <h1>Hello Dr.Frank Huth</h1>
+            <h2>Date: 23/02/2022</h2>
+            <h3>You are currently incharge of 12 patients</h3>
+            <h3>Please find todays's log. Click on</h3>
+            <h3>patient name to access individual profile</h3>
+            <div>
+                <lottie-player id="clinician-lottie" src="https://assets6.lottiefiles.com/packages/lf20_ibbakwps.json"  background="transparent"  speed="1"  loop  autoplay></lottie-player>
             </div>
-        </nav>
-    </header>   
-    <div style="width: 100%; display: table;">
-        <div style="display: table-row">
-            <div class="clinician-style">  
-                <h1>Hello Dr.Frank Huth</h1>
-                <h2>Date: 23/02/2022</h2>
-                <h3>You are currently incharge of 12 patients</h3>
-                <h3>Please find todays's log. Click on</h3>
-                <h3>patient name to access individual profile</h3>
-                <div>
-                    <lottie-player id="clinician-lottie" src="https://assets6.lottiefiles.com/packages/lf20_ibbakwps.json"  background="transparent"  speed="1"  loop  autoplay></lottie-player>
-                </div>
-                <button type="clinician-button" id="clinician-button"> Create New Patient </button>
-            </div>
-        
-            
-            <div class="clinician-table"> 
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Blood Glucose(nmol/L)</th>
-                            <th>Weight(Kg)</th>
-                            <th> Doses of Insulin</th>
-                            <th>Step Count</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th>Sanskar Agarwal</th>
-                            <th id="red">Not Updated</th>
-                            <th>85</th>
-                            <th>1</th>
-                            <th> 5,345</th>
-                        </tr>
-                        <tr>
-                            <th>James Parini</th>
-                            <th>5.6</th>
-                            <th>78</th>
-                            <th id="red">5</th>
-                            <th> </th>
-                        </tr>
-                        <tr>
-                            <th>Liam Jelly</th>
-                            <th>6.2</th>
-                            <th>77</th>
-                            <th id="red"> Not Updated</th>
-                            <th> </th>
-                        </tr>
-                        <tr>
-                            <th>Arya Kushwa</th>
-                            <th id="red">8.2</th>
-                            <th>92</th>
-                            <th>3 </th>
-                            <th id="red"> 3,276</th>
-                        </tr>
-                        <tr>
-                            <th>Aryan Goswami</th>
-                            <th id="red">7.7</th>
-                            <th>90</th>
-                            <th> 1</th>
-                            <th> 11,111</th>
-                        </tr>
-                        <tr>
-                            <th>Alana Brown</th>
-                            <th>6.4</th>
-                            <th>56</th>
-                            <th>4</th>
-                            <th> 5,378</th>
-                        </tr>
-                        <tr>
-                            <th>Kelsey Brown</th>
-                            <th id="red">7.9</th>
-                            <th>51</th>
-                            <th id="red">3</th>
-                            <th> </th>
-                        </tr>
-                        <tr>
-                            <th>Jess Kaur</th>
-                            <th>6.5</th>
-                            <th>53</th>
-                            <th>2</th>
-                            <th> 2,121</th>
-                        </tr>
-                        <tr>
-                            <th>Alex Zamble</th>
-                            <th>6.8</th>
-                            <th>66</th>
-                            <th>1</th>
-                            <th> 6,487</th>
-                        </tr>
-                        <tr>
-                            <th>Grady Lo</th>
-                            <th>7.2</th>
-                            <th>61</th>
-                            <th>2</th>
-                            <th> </th>
-                        </tr>
-                        <tr>
-                            <th>Oliver Bestel</th>
-                            <th id="red">Not Updated</th>
-                            <th>101</th>
-                            <th>2</th>
-                            <th id="red"> 4,278</th>
-                        </tr>
-                        <tr>
-                            <th>Mohan Kawtra</th>
-                            <th>5.4</th>
-                            <th>76</th>
-                            <th>4</th>
-                            <th> 5,435</th>
-                        </tr>
-                        
-                    </tbody>
-                </table>
-            </div>
+            <button type="clinician-button" id="clinician-button"> Create New Patient </button>
         </div>
-    </div>
-
-
-</body>
-</html>
+    
+        
+        <div class="clinician-table"> 
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Blood Glucose(nmol/L)</th>
+                        <th>Weight(Kg)</th>
+                        <th> Doses of Insulin</th>
+                        <th>Step Count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Sanskar Agarwal</th>
+                        <th id="red">Not Updated</th>
+                        <th>85</th>
+                        <th>1</th>
+                        <th> 5,345</th>
+                    </tr>
+                    <tr>
+                        <th>James Parini</th>
+                        <th>5.6</th>
+                        <th>78</th>
+                        <th id="red">5</th>
+                        <th> </th>
+                    </tr>
+                    <tr>
+                        <th>Liam Jelly</th>
+                        <th>6.2</th>
+                        <th>77</th>
+                        <th id="red"> Not Updated</th>
+                        <th> </th>
+                    </tr>
+                    <tr>
+                        <th>Arya Kushwa</th>
+                        <th id="red">8.2</th>
+                        <th>92</th>
+                        <th>3 </th>
+                        <th id="red"> 3,276</th>
+                    </tr>
+                    <tr>
+                        <th>Aryan Goswami</th>
+                        <th id="red">7.7</th>
+                        <th>90</th>
+                        <th> 1</th>
+                        <th> 11,111</th>
+                    </tr>
+                    <tr>
+                        <th>Alana Brown</th>
+                        <th>6.4</th>
+                        <th>56</th>
+                        <th>4</th>
+                        <th> 5,378</th>
+                    </tr>
+                    <tr>
+                        <th>Kelsey Brown</th>
+                        <th id="red">7.9</th>
+                        <th>51</th>
+                        <th id="red">3</th>
+                        <th> </th>
+                    </tr>
+                    <tr>
+                        <th>Jess Kaur</th>
+                        <th>6.5</th>
+                        <th>53</th>
+                        <th>2</th>
+                        <th> 2,121</th>
+                    </tr>
+                    <tr>
+                        <th>Alex Zamble</th>
+                        <th>6.8</th>
+                        <th>66</th>
+                        <th>1</th>
+                        <th> 6,487</th>
+                    </tr>
+                    <tr>
+                        <th>Grady Lo</th>
+                        <th>7.2</th>
+                        <th>61</th>
+                        <th>2</th>
+                        <th> </th>
+                    </tr>
+                    <tr>
+                        <th>Oliver Bestel</th>
+                        <th id="red">Not Updated</th>
+                        <th>101</th>
+                        <th>2</th>
+                        <th id="red"> 4,278</th>
+                    </tr>
+                    <tr>
+                        <th>Mohan Kawtra</th>
+                        <th>5.4</th>
+                        <th>76</th>
+                        <th>4</th>
+                        <th> 5,435</th>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+</div>

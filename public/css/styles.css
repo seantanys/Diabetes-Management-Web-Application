@@ -1691,34 +1691,52 @@ td, th {
   }
 }
 
-.clinician-style{
-  color: rgba(1, 58, 99, 1);
-  width:35%;
-  display:table-cell;
+.clinician-dashboard {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+}
+
+.clinician-info-container {
+  background-color: var(--colour-h1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  padding: 15px 0px 15px 0px;
+  border-radius: 25px;
+  width: 25%;
+}
+
+.clinician-info {
+  color: rgb(255, 255, 255);
+  display:flex;
+  flex-direction: column;
+  align-items: center;
   text-align:center;
-  padding-top: 50px;
+  padding: 15px;
 }
 
-/* 
-Please dont do shit like this, give your elements class names.
-
-.table,th,tr{
-  color: white;
-  text-align: center;
-  background-color: #081F65;
-  border-collapse: collapse;
-  font:arial;
+.clinician-info h1 {
+  font-size: var(--text-h1);
 }
 
-th{
+.clinician-info h2 {
+  font-size: var(--text-h3);
+  font-weight: 600;
+}
+
+.clinician-info p {
+  width: 80%;
+  font-size: var(--text-p);
+}
+
+.clinician-table-styled th{
   width:180px;
   height:50px ;
   font-size: 15px;
 }
-
-tr:hover{
-  background-color: white;
-} */
 
 #red{
   color: red;
@@ -1728,11 +1746,47 @@ tr:hover{
   text-align:center;
 }
 
-.clinician-table{
-  position:absolute;
+/* .clinician-table{
   left:40%;
   top:20%;
   display: table-cell;
+} */
+
+.clinician-table-styled a {
+  text-decoration: none;
+  color: var(--text-h1);
+}
+
+.clinician-table-styled {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  min-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.clinician-table-styled thead tr {
+  background-color: rgba(1, 58, 99, 1);
+  color: white;
+  text-align: left;
+}
+
+.clinician-table-styled tbody tr {
+  border-bottom: thin solid #dddddd;
+  background-color: rgb(255, 255, 255);
+  color: black;
+}
+
+.clinician-table-styled tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.clinician-table-styled tbody tr:hover{
+  background-color: rgba(177, 174, 174, 0.562);
+}
+
+.clinician-table-styled tbody tr:last-of-type {
+  border-bottom: 2px solid var(--colour-h1);
 }
 
 .clinician-icon {
@@ -1744,12 +1798,7 @@ tr:hover{
   color: #081F65;
   background-color: white;
   padding: 15px 32px;
-  margin: 30px 20px;
   cursor: pointer;
-  position: absolute;
-  bottom:10%;
-  left:150px;
-
 }
 
 .clinician-nav {
@@ -1761,9 +1810,6 @@ tr:hover{
 }
 
 #clinician-lottie {
-  position:absolute;
-  left:100px;
-  top:30%;
   width: 400px;
   height: 400px;
 }
