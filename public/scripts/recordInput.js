@@ -3,6 +3,12 @@ const isEmpty = str => !str.trim().length;
 window.onload = function () {
     const input = document.getElementById("bcg")
     const btn = document.getElementById("bcg-btn")
+    const loader = document.getElementById("loader")
+
+    setTimeout(() => {
+      loader.remove();
+    }, 1000)
+    
 
     if (input) {
         input.addEventListener("input", function() {
