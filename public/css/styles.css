@@ -1696,6 +1696,8 @@ td, th {
   flex-direction: row;
   justify-content: center;
   align-content: center;
+
+  margin-bottom: 50px;
 }
 
 .clinician-info-container {
