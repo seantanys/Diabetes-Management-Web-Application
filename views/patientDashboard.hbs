@@ -24,7 +24,7 @@
                 <h3>Reminders</h3>
             </div>
             <div class="patient-card-content">
-                <p>Today you need to:</p>
+                <p>G'Day, {{singlePatient.first_name}}. Today you need to:</p>
                 <ul>
                     {{#if singlePatient.measurements.bcg}}
                         {{#if (isIn "bcg" notMeasured)}}
