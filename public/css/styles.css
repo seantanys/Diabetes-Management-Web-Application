@@ -1690,3 +1690,80 @@ td, th {
     height: 80px;
   }
 }
+
+.clinician-style{
+  color: rgba(1, 58, 99, 1);
+  width:35%;
+  display:table-cell;
+  text-align:center;
+  padding-top: 50px;
+}
+
+/* 
+Please dont do shit like this, give your elements class names.
+
+.table,th,tr{
+  color: white;
+  text-align: center;
+  background-color: #081F65;
+  border-collapse: collapse;
+  font:arial;
+}
+
+th{
+  width:180px;
+  height:50px ;
+  font-size: 15px;
+}
+
+tr:hover{
+  background-color: white;
+} */
+
+#red{
+  color: red;
+}
+
+.clinician-info{
+  text-align:center;
+}
+
+.clinician-table{
+  position:absolute;
+  left:40%;
+  top:20%;
+  display: table-cell;
+}
+
+.clinician-icon {
+  width: 20px;
+  height: 20px;
+}
+
+#clinician-button {
+  color: #081F65;
+  background-color: white;
+  padding: 15px 32px;
+  margin: 30px 20px;
+  cursor: pointer;
+  position: absolute;
+  bottom:10%;
+  left:150px;
+
+}
+
+.clinician-nav {
+  vertical-align: center;
+  text-align: center;
+  font-size: var(--text-h1);
+  font-weight: 950;
+  color: var(--colour-h1);
+}
+
+#clinician-lottie {
+  position:absolute;
+  left:100px;
+  top:30%;
+  width: 400px;
+  height: 400px;
+}
