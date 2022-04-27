@@ -5,6 +5,7 @@
   --text-h2: 28px;
   --text-h3: 25px;
   --text-p: 18px;
+  --text-p-mobile: 15px;
   --font-family-body: 'Poppins', sans-serif;
   --font-family-heading: 'Poppins', sans-serif;
   --colour-h1: rgba(1, 58, 99, 1);
@@ -1250,6 +1251,7 @@ td, th {
   padding-top: 5%;
   padding-bottom: 5%;
   font-size: var(--text-p);
+  text-align: center;
 }
 
 #patient-details img {
@@ -1395,6 +1397,10 @@ td, th {
 }
 
 @media screen and (max-width: 768px) {
+  .patient-card-content {
+    max-width: 375px;
+    font-size: var(--text-p-mobile);
+  }
   #patient-dashboard-content {
     background-color: var(--colour-background-teal);
   }
@@ -1406,6 +1412,7 @@ td, th {
   }
   .patient-badge p {
     background-color: var(--colour-background-teal);
+    font-size: 12px;
   }
   .leaderboard th p {
     background-color: var(--colour-background-teal);
