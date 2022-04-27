@@ -1292,6 +1292,7 @@ td, th {
   margin-top: -15%;
   display: flex;
   flex-wrap: wrap;
+  overflow-y: scroll;
 }
 
 .patient-card-content a {
@@ -1393,6 +1394,41 @@ td, th {
 
 .leaderboard #fifth {
   background-color: var(--colour-fifth);
+}
+
+.patient-badge lottie-player {
+  width: 100px;
+  height: 100px;
+}
+
+.msg-bubble {
+  padding: 20px;
+  background: #EEEEEE;
+  color: var(--colour-h1);
+  position: relative;
+  box-shadow: rgba(0,0,0,0.5) 0 3px 5px -3px;
+  margin: 20px 0;
+}
+.msg-bubble:after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  position: absolute;
+  top: 0px;
+  border-color: #EEEEEE;
+}
+.msg-bubble.msg-bubble-left {
+  margin-left: 20px;
+  border-radius: 0 4px 4px 4px;
+}
+.msg-bubble.msg-bubble-left:after {
+  border-width: 0 20px 24px 0;
+  border-top-color: transparent !important;
+  border-left-color: transparent !important;
+  border-bottom-color: transparent !important;
+  left: -20px;
 }
 
 /* Patient account stuff */
@@ -1633,6 +1669,9 @@ td, th {
     margin-bottom: 10%;
   }
   .patient-card-content {
+    max-width: 90%;
+    margin-right: 5%;
+    margin-left: 5%;
     background-color: var(--colour-background);
   }
   .patient-badge p {
@@ -1641,5 +1680,9 @@ td, th {
   }
   .leaderboard th p {
     background-color: var(--colour-background-teal);
+  }
+  .patient-badge lottie-player {
+    width: 80px;
+    height: 80px;
   }
 }
