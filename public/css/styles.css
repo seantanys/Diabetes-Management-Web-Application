@@ -1319,6 +1319,10 @@ td, th {
   list-style-type: disc;
 }
 
+.patient-card-content::-webkit-scrollbar {
+  width: 10px;
+}
+
 #patient-badges {
   display: flex;
   flex-wrap: wrap;
