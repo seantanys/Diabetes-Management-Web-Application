@@ -1,13 +1,6 @@
 const mongoose = require('mongoose')
 
-// const measurementSchema = new mongoose.Schema({
-//     type: { type: String, required: [true, "input is required bruv"] },
-//     patientId: { type: String, required: true },
-//     value: { type: Number, required: [true, "value is required bruv"] },
-//     date: {type: Date, default: Date.now},
-//     comment: {type: String, default: ""}
-// });
-
+// define the patientSchema
 const patientSchema = new mongoose.Schema({
     first_name: {type: String, required: true},
     last_name: {type: String, required: true},
@@ -34,17 +27,18 @@ const patientSchema = new mongoose.Schema({
     }
 });
 
+// derive full name from patientSchema using first and last name
 patientSchema.virtual('fullName').get(function () {
     return `${this.first_name} ${this.last_name}`
 })
 
+// derive age from patientSchema using date of birth
 patientSchema.virtual('age').get(function () {
     currentDate = new Date()
     return `${currentDate.getYear() - this.dob.getYear()}`
 })
 
+// compile the measurementSchemas into Model
 const Patient = mongoose.model('Patient', patientSchema)
-// const Measurement = mongoose.model('Measurement', measurementSchema)
-
 
 module.exports = {Patient}

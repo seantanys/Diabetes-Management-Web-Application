@@ -6,14 +6,16 @@ const clinicianRouter = express.Router()
 // import people controller functions
 const clinicianController = require('../controllers/clinicianController')
 
+// route to handle the GET request for creating new patient
 clinicianRouter.get('/create', clinicianController.getNewPatientForm)
 
-// add a route to handle the GET request for all patients data
+// route to handle the GET request for all patients data
 clinicianRouter.get('/dashboard', clinicianController.getAllPatientData)
 
-// add a route to handle the GET request for one data instance
+// route to handle the GET request for one patient data
 clinicianRouter.get('/:patient_id', clinicianController.getDataById)
 
+// route to handle the POST request new patient, adding to the database
 clinicianRouter.post('/dashboard', clinicianController.insertData)
 
 // export the router
