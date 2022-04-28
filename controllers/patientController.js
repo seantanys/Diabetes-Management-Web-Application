@@ -99,6 +99,10 @@ const getPatientPage = async (req, res) => {
     }
 }
 
+const redirectToDashboard = async (req, res) => {
+    res.redirect('/patient/dashboard');
+}
+
 const getPatientAccountPage = async (req, res) => {
     res.render('account')
 }
@@ -111,5 +115,6 @@ module.exports = {
     getMeasurementPage,
     submitMeasurement,
     getPatientPage,
+    redirectToDashboard,    
     getPatientAccountPage
 }

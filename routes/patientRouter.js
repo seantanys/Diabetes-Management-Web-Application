@@ -6,6 +6,7 @@ const patientRouter = express.Router()
 // import people controller functions
 const patientController = require('../controllers/patientController')
 
+patientRouter.get('/', patientController.redirectToDashboard)
 patientRouter.get('/record', patientController.getMeasurementPage)
 patientRouter.post('/record', patientController.submitMeasurement)
 patientRouter.get('/dashboard', patientController.getPatientPage)
