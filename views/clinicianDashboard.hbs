@@ -7,7 +7,7 @@
             <h2>{{date}}</h2>
             <br>
             <p>You are currently incharge of {{numPatients}} patients.</p>
-            <p>Please find your patient's latest logs. Click on patient name to access individual profile</p>
+            <p>Your patient's latest logs are displayed on the right. Click on patient name to access individual profile</p>
             <div>
                 <lottie-player id="clinician-lottie" src="https://assets6.lottiefiles.com/packages/lf20_ibbakwps.json"  background="transparent"  speed="1"  loop  autoplay></lottie-player>
             </div>
@@ -30,43 +30,58 @@
         {{#each data}}
             <tr>
             <th><a href="#">{{this.patient.first_name}} {{this.patient.last_name}}</a></th>
+            {{#if this.patient.measurements.bcg}}
+            <th>
+                {{#if (and (gte this.bcg this.patient.measurements.bcg.minimum) (lte this.bcg this.patient.measurements.bcg.maximum))}}
+                    {{this.bcg}}
+                {{else}}
+                    <p id ="red">{{this.bcg}}</p>
+                {{/if}}
+            </th>
+            {{else}}
+            <th style="background-color: rgba(110, 107, 107, 0.404);"> 
+            </th>
+            {{/if}}
 
+            {{#if this.patient.measurements.weight}}
             <th>
-                {{#if this.patient.measurements.bcg}}
-                    {{#if (and (gte this.bcg this.patient.measurements.bcg.minimum) (lte this.bcg this.patient.measurements.bcg.maximum))}}
-                        {{this.bcg}}
-                    {{else}}
-                        <p id ="red">{{this.bcg}}</p>
-                    {{/if}}
+                {{#if (and (gte this.weight this.patient.measurements.weight.minimum) (lte this.weight this.patient.measurements.weight.maximum))}}
+                    {{this.weight}}
+                {{else}}
+                    <p id ="red">{{this.weight}}</p>
                 {{/if}}
             </th>
+            {{else}}
+            <th style="background-color: rgba(110, 107, 107, 0.404);"> 
+            </th>
+            {{/if}}
+
+            {{#if this.patient.measurements.insulin}}
             <th>
-                {{#if this.patient.measurements.weight}}
-                    {{#if (and (gte this.weight this.patient.measurements.weight.minimum) (lte this.weight this.patient.measurements.weight.maximum))}}
-                        {{this.weight}}
-                    {{else}}
-                        <p id ="red">{{this.weight}}</p>
-                    {{/if}}
+                {{#if (and (gte this.insulin this.patient.measurements.insulin.minimum) (lte this.insulin this.patient.measurements.insulin.maximum))}}
+                    {{this.insulin}}
+                {{else}}
+                    <p id ="red">{{this.insulin}}</p>
                 {{/if}}
             </th>
+            {{else}}
+            <th style="background-color: rgba(110, 107, 107, 0.404);"> 
+            </th>
+            {{/if}}
+
+            {{#if this.patient.measurements.exercise}}
             <th>
-                {{#if this.patient.measurements.insulin}}
-                    {{#if (and (gte this.insulin this.patient.measurements.insulin.minimum) (lte this.insulin this.patient.measurements.insulin.maximum))}}
-                        {{this.insulin}}
-                    {{else}}
-                        <p id ="red">{{this.insulin}}</p>
-                    {{/if}}
+                {{#if (and (gte this.exercise this.patient.measurements.exercise.minimum) (lte this.exercise this.patient.measurements.exercise.maximum))}}
+                    {{this.exercise}}
+                {{else}}
+                    <p id ="red">{{this.exercise}}</p>
                 {{/if}}
             </th>
-            <th>
-                {{#if this.patient.measurements.exercise}}
-                    {{#if (and (gte this.exercise this.patient.measurements.exercise.minimum) (lte this.exercise this.patient.measurements.exercise.maximum))}}
-                        {{this.exercise}}
-                    {{else}}
-                        <p id ="red">{{this.exercise}}</p>
-                    {{/if}}
-                {{/if}}
+            {{else}}
+            <th style="background-color: rgba(110, 107, 107, 0.404);"> 
             </th>
+            {{/if}}
+
             </tr>
         {{/each}}
         </tbody>
