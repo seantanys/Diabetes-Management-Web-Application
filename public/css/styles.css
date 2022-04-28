@@ -1767,9 +1767,10 @@ td, th {
 
 .clinician-table-styled {
   border-collapse: collapse;
-  margin: 25px 0;
+  margin: 20px 0;
   font-size: 0.9em;
   min-width: 400px;
+  height: 90%;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
@@ -1821,3 +1822,26 @@ td, th {
   width: 400px;
   height: 400px;
 }
+
+.info {
+  display: flex;
+  align-items: center;
+  border-radius: 15px;
+  background-color: white;
+  padding: 0 0 0 5px;
+  width: 500px;
+  text-align: left;
+}
+
+.info-text {
+  margin-left: 5px;
+  font-size: 16px;
+	color: var(--colour-h1);
+  font-weight: 300;
+}
+
+.info img {
+  width: 20px;
+  height: 20px;
+}
+
