@@ -6,18 +6,16 @@ const clinicianRouter = express.Router()
 // import people controller functions
 const clinicianController = require('../controllers/clinicianController')
 
-// add a route to handle the GET request for all people data
-clinicianRouter.get('/', clinicianController.getAllPeopleData)
+clinicianRouter.get('/create', clinicianController.getNewPatientForm)
+
+// add a route to handle the GET request for all patients data
+clinicianRouter.get('/dashboard', clinicianController.getAllPatientData)
 
 // add a route to handle the GET request for one data instance
 clinicianRouter.get('/:patient_id', clinicianController.getDataById)
 
-// add a new JSON object to the database
-clinicianRouter.post('/', clinicianController.insertData)
+clinicianRouter.post('/dashboard', clinicianController.insertData)
 
-clinicianRouter.get('/BCG', clinicianController.getBloodGlucoseMeasurement)
-
-clinicianRouter.get('/createPatient', clinicianController.getNewPatientForm)
 // export the router
 module.exports = clinicianRouter
 
