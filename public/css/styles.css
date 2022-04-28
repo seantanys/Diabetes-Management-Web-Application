@@ -31,6 +31,12 @@ body {
   color: #ffffff;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 /* used when mobile menu is clicked to prevent scrolling */
 .fixed-position {
   position: fixed;
@@ -406,13 +412,7 @@ textarea {
   flex: 1;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-lottie-player {
+.hero-section lottie-player {
   width: 800px;
   height: 800px;
   margin-right: -50px
@@ -422,7 +422,10 @@ lottie-player {
   height: 75vh;
   background-color: var(--colour-background-teal);
   display: flex;
-  justify-content: center;
+  width: 70%;
+  margin-right: 15%;
+  margin-left: 15%;
+  justify-content: space-around;
   align-items:center;
 }
 
@@ -483,13 +486,13 @@ lottie-player {
     padding: 1em;
 }
 
-.caption {
+.feature-list-item .caption {
   margin-left: 25px;
   font-size: var(--text-h3);
   padding: 0.5em 1em;
 }
 
-.icon {
+.feature-list-item .icon {
     width: 30px;
     height: 30px;
 }
@@ -861,18 +864,24 @@ text-align: center;
 .hero-section {
     flex-direction: column-reverse;
     align-items: center;
+    justify-content: center;
 }
 
 #hero-lottie {
-    margin: -50px 0px 0px 0px;
+    /* margin: -50px 0px 0px 0px; */
+    margin-right: 5%;
+    margin-bottom: -50px;
     width: 375px;
     height: 375px;
 }
 
 .hero-text {
     /* padding: 0px 0px 0px 60px; */
-    margin: -50px 0px 0px 0px;
-    width: 50%;
+    /* margin: -50px 0px 0px 0px; */
+    width: 80%;
+    margin-right: 10%;
+    margin-left: 10%;
+    text-align: center;
 }
 
 .hero-text h1 {
@@ -892,15 +901,15 @@ line-height: 25px;
 width: 100%;
 }
 
-.caption {
+.feature-list-item .caption {
 margin-left: 25px;
 font-size: var(--text-p);
 padding: 0.5em 1em;
 }
 
-.icon {
-width: 75px;
-height: 75px;
+.feature-list-item .icon {
+width: 100px;
+height: 100px;
 }
 
 .contact-section h1 {
@@ -1747,12 +1756,6 @@ td, th {
 .clinician-info{
   text-align:center;
 }
-
-/* .clinician-table{
-  left:40%;
-  top:20%;
-  display: table-cell;
-} */
 
 .clinician-table-styled a {
   text-decoration: none;
