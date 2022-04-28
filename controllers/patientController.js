@@ -1,6 +1,5 @@
-const patientData = require('../models/patientModel')
 const {Patient} = require('../models/patient')
-const {Measurement} = require('../models/patient')
+const {Measurement} = require('../models/measurement')
 
 const id = "62660737332717bb9fe3eb55"; // HARD CODED PATIENT ID
 

@@ -1,5 +1,5 @@
 const {Patient} = require('../models/patient')
-const {Measurement} = require('../models/patient')
+const {Measurement} = require('../models/measurement')
 
 const getAllPatientData = async (req, res, next) => {
     const patientDashboard = []

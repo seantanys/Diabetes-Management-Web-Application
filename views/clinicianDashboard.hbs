@@ -11,7 +11,7 @@
             <div>
                 <lottie-player id="clinician-lottie" src="https://assets6.lottiefiles.com/packages/lf20_ibbakwps.json"  background="transparent"  speed="1"  loop  autoplay></lottie-player>
             </div>
-            <button type="clinician-button" id="clinician-button"> <a href="/clinician/create">Create New Patient </a> </button>
+            <button type="clinician-button" id="clinician-button">Create New Patient </button>
         </div>
     </div>
 
@@ -29,7 +29,7 @@
         <tbody>
         {{#each data}}
             <tr>
-            <th><a href="/clinician/{{this.patient._id}}">{{this.patient.first_name}} {{this.patient.last_name}}</a></th>
+            <th><a href="#">{{this.patient.first_name}} {{this.patient.last_name}}</a></th>
 
             <th>
                 {{#if this.patient.measurements.bcg}}
