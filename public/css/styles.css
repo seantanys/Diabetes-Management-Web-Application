@@ -1696,7 +1696,7 @@ td, th {
   flex-direction: row;
   justify-content: center;
   align-content: center;
-
+  padding-top: 3em;
   margin-bottom: 50px;
 }
 
@@ -1770,7 +1770,7 @@ td, th {
 .clinician-table-styled thead tr {
   background-color: rgba(1, 58, 99, 1);
   color: white;
-  text-align: left;
+  text-align: center;
 }
 
 .clinician-table-styled tbody tr {
@@ -1797,7 +1797,7 @@ td, th {
 }
 
 #clinician-button {
-  color: #081F65;
+  color: #000000;
   background-color: white;
   padding: 15px 32px;
   cursor: pointer;
