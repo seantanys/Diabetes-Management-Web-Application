@@ -723,6 +723,12 @@ textarea {
   color: var(--colour-h1);
 }
 
+.notfound lottie-player {
+  width: 500px; 
+  height: 500px;
+}
+
+
 button {
   font-family: var(--font-family-body);
   font-weight: 600;
@@ -897,6 +903,11 @@ margin-top: 15px;
 font-size: var(--text-h3);
 font-weight: 400;
 line-height: 25px;
+}
+
+.notfound lottie-player {
+  height: 300px;
+  width: 300px;
 }
 
 .feature-list-item {
