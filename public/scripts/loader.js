@@ -1,3 +1,5 @@
+// loading screen
+
 window.onload = function () {
     const loader = document.getElementById("loader")
 

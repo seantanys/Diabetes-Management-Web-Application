@@ -39,7 +39,9 @@ body {
 
 /* used when mobile menu is clicked to prevent scrolling */
 .fixed-position {
-  position: fixed;
+  margin: 0; 
+  height: 100%; 
+  overflow: hidden;
 }
   
   html {

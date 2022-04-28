@@ -1,18 +1,15 @@
+// this script provides visual aids when user enters data, no actual logic. only visuals. (for now)
+
 const isEmpty = str => !str.trim().length;
 
 window.onload = function () {
     const input = document.getElementById("bcg")
     const btn = document.getElementById("bcg-btn")
-    const loader = document.getElementById("loader")
-
-    setTimeout(() => {
-      loader.remove();
-    }, 1000)
-    
 
     if (input) {
         input.addEventListener("input", function() {
-            if( isEmpty(this.value) ) {
+            // if the field is entered and then made blank, the field will be highlighted red and button greyed
+            if( isEmpty(this.value) ) { 
             input.classList.add("validation-fail");
             btn.classList.remove("record-button-valid");
             
