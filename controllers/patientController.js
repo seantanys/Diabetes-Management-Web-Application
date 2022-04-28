@@ -7,12 +7,12 @@ const id = "62660737332717bb9fe3eb55";
 const getMeasurementPage = async (req, res) => {
     const currentTime = new Date()
     currentTime.setHours(0, 0, 0);
-    const data = await Patient.findById(id).lean();
-    const todayData = await Measurement.find({patientId: id, date: { $gte: currentTime}}).lean();
+    const data = await Patient.findById(id).lean(); // get the patient's data
+    const todayData = await Measurement.find({patientId: id, date: { $gte: currentTime}}).lean(); // get the patient's recorded data today
 
-    const reqMeasurements = Object.keys(data["measurements"])
-    const alreadyMeasured = getMeasurementTypes(todayData);
-    const notMeasured = reqMeasurements.filter(x => !alreadyMeasured.includes(x));
+    const reqMeasurements = Object.keys(data["measurements"]) // get the patients required measurements.
+    const alreadyMeasured = getMeasurementTypes(todayData); // get the measurments that have already been recorded for today
+    const notMeasured = reqMeasurements.filter(x => !alreadyMeasured.includes(x)); // get the measurements that havent been recorded today
 
     if (data) {
         res.render('record.hbs', { singlePatient: data, measured: alreadyMeasured, notMeasured: notMeasured, required: reqMeasurements})
@@ -22,6 +22,7 @@ const getMeasurementPage = async (req, res) => {
     }
 }
 
+// helper function to determine the type of measurement (bcg, insulin, etc.)
 function getMeasurementTypes(arr) {
     const types = []
     for (let i = 0; i < arr.length; i++) {
@@ -30,6 +31,7 @@ function getMeasurementTypes(arr) {
     return types;
 }
 
+// this function instantiates a new measurement object and saves it to the db
 const submitMeasurement = async (req, res) => {
     try {
         const newMeasurement = new Measurement ({
@@ -47,16 +49,19 @@ const submitMeasurement = async (req, res) => {
     }
 }
 
+// this function renders the patient dashboard page
 const getPatientPage = async (req, res) => {
     const currentTime = new Date()
     currentTime.setHours(0, 0, 0);
-    const data = await Patient.findById(id).lean();
-    const todayData = await Measurement.find({patientId: id, date: { $gte: currentTime}}).lean();
+    const data = await Patient.findById(id).lean(); // get the patient's data
+    const todayData = await Measurement.find({patientId: id, date: { $gte: currentTime}}).lean(); // get the patient's recorded data today
 
-    const reqMeasurements = Object.keys(data["measurements"])
-    const alreadyMeasured = getMeasurementTypes(todayData);
-    const notMeasured = reqMeasurements.filter(x => !alreadyMeasured.includes(x));
-    const dob = data.dob.getDate().toString().padStart(2,"0") + "/" + (data.dob.getMonth() + 1).toString().padStart(2,"0") + "/" + data.dob.getFullYear().toString()
+    const reqMeasurements = Object.keys(data["measurements"]) // get the patients required measurements.
+    const alreadyMeasured = getMeasurementTypes(todayData); // get the measurments that have already been recorded for today
+    const notMeasured = reqMeasurements.filter(x => !alreadyMeasured.includes(x)); // get the measurements that havent been recorded today
+    const dob = data.dob.getDate().toString().padStart(2,"0") + "/" + 
+        (data.dob.getMonth() + 1).toString().padStart(2,"0") + "/" + data.dob.getFullYear().toString() // format the date for presentation
+
     if (data) {
         res.render('patientDashboard.hbs', {dob, singlePatient: data, measured: alreadyMeasured, notMeasured: notMeasured, required: reqMeasurements})
     } else {
