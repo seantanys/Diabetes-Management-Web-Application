@@ -1,5 +1,6 @@
 const {Patient} = require('../models/patient')
 const {Measurement} = require('../models/measurement')
+const { DateTime } = require("luxon");
 
 // function which handles requests for displaying patient name and measurement on clinician 
 // dashboard finds the most recent measurement entered by a patient and displays it
@@ -8,6 +9,10 @@ const getAllPatientData = async (req, res, next) => {
     const patientDashboard = []
     const date = new Date()
     const todaysDate= date.getDate().toString() + "-" + date.getMonth().toString() + "-" + date.getFullYear().toString();
+    // const currTime = DateTime.now().setZone('Australia/Melbourne'); // melb time using library
+    // const currDate = currTime.startOf('day').toISO()
+    // const todayDate = currTime.toLocaleString();
+    // console.log(todayDate)
 
     try {
         // for each patient in the Patients collection, we search for their latest measurements within the

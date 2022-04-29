@@ -1,16 +1,18 @@
 const {Patient} = require('../models/patient')
 const {Measurement} = require('../models/measurement')
+const { DateTime } = require("luxon");
 
 // hard coded Patient Pat's id for D2
 const id = "62660737332717bb9fe3eb55"; 
 
 const getMeasurementPage = async (req, res) => {
     const currentTime = new Date()
+    const currTime = DateTime.now().setZone('Australia/Melbourne').startOf('day').toISO(); // melb time using library
     currentTime.setHours(0, 0, 0);
     // get the patient's data
     const data = await Patient.findById(id).lean();
     // get the patient's recorded data today
-    const todayData = await Measurement.find({patientId: id, date: { $gte: currentTime}}).lean();
+    const todayData = await Measurement.find({patientId: id, date: { $gte: currTime}}).lean();
 
     // get the patients required measurements.
     const reqMeasurements = Object.keys(data["measurements"]) 
