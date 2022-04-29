@@ -548,7 +548,7 @@ textarea {
   font-weight: 300;
   color: black;
   text-align: center;
-  padding: 35px 0px;
+  /* padding: 35px 0px; */
 }
 
 .divider {
@@ -558,6 +558,8 @@ textarea {
   width: 40%;
   margin-right: 30%;
   margin-left: 30%;
+  margin-top: 25px;
+  margin-bottom: 25px;
 }
 
 .requirement-section {
@@ -979,7 +981,7 @@ font-size: var(--text-p);
   font-weight: 300;
   color: black;
   text-align: center;
-  padding: 35px 0px;
+  /* padding: 35px 0px; */
 }
 
 .contact-section h1 {

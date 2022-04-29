@@ -10,7 +10,7 @@ const getAllPatientData = async (req, res, next) => {
 
     const currTime = DateTime.now().setZone('Australia/Melbourne'); // melb time using library
     const currDate = currTime.startOf('day').toISO()
-    const todaysDate = currTime.toLocaleString();
+    const todaysDate = currTime.toLocaleString(DateTime.DATETIME_MED);
 
     try {
         // for each patient in the Patients collection, we search for their latest measurements within the

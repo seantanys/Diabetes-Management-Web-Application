@@ -6,13 +6,13 @@ const { DateTime } = require("luxon");
 const id = "62660737332717bb9fe3eb55"; 
 
 const getMeasurementPage = async (req, res) => {
-    const currentTime = new Date()
-    const currTime = DateTime.now().setZone('Australia/Melbourne').startOf('day').toISO(); // melb time using library
-    currentTime.setHours(0, 0, 0);
+    const currTime = DateTime.now().setZone('Australia/Melbourne'); // melb time using library
+    const currDate = currTime.startOf('day').toISO();
+    const displayTime = currTime.toLocaleString(DateTime.DATETIME_MED)
     // get the patient's data
     const data = await Patient.findById(id).lean();
     // get the patient's recorded data today
-    const todayData = await Measurement.find({patientId: id, date: { $gte: currTime}}).lean();
+    const todayData = await Measurement.find({patientId: id, date: { $gte: currDate}}).lean();
 
     // get the patients required measurements.
     const reqMeasurements = Object.keys(data["measurements"]) 
@@ -23,7 +23,8 @@ const getMeasurementPage = async (req, res) => {
 
     if (data) {
         res.render('record.hbs', { singlePatient: data, measured: alreadyMeasured, 
-                                  notMeasured: notMeasured, required: reqMeasurements})
+                                  notMeasured: notMeasured, required: reqMeasurements,
+                                  currentTime: displayTime})
     } else {
         console.log("patient data not found")
         res.render('notfound')
@@ -47,7 +48,7 @@ const submitMeasurement = async (req, res) => {
             patientId: id,
             value: parseFloat(req.body.value),
             date: Date.now(),
-            comment: req.body.comment
+            comment: req.body.comment,
         })
         await newMeasurement.save();
         console.log("Measurement successfully saved to db")
@@ -59,12 +60,12 @@ const submitMeasurement = async (req, res) => {
 
 // this function renders the patient dashboard page
 const getPatientPage = async (req, res) => {
-    const currentTime = new Date()
-    currentTime.setHours(0, 0, 0);
+    const currTime = DateTime.now().setZone('Australia/Melbourne'); // melb time using library
+    const currDate = currTime.startOf('day').toISO();
     // get the patient's data
     const data = await Patient.findById(id).lean(); 
     // get the patient's recorded data today
-    const todayData = await Measurement.find({patientId: id, date: { $gte: currentTime}}).lean(); 
+    const todayData = await Measurement.find({patientId: id, date: { $gte: currDate}}).lean(); 
 
     // get the patients required measurements.
     const reqMeasurements = Object.keys(data["measurements"])
