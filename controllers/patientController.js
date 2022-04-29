@@ -6,9 +6,9 @@ const { DateTime } = require("luxon");
 const id = "62660737332717bb9fe3eb55"; 
 
 const getMeasurementPage = async (req, res) => {
-    const currTime = DateTime.now().setZone('Australia/Melbourne'); // melb time using library
-    const currDate = currTime.startOf('day').toISO();
-    const displayTime = currTime.toLocaleString(DateTime.DATETIME_MED)
+    const currTime = DateTime.now().setZone('Australia/Melbourne'); // melb time using luxon library
+    const currDate = currTime.startOf('day').toISO(); // get the start of day
+    const displayTime = currTime.toLocaleString(DateTime.DATETIME_MED) // get the current time of the day
     // get the patient's data
     const data = await Patient.findById(id).lean();
     // get the patient's recorded data today
@@ -47,7 +47,7 @@ const submitMeasurement = async (req, res) => {
             type: req.body.type,
             patientId: id,
             value: parseFloat(req.body.value),
-            date: Date.now(),
+            date: DateTime.now().setZone('Australia/Melbourne').toISO(),
             comment: req.body.comment,
         })
         await newMeasurement.save();
