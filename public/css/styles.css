@@ -1718,7 +1718,7 @@ td, th {
   flex-direction: row;
   justify-content: center;
   align-content: center;
-  padding-top: 3em;
+  padding-top: 0.5em;
   margin-top: 100px;
   margin-bottom: 100px;
 }

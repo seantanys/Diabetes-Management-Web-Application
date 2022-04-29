@@ -7,12 +7,10 @@ const { DateTime } = require("luxon");
 // it is highlighted if its not in the safety threshold
 const getAllPatientData = async (req, res, next) => {
     const patientDashboard = []
-    const date = new Date()
-    const todaysDate= date.getDate().toString() + "-" + date.getMonth().toString() + "-" + date.getFullYear().toString();
-    // const currTime = DateTime.now().setZone('Australia/Melbourne'); // melb time using library
-    // const currDate = currTime.startOf('day').toISO()
-    // const todayDate = currTime.toLocaleString();
-    // console.log(todayDate)
+
+    const currTime = DateTime.now().setZone('Australia/Melbourne'); // melb time using library
+    const currDate = currTime.startOf('day').toISO()
+    const todaysDate = currTime.toLocaleString();
 
     try {
         // for each patient in the Patients collection, we search for their latest measurements within the
