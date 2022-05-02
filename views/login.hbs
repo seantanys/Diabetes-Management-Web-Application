@@ -3,18 +3,18 @@
 </div>
 
 <div class="log-in-section">
-    <form action="/" class="log-in-form">
+    <form action="/login" class="log-in-form" method="post">
         <div class="input-box">
             <span class="label">E-mail</span>
             <div class="input">
-                <input type="text" placeholder="name@example.com" required>
+                <input type="text" placeholder="name@example.com" id="username" name="username" required>
             </div>
         </div>
 
         <div class="input-box">
             <span class="label">Password</span>
             <div class="input">
-              <input type="password" placeholder="Enter Password" id="pw" required>
+              <input type="password" placeholder="Enter Password" id="pw" name="password" required>
             </div>
         </div>
 
@@ -23,3 +23,7 @@
     </form>
 
 </div>
+
+{{#each flash}}
+<p class="flash-warning">{{this}}</p>
+{{/each}}

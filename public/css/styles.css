@@ -377,6 +377,12 @@ body {
   font-size: var(--text-p);
 }
 
+.flash-warning {
+  font-size: var(--text-p);
+  background-color: red;
+  text-align: center;
+}
+
 .input-box {
   margin: 10px 0px;
 }

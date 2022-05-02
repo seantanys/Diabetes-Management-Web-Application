@@ -1,16 +1,13 @@
 // Import express
 const express = require('express')
-
 // include Handlebars module
 const exphbs = require('express-handlebars')
-
-// var helpers = require('handlebars-helpers')();
-
-// Set your app up as an express app
-const app = express()
-
+const flash = require('express-flash')  // for showing login error messages
+const session = require('express-session')
+const passport = require('./passport.js')
 require('./models')
 
+const app = express()
 // configure Handlebars
 app.engine(
     'hbs',
@@ -33,12 +30,55 @@ app.engine(
 // set Handlebars view engine
 app.set('view engine', 'hbs')
 
+app.use(flash())
+
 // define where static assets live
 app.use(express.static('public'))
+
+app.use(
+    session({
+        // The secret used to sign session cookies (ADD ENV VAR)
+        secret: process.env.SESSION_SECRET || 'keyboard cat',
+        name: 'generic-name', // The cookie name (CHANGE THIS)
+        saveUninitialized: false,
+        resave: false,
+        proxy: process.env.NODE_ENV === 'production', //  to work on Heroku
+        cookie: {
+            sameSite: 'strict',
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            maxAge: 300000 // sessions expire after 5 minutes
+        },
+    })
+)
+
+// use PASSPORT
+app.use(passport.authenticate('session'))
+
+// Passport Authentication middleware
+const isAuthenticated = (req, res, next) => {
+    // If user is not authenticated via Passport, redirect to login page
+    if (!req.isAuthenticated()) {
+        return res.redirect('/login')
+    }
+    // Otherwise, proceed to next middleware function
+    return next()
+}
 
 // Set up to handle POST requests
 app.use(express.json()) // needed if POST data is in JSON format
 app.use(express.urlencoded({ extended: true })) // only needed for URL-encoded input
+
+app.get('/login', (req, res) => { 
+    res.render('login', {flash: req.flash('error'), title: 'Login'})
+})
+
+app.post('/login',
+    passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }),  // if bad login, send user back to login page
+    (req, res) => { 
+        res.redirect('/patient/dashboard')   // login was successful, send user to home page
+    }   
+)
 
 const aboutRouter = require('./routes/aboutRouter')
 
@@ -52,14 +92,10 @@ const patientRouter = require('./routes/patientRouter')
 
 app.use('/patient', patientRouter)
 
-const loginRouter = require('./routes/loginRouter')
+// const loginRouter = require('./routes/loginRouter')
 
-app.use('/login', loginRouter)
+// app.use('/login', loginRouter)
 
-// Tells the app to send the string: "Our demo app is working!" when you hit the '/' endpoint.
-// app.get('/', (req,res) => {
-//     res.send('Our demo app is working!')
-// })
 app.get('/', (req, res) => {
     res.render('index.hbs', {layout: 'patient-logged-out.hbs'})
 })
