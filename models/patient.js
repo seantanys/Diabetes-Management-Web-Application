@@ -24,6 +24,10 @@ const patientSchema = new mongoose.Schema({
             maximum: Number
         },
         required: false
+    },
+    clinician_notes: {
+        date: {type: Date, default: Date.now},
+        comment: String
     }
 });
 

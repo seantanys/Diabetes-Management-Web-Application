@@ -2,6 +2,18 @@ const {Patient} = require('../models/patient')
 const {Measurement} = require('../models/measurement')
 const { DateTime } = require("luxon");
 
+function getDatesInRange(startDate, endDate) {
+    const date = new Date(endDate);
+
+    const dates = [];
+
+    while (date >= startDate) {
+        dates.push(new Date(date));
+        date.setDate(date.getDate() - 1);
+    } 
+    return dates;
+}
+
 // function which handles requests for displaying patient name and measurement on clinician 
 // dashboard finds the most recent measurement entered by a patient and displays it
 // it is highlighted if its not in the safety threshold
@@ -47,6 +59,12 @@ const getPatientById = async(req, res, next) => {
     try {
 
         const patient = await Patient.findById(req.params.patient_id).lean()
+        const currTime = DateTime.now().setZone('Australia/Melbourne')
+
+        const dateStart = new Date(patient.join_date)
+        const dateEnd = new Date()
+
+        const dates = await getDatesInRange(dateStart, dateEnd)
 
         bcgmeasurement = await Measurement.find({patientId: req.params.patient_id.toString(), type:'bcg'}).sort({"date": -1}).lean()
         weightmeasurement = await Measurement.find({patientId: req.params.patient_id.toString(), type:'weight'}).sort({"date": -1}).lean()
@@ -58,9 +76,12 @@ const getPatientById = async(req, res, next) => {
             // no patient found in database
             return res.render('notfound')
         }
+        
+        
         // found patient
-        return res.render('oneData', { oneItem: patient, bcgmeasurement: bcgmeasurement, weightmeasurement: weightmeasurement,
-                                    insulinmeasurement: insulinmeasurement, exercisemeasurement:exercisemeasurement})
+        // render clinicianTabs -- base page is overview
+        return res.render('clinicianTabs', { oneItem: patient, bcgmeasurement: bcgmeasurement, weightmeasurement: weightmeasurement,
+                                    insulinmeasurement: insulinmeasurement, exercisemeasurement:exercisemeasurement, dateRange:dates})
 
     } catch (err) {
         return next(err)

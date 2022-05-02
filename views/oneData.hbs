@@ -1,12 +1,9 @@
 <ul>
-    <li>{{oneItem._id}}</li>
-    <li>Name: {{oneItem.first_name}} {{oneItem.last_name}}</li>
-    <li>Date of Birth: {{oneItem.dob}}</li>
-    <li>Join Date: {{oneItem.join_date}}</li>
+    
     <br>
 
     {{#if oneItem.measurements.bcg}}
-    <li>bcg table</li>
+    <li>Input required {{oneItem.measurements.bcg.inputRequired}}</li>
     <li>minimum {{oneItem.measurements.bcg.minimum}}</li>
     <li>maximum {{oneItem.measurements.bcg.maximum}}</li>
     {{#each bcgmeasurement}}
