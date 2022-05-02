@@ -1,0 +1,110 @@
+<div class="clinician-drill-overview">
+    <div class="patient-info-container">
+        <div class="patient-info"> 
+            // flexbox: 3 columns with first col small, mid and last col equal width
+            <img>  
+            <h1>{{first_name}} {{last_name}}</h1>
+            {{gender}}
+            {{age}}
+            {{join_date}}
+        </div>
+    </div>
+    
+    <div class="functions-nav-bar">
+        //flexbox of 3 items
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="/#" class="nav-link">Overview</a>
+            </li>
+            <li class="nav-item">      
+                <a href="#" class="nav-link">Manage</a>
+            </li>
+            <li class="nav-item">
+                <a type="submit"> Support Message</a>
+            </li>
+        </ul>
+    </div>
+    
+    <div class="clinician-table-container">
+        <table class="clinician-table-styled">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Blood Glucose(nmol/L)</th>
+                    <th>Weight(Kg)</th>
+                    <th>Doses of Insulin</th>
+                    <th>Step Count</th>
+                </tr>
+            </thead>
+            {{!-- loops over the data set --}}
+            <tbody>
+            {{#each data}}
+                <tr>
+                <th><a href="#">{{this.patient.first_name}} {{this.patient.last_name}}</a></th>
+                {{#if this.patient.measurements.bcg}}
+                <th>
+                    {{#if (and (gte this.bcg this.patient.measurements.bcg.minimum) (lte this.bcg this.patient.measurements.bcg.maximum))}}
+                        {{this.bcg}}
+                    {{else}}
+                        <p id ="red">{{this.bcg}}</p>
+                    {{/if}}
+                </th>
+                {{else}}
+                <th style="background-color: rgba(110, 107, 107, 0.404);"> 
+                </th>
+                {{/if}}
+
+                {{#if this.patient.measurements.weight}}
+                <th>
+                    {{#if (and (gte this.weight this.patient.measurements.weight.minimum) (lte this.weight this.patient.measurements.weight.maximum))}}
+                        {{this.weight}}
+                    {{else}}
+                        <p id ="red">{{this.weight}}</p>
+                    {{/if}}
+                </th>
+                {{else}}
+                <th style="background-color: rgba(110, 107, 107, 0.404);"> 
+                </th>
+                {{/if}}
+
+                {{#if this.patient.measurements.insulin}}
+                <th>
+                    {{#if (and (gte this.insulin this.patient.measurements.insulin.minimum) (lte this.insulin this.patient.measurements.insulin.maximum))}}
+                        {{this.insulin}}
+                    {{else}}
+                        <p id ="red">{{this.insulin}}</p>
+                    {{/if}}
+                </th>
+                {{else}}
+                <th style="background-color: rgba(110, 107, 107, 0.404);"> 
+                </th>
+                {{/if}}
+
+                {{#if this.patient.measurements.exercise}}
+                <th>
+                    {{#if (and (gte this.exercise this.patient.measurements.exercise.minimum) (lte this.exercise this.patient.measurements.exercise.maximum))}}
+                        {{this.exercise}}
+                    {{else}}
+                        <p id ="red">{{this.exercise}}</p>
+                    {{/if}}
+                </th>
+                {{else}}
+                <th style="background-color: rgba(110, 107, 107, 0.404);"> 
+                </th>
+                {{/if}}
+
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+
+        <div class="info">
+            <img src="../images/icons/info.svg" alt="info-sign">
+            <span class="info-text">
+                Greyed-out fields: non-required measurements.
+            </span>
+        </div>
+
+    </div>
+</div>
+
