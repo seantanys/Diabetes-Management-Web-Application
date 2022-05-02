@@ -43,17 +43,24 @@ const getAllPatientData = async (req, res, next) => {
 
 // function which handles requests for displaying patient overview
 // will be implemented for D3
-const getDataById = async(req, res, next) => {
+const getPatientById = async(req, res, next) => {
     try {
 
-        const patient = await Patient.findById(req.body.patient_id).lean()
+        const patient = await Patient.findById(req.params.patient_id).lean()
+
+        bcgmeasurement = await Measurement.find({patientId: req.params.patient_id.toString(), type:'bcg'}).sort({"date": -1}).lean()
+        weightmeasurement = await Measurement.find({patientId: req.params.patient_id.toString(), type:'weight'}).sort({"date": -1}).lean()
+        insulinmeasurement = await Measurement.find({patientId: req.params.patient_id.toString(), type:'insulin'}).sort({"date": -1}).lean()
+        exercisemeasurement = await Measurement.find({patientId: req.params.patient_id.toString(), type:'exercise'}).sort({"date": -1}).lean()
+
 
         if (!patient) {
             // no patient found in database
             return res.render('notfound')
         }
         // found patient
-        return res.render('oneData', { oneItem: patient})
+        return res.render('oneData', { oneItem: patient, bcgmeasurement: bcgmeasurement, weightmeasurement: weightmeasurement,
+                                    insulinmeasurement: insulinmeasurement, exercisemeasurement:exercisemeasurement})
 
     } catch (err) {
         return next(err)
@@ -95,7 +102,7 @@ const insertData = async (req, res, next) => {
 // exports an object, which contain functions imported by router
 module.exports = {
     getAllPatientData,
-    getDataById,
+    getPatientById,
     insertData,
     getNewPatientForm
 }

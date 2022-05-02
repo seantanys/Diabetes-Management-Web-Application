@@ -13,7 +13,7 @@ clinicianRouter.get('/create', clinicianController.getNewPatientForm)
 clinicianRouter.get('/dashboard', clinicianController.getAllPatientData)
 
 // route to handle the GET request for one patient data
-clinicianRouter.get('/:patient_id', clinicianController.getDataById)
+clinicianRouter.get('/:patient_id', clinicianController.getPatientById)
 
 // route to handle the POST request new patient, adding to the database
 clinicianRouter.post('/dashboard', clinicianController.insertData)

@@ -1,14 +1,106 @@
-<h1>Displaying one item</h1>
-{{#with oneItem}}
 <ul>
-    <li>{{this._id}}</li>
-    <li>{{this.first_name}}</li>
-    <li>{{this.last_name}}</li>
-    <p>Latest measuremnts are</p>
-    <li>Blood Glucose is {{bcg.value}} </li>
-    <li>Weight is {{weight.value}} </li> 
-    <li>Insulin Doses are {{insulin.value}} </li> 
-    <li>Steps taken were {{exercise.value}} </li> 
-    
+    <li>{{oneItem._id}}</li>
+    <li>Name: {{oneItem.first_name}} {{oneItem.last_name}}</li>
+    <li>Date of Birth: {{oneItem.dob}}</li>
+    <li>Join Date: {{oneItem.join_date}}</li>
+    <br>
+
+    {{#if oneItem.measurements.bcg}}
+    <li>bcg table</li>
+    <li>minimum {{oneItem.measurements.bcg.minimum}}</li>
+    <li>maximum {{oneItem.measurements.bcg.maximum}}</li>
+    {{#each bcgmeasurement}}
+    <table>
+        <tr>
+            <td>
+                <li>{{this.date}}</li>
+            </td>
+            <td>
+                <li>{{this.type}}</li>
+            </td>
+            <td>
+                <li>{{this.value}}</li>
+            </td>
+            <td>
+                <li>{{this.comment}}</li>
+            </td>
+        </tr>
+    </table>
+    {{/each}}
+    {{/if}}
+
+    {{#if oneItem.measurements.weight}}
+    <li>weight table</li>
+    <li>minimum {{oneItem.measurements.weight.minimum}}</li>
+    <li>maximum {{oneItem.measurements.weight.maximum}}</li>
+    {{#each weightmeasurement}}
+    <table>
+        <tr>
+            <td>
+                <li>{{this.date}}</li>
+            </td>
+            <td>
+                <li>{{this.type}}</li>
+            </td>
+            <td>
+                <li>{{this.value}}</li>
+            </td>
+            <td>
+                <li>{{this.comment}}</li>
+            </td>
+        </tr>
+    </table>
+    {{/each}}
+    {{/if}}
+
+    {{#if oneItem.measurements.insulin}}
+    <li>insulin table</li>
+    <li>minimum {{oneItem.measurements.insulin.minimum}}</li>
+    <li>maximum {{oneItem.measurements.insulin.maximum}}</li>
+    {{#each insulinmeasurement}}
+    <table>
+        <tr>
+            <td>
+                <li>{{this.date}}</li>
+            </td>
+            <td>
+                <li>{{this.type}}</li>
+            </td>
+            <td>
+                <li>{{this.value}}</li>
+            </td>
+            <td>
+                <li>{{this.comment}}</li>
+            </td>
+        </tr>
+    </table>
+    {{/each}}
+    {{/if}}
+
+    {{#if oneItem.measurements.exercise}}
+    <li>exercise table</li>
+    <li>minimum {{oneItem.measurements.exercise.minimum}}</li>
+    <li>maximum {{oneItem.measurements.exercise.maximum}}</li>
+    {{#each exercisemeasurement}}
+    <table>
+        <tr>
+            <td>
+                <li>{{this.date}}</li>
+            </td>
+            <td>
+                <li>{{this.type}}</li>
+            </td>
+            <td>
+                <li>{{this.value}}</li>
+            </td>
+            <td>
+                <li>{{this.comment}}</li>
+            </td>
+        </tr>
+    </table>
+    {{/each}}
+    {{/if}}
+
 </ul>
-{{/with}}
+
+
