@@ -63,10 +63,7 @@
                 </table>
 
                 {{#each dateRange}}
-                {{#if (weightmeasurement.exists({date: this})}} {{data=1}}
-                {{else}} {{data = 0}}
-                    <li>{{this}}:{{data}}</li>
-                {{/if}}
+                {{dateRange}}
                 {{/each}}
             {{/if}}
         </div>

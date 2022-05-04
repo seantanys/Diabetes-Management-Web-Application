@@ -2,8 +2,16 @@ const {Patient} = require('../models/patient')
 const {Measurement} = require('../models/measurement')
 const { DateTime } = require("luxon");
 
+const mType = {
+    bcg: "bcg",
+    weight: "weight",
+    insulin: "insulin",
+    exercise: "exercise",
+};
+
 function getDatesInRange(startDate, endDate) {
     const date = new Date(endDate);
+    date.setUTCHours(0,0,0,0)
 
     const dates = [];
 
@@ -12,6 +20,34 @@ function getDatesInRange(startDate, endDate) {
         date.setDate(date.getDate() - 1);
     } 
     return dates;
+}
+
+function leftJoin(arr1, arr2, date1, date2) {
+    const resultArray = (arr1, arr2, date1, date2) => arr1.map(
+        item1 => ({
+            ...arr2.find(
+                item2 => item1[date1] === item2[date2.setUTCHours(0,0,0,0)]
+            ),
+            ...item1
+        })
+    )
+    return resultArray;
+}
+
+function getTableArray(dates, measurement) {
+    const outputArray = []
+    for (i in dates) {
+        date = dates[i]
+        for (j in measurement) {
+            dataDate = new Date(measurement[j].date)
+            dataDate.setUTCHours(0,0,0,0)
+            if (date.getTime() === dataDate.getTime()) {
+                outputArray.push(measurement[j])
+            } else {
+                outputArray.push(date)
+            }
+        }
+    }
 }
 
 // function which handles requests for displaying patient name and measurement on clinician 
@@ -56,21 +92,51 @@ const getAllPatientData = async (req, res, next) => {
 // function which handles requests for displaying patient overview
 // will be implemented for D3
 const getPatientById = async(req, res, next) => {
+
     try {
 
         const patient = await Patient.findById(req.params.patient_id).lean()
-        const currTime = DateTime.now().setZone('Australia/Melbourne')
+        const dates = await getDatesInRange(new Date(patient.join_date), new Date())
 
-        const dateStart = new Date(patient.join_date)
-        const dateEnd = new Date()
-
-        const dates = await getDatesInRange(dateStart, dateEnd)
-
+        // Get arrays of measurements of each type
         bcgmeasurement = await Measurement.find({patientId: req.params.patient_id.toString(), type:'bcg'}).sort({"date": -1}).lean()
         weightmeasurement = await Measurement.find({patientId: req.params.patient_id.toString(), type:'weight'}).sort({"date": -1}).lean()
         insulinmeasurement = await Measurement.find({patientId: req.params.patient_id.toString(), type:'insulin'}).sort({"date": -1}).lean()
         exercisemeasurement = await Measurement.find({patientId: req.params.patient_id.toString(), type:'exercise'}).sort({"date": -1}).lean()
+        
+        var mArray = []
+        mArray.push(bcgmeasurement)
+        mArray.push(weightmeasurement)
+        mArray.push(insulinmeasurement)
+        mArray.push(exercisemeasurement)        
 
+        // Make new array with all the dates from join date to now, with measurements
+        
+        mTrend = []
+        for (m in mArray) {
+            if (mArray[m].length == 0) {
+                mTrend.push(mArray[m])
+            } else {
+                tempArray = []
+                for (i in dates) {
+                    match = false
+                    for (j in mArray[m]) {
+                        dataDate = new Date(mArray[m][j].date)
+                        dataDate.setUTCHours(0,0,0,0)
+                        if (dates[i].getTime() === dataDate.getTime()) {
+                            tempArray.push(mArray[m][j])
+                            match = true
+                            break
+                        } 
+                    }
+                    if (!match) {
+                        tempArray.push({date: dates[i], value: undefined, comment: ''})
+                    }
+                }
+            mTrend.push(tempArray)
+            console.log("m " + m + "adds"+  mTrend)
+            }
+        }
 
         if (!patient) {
             // no patient found in database
@@ -80,8 +146,7 @@ const getPatientById = async(req, res, next) => {
         
         // found patient
         // render clinicianTabs -- base page is overview
-        return res.render('clinicianTabs', { oneItem: patient, bcgmeasurement: bcgmeasurement, weightmeasurement: weightmeasurement,
-                                    insulinmeasurement: insulinmeasurement, exercisemeasurement:exercisemeasurement, dateRange:dates})
+        return res.render('clinicianTabs', { oneItem: patient, dataset: mArray, dateRange:dates})
 
     } catch (err) {
         return next(err)

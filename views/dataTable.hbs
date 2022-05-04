@@ -4,6 +4,7 @@
             <tr>
                 <th>Date</th>
                 <th>Time</th>
+                <th>Type</th>
                 <th>{{measurement.name}} {{measurement.unit}}</th>
                 <th>Comments</th>
             </tr>
@@ -15,20 +16,25 @@
         <tbody>
         {{#each data_entry}}
             <tr>
-            <td>{{date}}</td>
-            {{#if this.date == date}}
-                <td>
-                    <li>{{this.type}}</li>
-                </td>
-                <td>
-                    <li>{{this.value}}</li>
-                </td>
-                <td>
-                    <li>{{this.comment}}</li>
-                </td>
-            {{else}}
+            <td>
+                {{date}}
+            </td>
+            <td>
+                {{date}}
+            </td>
+            <td>
+                <li>{{this.type}}</li>
+            </td>
+            <td>
+                {{#if this.value == undefined}}
                 <p id ="red">Not Updated</p>
-            {{/if}}
+                {{else}}
+                <li>{{this.value}}</li>
+                {{/if}}
+            </td>
+            <td>
+                <li>{{this.comment}}</li>
+            </td>
         </tbody>
     </table>
 </div>
