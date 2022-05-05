@@ -16,9 +16,9 @@
         <div id="patient-details">
             <img src="\images\male-profile.jpg">
             <p>{{singlePatient.first_name}} {{singlePatient.last_name}}</p>
-            <p>Screen name: Pat123</p>
+            <p>Screen Name: {{singlePatient.screen_name}}</p>
             <p>DOB: {{dob}}</p>
-            <p>Bio: I love travelling and my 3 dogs</p>
+            <p>Bio: {{singlePatient.bio}}</p>
         </div>
 
         {{!-- Messages are hard coded for now. --}}

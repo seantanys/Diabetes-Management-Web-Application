@@ -1,7 +1,6 @@
 // set up Passport
 const passport = require('passport')
 const LocalStrategy = require('passport-local')
-const {Patient} = require('./models/patient')
 const {User} = require('./models/user')
 
 // Updated serialize/deserialize functions

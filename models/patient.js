@@ -5,10 +5,9 @@ const bcrypt = require('bcrypt')
 const patientSchema = new mongoose.Schema({
     first_name: {type: String, required: true},
     last_name: {type: String, required: true},
-    username: {type: String, required: true},
-    password: {type: String, required: true},
+    screen_name: {type: String, required: true},
     dob: {type: Date, required: true},
-    join_date: {type: Date, default: Date.now},
+    bio: {type: Date, required: true},
     measurements: {
         bcg: {
             minimum: Number,
