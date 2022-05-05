@@ -7,7 +7,7 @@
         <div class="input-box">
             <span class="label">E-mail</span>
             <div class="input">
-                <input type="text" placeholder="name@example.com" id="username" name="username" required>
+                <input type="email" placeholder="name@example.com" id="username" name="username" required>
             </div>
         </div>
 
@@ -21,9 +21,6 @@
         <button type="submit">Log In</button>
 
     </form>
-
+    {{> flashWarning}}
 </div>
 
-{{#each flash}}
-<p class="flash-warning">{{this}}</p>
-{{/each}}

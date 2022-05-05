@@ -11,7 +11,7 @@ const mongoose = require('mongoose')
 mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost', {
     useNewUrlParser: true, 
     useUnifiedTopology: true,
-    dbName: 'diabetes-at-home'
+    dbName: 'diabetes-at-home-test'
     })
     .then(() => {
         console.log(`Connection success.`)

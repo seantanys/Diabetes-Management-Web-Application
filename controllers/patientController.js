@@ -22,7 +22,7 @@ const getMeasurementPage = async (req, res) => {
     const notMeasured = reqMeasurements.filter(x => !alreadyMeasured.includes(x)); 
 
     if (data) {
-        res.render('record.hbs', { singlePatient: data, measured: alreadyMeasured, 
+        res.render('record.hbs', {flash: req.flash('success'), singlePatient: data, measured: alreadyMeasured, 
                                   notMeasured: notMeasured, required: reqMeasurements,
                                   currentTime: displayTime})
     } else {
@@ -41,7 +41,7 @@ function getMeasurementTypes(arr) {
 }
 
 // this function instantiates a new measurement object and saves it to the db
-const submitMeasurement = async (req, res) => {
+const submitMeasurement = async (req, res, next) => {
     try {
         const newMeasurement = new Measurement ({
             type: req.body.type,
@@ -51,10 +51,17 @@ const submitMeasurement = async (req, res) => {
             comment: req.body.comment,
         })
         await newMeasurement.save();
-        console.log("Measurement successfully saved to db")
+        // console.log("Measurement successfully saved to db")
+        if (req.body.type === "bcg") {
+            req.flash('success', "blood glucose level successfully recorded.")
+        }
+        else {
+            req.flash('success', `${req.body.type} successfully recorded.`)
+        }
+        
         res.redirect('/patient/record');
     } catch (err) {
-        console.log("error submitting measurement.")
+        next(err);
     }
 }
 
@@ -92,6 +99,7 @@ const redirectToDashboard = async (req, res) => {
 const getPatientAccountPage = async (req, res) => {
     res.render('account')
 }
+
 
 // exports an object, which contain functions imported by router
 module.exports = {

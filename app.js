@@ -69,6 +69,11 @@ const isAuthenticated = (req, res, next) => {
 app.use(express.json()) // needed if POST data is in JSON format
 app.use(express.urlencoded({ extended: true })) // only needed for URL-encoded input
 
+// app.use((req, res, next) => {
+//     res.locals.success = req.flash('success');
+//     next();
+// })
+
 app.get('/login', (req, res) => { 
     res.render('login', {flash: req.flash('error'), title: 'Login'})
 })
@@ -96,22 +101,26 @@ app.use('/patient', patientRouter)
 
 // app.use('/login', loginRouter)
 
+// app.use((err, req, res, next) => {
+//     res.send('Something Went Wrong.')
+// })
+
 app.get('/', (req, res) => {
     res.render('index.hbs', {layout: 'patient-logged-out.hbs'})
 })
 
 app.get('*', (req, res) => {
-    res.render('notfound')
+    res.status(404).render('notfound')
 })
 
 // link to our router
 // const peopleRouter = require('./routes/peopleRouter')
 
 // middleware to log a message each time a request arrives at the server - handy for debugging
-app.use((req, res, next) => {
-    console.log('message arrived: ' + req.method + ' ' + req.path)
-    next()
-})
+// app.use((req, res, next) => {
+//     console.log('message arrived: ' + req.method + ' ' + req.path)
+//     next()
+// })
 
 // the demo routes are added to the end of the '/demo-management' path
 // app.use('/people', peopleRouter)

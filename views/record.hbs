@@ -1,4 +1,5 @@
 <script src="../scripts/recordInput.js"></script>
+<script src="../scripts/closeFlash.js"></script>
 <script src="../scripts/loader.js"></script>
 
 <div class="loader-wrapper" id="loader">
@@ -18,6 +19,8 @@
     </h2>
     <hr class="divider">
 </div>
+
+{{> flashSuccess}}
 
 <div class="requirement-section">
     <div class="checklist-container">
@@ -132,10 +135,10 @@
             </div>
             <span class="label">Blood Glucose Level</span>
             <div class="record-input">
-                <input name="value" type="text" placeholder="Enter Blood Glucose Level" id="bcg" required>
+                <input name="value" type="number" min=0 step=0.1 placeholder="Enter Blood Glucose Level" id="bcg" required>
             </div>
             <br>
-            <span class="label">Comment</span>
+            <span class="label">Comment (optional)</span>
             <div class="comment-input">
                 <textarea name="comment" id="comment" cols="30" rows="5" placeholder="Enter comment here"></textarea>
             </div>
@@ -157,10 +160,10 @@
             </div>
             <span class="label">Weight</span>
             <div class="record-input">
-                <input name="value" type="text" placeholder="Enter Weight" id="weight" required>
+                <input name="value" type="number" min=0 step=0.1 placeholder="Enter Weight" id="weight" required>
             </div>
             <br>
-            <span class="label">Comment</span>
+            <span class="label">Comment (optional)</span>
             <div class="comment-input">
                 <textarea name="comment" id="comment" cols="30" rows="5" placeholder="Enter comment here"></textarea>
             </div>
@@ -182,10 +185,11 @@
             </div>
             <span class="label">Insulin Doses</span>
             <div class="record-input">
-                <input name="value" type="text" placeholder="Enter Insulin doses" id="insulin" required>
+                <input name="value" type="number" min=0 step=1
+                  onkeypress="return event.charCode >= 48 && event.charCode <= 57" placeholder="Enter Insulin doses" id="insulin" required>
             </div>
             <br>
-            <span class="label">Comment</span>
+            <span class="label">Comment (optional)</span>
             <div class="comment-input">
                 <textarea name="comment" id="comment" cols="30" rows="5" placeholder="Enter comment here"></textarea>
             </div>
@@ -207,10 +211,10 @@
             </div>
             <span class="label">Number Of Steps</span>
             <div class="record-input">
-                <input name="value" type="text" placeholder="Enter number of steps" id="exercise" required>
+                <input name="value" type="number" min=0 placeholder="Enter number of steps" id="exercise" required>
             </div>
             <br>
-            <span class="label">Comment</span>
+            <span class="label">Comment (optional)</span>
             <div class="comment-input">
                 <textarea name="comment" id="comment" cols="30" rows="5" placeholder="Enter comment here"></textarea>
             </div>
