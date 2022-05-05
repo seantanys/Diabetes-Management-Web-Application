@@ -4,10 +4,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     if (btn) {
         btn.addEventListener("click", function() {
-            if (!flash) {
-                console.log("lol")
+            if (flash) {
+                flash.style.display = "none";
             }
-            flash.style.display = "none";
         }
     )}
     else {
