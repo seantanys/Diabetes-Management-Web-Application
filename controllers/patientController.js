@@ -1,18 +1,23 @@
 const {Patient} = require('../models/patient')
 const {Measurement} = require('../models/measurement')
 const { DateTime } = require("luxon");
+// const { isAuthenticated } = require('../app.js');
 
 // hard coded Patient Pat's id for D2
-const id = "62660737332717bb9fe3eb55"; 
+// const id = "62660737332717bb9fe3eb55"; 
 
 const getMeasurementPage = async (req, res) => {
-    const currTime = DateTime.now().setZone('Australia/Melbourne'); // melb time using luxon library
-    const currDate = currTime.startOf('day').toISO(); // get the start of day
-    const displayTime = currTime.toLocaleString(DateTime.DATETIME_MED) // get the current time of the day
+    // get logged in user id
+    const user = req.user 
+    // get current melbourne time using luxon
+    const currTime = DateTime.now().setZone('Australia/Melbourne');
+    // get the beginning of the the current day
+    const currDate = currTime.startOf('day').toISO();
+    const displayTime = currTime.toLocaleString(DateTime.DATETIME_MED)
     // get the patient's data
-    const data = await Patient.findById(id).lean();
+    const data = await Patient.findById(user._id).lean();
     // get the patient's recorded data today
-    const todayData = await Measurement.find({patientId: id, date: { $gte: currDate}}).lean();
+    const todayData = await Measurement.find({patientId: user._id, date: { $gte: currDate}}).lean();
 
     // get the patients required measurements.
     const reqMeasurements = Object.keys(data["measurements"]) 
@@ -22,7 +27,7 @@ const getMeasurementPage = async (req, res) => {
     const notMeasured = reqMeasurements.filter(x => !alreadyMeasured.includes(x)); 
 
     if (data) {
-        res.render('record.hbs', {flash: req.flash('success'), singlePatient: data, measured: alreadyMeasured, 
+        res.render('record.hbs', {loggedIn: req.isAuthenticated(), flash: req.flash('success'), singlePatient: data, measured: alreadyMeasured, 
                                   notMeasured: notMeasured, required: reqMeasurements,
                                   currentTime: displayTime})
     } else {
@@ -42,6 +47,7 @@ function getMeasurementTypes(arr) {
 
 // this function instantiates a new measurement object and saves it to the db
 const submitMeasurement = async (req, res, next) => {
+    const id = req.user._id
     try {
         const newMeasurement = new Measurement ({
             type: req.body.type,
@@ -67,12 +73,13 @@ const submitMeasurement = async (req, res, next) => {
 
 // this function renders the patient dashboard page
 const getPatientPage = async (req, res) => {
-    const currTime = DateTime.now().setZone('Australia/Melbourne'); // melb time using library
+    const user = req.user 
+    const currTime = DateTime.now().setZone('Australia/Melbourne'); 
     const currDate = currTime.startOf('day').toISO();
     // get the patient's data
-    const data = await Patient.findById(id).lean(); 
+    const data = await Patient.findById(user._id).lean(); 
     // get the patient's recorded data today
-    const todayData = await Measurement.find({patientId: id, date: { $gte: currDate}}).lean(); 
+    const todayData = await Measurement.find({patientId: user._id, date: { $gte: currDate}}).lean(); 
 
     // get the patients required measurements.
     const reqMeasurements = Object.keys(data["measurements"])
@@ -85,7 +92,7 @@ const getPatientPage = async (req, res) => {
         (data.dob.getMonth() + 1).toString().padStart(2,"0") + "/" + data.dob.getFullYear().toString() 
 
     if (data) {
-        res.render('patientDashboard.hbs', {dob, singlePatient: data, measured: alreadyMeasured, notMeasured: notMeasured, required: reqMeasurements})
+        res.render('patientDashboard.hbs', {loggedIn: req.isAuthenticated(), dob, singlePatient: data, measured: alreadyMeasured, notMeasured: notMeasured, required: reqMeasurements})
     } else {
         console.log("patient data not found")
         res.render('notfound')

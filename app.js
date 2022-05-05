@@ -85,6 +85,11 @@ app.post('/login',
     }   
 )
 
+app.post('/logout', (req, res) => {
+    req.logout();
+    res.redirect('/');
+})
+
 const aboutRouter = require('./routes/aboutRouter')
 
 app.use('/about', aboutRouter)
@@ -106,7 +111,7 @@ app.use('/patient', patientRouter)
 // })
 
 app.get('/', (req, res) => {
-    res.render('index.hbs', {layout: 'patient-logged-out.hbs'})
+    res.render('index.hbs', {loggedIn: req.isAuthenticated()})
 })
 
 app.get('*', (req, res) => {
@@ -129,3 +134,5 @@ app.get('*', (req, res) => {
 app.listen(process.env.PORT || 3000, () => {
     console.log('The library app is running!')
 })
+
+module.exports = { isAuthenticated }

@@ -6,6 +6,7 @@
     <span class="loader"><span class="loader-inner"></span></span>
 </div>
 
+{{#if loggedIn}}
 <div class="page-heading-1">
     <h1>Record</h1>
     <hr class="divider">
@@ -223,6 +224,12 @@
     </div>
 </div>
 {{/if}}
+{{/if}}
+
+{{else}}
+
+{{> loggedOut}}
+
 {{/if}}
 
 
