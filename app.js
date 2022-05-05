@@ -65,14 +65,30 @@ const isAuthenticated = (req, res, next) => {
     return next()
 }
 
+const hasRole = (thisRole) => {
+    return (req, res, next) => {
+        if (!req.user) {
+            res.redirect('/')
+        }
+        else {
+            if (req.user.role == thisRole) {
+                return next()
+            }
+            else {
+                res.redirect('/')
+            }
+        }
+    }
+}
+
+module.exports = { 
+    isAuthenticated,
+    hasRole
+}
+
 // Set up to handle POST requests
 app.use(express.json()) // needed if POST data is in JSON format
 app.use(express.urlencoded({ extended: true })) // only needed for URL-encoded input
-
-// app.use((req, res, next) => {
-//     res.locals.success = req.flash('success');
-//     next();
-// })
 
 app.get('/login', (req, res) => { 
     res.render('login', {flash: req.flash('error'), title: 'Login'})
@@ -81,7 +97,13 @@ app.get('/login', (req, res) => {
 app.post('/login',
     passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }),  // if bad login, send user back to login page
     (req, res) => { 
-        res.redirect('/patient/dashboard')   // login was successful, send user to home page
+        // login was successful, send user to home page
+        if (req.user.role === 'patient') {
+            res.redirect('/patient/dashboard')   
+        }
+        else if (req.user.role === 'clinician') {
+            res.redirect('/clinician/dashboard')
+        }
     }   
 )
 
@@ -114,6 +136,10 @@ app.get('/', (req, res) => {
     res.render('index.hbs', {loggedIn: req.isAuthenticated()})
 })
 
+app.get('/bruh', hasRole('clinician'), (req, res) => {
+    res.send("bruhh")
+})
+
 app.get('*', (req, res) => {
     res.status(404).render('notfound')
 })
@@ -134,5 +160,3 @@ app.get('*', (req, res) => {
 app.listen(process.env.PORT || 3000, () => {
     console.log('The library app is running!')
 })
-
-module.exports = { isAuthenticated }

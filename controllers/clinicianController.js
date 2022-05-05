@@ -34,7 +34,7 @@ const getAllPatientData = async (req, res, next) => {
                                 })
         }
         
-        return res.render('clinicianDashboard', { layout: "clinician.hbs", data: patientDashboard, numPatients: patients.length, date: todaysDate})
+        return res.render('clinicianDashboard', {loggedIn: req.isAuthenticated(), data: patientDashboard, numPatients: patients.length, date: todaysDate})
 
     } catch (err) {
         return next(err)

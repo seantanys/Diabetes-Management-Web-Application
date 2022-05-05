@@ -17,9 +17,9 @@ const getMeasurementPage = async (req, res) => {
         const currDate = currTime.startOf('day').toISO();
         const displayTime = currTime.toLocaleString(DateTime.DATETIME_MED)
         // get the patient's data
-        const data = await Patient.findById(user._id).lean();
+        const data = await Patient.findById(user.role_id).lean();
         // get the patient's recorded data today
-        const todayData = await Measurement.find({patientId: user._id, date: { $gte: currDate}}).lean();
+        const todayData = await Measurement.find({patientId: user.role_id, date: { $gte: currDate}}).lean();
 
         // get the patients required measurements.
         const reqMeasurements = Object.keys(data["measurements"]) 
@@ -54,7 +54,7 @@ function getMeasurementTypes(arr) {
 // this function instantiates a new measurement object and saves it to the db
 const submitMeasurement = async (req, res, next) => {
     if (req.isAuthenticated()) {
-        const id = req.user._id
+        const id = req.user.role_id
         try {
             const newMeasurement = new Measurement ({
                 type: req.body.type,
@@ -90,9 +90,9 @@ const getPatientPage = async (req, res) => {
         const currTime = DateTime.now().setZone('Australia/Melbourne'); 
         const currDate = currTime.startOf('day').toISO();
         // get the patient's data
-        const data = await Patient.findById(user._id).lean(); 
+        const data = await Patient.findById(user.role_id).lean(); 
         // get the patient's recorded data today
-        const todayData = await Measurement.find({patientId: user._id, date: { $gte: currDate}}).lean(); 
+        const todayData = await Measurement.find({patientId: user.role_id, date: { $gte: currDate}}).lean(); 
 
         // get the patients required measurements.
         const reqMeasurements = Object.keys(data["measurements"])

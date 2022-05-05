@@ -2,6 +2,7 @@
 const passport = require('passport')
 const LocalStrategy = require('passport-local')
 const {Patient} = require('./models/patient')
+const {User} = require('./models/user')
 
 // Updated serialize/deserialize functions
 passport.serializeUser((user, done) => {
@@ -9,7 +10,7 @@ passport.serializeUser((user, done) => {
 })
 
 passport.deserializeUser((userId, done) => {
-    Patient.findById(userId, { password: 0 }, (err, user) => {
+    User.findById(userId, { password: 0 }, (err, user) => {
         if (err) {
             return done(err, undefined)
         }
@@ -22,7 +23,7 @@ passport.deserializeUser((userId, done) => {
 
 var strategy = new LocalStrategy( (username, password, cb) => {
     // first, check if there is a user in the db with this username
-    Patient.findOne({username: username}, {}, {}, (err, user) => {
+    User.findOne({username: username}, {}, {}, (err, user) => {
         if (err) { return cb(null, false, { message: 'Unknown error.' }) }
         if (!user) { return cb(null, false, { message: 'Incorrect username or password' }) }
     // if there is a user with this username, check if the password matches

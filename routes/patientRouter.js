@@ -1,4 +1,5 @@
 const express = require('express')
+const app = require('../app.js');
 
 // create our Router object
 const patientRouter = express.Router()
@@ -10,16 +11,16 @@ const patientController = require('../controllers/patientController')
 patientRouter.get('/', patientController.redirectToDashboard)
 
 // route to handle the GET request for measurement page
-patientRouter.get('/record', patientController.getMeasurementPage)
+patientRouter.get('/record', app.hasRole('patient'), patientController.getMeasurementPage)
 
 // route to handle the GET request for submitting a measurement 
 patientRouter.post('/record', patientController.submitMeasurement)
 
 // route to handle the GET request for patient dashboard 
-patientRouter.get('/dashboard', patientController.getPatientPage)
+patientRouter.get('/dashboard', app.hasRole('patient'), patientController.getPatientPage)
 
 // route to handle the GET request for patient account 
-patientRouter.get('/account', patientController.getPatientAccountPage)
+patientRouter.get('/account', app.hasRole('patient'), patientController.getPatientAccountPage)
 
 // export the router
 module.exports = patientRouter
