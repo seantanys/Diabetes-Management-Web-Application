@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+var passportLocalMongoose=require("passport-local-mongoose");
 const bcrypt = require('bcrypt')
 
 // define the patientSchema
@@ -17,6 +18,8 @@ userSchema.virtual('age').get(function () {
     currentDate = new Date()
     return `${currentDate.getYear() - this.dob.getYear()}`
 })
+
+userSchema.plugin(passportLocalMongoose);
 
 userSchema.methods.verifyPassword = function (password, callback) {
     bcrypt.compare(password, this.password, (err, valid) => {

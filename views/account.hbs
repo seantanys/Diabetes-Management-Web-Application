@@ -1,3 +1,5 @@
+<script src="../scripts/patientAccount.js"></script>
+
 <div class="page-heading-1">
     <h1>My Account</h1>
 </div>
@@ -8,6 +10,7 @@
     <div class="patient-account-dashboard">
         <div class="tabset">
             <!-- Basix Details -->
+            {{!-- onclick="window.location='/patient/account/details';" --}}
             <input type="radio" name="tabset" id="tab1" aria-controls="account-details" checked>
             <label for="tab1">Basic Details</label>
             <!--Change Password -->
@@ -28,28 +31,28 @@
                 </section>
                 <section id="change-password" class="tab-panel">
                     <h2>Change Password</h2>
-                    <form action="/patient/account" class="log-in-form">
+                    <form action="/patient/account/change-password" class="change-pw-form" method="post">
                         <div class="input-box">
                             <span class="label">Current Password</span>
                             <div class="input">
-                                <input type="password" placeholder="Enter current password" id="opw" required>
+                                <input type="password" placeholder="Enter current password" id="opw" name="curr_pw" required>
                             </div>
                         </div>
 
                         <div class="input-box">
                             <span class="label">New Password</span>
                             <div class="input">
-                            <input type="password" placeholder="Enter new Password" id="npw" required>
+                            <input type="password" placeholder="Enter new Password" id="npw" name="new_pw" required>
                             </div>
                         </div>
 
                         <div class="input-box">
                             <span class="label">Confirm New Password</span>
                             <div class="input">
-                            <input type="password" placeholder="Confirm new Password" id="npw" required>
+                            <input type="password" placeholder="Confirm new Password" id="cpw" name="confirm_new_pw" required>
                             </div>
                         </div>
-                        <button type="submit">Submit</button>
+                        <button type="submit" id="change-pw-btn">Submit</button>
                     </form>
                 </section>
                 <section id="change-theme" class="tab-panel">

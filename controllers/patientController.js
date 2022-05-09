@@ -1,6 +1,7 @@
 const {Patient} = require('../models/patient')
 const {Measurement} = require('../models/measurement')
 const { DateTime } = require("luxon");
+const { User } = require('../models/user');
 // const { isAuthenticated } = require('../app.js');
 
 // hard coded Patient Pat's id for D2
@@ -144,6 +145,33 @@ const getPatientAccountPage = async (req, res) => {
     }
 }
 
+const changePassword = async (req, res) => {
+
+    if (req.isAuthenticated()) {
+        const user = req.user;
+        const pw = req.body.curr_pw
+
+        const retrieved_user = await User.findById(user._id)
+
+        if (retrieved_user) {
+            retrieved_user.changePassword(req.body.curr_pw, req.body.new_pw, function(err) {
+                        if (err) {
+                            if(err.name == "IncorrectPasswordError") {
+                                res.send("incorrect password mate")
+                            }
+                        }
+                        else {
+                            retrieved_user.save()
+                            res.send("nice")
+                        }
+            });
+        }
+        else {
+            res.send("user not found")
+        }
+    }
+}
+
 
 // exports an object, which contain functions imported by router
 module.exports = {
@@ -151,5 +179,6 @@ module.exports = {
     submitMeasurement,
     getPatientPage,
     redirectToDashboard,    
-    getPatientAccountPage
+    getPatientAccountPage,
+    changePassword
 }

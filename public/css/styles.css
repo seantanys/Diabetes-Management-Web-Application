@@ -374,8 +374,26 @@ body {
 }
 
 .log-in-form span {
-  color: var(--colour-h1);
+  color: white;
   font-size: var(--text-p);
+}
+
+.change-pw-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.change-pw-form span {
+  color: white;
+  font-size: var(--text-p);
+  text-align: center;
+}
+
+.change-pw-form button {
+  color: var(--colour-h1);
+  background-color: var(--colour-background-teal);
 }
 
 .flash {
