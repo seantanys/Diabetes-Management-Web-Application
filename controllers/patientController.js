@@ -121,7 +121,27 @@ const redirectToDashboard = async (req, res) => {
 }
 
 const getPatientAccountPage = async (req, res) => {
-    res.render('account')
+    if (req.isAuthenticated()) {
+        const user = req.user 
+        // get the patient's data
+        const data = await Patient.findById(user.role_id).lean(); 
+        const currTime = DateTime.now().setZone('Australia/Melbourne'); 
+
+        // format the date for presentation
+        const dob = data.dob.getDate().toString().padStart(2,"0") + "/" + 
+            (data.dob.getMonth() + 1).toString().padStart(2,"0") + "/" + data.dob.getFullYear().toString()
+
+        const age = currTime.year - data.dob.getFullYear()
+
+        if (data) {
+            res.render('account', {loggedIn: req.isAuthenticated(), age: age.toString(), singlePatient: data})
+        } else {
+            res.render('notfound')
+        }
+    }
+    else {
+        res.render('login')
+    }
 }
 
 

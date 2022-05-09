@@ -1593,6 +1593,18 @@ td, th {
   border-top: 1px solid #ccc;
   height: 300px;
   width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#account-details img {
+  height: 300px;
+  width: 300px;
+  margin-left:20%;
+  margin-right:20%;
 }
 
 .tabset {

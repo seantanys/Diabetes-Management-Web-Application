@@ -8,7 +8,8 @@ const userSchema = new mongoose.Schema({
     dob: {type: Date, required: true},
     join_date: {type: Date, default: Date.now},
     role: {type: String, required: true},
-    role_id: {type: String, required: true}
+    role_id: {type: String, required: true},
+    theme: {type: String, default:'default', required: true}
 });
 
 // derive age from patientSchema using date of birth

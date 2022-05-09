@@ -7,25 +7,24 @@
 <div class="patient-account-section">
     <div class="patient-account-dashboard">
         <div class="tabset">
-            <!-- Tab 1 -->
+            <!-- Basix Details -->
             <input type="radio" name="tabset" id="tab1" aria-controls="account-details" checked>
-            <label for="tab1">Account Details</label>
-            <!-- Tab 2 -->
+            <label for="tab1">Basic Details</label>
+            <!--Change Password -->
             <input type="radio" name="tabset" id="tab2" aria-controls="change-password">
             <label for="tab2">Change Password</label>
-            <!-- Tab 3 -->
+            <!-- Change Theme -->
             <input type="radio" name="tabset" id="tab3" aria-controls="change-theme">
             <label for="tab3">Change Theme</label>
-            
             <div class="tab-panels">
                 <section id="account-details" class="tab-panel">
                     <h2>Basic Details</h2>
                     <img src="\images\male-profile.jpg">
-                    <p>Username: Bruh123</p>
-                    <p>Family Name: Bruh</p>
-                    <p>Given Name: Bruh</p>
-                    <p>Date Of Birth: 10/03/1998</p>
-                    <p>Bio: Bruh bruh bruh</p>
+                    <p>Screen Name: {{singlePatient.screen_name}}</p>
+                    <p>Family Name: {{singlePatient.last_name}}</p>
+                    <p>Given Name: {{singlePatient.first_name}}</p>
+                    <p>Age: {{age}}</p>
+                    <p>Bio: {{singlePatient.bio}}</p>
                 </section>
                 <section id="change-password" class="tab-panel">
                     <h2>Change Password</h2>
