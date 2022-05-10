@@ -121,6 +121,10 @@ const redirectToDashboard = async (req, res) => {
     res.redirect('/patient/dashboard');
 }
 
+const getEngagementRate = async (req, res) => {
+    
+}
+
 const getPatientAccountPage = async (req, res) => {
     if (req.isAuthenticated()) {
         const user = req.user 
@@ -155,15 +159,15 @@ const changePassword = async (req, res) => {
 
         if (retrieved_user) {
             retrieved_user.changePassword(req.body.curr_pw, req.body.new_pw, function(err) {
-                        if (err) {
-                            if(err.name == "IncorrectPasswordError") {
-                                res.send("incorrect password mate")
-                            }
-                        }
-                        else {
-                            retrieved_user.save()
-                            res.send("nice")
-                        }
+                if (err) {
+                    if(err.name == "IncorrectPasswordError") {
+                        res.send("incorrect password mate")
+                    }
+                }
+                else {
+                    retrieved_user.save()
+                    res.send("nice")
+                }
             });
         }
         else {

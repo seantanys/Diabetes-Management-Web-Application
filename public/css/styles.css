@@ -1338,12 +1338,28 @@ td, th {
   padding-bottom: 5%;
   font-size: var(--text-p);
   text-align: center;
+  max-width: 25em;
+}
+
+#patient-details p {
+  width: 80%;
 }
 
 #patient-details img {
   max-width: 60%;
   height: auto;
   margin-bottom: 5%;
+}
+
+#patient-details a {
+  background-color: var(--colour-text);
+  color: var(--colour-background);
+  border-radius: 10em;
+  width: 10em;
+  height: 2.5em;
+  text-align: center;
+  padding-top: 0.5em;
+  margin-top: 1em;
 }
 
 .patient-card {
