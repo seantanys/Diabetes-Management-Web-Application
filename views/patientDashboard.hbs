@@ -1,0 +1,176 @@
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+<script src="../scripts/loader.js"></script>
+<div class="loader-wrapper" id="loader">
+    <span class="loader"><span class="loader-inner"></span></span>
+</div>
+
+{{#if loggedIn}}
+
+<div class="page-heading-1">
+    <h1>Dashboard</h1>
+</div>
+
+<section id="patient-dashboard">
+    <section id="patient-dashboard-content">
+        
+        <div id="patient-details">
+            <img src="\images\male-profile.jpg">
+            <p>{{singlePatient.first_name}} {{singlePatient.last_name}}</p>
+            <p>Screen Name: {{singlePatient.screen_name}}</p>
+            <p>DOB: {{dob}}</p>
+            <p>Bio: {{singlePatient.bio}}</p>
+        </div>
+
+        {{!-- Messages are hard coded for now. --}}
+        <div class="patient-card">
+            <div class="patient-card-label">
+                <h3>Messages</h3>
+            </div>
+            <div class="patient-card-content">
+                <div class="msg-bubble msg-bubble-left">
+                    "Well done achieving your step count this week!"
+                    <br>
+                    <i>- Dr. Chris (29/04/22)</i>
+                </div>
+                <div class="msg-bubble msg-bubble-left">
+                    "Happy Birthday Pat!"
+                    <br>
+                    <i>- Dr. Chris (28/04/22)</i>
+                </div>
+                <div class="msg-bubble msg-bubble-left">
+                    "Don't forget your doses change next week :)"
+                    <br>
+                    <i>- Dr. Chris (27/04/22)</i>
+                </div>
+            </div>
+        </div>
+
+        <div class="patient-card">
+            <div class="patient-card-label">
+                <h3>Reminders</h3>
+            </div>
+            <div class="patient-card-content">
+                <p>G'Day, {{singlePatient.first_name}}. Today you need to:</p>
+                <ul>
+                    {{#if singlePatient.measurements.bcg}}
+                        {{#if (isIn "bcg" notMeasured)}}
+                            <li>Enter your blood glucose level</li>
+                        {{else}}
+                            <li class="measured">Enter your blood glucose level</li>
+                        {{/if}}
+                    {{/if}}
+                    {{#if singlePatient.measurements.weight}}
+                        {{#if (isIn "weight" notMeasured)}}
+                            <li>Enter your weight</li>
+                        {{else}}
+                            <li class="measured">Enter your weight</li>
+                        {{/if}}
+                    {{/if}}
+                    {{#if singlePatient.measurements.exercise}}
+                        {{#if (isIn "exercise" notMeasured)}}
+                            <li>Enter step count</li>
+                        {{else}}
+                            <li class="measured">Enter step count</li>
+                        {{/if}}
+                    {{/if}}
+                    {{#if singlePatient.measurements.insulin}}
+                        {{#if (isIn "insulin" notMeasured)}}
+                            <li>Enter your insulin doses</li>
+                        {{else}}
+                            <li class="measured">Enter your insulin doses</li>
+                        {{/if}}
+                    {{/if}}
+                </ul>
+                <a href="/patient/record">Record measurements</a>
+            </div>
+        </div>
+
+        <div class="patient-card">   
+            <div class="patient-card-label">
+                <h3>Badges</h3>
+            </div>
+            <div class="patient-card-content">
+                <div id="patient-badges">
+                    <div class="patient-badge">
+                        <lottie-player id="trophyLottie" src="../images/lottie/trophy.json" autoplay loop>"></lottie-player>
+                        <p>80+ engagement</p>
+                    </div>
+                    <div class="patient-badge">
+                        <lottie-player id="trophyLottie" src="../images/lottie/trophy.json" autoplay loop>"></lottie-player>
+                        <p>Top 1000</p>
+                    </div>
+                    <div class="patient-badge">
+                        <lottie-player id="trophyLottie" src="../images/lottie/trophy.json" autoplay loop>"></lottie-player>
+                        <p>Step Smasher</p>
+                    </div>
+                    <div class="patient-badge">
+                        {{!-- <img src="\images\icons\trophy.svg"> --}}
+                        <lottie-player id="trophyLottie" src="../images/lottie/your-a-star.json" autoplay loop>"></lottie-player>
+                        <p>Gluc Yeh!</p>
+                    </div>
+                    <div class="patient-badge">
+                        <lottie-player id="trophyLottie" src="../images/lottie/trophy.json" autoplay loop>"></lottie-player>
+                        <p>Insulegend</p>
+                    </div>
+                    <div class="patient-badge">
+                        <lottie-player id="trophyLottie" src="../images/lottie/trophy.json" autoplay loop>"></lottie-player>
+                        <p>500 km club</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="patient-card">
+            <div class="patient-card-label">
+                <h3>Leaderboard</h3>
+            </div>
+            <div class="patient-card-content">
+                <table class="leaderboard">
+                    <tr>
+                        <th>
+                            <p>Position</p>
+                        </th>
+                        <th>
+                            <p>Name</p>
+                        </th>
+                        <th>
+                            <p>Engagement Rate</p>
+                        </th>
+                    </tr>
+                    <tr id="first">
+                        <td>1</td>
+                        <td>Sanskar</td>
+                        <td>100%</td>
+                    </tr>
+                    <tr id="second">
+                        <td>2</td>
+                        <td>Anh</td>
+                        <td>40%</td>
+                    </tr>
+                    <tr id="third">
+                        <td>3</td>
+                        <td>Sean</td>
+                        <td>35%</td>
+                    </tr>
+                    <tr id="fourth">
+                        <td>4</td>
+                        <td>Nic</td>
+                        <td>20%</td>
+                    </tr>
+                    <tr id="fifth">
+                        <td>5</td>
+                        <td>Kian</td>
+                        <td>6%</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </section>
+</section>
+
+{{else}}
+
+{{> loggedOut}}
+
+{{/if}}

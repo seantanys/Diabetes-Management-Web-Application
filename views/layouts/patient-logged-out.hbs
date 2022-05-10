@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <meta charset="UTF-8"> 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="../scripts/preventScroll.js"></script>
+    <title>Diabetes@Home</title>
+</head>
+<body> 
+   <header id="header">
+        <nav class="navbar">
+            <a href="/" class="logo"><span style="color:black">D</span>@H</a>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="/" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">      
+                    <div class="dropdown">
+                        <a href="#" class="nav-link">About</a>
+                        <div class="dropdown-content">
+                          <a href="/about/diabetes">Diabetes</a>
+                          <a href="/about/website">This website</a>
+                        </div>
+                      </div>
+                </li>
+                <li class="nav-item">
+                    <form action="/login">
+                        <button type="submit"> Login </button>
+                    </form>
+                </li>
+            </ul>
+            
+            <div id="menuToggle">
+
+                <input type="checkbox" id="menuToggleCheckbox"/>
+                <span></span>
+                <span></span>
+                <span></span>
+                
+                <ul id="menu">
+                  <a href="/"><li>Home</li></a>
+                  <hr class="solid">
+                  <a href="/about/diabetes"><li>About Diabetes</li></a>
+                  <hr class="solid">
+                  <a href="/about/website"><li>About this Website</li></a>
+                  <hr class="solid">
+                  <a href="/login"><li>Login</li></a>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main> 
+        {{{body}}} 
+    </main> 
+    <footer id="footer"> 
+        <a href="#" class="logo"><span style="color:black">D</span>@H</a>
+        <p>Powered by INFO30005</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<div class="page-heading" style="background-image: url('../images/header-img-2.jpg');">
+            <h1>Log In</h1>          
+</div>
+
+<div class="log-in-section">
+    <form action="/login" class="log-in-form" method="post">
+        <div class="input-box">
+            <span class="label">E-mail</span>
+            <div class="input">
+                <input type="email" placeholder="name@example.com" id="username" name="username" required>
+            </div>
+        </div>
+
+        <div class="input-box">
+            <span class="label">Password</span>
+            <div class="input">
+              <input type="password" placeholder="Enter Password" id="pw" name="password" required>
+            </div>
+        </div>
+
+        <button type="submit">Log In</button>
+
+    </form>
+    {{> flashWarning}}
+</div>
+

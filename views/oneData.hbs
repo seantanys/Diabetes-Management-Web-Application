@@ -1,0 +1,14 @@
+<h1>Displaying one item</h1>
+{{#with oneItem}}
+<ul>
+    <li>{{this._id}}</li>
+    <li>{{this.first_name}}</li>
+    <li>{{this.last_name}}</li>
+    <p>Latest measuremnts are</p>
+    <li>Blood Glucose is {{bcg.value}} </li>
+    <li>Weight is {{weight.value}} </li> 
+    <li>Insulin Doses are {{insulin.value}} </li> 
+    <li>Steps taken were {{exercise.value}} </li> 
+    
+</ul>
+{{/with}}

@@ -1,0 +1,103 @@
+    <div class="page-heading" style="background-image: url('../images/header-img-3.jpg');">
+            <h1>About This Website</h1>          
+    </div>
+
+    <section class="about-website">
+
+        <p>Diabetes@Home is a startup where we plan to provide digital health solutions to targeted health requirements. Our flagship product is a web app that helps people manage their diabetes in the convenience of their own home, by recording data that can be monitored remotely by their clinician.</p>
+        <br>
+        <br>     
+        <div class="about-lottie">
+            <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+            <script src="https://unpkg.com/@lottiefiles/lottie-interactivity@latest/dist/lottie-interactivity.min.js"></script>
+            {{!-- <lottie-player id="screenLottie" src="../images/lottie/mobile-app.json"  background="transparent"  speed="1"  style="width: 300px; height: 300px;" autoplay loop></lottie-player> --}}
+            <lottie-player id="screenLottie" src="../images/lottie/mobile-app.json" style="width: 300px; height: 300px;" loop></lottie-player>
+            <script>
+                LottieInteractivity.create({
+                    player: "#screenLottie",
+                    mode:"cursor",
+                    actions: [
+                        {
+                            position: { x: [0, 1], y: [0, 1] },
+                            type: "seek",
+                            frames: [1, 180]
+                        }
+                    ]
+                });
+            </script> 
+        </div>
+        <br>
+        <br>
+        <p>To continue using the features of our app, users will need to be logged in. Please create an account and contact your clinician for further information.</p>
+        <br>
+    </section>
+
+    <div class="filler-image" style="background-image: url('/images/team-of-devs.jpg');">
+        <h2>
+            A deep and insightful quote should be placed here.       
+        </h2>
+    </div>
+
+    <section class="team-section">
+        <h2>Meet the team</h2>
+        <p>
+            We are a team of web developers aiming to provide users with the best experience.
+        </p>
+        <div class="team-container">
+            <div class="card">
+                <img src = "/images/Kian.jpg">
+                <div class="card-text">
+                    <h3>Kian Dsouza</h3>
+                    <p>Developer</p>
+                    <p>kiandsouza@me.com</p>
+                    <p>I am Kian, a marketing technology enthusiast and I love walking my imaginary dog.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src = "/images/Sans.jpg">   
+                <div class="card-text">
+                    <h3>Sanskar Agarwal</h3>
+                    <p>Developer</p>
+                    <p>sanskar@me.com</p>
+                    <p>My name is Sanskar and I am interested in software development, watching soccer (Manchester United) and listening to music</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src = "/images/sean-pic.jpg">   
+                <div class="card-text">
+                    <h3>Yi Sheon Tan (Sean)</h3>
+                    <p>Developer</p>
+                    <p>seantan@me.com</p>
+                    <p>I am Yi Sheon, but you can call me Sean. My interests include software development and playing the guitar.</p>               
+                </div>
+            </div>
+
+            <div class="card">
+                <img src = "/images/Anh.jpg">
+                <div class="card-text">
+                    <h3>Anh Pham</h3>
+                    <p>Developer</p>
+                    <p>anhpham@me.com</p>
+                    <p>I am Anh. Grab me when you want to try out a new foodie place or kdrama!</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src = "/images/Nick.jpg">
+                <div class="card-text">
+                    <h3>Nicholas Dun</h3>
+                    <p>Developer</p>
+                    <p>nicdun@me.com</p>
+                    <p>Hi, I'm Nic. I like programming, videogames and walking my dog.</p>
+                </div> 
+            </div>
+        </div>
+
+    </section>
+
+    {{!-- <div class="footer">
+        <a href="#" class="logo"><span style="color:black">D</span>@H</a>
+        <p>Powered by INFO30005</p>
+    </div> --}}
