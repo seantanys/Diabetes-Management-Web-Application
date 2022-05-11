@@ -8,11 +8,11 @@
   --text-p-mobile: 15px;
   --font-family-body: 'Poppins', sans-serif;
   --font-family-heading: 'Poppins', sans-serif;
-  --colour-h1: rgba(1, 58, 99, 1);
-  --colour-background-teal: rgba(185, 218, 235, 1);
+  --colour-h1: #121212;
+  --colour-background-teal: #424242;
   --colour-text: rgba(28, 70, 89, 1);
   --colour-h2: rgba(5, 85, 142, 1);
-  --colour-background: rgba(255, 255, 255, 1);
+  --colour-background: black;
   --colour-black: rgba(0, 0, 0, 0);
   --colour-first: rgb(204, 255, 197);
   --colour-second: rgba(252, 245, 147, 1);
@@ -1326,7 +1326,7 @@ td, th {
 
 #patient-details {
   background-color: var(--colour-background-teal);
-  color: var(--colour-text);
+  color: white;
   border-radius: 10%;
   display: flex;
   align-items: center;
@@ -1370,7 +1370,7 @@ td, th {
 
 .patient-card-content {
   background-color: var(--colour-background-teal);
-  color: var(--colour-text);
+  color: white;
   border-radius: 10%;
   height: 20em;
   width: 25em;
@@ -1430,7 +1430,7 @@ td, th {
 .patient-badge p {
   font-size: 15px;
   text-align: center;
-  color: var(--colour-text);
+  color: white;
   background-color: var(--colour-background);
   height: fit-content;
   padding: 4%;

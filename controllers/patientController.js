@@ -2,6 +2,9 @@ const {Patient} = require('../models/patient')
 const {Measurement} = require('../models/measurement')
 const { DateTime } = require("luxon");
 const { User } = require('../models/user');
+const bcrypt = require('bcrypt');
+const e = require('connect-flash');
+
 // const { isAuthenticated } = require('../app.js');
 
 // hard coded Patient Pat's id for D2
@@ -30,7 +33,7 @@ const getMeasurementPage = async (req, res) => {
         const notMeasured = reqMeasurements.filter(x => !alreadyMeasured.includes(x)); 
 
         if (data) {
-            res.render('record.hbs', {loggedIn: req.isAuthenticated(), flash: req.flash('success'), singlePatient: data, measured: alreadyMeasured, 
+            res.render('record.hbs', {loggedIn: req.isAuthenticated(), flash: req.flash('success'), theme: user.theme, singlePatient: data, measured: alreadyMeasured, 
                                     notMeasured: notMeasured, required: reqMeasurements,
                                     currentTime: displayTime})
         } else {
@@ -106,7 +109,7 @@ const getPatientPage = async (req, res) => {
             (data.dob.getMonth() + 1).toString().padStart(2,"0") + "/" + data.dob.getFullYear().toString() 
 
         if (data) {
-            res.render('patientDashboard.hbs', {loggedIn: req.isAuthenticated(), dob, singlePatient: data, measured: alreadyMeasured, notMeasured: notMeasured, required: reqMeasurements})
+            res.render('patientDashboard.hbs', {loggedIn: req.isAuthenticated(), theme: user.theme, dob, singlePatient: data, measured: alreadyMeasured, notMeasured: notMeasured, required: reqMeasurements})
         } else {
             console.log("patient data not found")
             res.render('notfound')
@@ -135,7 +138,7 @@ const getPatientAccountPage = async (req, res) => {
         const age = currTime.year - data.dob.getFullYear()
 
         if (data) {
-            res.render('account', {loggedIn: req.isAuthenticated(), age: age.toString(), singlePatient: data})
+            res.render('account', {loggedIn: req.isAuthenticated(), flash: req.flash('success'), age: age.toString(), singlePatient: data, theme: user.theme})
         } else {
             res.render('notfound')
         }
@@ -145,30 +148,63 @@ const getPatientAccountPage = async (req, res) => {
     }
 }
 
+const SALT_FACTOR = 10
+
 const changePassword = async (req, res) => {
 
     if (req.isAuthenticated()) {
         const user = req.user;
         const pw = req.body.curr_pw
+        const new_pw = req.body.new_pw
+        const confirm_pw = req.body.confirm_new_pw
 
         const retrieved_user = await User.findById(user._id)
 
-        if (retrieved_user) {
-            retrieved_user.changePassword(req.body.curr_pw, req.body.new_pw, function(err) {
-                        if (err) {
-                            if(err.name == "IncorrectPasswordError") {
-                                res.send("incorrect password mate")
-                            }
-                        }
-                        else {
-                            retrieved_user.save()
-                            res.send("nice")
-                        }
-            });
+        // if (retrieved_user) {
+        //     if (retrieved_user.authenticate(pw)) {
+        //         if (new_pw === confirm_pw) {
+        //             res.send("password changed")
+        //         }
+        //         else {
+        //             res.send("passwords do not match")
+        //         }
+        //     }
+        //     else {
+        //         res.send("old password is wrong")
+        //     }
+        // }
+
+        retrieved_user.changePassword(pw, new_pw, function (err) {
+            if (!err) {
+                res.send("worked")
+            }
+            else {
+                res.send(err)
+            }
+        })
+    }
+    else {
+        res.render('login');
+    }
+}
+
+const changeTheme = async (req, res) => {
+    if (req.isAuthenticated()) {
+        const user = req.user
+        const retrieved_user = await User.findById(user._id)
+        retrieved_user.theme = req.body.theme
+
+        try {
+            await retrieved_user.save()
+            req.flash('success', `Successfully changed to ${req.body.theme} theme.`)
+            res.redirect('/patient/account');
         }
-        else {
-            res.send("user not found")
+        catch (err) {
+            console.log(err)
         }
+    }
+    else {
+        res.render('login');
     }
 }
 
@@ -180,5 +216,6 @@ module.exports = {
     getPatientPage,
     redirectToDashboard,    
     getPatientAccountPage,
-    changePassword
+    changePassword,
+    changeTheme
 }
