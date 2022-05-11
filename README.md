@@ -8,7 +8,7 @@ Maybe you can mention me or this repo in the acknowledgements too
 -->
 <div align="center">
 
-  <img src="public/images/logo-full.png" alt="logo" width="300" height="auto" />
+  <img src="public/images/logo-full.png" alt="logo" width="500" height="auto" />
   <h1>Diabetes@Home Web Application</h1>
   
   <p>
