@@ -12,7 +12,7 @@ Maybe you can mention me or this repo in the acknowledgements too
   <h1>Diabetes@Home Web Application</h1>
   
   <p>
-   We are Team h1 Our team comprises of Kian, Sanskar, Anh, Sean and Nic. Together we are creating web-based software for Diabetes@Home, a startup who plan to sell    digital health solutions.
+   We are Team h1. Our team comprises of Kian, Sanskar, Anh, Sean and Nic. Together we are creating web-based software for Diabetes@Home, a startup who plan to sell      digital health solutions.
 
    The first product we are designing is a web app which helps people to manage their diabetes in the conveniences of their own home.
 
@@ -74,34 +74,21 @@ Maybe you can mention me or this repo in the acknowledgements too
 <details>
   <summary>Client</summary>
   <ul>
-    <li><a href="https://www.typescriptlang.org/">Typescript</a></li>
-    <li><a href="https://nextjs.org/">Next.js</a></li>
-    <li><a href="https://reactjs.org/">React.js</a></li>
-    <li><a href="https://tailwindcss.com/">TailwindCSS</a></li>
+    <li><a href="https://nodejs.org/en/">Node.js</a></li>
+    <li><a href="https://handlebarsjs.com/">Handlebars </a></li>
   </ul>
 </details>
 
 <details>
   <summary>Server</summary>
   <ul>
-    <li><a href="https://www.typescriptlang.org/">Typescript</a></li>
     <li><a href="https://expressjs.com/">Express.js</a></li>
-    <li><a href="https://go.dev/">Golang</a></li>
-    <li><a href="https://nestjs.com/">Nest.js</a></li>
-    <li><a href="https://socket.io/">SocketIO</a></li>
-    <li><a href="https://www.prisma.io/">Prisma</a></li>    
-    <li><a href="https://www.apollographql.com/">Apollo</a></li>
-    <li><a href="https://graphql.org/">GraphQL</a></li>
   </ul>
 </details>
 
 <details>
 <summary>Database</summary>
   <ul>
-    <li><a href="https://www.mysql.com/">MySQL</a></li>
-    <li><a href="https://www.postgresql.org/">PostgreSQL</a></li>
-    <li><a href="https://redis.io/">Redis</a></li>
-    <li><a href="https://neo4j.com/">Neo4j</a></li>
     <li><a href="https://www.mongodb.com/">MongoDB</a></li>
   </ul>
 </details>
@@ -109,9 +96,7 @@ Maybe you can mention me or this repo in the acknowledgements too
 <details>
 <summary>DevOps</summary>
   <ul>
-    <li><a href="https://www.docker.com/">Docker</a></li>
-    <li><a href="https://www.jenkins.io/">Jenkins</a></li>
-    <li><a href="https://circleci.com/">CircleCLI</a></li>
+    <li><a href="https://www.passportjs.org/">Passport.js</a></li>
   </ul>
 </details>
 
@@ -138,9 +123,9 @@ Maybe you can mention me or this repo in the acknowledgements too
 
 To run this project, you will need to add the following environment variables to your .env file
 
-`API_KEY`
+`MONGO_URL`
 
-`ANOTHER_API_KEY`
+`SESSION_SECRET`
 
 <!-- Getting Started -->
 ## 	:toolbox: Getting Started
@@ -148,10 +133,10 @@ To run this project, you will need to add the following environment variables to
 <!-- Prerequisites -->
 ### :bangbang: Prerequisites
 
-This project uses Yarn as package manager
+This project uses npm as package manager
 
 ```bash
- npm install --global yarn
+ npm install --package here
 ```
 
 <!-- Installation -->
@@ -179,7 +164,7 @@ To run tests, run the following command
 Clone the project
 
 ```bash
-  git clone https://github.com/Louis3797/awesome-readme-template.git
+  git clone https://github.com/ncko10/Web-IT-group/
 ```
 
 Go to the project directory
@@ -214,8 +199,7 @@ To deploy this project run
 <!-- Usage -->
 ## :eyes: Usage
 
-Use this space to tell a little more about your project and how it can be used. Show additional screenshots, code samples, demos or link to other resources.
-
+This is how you use our app
 
 ```javascript
 import Component from 'my-project'
@@ -228,27 +212,14 @@ function App() {
 <!-- Roadmap -->
 ## :compass: Roadmap
 
-* [x] Todo 1
-* [ ] Todo 2
-
-
-<!-- Contributing -->
-## :wave: Contributing
-
-<a href="https://github.com/Louis3797/awesome-readme-template/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Louis3797/awesome-readme-template" />
-</a>
-
-
-Contributions are always welcome!
-
-See `contributing.md` for ways to get started.
-
+* [x] Deliverable 1
+* [x] Deliverable 2
+* [ ] Deliverable 3
 
 <!-- Code of Conduct -->
 ### :scroll: Code of Conduct
 
-Please read the [Code of Conduct](https://github.com/Louis3797/awesome-readme-template/blob/master/CODE_OF_CONDUCT.md)
+Please read the [Code of Conduct](https://github.com/ncko10/Web-IT-group/)
 
 <!-- FAQ -->
 ## :grey_question: FAQ
@@ -265,15 +236,15 @@ Please read the [Code of Conduct](https://github.com/Louis3797/awesome-readme-te
 <!-- License -->
 ## :warning: License
 
-Distributed under the no License. See LICENSE.txt for more information.
+This web app is only for use for INFO30005 Web Information Technologies 2022 Semester 1 Project
 
 
 <!-- Contact -->
 ## :handshake: Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+Yi Sheon Tan - ystan@student.unimelb.edu.au
 
-Project Link: [https://github.com/Louis3797/awesome-readme-template](https://github.com/Louis3797/awesome-readme-template)
+Project Link: [https://github.com/ncko10/Web-IT-group/](https://github.com/ncko10/Web-IT-group/)
 
 
 <!-- Acknowledgments -->
@@ -281,7 +252,4 @@ Project Link: [https://github.com/Louis3797/awesome-readme-template](https://git
 
 Use this section to mention useful resources and libraries that you have used in your projects.
 
- - [Shields.io](https://shields.io/)
- - [Awesome README](https://github.com/matiassingers/awesome-readme)
- - [Emoji Cheat Sheet](https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md#travel--places)
- - [Readme Template](https://github.com/othneildrew/Best-README-Template)
+
