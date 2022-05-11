@@ -10,10 +10,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     const btns = [default_btn, dark_btn, spring_btn, autumn_btn];
 
-    if (!dark_btn) {
-        console.log("btn not found")
-    }
-
     for (let btn in btns) {
         btns[btn].addEventListener('click', selectTheme);
     }
