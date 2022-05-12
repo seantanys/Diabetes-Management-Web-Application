@@ -24,5 +24,7 @@ patientRouter.get('/account', app.hasRole('patient'), patientController.getPatie
 
 patientRouter.post('/account/change-password', app.hasRole('patient'), patientController.changePassword)
 
+patientRouter.post('/account/change-theme', app.hasRole('patient'), patientController.changeTheme)
+
 // export the router
 module.exports = patientRouter

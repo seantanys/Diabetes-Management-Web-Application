@@ -3,15 +3,10 @@
 <head> 
     <meta charset="UTF-8"> 
     <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {{#if theme}}
-    <link rel="stylesheet" type="text/css" href="/themes/{{theme}}.css" />
-    {{else}}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <link rel="stylesheet" type="text/css" href="/css/styles.css" />
-    {{/if}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="../scripts/preventScroll.js"></script>
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <title>Diabetes@Home</title>
 </head>
 <body> 
@@ -19,35 +14,22 @@
         <nav class="navbar">
             <a href="/" class="logo"><span style="color:black">D</span>@H</a>
             <ul class="nav-menu">
-                {{#if loggedIn}}
-                <li class="nav-item">
-                    <a href="/patient/dashboard" class="nav-link">Dashboard</a>
-                </li>
-                {{else}}
                 <li class="nav-item">
                     <a href="/" class="nav-link">Home</a>
                 </li>
-                {{/if}}
-                <li class="nav-item">  
+                <li class="nav-item">      
                     <div class="dropdown">
                         <a href="#" class="nav-link">About</a>
                         <div class="dropdown-content">
                           <a href="/about/diabetes">Diabetes</a>
                           <a href="/about/website">This website</a>
                         </div>
-                    </div>
+                      </div>
                 </li>
                 <li class="nav-item">
-                    {{#if loggedIn}}
-                    <form action="/logout" method="post">
-                        <button type="submit"> Logout </button>
-                    </form>
-                    {{else}}
                     <form action="/login">
                         <button type="submit"> Login </button>
                     </form>
-                    {{/if}}
-                    
                 </li>
             </ul>
             
@@ -59,13 +41,13 @@
                 <span></span>
                 
                 <ul id="menu">
-                  <a href="/patient/dashboard"><li>Dashboard</li></a>
+                  <a href="/"><li>Home</li></a>
                   <hr class="solid">
                   <a href="/about/diabetes"><li>About Diabetes</li></a>
                   <hr class="solid">
                   <a href="/about/website"><li>About this Website</li></a>
                   <hr class="solid">
-                  <a href="/"><li>Log Out</li></a>
+                  <a href="/login"><li>Login</li></a>
                 </ul>
             </div>
         </nav>

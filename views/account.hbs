@@ -1,4 +1,8 @@
 <script src="../scripts/patientAccount.js"></script>
+<script src="../scripts/patientTheme.js"></script>
+<script src="../scripts/closeFlash.js"></script>
+
+{{> flashSuccess}}
 
 <div class="page-heading-1">
     <h1>My Account</h1>
@@ -55,33 +59,41 @@
                         <button type="submit" id="change-pw-btn">Submit</button>
                     </form>
                 </section>
+
+                {{!-- add template to radio button checked  --}}
                 <section id="change-theme" class="tab-panel">
-                    <h2>Change Theme</h2>
-                    <div class="theme-container">
-                        <label class="theme">
-                            <input type="radio" name="test" value="small" checked>
-                            <img src="https://images.unsplash.com/photo-1515462277126-2dd0c162007a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZGFyayUyMHRoZW1lfGVufDB8fDB8fA%3D%3D&w=1000&q=80">
-                            <h3>Dark</h3>
-                        </label>
-                        <label class="theme">
-                            <input type="radio" name="test" value="big">
-                            <img src="https://media.istockphoto.com/photos/blue-gradient-soft-background-picture-id1093513194?k=20&m=1093513194&s=170667a&w=0&h=Te14UkjvQeBBii6b2eD9GQcslk0NazN3LoNXl7BPDQg=">
-                        <h3>Original</h3>
-                        </label>
-                        <label class="theme">
-                            <input type="radio" name="test" value="big">
-                            <img src="https://assets-eu-01.kc-usercontent.com/bcd02f72-b50c-0179-8b4b-5e44f5340bd4/7a0b8947-d971-444f-9287-e11fd0d2c421/autumn-poems-header-min.jpg">
-                        <h3>Autumn</h3>
-                        </label>
-                        <label class="theme">
-                            <input type="radio" name="test" value="big">
-                            <img src="https://www.nj.com/resizer/LZ0Y3O0GrmrSsOw4MYbrEYh-ypg=/1280x0/smart/cloudfront-us-east-1.images.arcpublishing.com/advancelocal/A7TFEUUSRJBAZHOCLPWPMXAM2E.jpg">
-                        <h3>Spring</h3>
-                        </label>
-                    </div>
-                    <h2>Your Current Theme: Original</h2>
-                    <h2>Selected Theme:</h2>
-                    <button>Apply</button>
+                    <form id="theme-form" action="/patient/account/change-theme" method="post">
+                        <h2>Change Theme</h2>
+                        <div class="theme-container">
+                                <label class="theme">
+                                    <input type="radio" id="default-theme" name="theme" value="default">
+                                    <img src="https://media.istockphoto.com/photos/blue-gradient-soft-background-picture-id1093513194?k=20&m=1093513194&s=170667a&w=0&h=Te14UkjvQeBBii6b2eD9GQcslk0NazN3LoNXl7BPDQg=">
+                                    <h3>Default</h3>
+                                </label>
+                                <label class="theme">
+                                    <input type="radio" id="dark-theme" name="theme" value="dark">
+                                    <img src="https://images.unsplash.com/photo-1515462277126-2dd0c162007a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZGFyayUyMHRoZW1lfGVufDB8fDB8fA%3D%3D&w=1000&q=80">
+                                    <h3>Dark</h3>
+                                </label>
+                                <label class="theme">
+                                    <input type="radio" id="autumn-theme" name="theme" value="autumn">
+                                    <img src="https://assets-eu-01.kc-usercontent.com/bcd02f72-b50c-0179-8b4b-5e44f5340bd4/7a0b8947-d971-444f-9287-e11fd0d2c421/autumn-poems-header-min.jpg">
+                                    <h3>Autumn</h3>
+                                </label>
+                                <label class="theme">
+                                    <input type="radio" id="spring-theme" name="theme" value="spring">
+                                    <img src="https://www.nj.com/resizer/LZ0Y3O0GrmrSsOw4MYbrEYh-ypg=/1280x0/smart/cloudfront-us-east-1.images.arcpublishing.com/advancelocal/A7TFEUUSRJBAZHOCLPWPMXAM2E.jpg">
+                                    <h3>Spring</h3>
+                                </label>              
+                        </div>
+                        <div class="theme-text-container">
+                            <h2>Your Current Theme</h2>
+                            <h2>{{theme}}</h2>
+                            <h2>Selected Theme</h2>
+                            <h2 id="selected-theme">-</h2>
+                            <button>Apply</button>
+                        </div>
+                    </form>
                 </section>
             </div>
         </div>
