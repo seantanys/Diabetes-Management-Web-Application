@@ -133,7 +133,15 @@ app.use('/patient', patientRouter)
 // })
 
 app.get('/', (req, res) => {
-    res.render('index.hbs', {loggedIn: req.isAuthenticated()})
+    
+    if (req.isAuthenticated()) {
+        user = req.user;
+        res.render('index.hbs', {loggedIn: req.isAuthenticated(), theme: user.theme})
+    }
+    else {
+        res.render('index.hbs', {loggedIn: req.isAuthenticated()})
+    }
+    
 })
 
 app.get('/bruh', hasRole('clinician'), (req, res) => {
