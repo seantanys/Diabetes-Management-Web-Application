@@ -22,6 +22,8 @@ patientRouter.get('/dashboard', app.hasRole('patient'), patientController.getPat
 // route to handle the GET request for patient account 
 patientRouter.get('/account', app.hasRole('patient'), patientController.getPatientAccountPage)
 
+patientRouter.get('/data', app.hasRole('patient'), patientController.getPatientDataPage)
+
 patientRouter.post('/account/change-password', app.hasRole('patient'), patientController.changePassword)
 
 patientRouter.post('/account/change-theme', app.hasRole('patient'), patientController.changeTheme)

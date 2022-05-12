@@ -1,0 +1,28 @@
+<script src="../scripts/recordInput.js"></script>
+<script src="../scripts/closeFlash.js"></script>
+<script src="../scripts/loader.js"></script>
+
+<div class="loader-wrapper" id="loader">
+    <span class="loader"><span class="loader-inner"></span></span>
+</div>
+
+{{#if loggedIn}}
+{{> flashSuccess}}
+
+<div class="page-heading-1">
+    <h1>Your Data</h1>
+    <hr class="divider">
+    <h2>
+        You can view your data, sort by measurements and time.
+    </h2>
+    <hr class="divider">
+</div>
+
+{{else}}
+
+{{> loggedOut}}
+
+{{/if}}
+
+
+    

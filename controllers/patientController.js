@@ -208,6 +208,16 @@ const changeTheme = async (req, res) => {
     }
 }
 
+const getPatientDataPage = async (req, res) => {
+    if (req.isAuthenticated()) {
+        const user = req.user;
+        res.render('patientData', {loggedIn: req.isAuthenticated()});
+    }
+    else {
+        res.render('login');
+    }
+}
+
 
 // exports an object, which contain functions imported by router
 module.exports = {
@@ -217,5 +227,6 @@ module.exports = {
     redirectToDashboard,    
     getPatientAccountPage,
     changePassword,
-    changeTheme
+    changeTheme,
+    getPatientDataPage
 }

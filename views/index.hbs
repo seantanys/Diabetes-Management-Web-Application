@@ -3,11 +3,19 @@
             {{!-- <h1>Managing</h1> --}}
             <h1>Managing Diabetes is difficult.</h1>
             <h2>Our app makes it easy.</h2>
+            {{#if loggedIn}}
+            <form action="/logout" method="post">
+                <button type="submit" id="login-hero"> 
+                    Logout 
+                </button>
+            </form>  
+            {{else}}
             <form action="/login">
                 <button type="submit" id="login-hero"> 
                     Login 
                 </button>
-            </form>        
+            </form>  
+            {{/if}}      
         </div>
 
         <div class="hero-image">
