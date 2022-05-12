@@ -1,0 +1,1192 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+:root {
+  --text-h1: 35px;
+  --text-h2: 28px;
+  --text-h3: 25px;
+  --text-p: 18px;
+  --font-family-body: 'Poppins', sans-serif;
+  --font-family-heading: 'Poppins', sans-serif;
+  --colour-h1: #1b4332;
+  --colour-background-teal: #95d5b2;
+  --colour-text: #d8f3dc;
+  --colour-h2: #2d6a4f;
+  --colour-background: rgba(255, 255, 255, 1);
+  --colour-black: rgba(0, 0, 0, 0);
+  --curved_corners: 20px;
+}
+
+body {
+    font-family: var(--font-family-body);
+    margin: 0;
+    background-color: var(--colour-background-teal);
+  }
+  
+  html {
+    box-sizing: border-box;
+  }
+  
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+
+  .page-heading {
+    background-color: var(--colour-background-teal);
+    background-position: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    box-shadow:inset 0 0 0 2000px rgba(14, 13, 13, 0.452);
+    padding-top: 3em;
+    padding-bottom: 3em;
+  }
+
+  .page-heading h1 {
+    font-size: var(--text-h1);
+    color: white;
+    text-align: center;
+    padding: 35px 0px;
+  }
+
+  .what-is-diabetes {
+    background: var(--colour-h1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 25px;
+    padding-bottom: 50px;
+  }
+
+  .what-is-diabetes h2 {
+    font-size: var(--text-h2);
+    font-weight: 600;
+    color: white;
+    margin-top: 25px;
+    margin-bottom: 25px;
+  }
+
+  .what-is-diabetes p {
+    margin-right: 25%;
+    margin-left: 25%;
+    font-size: var(--text-p);
+    color: white;
+    font-weight: 300;
+    text-align: center;
+  }
+
+  .what-is-diabetes iframe{
+    width: 100%;
+    height: 300px;
+  }
+  
+  .what-is-diabetes .video-mask{
+      width: 50%;
+      height: 300px;
+      border-radius: var(--curved_corners); 
+      overflow: auto; 
+      margin: 0 auto;
+      /* margin-left: auto;   
+      margin-right: auto; */
+  }
+
+  .filler-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-image: url('/images/girl-walking.jpg'); */
+    background-position: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    box-shadow:inset 0 0 0 2000px rgba(36, 34, 34, 0.452);
+    padding-top: 3em;
+    padding-bottom: 3em;
+
+    height: 400px;
+  }
+
+  .filler-image h2 {
+    font-size: var(--text-h2);
+    color: white;
+    text-align: center;
+  }
+
+  .diabetes-type {
+    background-color: var(--colour-background-teal);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 25px;
+    padding-bottom: 50px;
+    text-align: center;
+  }
+
+  .diabetes-type h2 {
+    color: var(--colour-h1);
+    font-size: var(--text-h2);
+    font-weight: 600;
+  }
+
+  .diabetes-type h3 {
+    color: white;
+    font-size: var(--text-h3);
+    font-weight: 400;
+  }
+
+  .diabetes-type p{
+    padding-top: 25px;
+    padding-bottom: 25px;
+  }
+
+  .diabetes-type p {
+    font-size: var(--text-p);
+    color: var(--colour-h1);
+  }
+
+  .diabetes-type input {
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+  }
+
+  .accordion {
+    width: 50%;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 4px -2px rgba(0,0,0,0.5);
+  }
+
+  .accordion-item {
+    color: white;
+    overflow: hidden;
+  }
+
+  .accordion-label {
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+    background: var(--colour-h1);
+    font-weight: bold;
+    cursor: pointer;
+   /* Icon */
+ }
+
+  .accordion-label:hover {
+    background: rgb(4, 84, 141);
+ }
+
+  .accordion-label::after {
+    content: "\276F";
+    width: 1em;
+    height: 1em;
+    text-align: center;
+    transition: all 0.35s;
+ }
+
+  .accordion-content {
+    max-height: 0;
+    padding: 0 1em;
+    color: var(--colour-h1);
+    background: white;
+    transition: all 0.35s;
+ }
+
+  .accordion-close {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1em;
+    font-size: 0.75em;
+    background: var(--colour-h1);
+    cursor: pointer;
+ }
+
+  .accordion-close:hover {
+    background: darken(var(--colour-h1), 10%);
+ }
+
+ .diabetes-type input:checked + .accordion-label {
+  background: #1a252f;
+}
+
+.diabetes-type input:checked + .accordion-label::after {
+  transform: rotate(90deg);
+}
+
+.diabetes-type input:checked ~ .accordion-content {
+  max-height: 100vh;
+  padding: 1em;
+}
+
+
+.learn-more {
+  background-color: var(--colour-background-teal);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+.learn-more h2 {
+  font-size: var(--text-h2);
+  color: var(--colour-h1);
+  font-weight: 600;
+}
+
+.learn-more ul{
+  text-align: center;
+  list-style: outside;
+}
+
+.learn-more li{
+  color: var(--colour-text);
+  font-size: var(--text-p);
+}
+
+.about-website {
+  background-color: var(--colour-h1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.about-lottie {
+  display: flex;
+  justify-content: center;
+}
+
+.about-website p {
+  width: 50%;
+  margin-left: 25%;
+  margin-right: 25%;
+  font-size: var(--text-h3);
+  font-weight: 400;
+  color: white;
+  text-align: center;
+}
+
+.team-section {
+  background-color: var(--colour-background-teal);
+  font-size: var(--text-h2);
+  text-align: center;
+  padding: 50px 0px;
+}
+
+.team-section h2:first-of-type {
+  color: var(--colour-h1);
+}
+
+.team-section h2 ~ p {
+  color: var(--colour-h1);
+  font-weight: 300;
+}
+
+.team-container {
+  background-color: var(--colour-background-teal);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+
+  padding-top: 50px;
+  padding-bottom: 50px;
+
+}
+
+.card {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  background-color: rgba(1, 58, 99, 0.938);
+  text-align: center;
+  padding: 25px;
+  margin: 25px
+}
+
+.card img {
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  margin-bottom: 25px;
+}
+
+.card h3 {
+  font-size: var(--text-h3);
+}
+
+.card p{
+  font-size: var(--text-p);
+  font-weight: 300;
+  width: 50%;
+
+  margin-left: 25%;
+  margin-right: 25%;
+  margin-top: 10px;
+}
+
+.card p:nth-child(-n+3) {
+  font-weight: 600;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.log-in-section {
+  background-color: var(--colour-background-teal);
+  padding-top: 50px;
+  padding-bottom: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.log-in-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.log-in-form span {
+  color: var(--colour-h1);
+  font-size: var(--text-p);
+}
+
+.input-box {
+  margin: 10px 0px;
+}
+
+.input {
+  background-color: #f6f6f6;
+  padding: 0px 5px;
+  border: 2px solid rgba(216, 216, 216, 1);
+  border-radius: 10px;
+  overflow: hidden;
+  justify-content: flex-start;
+}
+
+.validation-fail {
+  border-bottom: 3px solid rgba(163, 17, 17, 0.904);
+}
+
+.validation-pass {
+  border-bottom: 2px solid green;
+}
+
+input {
+  border: none;
+  outline: none;
+  padding: 10px 5px;
+  background-color: #f6f6f6;
+  flex: 1;
+}
+
+textarea {
+  border: none;
+  outline: none;
+  padding: 10px 5px;
+  background-color: #f6f6f6;
+  flex: 1;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+lottie-player {
+  width: 800px;
+  height: 800px;
+  margin-right: -50px
+}
+
+.hero-section {
+  height: 75vh;
+  background-color: var(--colour-background-teal);
+  display: flex;
+  justify-content: center;
+  align-items:center;
+}
+
+.hero-text button {
+  font-size: var(--text-h3);
+}
+
+.hero-text h1 {
+    font-size: var(--text-h1);
+    color: var(--colour-h1);
+}
+
+.hero-text h2 {
+    font-size: var(--text-h2);
+    font-weight: 400;
+    color: var(--colour-h1);
+    margin-bottom: 20px;
+}
+
+.sect-header {
+    background-color: var(--colour-background-teal);
+    background-position: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    box-shadow:inset 0 0 0 2000px rgba(14, 13, 13, 0.452);
+    padding-top: 3em;
+    padding-bottom: 3em;
+}
+
+.sect-header h1 {
+    font-size: var(--text-h1);
+    color: white;
+    text-align: center;
+    padding: 35px 0px;
+}
+
+.sect-header h2 {
+  color: black;
+  font-weight: 300;
+}
+
+.feature-section {
+    background-color: var(--colour-h1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 4em;
+    padding-bottom: 4em;
+}
+
+.feature-list-item {
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+    display: flex;
+    align-items: center;
+    max-width: 70%;
+    padding: 1em;
+}
+
+.caption {
+  margin-left: 25px;
+  font-size: var(--text-h3);
+  padding: 0.5em 1em;
+}
+
+.icon {
+    width: 30px;
+    height: 30px;
+}
+
+.contact-section {
+    background-color: var(--colour-background-teal);
+    color: var(--colour-h1);
+    display: flex;
+    flex-direction: column;
+    padding-top: 3em;
+    padding-bottom: 3em;
+}
+
+.contact-section h1 {
+    width: 50%;
+    margin-right: 25%;
+    margin-left: 25%;
+    font-size: var(--text-h1);
+    font-weight: 600;
+    text-align: center;
+}
+
+.contact-section h3 {
+    font-size: var(--text-h3);
+    font-weight: 300;
+    text-align: center;
+}
+
+/* RECORD/MEASUREMENT PAGE */
+/*  */
+/*  */
+
+.page-heading-1 {
+  background-color: var(--colour-background-teal);
+  padding-top: 3em;
+  padding-bottom: 3em;
+}
+
+.page-heading-1 h1 {
+  font-size: var(--text-h1);
+  color: var(--colour-h1);
+  text-align: center;
+  padding: 35px 0px;
+}
+
+.page-heading-1 h2 {
+  width: 50%;
+  margin-right: 25%;
+  margin-left: 25%;
+  font-size: var(--text-h3);
+  font-weight: 300;
+  color: black;
+  text-align: center;
+  padding: 35px 0px;
+}
+
+.divider {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+  width: 40%;
+  margin-right: 30%;
+  margin-left: 30%;
+}
+
+.requirement-section {
+  background-color: var(--colour-background-teal);
+  padding: 25px;
+}
+
+.checklist-container {
+  background-color: rgba(128, 128, 128, 0.568);
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  margin-right: 30%;
+  margin-left: 30%;
+  border-radius: 25px;
+  padding: 15px;
+}
+
+.checklist-container h3 {
+  color: var(--colour-h1);
+  font-size: var(--text-h3);
+  text-align: center;
+}
+
+.requirement-checklist-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 20%;
+  margin-right: 20%;
+  padding-top: 20px;
+}
+
+.requirement-checklist-item p{
+  color: var(--colour-h1);
+  font-size: var(--text-h3);
+}
+
+.requirement-checklist-item img {
+  height: 25px;
+  width: 25px;
+}
+
+.reminder-section {
+  display: flex;
+  align-items: center;
+  background-color: var(--colour-background-teal);
+  height: 200px;
+  border: none;
+}
+
+.reminder-section img {
+  height: 25px;
+  width: 25px;
+  margin-right: 15px;
+}
+
+.reminder-container {
+  background-color: rgba(235, 125, 0, 0.568);
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  margin-right: 30%;
+  margin-left: 30%;
+  border-radius: 25px;
+  padding: 15px;
+}
+
+.reminder-done {
+  background-color: rgba(21, 85, 5, 0.568);
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  margin-right: 30%;
+  margin-left: 30%;
+  border-radius: 25px;
+  padding: 15px;
+}
+
+.reminder-heading {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+
+  color: white;
+  font-size: var(--text-p);
+}
+
+.reminder-text {
+  margin-left: 40px;
+
+  color: white;
+  font-size: var(--text-p);
+  font-weight: 300;
+}
+
+.record-container {
+  background-color: var(--colour-h1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.record-container h2 {
+  font-size: var(--text-h2);
+  color: white;
+  margin-top: 25px;
+  text-align: center;
+}
+
+.record-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 25px;
+}
+
+.record-form span {
+  font-size: var(--text-p);
+}
+
+.type-input {
+  display: none;
+}
+
+.record-button {
+  font-family: var(--font-family-body);
+  font-weight: 600;
+  font-size: var(--text-p);
+  border: none;
+  color: white;
+  background-color: grey;
+  padding: 5px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 999em;
+}
+
+.record-button-valid {
+  background-color: var(--colour-background-teal);
+  color: var(--colour-h1);
+}
+
+/* 404 PAGE */
+.notfound {
+  height: 100vh;
+  background-color: var(--colour-background-teal);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center;
+}
+
+.notfound h1 {
+  font-size: var(--text-h1);
+  color: var(--colour-h1);
+}
+
+button {
+  font-family: var(--font-family-body);
+  font-weight: 600;
+  font-size: var(--text-p);
+  border: none;
+  color: white;
+  background-color: var(--colour-h1);
+  padding: 5px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 999em;
+}
+
+html {
+    font-size: 62.5%;
+    font-family: 'Roboto', sans-serif;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+#header{
+  border-bottom: 1px solid #E2E8F0;
+  background-color: white;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.navbar { 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+}
+
+.nav-menu {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+/*
+.nav-item {
+  margin-left: 5rem;
+}
+*/
+
+.nav-link{
+  font-size: var(--text-h2);
+  font-weight: 600;
+  color: var(--colour-h2);
+  display: block;
+  text-align: center;
+  padding: 12px 50px;
+}
+
+.nav-link:hover{
+  background-color: rgba(197, 194, 194, 0.301);
+}
+
+.dropdown {
+position: relative;
+display: inline-block;
+}
+
+.dropdown-content {
+display: none;
+position: absolute;
+background-color: var(--colour-h2);
+min-width: 140px;
+box-shadow: 0px 8px 16px 0px transparent;
+z-index: 1;
+padding: 10px 10px 10px;
+font-size: var(--text-h2);
+font-weight: 500;
+text-align: centre;
+}
+
+.dropdown-content a {
+color: white;
+padding: 12px 16px;
+text-decoration: none;
+display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: var(--colour-h1);
+}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.logo {
+  font-size: var(--text-h1);
+  font-weight: 950;
+  color: var(--colour-h1);
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.footer {
+position: relative;
+left: 0;
+bottom: 0;
+width: 100%;
+padding: 10px;
+background-color: #fdfbfb;
+color: black;
+text-align: center;
+}
+
+/* moving nav icon */
+/* https://codepen.io/erikterwan/pen/EVzeRP */
+
+body
+{
+  margin: 0;
+  padding: 0;
+  
+  background: #232323;
+  color: #cdcdcd;
+}
+
+
+#menuToggle {
+  display: none;
+}
+
+#menu {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+
+  .logo {
+    font-size: var(--text-h2);
+  }
+
+  .navbar ul:not(:first-child) {
+    display: none;
+  }
+
+  .nav-menu {
+    display:none;
+}
+
+.hero-section {
+    flex-direction: column-reverse;
+    align-items: center;
+}
+
+lottie-player {
+    margin: -50px 0px 0px 0px;
+    width: 375px;
+    height: 375px;
+}
+
+.hero-text {
+    /* padding: 0px 0px 0px 60px; */
+    margin: -50px 0px 0px 0px;
+    width: 50%;
+}
+
+.hero-text h1 {
+font-size: var(--text-h2);
+font-weight: 600;
+line-height: 1.0;
+}
+
+.hero-text h2 {
+margin-top: 15px;
+font-size: var(--text-h3);
+font-weight: 400;
+line-height: 25px;
+}
+
+.feature-list-item {
+width: 100%;
+}
+
+.caption {
+margin-left: 25px;
+font-size: var(--text-p);
+padding: 0.5em 1em;
+}
+
+.icon {
+width: 75px;
+height: 75px;
+}
+
+.contact-section h1 {
+font-size: var(--text-h3);
+}
+
+.contact-section h3 {
+font-size: var(--text-p);
+}
+
+.what-is-diabetes .video-mask{
+  width: 80%
+}
+
+.what-is-diabetes p {
+  margin-right: 10%;
+  margin-left: 10%;
+}
+
+.accordion {
+  width: 85%
+}
+
+.filler-image {
+  height: 250px;
+}
+
+.about-website p{
+  font-size: var(--text-p);
+  width: 80%;
+  margin-right: 10%;
+  margin-left: 10%;
+}
+
+.team-section h2 ~ p {
+  width: 80%;
+  margin-right: 10%;
+  margin-left: 10%;
+  font-size: var(--text-h3);
+}
+
+.card p{
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 10px;
+}
+
+.page-heading-1 h2 {
+  width: 70%;
+  margin-right: 15%;
+  margin-left: 15%;
+  font-size: var(--text-p);
+  font-weight: 300;
+  color: black;
+  text-align: center;
+  padding: 35px 0px;
+}
+
+.requirement-section {
+  padding: 15px;
+}
+
+.checklist-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-right: 0%;
+  margin-left: 0%;
+  padding: 15px;
+}
+
+.checklist-container h3 {
+  font-size: var(--text-p);
+}
+
+.checklist-container p {
+  font-size: var(--text-p);
+}
+
+.checklist-container img {
+  width: 20px;
+  height: 20px;
+}
+
+.requirement-checklist-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 10%;
+  margin-right: 10%;
+  padding-top: 20px;
+}
+
+.reminder-section {
+  height: 250px;
+  border: none;
+}
+
+.reminder-container {
+  width: 90%;
+  margin-right: 5%;
+  margin-left: 5%;
+}
+
+.reminder-done {
+  width: 90%;
+  margin-right: 5%;
+  margin-left: 5%;
+}
+
+.reminder-heading {
+  color: white;
+  font-size: var(--text-p);
+}
+
+.reminder-text {
+  margin-left: 40px;
+  color: white;
+  font-size: var(--text-p);
+  font-weight: 300;
+}
+
+.record-container h2 {
+  font-size: var(--text-h3);
+  color: white;
+  margin-top: 25px;
+}
+
+
+#login {
+  display: none;
+}
+
+#logout {
+    display:none;
+}
+    
+  #menuToggle {
+    display: block;
+    position: relative;
+    z-index: 1;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  #menuToggle a{
+    text-decoration: none;
+    color: white;
+    
+    transition: color 0.3s ease;
+  }
+
+  #menuToggle a:hover{
+    color: var(--colour-background-teal);
+  }
+
+
+  #menuToggle input{
+    display: block;
+    width: 40px;
+    height: 32px;
+    position: absolute;
+    top: -7px;
+    right: -5px;
+    
+    cursor: pointer;
+    
+    opacity: 0; /* hide this */
+    z-index: 2; /* and place it over the hamburger */
+    
+    -webkit-touch-callout: none;
+  }
+
+  /*
+  * Just a quick hamburger
+  */
+  #menuToggle span
+  {
+    display: block;
+    width: 33px;
+    height: 4px;
+    margin-bottom: 5px;
+    position: relative;
+    
+    background: black;
+    border-radius: 3px;
+    
+    z-index: 1;
+    
+    transform-origin: 4px 0px;
+    
+    transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+                background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+                opacity 0.55s ease;
+  }
+
+  #menuToggle span:first-child
+  {
+    transform-origin: 0% 0%;
+  }
+
+  #menuToggle span:nth-last-child(2)
+  {
+    transform-origin: 0% 100%;
+  }
+
+  /* 
+  * Transform all the slices of hamburger
+  * into a crossmark.
+  */
+  #menuToggle input:checked ~ span
+  {
+    opacity: 1;
+    transform: rotate(45deg) translate(-2px, -1px);
+    background: black;
+  }
+
+  /*
+  * But let's hide the middle one.
+  */
+  #menuToggle input:checked ~ span:nth-last-child(3)
+  {
+    opacity: 0;
+    transform: rotate(0deg) scale(0.2, 0.2);
+  }
+
+  /*
+  * Ohyeah and the last one should go the other direction
+  */
+  #menuToggle input:checked ~ span:nth-last-child(2)
+  {
+    transform: rotate(-45deg) translate(0, -1px);
+  }
+
+  /*
+  * Make this absolute positioned
+  * at the top left of the screen
+  */
+  #menu {
+    display: block;
+    position: absolute;
+    width: 300px;
+    margin: 25px 0 0 -250px;
+    padding: 40px;
+    padding-bottom: 300px;
+    
+    background: black;
+    opacity: 0.85;
+    list-style-type: none;
+    -webkit-font-smoothing: antialiased;
+    /* to stop flickering of text in safari */
+    
+    transform-origin: 0% 0%;
+    transform: translate(100%, 0);
+    
+    transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+  }
+
+  #menu li
+  {
+    padding: 10px 0;
+    font-size: var(--text-h3);
+  }
+
+  /*
+  * And let's slide it in from the left
+  */
+  #menuToggle input:checked ~ ul
+  {
+    transform: none;
+  }
+
+  hr.solid {
+    border-top: 0.1px solid white;
+    width: 150px;
+  }
+
+}
+table {
+  border-collapse: collapse;
+  background-color: aqua;
+  color: #232323;
+}
+td, th {
+  border: 1px solid #999;
+  padding: 0.5rem;
+}
