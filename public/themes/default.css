@@ -323,7 +323,7 @@ body {
   align-items: center;
 
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  background-color: var(--colour-h1);
+  background-color: rgba(1, 58, 99, 0.938);
   text-align: center;
   padding: 25px;
   margin: 25px

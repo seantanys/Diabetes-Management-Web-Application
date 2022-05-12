@@ -47,7 +47,7 @@ app.use(
             sameSite: 'strict',
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
-            maxAge: 300000 // sessions expire after 5 minutes
+            // maxAge: 900000 // sessions expire after 5 minutes
         },
     })
 )
