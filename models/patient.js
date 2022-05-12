@@ -8,7 +8,6 @@ const patientSchema = new mongoose.Schema({
     screen_name: {type: String, required: true},
     dob: {type: Date, required: true},
     bio: {type: Date, required: true},
-    engagement_rate: {type: Number, required: true},
     measurements: {
         bcg: {
             minimum: Number,
