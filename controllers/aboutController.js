@@ -2,12 +2,26 @@ const { User } = require('../models/user')
 
 // function which handles requests for  displaying About Diabetes page
 const getAboutDiabetes = (req, res) => {
-    res.render('aboutDiabetes.hbs', {loggedIn: req.isAuthenticated()})
+    if (req.isAuthenticated()) {
+        const user = req.user 
+        res.render('aboutDiabetes.hbs', {loggedIn: req.isAuthenticated(), theme: user.theme})
+    }
+    else {
+        res.render('aboutDiabetes.hbs', {loggedIn: req.isAuthenticated()})
+    }
+    
 }
 
 // function which handles requests for  displaying About this Website page
 const getAboutWebsite = async (req, res) => {
-    res.render('aboutWebsite.hbs', {loggedIn: req.isAuthenticated()})
+    if (req.isAuthenticated()) {
+        const user = req.user 
+        res.render('aboutWebsite.hbs', {loggedIn: req.isAuthenticated(), theme: req.user.theme})
+    }
+    else {
+        res.render('aboutWebsite.hbs', {loggedIn: req.isAuthenticated()})
+    }
+    
 }
 
 // exports an object, which contain functions imported by router

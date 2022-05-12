@@ -122,7 +122,12 @@ const redirectToDashboard = async (req, res) => {
 }
 
 const getEngagementRate = async (req, res) => {
-    
+    if (req.isAuthenticated()) {
+        
+    }
+    else {
+        res.render('login')
+    }
 }
 
 const getPatientAccountPage = async (req, res) => {

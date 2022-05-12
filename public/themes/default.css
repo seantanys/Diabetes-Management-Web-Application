@@ -323,7 +323,7 @@ body {
   align-items: center;
 
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  background-color: var(--colour-h1);
+  background-color: rgba(1, 58, 99, 0.938);
   text-align: center;
   padding: 25px;
   margin: 25px
@@ -1338,28 +1338,12 @@ td, th {
   padding-bottom: 5%;
   font-size: var(--text-p);
   text-align: center;
-  max-width: 25em;
-}
-
-#patient-details p {
-  width: 80%;
 }
 
 #patient-details img {
   max-width: 60%;
   height: auto;
   margin-bottom: 5%;
-}
-
-#patient-details a {
-  background-color: var(--colour-text);
-  color: var(--colour-background);
-  border-radius: 10em;
-  width: 10em;
-  height: 2.5em;
-  text-align: center;
-  padding-top: 0.5em;
-  margin-top: 1em;
 }
 
 .patient-card {
