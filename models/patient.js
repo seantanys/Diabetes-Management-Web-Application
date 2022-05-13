@@ -5,10 +5,10 @@ const bcrypt = require('bcrypt')
 const patientSchema = new mongoose.Schema({
     first_name: {type: String, required: true},
     last_name: {type: String, required: true},
-    screen_name: {type: String, required: true},
-    dob: {type: Date, required: true},
-    bio: {type: Date, required: true},
-    engagement_rate: {type: Number, required: true},
+    screen_name: {type: String, required: false},
+    dob: {type: Date, required: false},
+    bio: {type: Date, required: false},
+    engagement_rate: {type: Number, required: false},
     measurements: {
         bcg: {
             minimum: Number,
@@ -30,16 +30,16 @@ const patientSchema = new mongoose.Schema({
     }
 });
 
-// derive full name from patientSchema using first and last name
-patientSchema.virtual('fullName').get(function () {
-    return `${this.first_name} ${this.last_name}`
-})
+// // derive full name from patientSchema using first and last name
+// patientSchema.virtual('fullName').get(function () {
+//     return `${this.first_name} ${this.last_name}`
+// })
 
-// derive age from patientSchema using date of birth
-patientSchema.virtual('age').get(function () {
-    currentDate = new Date()
-    return `${currentDate.getYear() - this.dob.getYear()}`
-})
+// // derive age from patientSchema using date of birth
+// patientSchema.virtual('age').get(function () {
+//     currentDate = new Date()
+//     return `${currentDate.getYear() - this.dob.getYear()}`
+// })
 
 patientSchema.methods.verifyPassword = function (password, callback) {
     bcrypt.compare(password, this.password, (err, valid) => {

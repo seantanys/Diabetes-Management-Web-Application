@@ -1,5 +1,6 @@
 const {Patient} = require('../models/patient')
 const {Measurement} = require('../models/measurement')
+const {User} = require('../models/user')
 const { DateTime } = require("luxon");
 
 // function which handles requests for displaying patient name and measurement on clinician 
@@ -74,20 +75,83 @@ const getNewPatientForm = async (req, res, next) => {
 // will be implemented for D3
 const insertData = async (req, res, next) => {
     try {
+        console.log(req.body.recordBCG.value)
+        measurement = []
+
+        measurement.push( [
+            bcg = [
+                maximium =req.body.BCGmax,
+                minimum = req.body.BCGmin
+            ]
+        ])
+        
+        
+        console.log(measurement)
+
         const newPatient = new Patient({
             first_name: req.body.first_name,
             last_name: req.body.last_name,
-            age: req.body.age,
-            join_date: req.body.join_date,
-            recordBCG: req.body.recordBCG,
-            recordWeight: req.body.recordWeight,
-            recordInsulin: req.body.recordInsulin,
-            recordExercise: req.body.recordExercise,
-
+            screen_name: req.body.screen_name,
+            dob: req.body.dob,
+            bio: req.body.bio,
+            engagement_rate: req.body.engagement_rate,
+            meassurements: {
+                bcg: {
+                    minimum: req.body.BCGmin,
+                    maximum: req.body.BCGmax
+                }
+            }
+            
         })
-        await newPatient.save();
+        await newPatient.save(async function(err, newP){
+            const newUser = new User({
+                username: req.body.email,
+                password: req.body.password,
+                dob: req.body.dob,
+                role: "patient",
+                role_id: newP._id,
+            })
+            await newUser.save();
+        });
+
+        const patient = await Patient.find({screen_name:req.body.screen_name}).lean()
+
+
         return res.redirect('/clinician/dashboard')
     }catch (err) {
+        return next(err)
+    }
+}
+
+const getPatientMessages = async (req, res, next) => {
+    try{
+
+        patientComments = []
+
+        measurement = await Measurement.find().sort({"date": -1}).lean()
+        //console.log(measurement)
+
+        if (!measurement) {
+            return res.render('notfound')
+        }
+
+        for (let i = 0; i < measurement.length; i++){
+            patient = await Patient.findById(measurement[i].patientId.toString()).lean()
+            //console.log(patient.first_name)
+            patientComments.push({
+                patient: patient.first_name,
+                id: measurement[i]._id,
+                type: measurement[i].type,
+                comment: measurement[i].comment,
+                date: measurement[i].date
+            })
+        }
+
+        //console.log(patientComments)
+        return res.render('clinicianMessages', { data: patientComments})
+
+
+    } catch(err){
         return next(err)
     }
 }
@@ -97,5 +161,6 @@ module.exports = {
     getAllPatientData,
     getDataById,
     insertData,
-    getNewPatientForm
+    getNewPatientForm,
+    getPatientMessages
 }
