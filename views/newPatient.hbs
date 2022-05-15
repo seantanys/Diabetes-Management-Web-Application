@@ -7,40 +7,51 @@
 <section class="create-patient-section">
 	<form action="/clinician/create" method="POST">
 		<div class="create-patient-container">
-
 			<h3>Enter Patient Details</h3>
 
-			<div class="create-patient-field">
+			<div class="create-patient-container-row">
+				<div class="create-patient-field">
 				<label for="first_name"><p>First Name</p></label>
-				<input type="text" placeholder="First name" name="first_name" required />
+				<input type="text" placeholder="First name" name="first_name" pattern="^[a-zA-Z]+$" required />
 			</div>
 			<div class="create-patient-field">
 				<label for="last_name"><p>Last Name</p></label>
-				<input type="text" placeholder="Last name" name="last_name" required />
+				<input type="text" placeholder="Last name" name="last_name" pattern="^[a-zA-Z]+$" required />
 			</div>
-			<div class="create-patient-field">
-				<label for="screen_name"><p>Screen Name</p></label>
-				<input type="text" placeholder="Screen Name" name="screen_name" required />
 			</div>
-			<div class="create-patient-field">
-				<label for="dob"><p>Date Of Birth</p></label>
-				<input type="date" placeholder="DOB" name="dob" required />
+			
+			<div class="create-patient-container-row">
+				<div class="create-patient-field">
+					<label for="screen_name"><p>Screen Name</p></label>
+					<input type="text" placeholder="Screen Name" name="screen_name" pattern="[a-zA-Z0-9_-\.]+" required />
+				</div>
+				<div class="create-patient-field">
+					<label for="dob"><p>Date Of Birth</p></label>
+					<input type="date" placeholder="DOB" name="dob" required />
+				</div>
 			</div>
+
+			
+			
 			<div class="create-patient-field">
 				<label for="bio"><p>Text Bio</p></label>
 				<textarea type="text" placeholder="Enter a short bio" name="bio" required></textarea>
 			</div>
-			<div class="create-patient-field">
-				<label for="email"><p>Email Address</p></label>
-				<input type="email"  placeholder="email" name="email" required>
-			</div>
-			<div class="create-patient-field">
-				<label for="password"><p>Password</p></label>
-				<input type="password" placeholder="password" name="password" required>
+
+			<div class="create-patient-container-row">
+				<div class="create-patient-field">
+					<label for="email"><p>Email Address</p></label>
+					<input type="email"  placeholder="email" name="email" required>
+				</div>
+				<div class="create-patient-field">
+					<label for="password"><p>Password</p></label>
+					<input type="password" placeholder="password" name="password" 
+						   minlength="8" required>
+				</div>
 			</div>
 
 			<h3>Enter Patient Required Measurements</h3>
-		
+
 			<div class="create-patient-checkbox">
 				<label for="bcg"><p>Blood Glucose Level</p></label>
 				<input type="checkbox" id="recordBCG" name="bcg" value="bcg">
@@ -60,6 +71,7 @@
 					</div>
 				</div>
 			</div>
+
 
 			<div class="create-patient-checkbox">
 				<label for="weight"><p>Weight</p></label>

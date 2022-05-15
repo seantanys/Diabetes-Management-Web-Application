@@ -8,7 +8,7 @@ const { DateTime } = require("luxon");
 // it is highlighted if its not in the safety threshold
 const getAllPatientData = async (req, res, next) => {
     const patientDashboard = []
-
+    const user = req.user 
     const currTime = DateTime.now().setZone('Australia/Melbourne'); // melb time using library
     const currDate = currTime.startOf('day').toISO()
     const todaysDate = currTime.toLocaleString(DateTime.DATETIME_MED);
@@ -35,7 +35,7 @@ const getAllPatientData = async (req, res, next) => {
                                 })
         }
         
-        return res.render('clinicianDashboard', {layout: "clinician.hbs", loggedIn: req.isAuthenticated(), flash: req.flash('success'), data: patientDashboard, numPatients: patients.length, date: todaysDate})
+        return res.render('clinicianDashboard', {layout: "clinician.hbs", loggedIn: req.isAuthenticated(), flash: req.flash('success'), user: user, data: patientDashboard, numPatients: patients.length, date: todaysDate})
 
     } catch (err) {
         return next(err)
@@ -70,13 +70,13 @@ const getDataById = async(req, res, next) => {
 const getNewPatientForm = async (req, res, next) => {
     if (req.isAuthenticated()) {
         try {
-            return res.render('newPatient')
+            return res.render('newPatient', {layout: 'clinician.hbs', loggedIn: req.isAuthenticated()})
         } catch (err) {
             return next(err)
         }
     }
     else {
-        res.render('login', {layout: 'clinician.hbs'});
+        res.render('login');
     } 
 }
 

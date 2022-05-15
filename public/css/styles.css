@@ -752,8 +752,8 @@ textarea {
   font-weight: 600;
   font-size: var(--text-p);
   border: none;
-  color: white;
-  background-color: grey;
+  color: var(--colour-h1);
+  background-color: var(--colour-background-teal);
   padding: 5px 20px;
   text-align: center;
   text-decoration: none;
@@ -1279,22 +1279,30 @@ hr.solid {
 }
 }
 
-.create-patient-secion {
-  background-color: var(--colour-background-teal);
-  display: flex;
-  justify-content: center;
-}
 
-table {
-  border-collapse: collapse;
-  color: #fdfdfd;
-}
+/* TABLET SIZE */
+@media screen 
+  and (min-width: 768px) 
+  and (max-width: 1024px) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+  
+  .hero-section lottie-player {
+    width: 550px;
+    height: 550px;
+    margin-right: -50px
+  }
 
-td, th {
-  border: 1px solid #999;
-  padding: 0.5rem;
-}
+  .feature-list-item .icon {
+    width: 50px;
+    height: 50px;
+  }
 
+  .tabset {
+    width: 100%;
+  }
+
+
+}
 /* Patient dashboard stuff */
 
 #patient-dashboard {
@@ -1972,7 +1980,14 @@ td, th {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
 
+.create-patient-container-row {
+  background-color: var(--colour-h1);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .create-patient-container h3 {
@@ -2037,6 +2052,10 @@ td, th {
   text-align: center;
   font-size: var(--text-p);
   font-weight: 300;
+}
+
+.validator {
+  color: red;
 }
 
 
