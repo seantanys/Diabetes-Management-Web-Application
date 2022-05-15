@@ -136,16 +136,18 @@ app.get('/', (req, res) => {
     
     if (req.isAuthenticated()) {
         user = req.user;
-        res.render('index.hbs', {loggedIn: req.isAuthenticated(), theme: user.theme})
+        if (req.user.role === "patient") {
+            res.render('index.hbs', {loggedIn: req.isAuthenticated(), theme: user.theme})
+        }
+        else {
+            res.render('index.hbs', {loggedIn: req.isAuthenticated(), layout: "clinician"})
+        }
+        
     }
     else {
         res.render('index.hbs', {loggedIn: req.isAuthenticated()})
     }
     
-})
-
-app.get('/bruh', hasRole('clinician'), (req, res) => {
-    res.send("bruhh")
 })
 
 app.get('*', (req, res) => {
