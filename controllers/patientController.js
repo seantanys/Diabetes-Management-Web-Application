@@ -55,6 +55,29 @@ function getMeasurementTypes(arr) {
     return types;
 }
 
+function calcEngagementRate(patientId) {
+    // get current melbourne time using luxon
+    const currTime = DateTime.now().setZone('Australia/Melbourne');
+    // get the beginning of the the current day
+    const currDate = currTime.startOf('day').toISO();
+    // get the patient's user data
+    const userData = await User.find({role_id: patientId}).lean();
+    // get the patient's data
+    const patientData = await Patient.findById(patientId).lean();
+    // get the patient's recorded data today
+    const todayData = await Measurement.find({patientId: patientId, date: { $gte: currDate}}).lean();
+    // get the measurments that have already been recorded for today
+    const alreadyMeasured = getMeasurementTypes(todayData); 
+
+    // checks if first measurement of the day
+    if (alreadyMeasured.length == 0) {
+        const currEngRate = patientData.engagement_rate
+        const daysSinceJoined = currDate - userData.join_date
+        const newEngRate = ((currEngRate * (daysSinceJoined - 1)) + 1) / daysSinceJoined
+        return newEngRate
+    }
+}
+
 // this function instantiates a new measurement object and saves it to the db
 const submitMeasurement = async (req, res, next) => {
     if (req.isAuthenticated()) {
@@ -67,6 +90,7 @@ const submitMeasurement = async (req, res, next) => {
                 date: DateTime.now().setZone('Australia/Melbourne').toISO(),
                 comment: req.body.comment,
             })
+            calcEngagementRate(id);
             await newMeasurement.save();
             // console.log("Measurement successfully saved to db")
             if (req.body.type === "bcg") {
