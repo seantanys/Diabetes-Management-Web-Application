@@ -1929,6 +1929,86 @@ td, th {
   height: 400px;
 }
 
+.create-patient-section {
+  background-color: var(--colour-h1);
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+.create-patient-container {
+  background-color: var(--colour-h1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.create-patient-container h3 {
+  font-size: var(--text-h3);
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.create-patient-container button {
+  margin-top: 25px;
+  color: var(--colour-h1);
+  background-color: var(--colour-background-teal);
+}
+
+.create-patient-field {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: baseline;
+
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.create-patient-field p {
+  font-size: var(--text-p);
+}
+
+.create-patient-field textarea {
+  height: 200px;
+}
+
+.create-patient-field-req {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.create-patient-checkbox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: var(--text-p);
+  margin-top: 15px;
+}
+
+.create-patient-checkbox label {
+  margin-right: 15px;
+}
+
+.threshold-container {
+  display: none;
+  background-color: #b9daeb96;
+  border-radius: 10px;
+}
+
+.threshold-container p {
+  margin-top: 15px;
+  text-align: center;
+  font-size: var(--text-p);
+  font-weight: 300;
+}
+
+
 .info {
   display: flex;
   align-items: center;
