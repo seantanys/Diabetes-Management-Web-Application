@@ -1551,6 +1551,10 @@ td, th {
   font-size: var(--text-h3)
 }
 
+.tabset {
+  width: 100%;
+}
+
 .tabset > input[type="radio"] {
   position: absolute;
   left: -200vw;
@@ -1623,10 +1627,6 @@ td, th {
   width: 300px;
   margin-left:20%;
   margin-right:20%;
-}
-
-.tabset {
-  width: 100%;
 }
 
 .theme-color {
@@ -1806,6 +1806,37 @@ td, th {
     width: 80px;
     height: 80px;
   }
+
+  .patient-account-dashboard {
+    width: 90%;
+    margin-right: 5%;
+    margin-left: 5%;
+    height: 100vh;
+  }
+
+  .patient-account-dashboard p {
+    width: 80%;
+    margin-right:10%;
+    margin-left: 10%;
+  }
+
+  .tabset > input:checked + label {
+    border: none;
+  }
+  
+  .tab-panel {
+    border-top: none;
+  }
+
+  .theme {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+  
+    margin: 25px 0px 25px 0px;
+  }
+
 }
 
 .clinician-dashboard {

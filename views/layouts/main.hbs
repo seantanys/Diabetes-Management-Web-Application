@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {{#if theme}}
-    <link rel="stylesheet" type="text/css" href="/themes/{{theme}}.css" />
+    {{!-- <link rel="stylesheet" type="text/css" href="/themes/{{theme}}.css" /> --}}
+    <link rel="stylesheet" type="text/css" href="/css/styles.css" />
     {{else}}
     <link rel="stylesheet" type="text/css" href="/css/styles.css" />
     {{/if}}
@@ -62,13 +63,24 @@
                 <span></span>
                 
                 <ul id="menu">
-                  <a href="/patient/dashboard"><li>Dashboard</li></a>
-                  <hr class="solid">
-                  <a href="/about/diabetes"><li>About Diabetes</li></a>
-                  <hr class="solid">
-                  <a href="/about/website"><li>About this Website</li></a>
-                  <hr class="solid">
-                  <a href="/"><li>Log Out</li></a>
+                    {{#if loggedIn}}
+                    <a href="/patient/dashboard"><li>Dashboard</li></a>
+                    <hr class="solid">
+                    {{/if}}
+                    {{#if loggedIn}}
+                    <a href="/patient/data"><li>Your Data</li></a>
+                    <hr class="solid">
+                    {{/if}}
+                    <a href="/about/diabetes"><li>About Diabetes</li></a>
+                    <hr class="solid">
+                    <a href="/about/website"><li>About this Website</li></a>
+                    <hr class="solid">
+                    {{#if loggedIn}}
+                    <a href="/logout"><li>Log Out</li></a>
+                    {{else}}
+                    <a href="/login"><li>Log In</li></a>
+                    {{/if}}
+
                 </ul>
             </div>
         </nav>
