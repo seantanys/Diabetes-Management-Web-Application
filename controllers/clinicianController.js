@@ -74,49 +74,99 @@ const getNewPatientForm = async (req, res, next) => {
 // function which handles requests for creating a new patient
 // will be implemented for D3
 const insertData = async (req, res, next) => {
+
+    
     try {
-        console.log(req.body.recordBCG.value)
-        measurement = []
-
-        measurement.push( [
-            bcg = [
-                maximium =req.body.BCGmax,
-                minimum = req.body.BCGmin
-            ]
-        ])
-        
-        
-        console.log(measurement)
-
+        // first create the patient document and save to db
         const newPatient = new Patient({
             first_name: req.body.first_name,
             last_name: req.body.last_name,
             screen_name: req.body.screen_name,
             dob: req.body.dob,
             bio: req.body.bio,
-            engagement_rate: req.body.engagement_rate,
-            meassurements: {
-                bcg: {
-                    minimum: req.body.BCGmin,
-                    maximum: req.body.BCGmax
-                }
-            }
-            
-        })
-        await newPatient.save(async function(err, newP){
-            const newUser = new User({
-                username: req.body.email,
-                password: req.body.password,
-                dob: req.body.dob,
-                role: "patient",
-                role_id: newP._id,
-            })
-            await newUser.save();
+            engagement_rate: 0,
+            measurements: {}  
+        });
+        
+        // extract the object id from the patient document
+        const patient = await newPatient.save();  
+        const patientId = patient._id;
+
+        // then we create the user document and save to db
+        const newUser = new User({
+            username: req.body.email,
+            password: req.body.password,
+            dob: req.body.dob,
+            role: "patient",
+            role_id: patientId,
+            theme: "default"
         });
 
-        const patient = await Patient.find({screen_name:req.body.screen_name}).lean()
+        await newUser.save();
 
+        // now we get the required measurements
+        // and push it to the patient document.
 
+        const required_measurements = [];
+
+        if (req.body.bcg) {
+            const thresholds = [];
+            thresholds.push(req.body.bcg);
+            if (req.body.bcgmin) {
+                thresholds.push(req.body.bcgmin)
+            }
+            if (req.body.bcgmax) {
+                thresholds.push(req.body.bcgmax)
+            }
+            required_measurements.push(thresholds)
+        }
+        
+        if (req.body.weight) {
+            const thresholds = [];
+            thresholds.push(req.body.weight);
+            if (req.body.weightmin) {
+                thresholds.push(req.body.weightmin)
+            }
+            if (req.body.weightmax) {
+                thresholds.push(req.body.weightmax)
+            }
+            required_measurements.push(thresholds)
+        }
+        
+        if (req.body.insulin) {
+            const thresholds = [];
+            thresholds.push(req.body.insulin);
+            if (req.body.insulinmin) {
+                thresholds.push(req.body.insulinmin)
+            }
+            if (req.body.insulinmax) {
+                thresholds.push(req.body.insulinmax)
+            }
+            required_measurements.push(thresholds)
+        }
+        
+        if (req.body.exercise) {
+            const thresholds = [];
+            thresholds.push(req.body.exercise);
+            if (req.body.exercisemin) {
+                thresholds.push(req.body.exercisemin)
+            }
+            if (req.body.exercisemax) {
+                thresholds.push(req.body.exercisemax)
+            }
+            required_measurements.push(thresholds)
+        }
+
+        var measurementJson = {}
+        for (let i = 0; i < required_measurements.length; i++) {
+            const measurement = required_measurements[i][0];
+            const min = required_measurements[i][1];
+            const max = required_measurements[i][2];
+
+            measurementJson[measurement] = {minimum: min, maximum: max}
+        }
+
+        await Patient.findByIdAndUpdate(patientId, {measurements: measurementJson});
         return res.redirect('/clinician/dashboard')
     }catch (err) {
         return next(err)

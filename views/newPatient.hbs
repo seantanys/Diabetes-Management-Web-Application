@@ -1,156 +1,130 @@
-<h1> Create New Patient</h1>
+<script src="../scripts/createPatient.js"></script>
+
+<div class="page-heading-1">
+    <h1>Create New Patient</h1>
+</div>
+
+<section class="create-patient-section">
+	<form action="/clinician/create" method="POST">
+		<div class="create-patient-container">
+
+			<h3>Enter Patient Details</h3>
+
+			<div class="create-patient-field">
+				<label for="first_name"><p>First Name</p></label>
+				<input type="text" placeholder="First name" name="first_name" required />
+			</div>
+			<div class="create-patient-field">
+				<label for="last_name"><p>Last Name</p></label>
+				<input type="text" placeholder="Last name" name="last_name" required />
+			</div>
+			<div class="create-patient-field">
+				<label for="screen_name"><p>Screen Name</p></label>
+				<input type="text" placeholder="Screen Name" name="screen_name" required />
+			</div>
+			<div class="create-patient-field">
+				<label for="dob"><p>Date Of Birth</p></label>
+				<input type="date" placeholder="DOB" name="dob" required />
+			</div>
+			<div class="create-patient-field">
+				<label for="bio"><p>Text Bio</p></label>
+				<textarea type="text" placeholder="Enter a short bio" name="bio" required></textarea>
+			</div>
+			<div class="create-patient-field">
+				<label for="email"><p>Email Address</p></label>
+				<input type="email"  placeholder="email" name="email" required>
+			</div>
+			<div class="create-patient-field">
+				<label for="password"><p>Password</p></label>
+				<input type="password" placeholder="password" name="password" required>
+			</div>
+
+			<h3>Enter Patient Required Measurements</h3>
+		
+			<div class="create-patient-checkbox">
+				<label for="bcg"><p>Blood Glucose Level</p></label>
+				<input type="checkbox" id="recordBCG" name="bcg" value="bcg">
+			</div>
+
+			<div class="threshold-container" id="bcg-threshold">
+				<p>Set Threshold Values</p>
+				<div class="create-patient-field-req">		
+					<div class="create-patient-field">
+						<label for="BCGmin"><p>Minimum</p></label>
+						<input type="text" placeholder="minimum" name="bcgmin" />
+					</div>
+
+					<div class="create-patient-field">
+						<label for="BCGmax"><p>Maximum</p></label>
+						<input type="text" placeholder="maximum" name="bcgmax" />
+					</div>
+				</div>
+			</div>
+
+			<div class="create-patient-checkbox">
+				<label for="weight"><p>Weight</p></label>
+				<input type="checkbox" id="recordWeight" name="weight" value="weight">
+			</div>
+
+			<div class="threshold-container" id="weight-threshold">
+				<p>Set Threshold Values</p>
+				<div class="create-patient-field-req">		
+					<div class="create-patient-field">
+						<label for="weightmin"><p>Minimum</p></label>
+						<input type="text" placeholder="minimum" name="weightmin" />
+					</div>
+
+					<div class="create-patient-field">
+						<label for="weightmax"><p>Maximum</p></label>
+						<input type="text" placeholder="maximum" name="weightmax" />
+					</div>
+				</div>
+			</div>
+
+			<div class="create-patient-checkbox">
+				<label for="insulin"><p>Insulin</p></label>
+				<input type="checkbox" id="recordInsulin" name="insulin" value="insulin">
+			</div>
+
+			<div class="threshold-container" id="insulin-threshold">
+				<p>Set Threshold Values</p>
+				<div class="create-patient-field-req">		
+					<div class="create-patient-field">
+						<label for="insulinmin"><p>Minimum</p></label>
+						<input type="text" placeholder="minimum" name="insulinmin" />
+					</div>
+
+					<div class="create-patient-field">
+						<label for="insulinmax"><p>Maximum</p></label>
+						<input type="text" placeholder="maximum" name="insulinmax" />
+					</div>
+				</div>
+			</div>
+
+			<div class="create-patient-checkbox">
+				<label for="exercise"><p>Exercise</p></label>
+				<input type="checkbox" id="recordExercise" name="exercise" value="exercise">
+			</div>
+
+			<div class="threshold-container" id="exercise-threshold">
+				<p>Set Threshold Values</p>
+				<div class="create-patient-field-req">		
+					<div class="create-patient-field">
+						<label for="exercisemin"><p>Minimum</p></label>
+						<input type="text" placeholder="minimum" name="exercisemin" />
+					</div>
+
+					<div class="create-patient-field">
+						<label for="exercisemax"><p>Maximum</p></label>
+						<input type="text" placeholder="maximum" name="exercisemax" />
+					</div>
+				</div>
+			</div>
+			<button type="submit">Submit</button>
+		</div>
+	</form>
+	
+</section>
 
 
-<form action="/clinician/dashboard" method="POST">
-	<table>
-		<tr>
-			<td>
-				First Name:
-			</td>
 
-			<td>
-				<input type="text" placeholder="First name" name="first_name" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				Last Name:
-			</td>
-
-			<td>
-				<input type="text" placeholder="Last name" name="last_name" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				Screen Name:
-			</td>
-
-			<td>
-				<input type="text" placeholder="Screen Name" name="screen_name" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				Date Of Birth:
-			</td>
-
-			<td>
-				<input type="date" placeholder="DOB" name="dob" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				BIO:
-			</td>
-
-			<td>
-				<input type="date" placeholder="BIO" name="bio" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				eng rate:
-			</td>
-
-			<td>
-				<input type="text" placeholder="engagement rate" name="engagement_rate" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				Email Address:
-			</td>
-
-			<td>
-				<input type="text"  placeholder="email" name="email">
-			</td>
-		</tr>
-        <tr>
-            <td>
-				Password:
-			</td>
-
-			<td>
-				<input type="text" placeholder="password" name="password">
-			</td>
-		</tr>
-	</table>
-
-    <br>
-
-    <table>
-		<tr>
-			<td>
-
-			</td>
-
-			<td>
-				MIN
-			</td>
-
-            <td>
-				MAX
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<input type="checkbox" id="recordBCG" name="recordBCG" value="Boolean">
-                <label for="recordBCG"> BCG </label>
-			</td>
-
-			<td>
-				<input type="text" placeholder="minimum" name="BCGmin" />
-			</td>
-
-            <td>
-				<input type="text" placeholder="maxmimum" name="BCGmax" />
-			</td>
-		</tr>
-        <tr>
-			<td>
-				<input type="checkbox" id="recordWeight" name="recordWeight" value="Weight">
-                <label for="recordWeight"> Weight </label>
-			</td>
-
-			<td>
-				<input type="text" placeholder="minimum" name="Weightmin" />
-			</td>
-
-            <td>
-				<input type="text" placeholder="maxmimum" name="Weightmax" />
-			</td>
-		</tr>
-        		<tr>
-			<td>
-				<input type="checkbox" id="recordInsulin" name="recordInsulin" value="Insulin">
-                <label for="recordInsulin"> Insulin </label>
-			</td>
-
-			<td>
-				<input type="text" placeholder="minimum" name="Insulinmin" />
-			</td>
-
-            <td>
-				<input type="text" placeholder="maxmimum" name="Insulinmax" />
-			</td>
-		</tr>
-        		<tr>
-			<td>
-				<input type="checkbox" id="recordExercise" name="recordExercise" value="Exercise">
-                <label for="recordExercise"> Exercise </label>
-			</td>
-
-			<td>
-				<input type="text" placeholder="minimum" name="Exercisemin" />
-			</td>
-
-            <td>
-				<input type="text" placeholder="maxmimum" name="Exercisemax" />
-			</td>
-		</tr>
-
-	</table>
-
-    <input type="submit" />
-</form> 

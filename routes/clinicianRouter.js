@@ -10,6 +10,8 @@ const clinicianController = require('../controllers/clinicianController')
 // route to handle the GET request for creating new patient
 clinicianRouter.get('/create', clinicianController.getNewPatientForm)
 
+clinicianRouter.post('/create', clinicianController.insertData)
+
 clinicianRouter.get('/messages', clinicianController.getPatientMessages)
 
 // route to handle the GET request for all patients data
@@ -21,7 +23,7 @@ clinicianRouter.get('/:patient_id', clinicianController.getDataById)
 clinicianRouter.get('/messages', clinicianController.getPatientMessages)
 
 // route to handle the POST request new patient, adding to the database
-clinicianRouter.post('/dashboard', clinicianController.insertData)
+// clinicianRouter.post('/dashboard', clinicianController.insertData)
 
 // export the router
 module.exports = clinicianRouter

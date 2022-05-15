@@ -7,7 +7,7 @@ const patientSchema = new mongoose.Schema({
     last_name: {type: String, required: true},
     screen_name: {type: String, required: false},
     dob: {type: Date, required: false},
-    bio: {type: Date, required: false},
+    bio: {type: String, required: false},
     engagement_rate: {type: Number, required: false},
     measurements: {
         bcg: {
