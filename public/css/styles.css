@@ -1844,7 +1844,62 @@ hr.solid {
   
     margin: 25px 0px 25px 0px;
   }
+}
 
+.patient-data-section {
+  margin-bottom: 25px;
+}
+
+.patient-data-container {
+  background-color: var(--colour-h1);
+  width: 80%;
+  margin-right: 10%;
+  margin-left: 10%;
+}
+
+.patient-data-filters {
+  width: 80%;
+  margin-right: 10%;
+  margin-left: 10%;
+
+  display: flex;
+  flex-direction: row;
+}
+
+#pd-search-input {
+  height: 30px;
+  background-image: url('../images/icons/search.svg');
+  background-position: 10px 12px;
+  background-repeat: no-repeat;
+  font-size: var(--text-p);
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+  margin-left: 5px;
+}
+
+#search-filter {
+  height: 30px;
+}
+
+#patient-data-table {
+  border-collapse: collapse;
+  width: 100%;
+  border: none;
+  font-size: var(--text-p);
+}
+
+#patient-data-table th, #patient-data-table td {
+  text-align: left;
+  padding: 12px;
+}
+
+.patient-data-header {
+  border-bottom: 1px solid #ddd;
+}
+
+.patient-data-row:hover {
+  background-color: #93b8f0bb;
 }
 
 .clinician-dashboard {
@@ -2057,7 +2112,6 @@ hr.solid {
 .validator {
   color: red;
 }
-
 
 .info {
   display: flex;

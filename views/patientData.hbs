@@ -1,6 +1,6 @@
-<script src="../scripts/recordInput.js"></script>
 <script src="../scripts/closeFlash.js"></script>
 <script src="../scripts/loader.js"></script>
+<script src="../scripts/patientDataFilter.js"></script>
 
 <div class="loader-wrapper" id="loader">
     <span class="loader"><span class="loader-inner"></span></span>
@@ -19,8 +19,38 @@
 </div>
 
 <section class="patient-data-section">
+    <div class="patient-data-filters">
+        <select name="search-filter" id="search-filter">
+            <option value="">Filter By</option>
+            <option value="measurement">Measurement</option>
+            <option value="value">Value</option>
+            <option value="comment">Comment</option>
+            <option value="time">Time</option>
+        </select>
+        <input type="text" id="pd-search-input" onkeyup="search()" placeholder="Search for measurements.">
+    </div>
     <div class="patient-data-container">
-        
+        <table id="patient-data-table">
+            <tr class="patient-data-header">
+                <th>Measurement</th>
+                <th>Value</th>
+                <th>Comment</th>
+                <th>Time Recorded</th>
+            </tr>
+            {{#each measurement}}
+            <tr class="patient-data-row">
+                {{#if (eqBcg this.type)}}
+                <td>blood glucose level</td>
+                {{else}}
+                <td>{{this.type}}</td>
+                {{/if}}
+                <td>{{this.value}}</td>
+                <td>{{this.comment}}</td>
+                <td>{{this.date}}</td>
+            </tr>
+            {{/each}}
+        </table>
+
     </div>
 </section>
 

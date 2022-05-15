@@ -22,7 +22,8 @@ app.engine(
             gte: (v1, v2) => v1 >= v2,
             and() {
                 return Array.prototype.every.call(arguments, Boolean);
-            }
+            },
+            eqBcg: (str) => str === "bcg"
         }
     })
 )
@@ -47,7 +48,7 @@ app.use(
             sameSite: 'strict',
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
-            maxAge: 300000 // sessions expire after 5 minutes
+            maxAge: 3000000 // sessions expire after 5 minutes
         },
     })
 )

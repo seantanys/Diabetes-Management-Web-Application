@@ -211,7 +211,12 @@ const changeTheme = async (req, res) => {
 const getPatientDataPage = async (req, res) => {
     if (req.isAuthenticated()) {
         const user = req.user;
-        res.render('patientData', {loggedIn: req.isAuthenticated()});
+        // get the patient's recorded data today
+        const measurements = await Measurement.find({patientId: user.role_id}).lean(); 
+
+        // need to format date to aussie time.
+
+        res.render('patientData', {loggedIn: req.isAuthenticated(), measurement: measurements});
     }
     else {
         res.render('login');
