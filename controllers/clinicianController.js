@@ -42,28 +42,71 @@ const getAllPatientData = async (req, res, next) => {
     }
 }
 
-// function which handles requests for displaying patient overview
-// will be implemented for D3
-const getDataById = async(req, res, next) => {
+const getPatientById = async(req, res, next) => {
     if (req.isAuthenticated()) {
         try {
 
-            const patient = await Patient.findById(req.body.patient_id).lean()
+            const patient = await Patient.findById(req.params.patient_id).lean()
+            const dates = await getDatesInRange(new Date(patient.join_date), new Date())
+
+            // Get arrays of measurements of each type
+            bcgmeasurement = await Measurement.find({patientId: req.params.patient_id.toString(), type:'bcg'}).sort({"date": -1}).lean()
+            weightmeasurement = await Measurement.find({patientId: req.params.patient_id.toString(), type:'weight'}).sort({"date": -1}).lean()
+            insulinmeasurement = await Measurement.find({patientId: req.params.patient_id.toString(), type:'insulin'}).sort({"date": -1}).lean()
+            exercisemeasurement = await Measurement.find({patientId: req.params.patient_id.toString(), type:'exercise'}).sort({"date": -1}).lean()
+            
+            var mArray = []
+            mArray.push(bcgmeasurement)
+            mArray.push(weightmeasurement)
+            mArray.push(insulinmeasurement)
+            mArray.push(exercisemeasurement)        
+
+            // Make new array with all the dates from join date to now, with measurements
+            
+            mTrend = []
+            for (m in mArray) {
+                if (mArray[m].length == 0) {
+                    mTrend.push(mArray[m])
+                } else {
+                    tempArray = []
+                    for (i in dates) {
+                        match = false
+                        for (j in mArray[m]) {
+                            dataDate = new Date(mArray[m][j].date)
+                            dataDate.setUTCHours(0,0,0,0)
+                            if (dates[i].getTime() === dataDate.getTime()) {
+                                tempArray.push(mArray[m][j])
+                                match = true
+                                break
+                            } 
+                        }
+                        if (!match) {
+                            tempArray.push({date: dates[i], value: undefined, comment: ''})
+                        }
+                    }
+                mTrend.push(tempArray)
+                console.log("m " + m + "adds"+  mTrend)
+                }
+            }
 
             if (!patient) {
                 // no patient found in database
                 return res.render('notfound')
             }
+            
+            
             // found patient
-            return res.render('oneData', { oneItem: patient})
+            // render clinicianTabs -- base page is overview
+            return res.render('clinicianTabs', { oneItem: patient, dataset: mArray, dateRange:dates})
 
         } catch (err) {
             return next(err)
         }
     } else {
         res.render('login');
-    } 
+    }
 }
+
 
 // function which handles requests for displaying the create form
 // will be implemented for D3
@@ -225,7 +268,7 @@ const getPatientMessages = async (req, res, next) => {
 // exports an object, which contain functions imported by router
 module.exports = {
     getAllPatientData,
-    getDataById,
+    getPatientById,
     insertData,
     getNewPatientForm,
     getPatientMessages

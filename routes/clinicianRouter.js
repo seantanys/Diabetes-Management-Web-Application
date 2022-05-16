@@ -18,7 +18,7 @@ clinicianRouter.get('/messages', app.hasRole('clinician'), clinicianController.g
 clinicianRouter.get('/dashboard', app.hasRole('clinician'), clinicianController.getAllPatientData)
 
 // route to handle the GET request for one patient data
-clinicianRouter.get('/:patient_id', app.hasRole('clinician'), clinicianController.getDataById)
+clinicianRouter.get('/:patient_id', app.hasRole('clinician'), clinicianController.getPatientById)
 
 clinicianRouter.get('/messages', app.hasRole('clinician'), clinicianController.getPatientMessages)
 
