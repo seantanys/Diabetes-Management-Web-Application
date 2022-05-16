@@ -121,54 +121,75 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // toggle between different types of measurements
-
     if (bcgToggle) {
         bcgToggle.addEventListener('click', function (e) {
-            chart.series[0].setData(bcg, false);
+            removeAllSeries();
+            chart.addSeries({
+                name: "Blood Glucose Level",
+                id: "bcg",
+                data: bcg,
+            }, false)
             chart.setTitle({text: "Blood Glucose Level"});
             chart.yAxis[0].setTitle({text: "Blood Glucose Level (nmol/L)"});
             chart.xAxis[0].setCategories(bcgDates.map(date => {
                 return Highcharts.dateFormat('%d-%m-%Y', new Date(date).getTime());
             }), false);
-            chart.series[0].update({name:"Blood Glucose"}, true);
             toggleButtons("Blood Glucose Level");
         });
     }
     if (weightToggle) {
         weightToggle.addEventListener('click', function (e) {
-            chart.series[0].setData(weight, false);
+            removeAllSeries();
+            chart.addSeries({
+                name: "Weight",
+                id: "weight",
+                data: weight,
+            }, false)
             chart.setTitle({text: "Weight"});
             chart.yAxis[0].setTitle({text: "Weight (kg)"});
             chart.xAxis[0].setCategories(weightDates.map(date => {
                 return Highcharts.dateFormat('%d-%m-%Y', new Date(date).getTime());
             }), false);
-            chart.series[0].update({name:"Weight"}, true);
             toggleButtons("Weight");
         });
     }
     if (exerciseToggle) {
         exerciseToggle.addEventListener('click', function (e) {
-            chart.series[0].setData(exercise, false);
-            chart.setTitle({text: "Step Count"});
-            chart.yAxis[0].setTitle({text: "Steps"});
+            removeAllSeries();
+            chart.addSeries({
+                name: "Step Count",
+                id: "exercise",
+                data: exercise,
+            }, false)
+            chart.setTitle({text: "Exercise (Step Count)"});
+            chart.yAxis[0].setTitle({text: "Step Count"});
             chart.xAxis[0].setCategories(exerciseDates.map(date => {
                 return Highcharts.dateFormat('%d-%m-%Y', new Date(date).getTime());
             }), false);
-            chart.series[0].update({name:"Step Count"}, true);
             toggleButtons("Exercise");
         });
     }
     if (insulinToggle) {
         insulinToggle.addEventListener('click', function (e) {
-            chart.series[0].setData(insulin, false);
+            removeAllSeries();
+            chart.addSeries({
+                name: "Insulin Doses",
+                id: "insulin",
+                data: insulin,
+            }, false)
             chart.setTitle({text: "Insulin Doses"});
             chart.yAxis[0].setTitle({text: "Insulin Doses (unit)"});
             chart.xAxis[0].setCategories(insulinDates.map(date => {
                 return Highcharts.dateFormat('%d-%m-%Y', new Date(date).getTime());
             }), false);
-            chart.series[0].update({name:"Insulin Doses"}, true);
             toggleButtons("Insulin");
         });
+    }
+
+    function removeAllSeries() {
+        for(var i = chart.series.length - 1; i >= 0; i--) {
+            chart.series[i].remove(false);
+        }
     }
 
     // this functions toggles the buttons css
