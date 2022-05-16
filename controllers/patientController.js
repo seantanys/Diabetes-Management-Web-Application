@@ -149,8 +149,6 @@ const getPatientAccountPage = async (req, res) => {
     }
 }
 
-const SALT_FACTOR = 10
-
 const changePassword = async (req, res) => {
 
     if (req.isAuthenticated()) {
