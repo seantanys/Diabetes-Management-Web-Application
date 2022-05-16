@@ -23,7 +23,13 @@ app.engine(
             and() {
                 return Array.prototype.every.call(arguments, Boolean);
             },
-            eqBcg: (str) => str === "bcg"
+            eqBcg: (str) => str === "bcg",
+            eqWeight: (str) => str === "weight",
+            eqInsulin: (str) => str === "insulin",
+            eqExercise: (str) => str === "exercise",
+            json(context) {
+                return JSON.stringify(context);
+            }
         }
     })
 )

@@ -213,14 +213,45 @@ const getPatientDataPage = async (req, res) => {
         const user = req.user;
         // get the patient's recorded data today
         const measurements = await Measurement.find({patientId: user.role_id}).lean(); 
+        const dates = getDatesFromPatientObj(measurements);
 
-        // need to format date to aussie time.
+        // group measurements by date, put into array or json? 
+        // ['date', 'bcg', 'weight'] or {date: {"bcg" : 12, "weight": 13}}
 
-        res.render('patientData', {loggedIn: req.isAuthenticated(), measurement: measurements});
+        const measurementsByDate = groupMeasurementsByDate(measurements);
+
+        res.render('patientData', {loggedIn: req.isAuthenticated(), measurement: measurements, groupedByDate: measurementsByDate});
     }
     else {
         res.render('login');
     }
+}
+
+function getDatesFromPatientObj(object) {
+    var dates = [];
+    for (let i = 0; i < object.length; i++) {
+        dates.push(object[i].date);
+    }
+    return dates;
+}
+
+function groupMeasurementsByDate(measurements) {
+    const groupedData = {};
+
+    for (let i = 0; i < measurements.length; i++) {
+        var date = `${measurements[i].date.getDate()}-${measurements[i].date.getMonth()}-${measurements[i].date.getFullYear()}`
+        var time = new Date(measurements[i].date.getFullYear(), measurements[i].date.getMonth(), measurements[i].date.getDate(), 0, 0, 0);
+
+        // if this date doesnt exist in the object, insert and initialize an empty dict.
+        if (!(time in groupedData)) {
+            groupedData[time] = {};
+        }
+
+        // add the measurement for this current data
+        groupedData[time][measurements[i].type] = measurements[i].value
+    }
+
+    return groupedData;
 }
 
 
