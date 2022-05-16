@@ -33,7 +33,7 @@
             <tbody>
             {{#each data}}
                 <tr>
-                <th><a href="#">{{this.patient.first_name}} {{this.patient.last_name}}</a></th>
+                <th><a href={{this.patient._id}}>{{this.patient.first_name}} {{this.patient.last_name}}</a></th>
                 {{#if this.patient.measurements.bcg}}
                 <th>
                     {{#if (and (gte this.bcg this.patient.measurements.bcg.minimum) (lte this.bcg this.patient.measurements.bcg.maximum))}}
