@@ -9,28 +9,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const weightToggle = document.getElementById("weight-toggle");
     const insulinToggle = document.getElementById("insulin-toggle");
     const exerciseToggle = document.getElementById("exercise-toggle");
-    
-
-    if (bcgToggle) {
-        bcgToggle.addEventListener('click', toggleChart);
-    }
-    if (weightToggle) {
-        weightToggle.addEventListener('click', toggleChart);
-    }
-    if (insulinToggle) {
-        insulinToggle.addEventListener('click', toggleChart);
-    }
-    if (exerciseToggle) {
-        exerciseToggle.addEventListener('click', toggleChart);
-    }
-
-    function toggleChart() {
-        // give class or active-toggle and remove inactive-toggle
-        // then give other classes inactive and remove active-toggle
-        
-        // then display the specified chart
-        // and hide the others.
-    }
+    const toggles = [];
+    var defaultData = [];
+    var defaultName = "";
 
     for (let i = 0; i < dates.length; i++) {
         if ("bcg" in measurements[dates[i]]) {
@@ -47,6 +28,37 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    if (bcgToggle) {
+        toggles.push(bcgToggle);
+    }
+    if (weightToggle) {
+        toggles.push(weightToggle);
+    }
+    if (insulinToggle) {
+        toggles.push(insulinToggle);
+    }
+    if (exerciseToggle) {
+        toggles.push(exerciseToggle);
+    }
+
+    for (let i = 0; i < toggles.length; i++) {
+
+        if (toggles[i].innerText === "Blood Glucose Level") {
+            defaultData = bcg;
+        }
+        if (toggles[i].innerText === "Weight") {
+            defaultData = weight;
+        }
+        if (toggles[i].innerText === "Insulin") {
+            defaultData = insulin;
+        }
+        if (toggles[i].innerText === "Exercise") {
+            defaultData = exercise;
+        }
+        defaultName = toggles[i].innerText
+        break;
+    }
+
     Highcharts.setOptions({
         chart: {
             style: {
@@ -60,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function () {
             type: 'line'
         },
         title: {
-            text: 'Blood Glucose Level'
+            text: defaultName
         },
         xAxis: {
             categories: dates.map(date => {
@@ -69,12 +81,13 @@ document.addEventListener('DOMContentLoaded', function () {
         },
         yAxis: {
             title: {
-                text: 'Blood Glucose Level (nmol/L)'
+                text: defaultName
             }
         },
         series: [{
-            name: 'Blood Glucose',
-            data: bcg
+            id: 'bcg',
+            name: defaultName,
+            data: defaultData
         }],
         responsive: {  
             rules: [{  
@@ -94,5 +107,56 @@ document.addEventListener('DOMContentLoaded', function () {
             }]  
         }
     });
+
+    if (bcgToggle) {
+        bcgToggle.addEventListener('click', function (e) {
+            chart.series[0].setData(bcg, false);
+            chart.setTitle({text: "Blood Glucose Level"});
+            chart.yAxis[0].setTitle({text: "Blood Glucose Level (nmol/L)"});
+            chart.series[0].update({name:"Blood Glucose"}, false);
+            toggleButtons("Blood Glucose Level");
+        });
+    }
+    if (weightToggle) {
+        weightToggle.addEventListener('click', function (e) {
+            chart.series[0].setData(weight, false);
+            chart.setTitle({text: "Weight"});
+            chart.yAxis[0].setTitle({text: "Weight (kg)"});
+            toggleButtons("Weight");
+            chart.series[0].update({name:"Weight"}, true);
+        });
+    }
+    if (exerciseToggle) {
+        exerciseToggle.addEventListener('click', function (e) {
+            chart.series[0].setData(exercise, false);
+            chart.setTitle({text: "Step Count"});
+            chart.yAxis[0].setTitle({text: "Steps"});
+            toggleButtons("Exercise");
+            chart.series[0].update({name:"Step Count"}, false);
+        });
+    }
+    if (insulinToggle) {
+        insulinToggle.addEventListener('click', function (e) {
+            chart.series[0].setData(insulin, false);
+            chart.setTitle({text: "Insulin Doses"});
+            chart.yAxis[0].setTitle({text: "Insulin Doses (unit)"});
+            toggleButtons("Insulin");
+            chart.series[0].update({name:"Insulin Doses"}, true);
+        });
+    }
+
+    function toggleButtons(type) {
+        for (let i = 0; i < toggles.length; i++) {
+            if (toggles[i].innerText === type) {
+                toggles[i].classList.add("active-toggle");
+                toggles[i].classList.remove("inactive-toggle");
+            }
+            else {
+                toggles[i].classList.add("inactive-toggle");
+                toggles[i].classList.remove("active-toggle");
+            }
+        }
+        chart.redraw();
+    }
 
 });

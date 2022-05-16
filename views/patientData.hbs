@@ -27,10 +27,18 @@
 <div class="chart-toggle-container">
     <h3>Filter chart by</h3>
     <div class="chart-toggles">
+        {{#if (isIn "bcg" required)}}
         <button id="bcg-toggle" class="active-toggle">Blood Glucose Level</button>
+        {{/if}}
+        {{#if (isIn "insulin" required)}}
         <button id="insulin-toggle" class="inactive-toggle">Insulin</button>
+        {{/if}}
+        {{#if (isIn "weight" required)}}
         <button id="weight-toggle" class="inactive-toggle">Weight</button>
+        {{/if}}
+        {{#if (isIn "exercise" required)}}
         <button id="exercise-toggle" class="inactive-toggle">Exercise</button>
+        {{/if}}
     </div>
 </div>
 
