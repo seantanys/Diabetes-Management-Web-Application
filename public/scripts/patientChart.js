@@ -42,11 +42,11 @@ document.addEventListener('DOMContentLoaded', function () {
     if (bcgToggle) {
         toggles.push(bcgToggle);
     }
-    if (weightToggle) {
-        toggles.push(weightToggle);
-    }
     if (insulinToggle) {
         toggles.push(insulinToggle);
+    }
+    if (weightToggle) {
+        toggles.push(weightToggle);
     }
     if (exerciseToggle) {
         toggles.push(exerciseToggle);

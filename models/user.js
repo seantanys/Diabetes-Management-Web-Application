@@ -47,6 +47,14 @@ userSchema.pre('save', function save(next) {
     })
 })
 
+// Password verification
+userSchema.methods.comparePassword = function(candidatePassword, cb) {
+    bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
+            if(err) return cb(err);
+            cb(null, isMatch);
+    });
+};
+
 // compile the measurementSchemas into Model
 const User = mongoose.model('User', userSchema)
 

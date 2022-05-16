@@ -4,6 +4,7 @@ const { DateTime } = require("luxon");
 const { User } = require('../models/user');
 const bcrypt = require('bcrypt');
 const e = require('connect-flash');
+const { redirect } = require('express/lib/response');
 
 // const { isAuthenticated } = require('../app.js');
 
@@ -138,7 +139,7 @@ const getPatientAccountPage = async (req, res) => {
         const age = currTime.year - data.dob.getFullYear()
 
         if (data) {
-            res.render('account', {loggedIn: req.isAuthenticated(), flash: req.flash('success'), age: age.toString(), singlePatient: data, theme: user.theme})
+            res.render('account', {loggedIn: req.isAuthenticated(), flash: req.flash('success'), errorFlash: req.flash('error'), age: age.toString(), singlePatient: data, theme: user.theme})
         } else {
             res.render('notfound')
         }
@@ -160,28 +161,37 @@ const changePassword = async (req, res) => {
 
         const retrieved_user = await User.findById(user._id)
 
-        // if (retrieved_user) {
-        //     if (retrieved_user.authenticate(pw)) {
-        //         if (new_pw === confirm_pw) {
-        //             res.send("password changed")
-        //         }
-        //         else {
-        //             res.send("passwords do not match")
-        //         }
-        //     }
-        //     else {
-        //         res.send("old password is wrong")
-        //     }
-        // }
+        if (new_pw !== confirm_pw) {
+            req.flash('error', `Passwords do not match`)
+            res.redirect('/patient/account');
+        }
+        if ((new_pw.length < 8) || (confirm_pw.length < 8)) {
+            req.flash('error', `Passwords must be at least 8 characters long!`)
+            res.redirect('/patient/account');
+        }
 
-        retrieved_user.changePassword(pw, new_pw, function (err) {
+        retrieved_user.verifyPassword(pw, async (err, valid) => {
             if (!err) {
-                res.send("worked")
+                // if the password matches
+                if (valid) {
+                    if (pw === new_pw) {
+                        req.flash('error', 'New password cannot be the same as your current password.')
+                        res.redirect('/patient/account');
+                    }
+                    else {
+                        retrieved_user.password = new_pw;
+                        await retrieved_user.save();
+                        req.flash('success', 'Password Successfully Changed.')
+                        res.redirect('/patient/account');
+                    }
+                } else {
+                    req.flash('error', 'Password is incorrect. Try again.')
+                    res.redirect('/patient/account');
+                }
+            } else {
+                res.send(err);
             }
-            else {
-                res.send(err)
-            }
-        })
+        });
     }
     else {
         res.render('login');
@@ -217,7 +227,7 @@ const getPatientDataPage = async (req, res) => {
 
         const data = await Patient.findById(user.role_id).lean(); 
         const reqMeasurements = Object.keys(data["measurements"])
-        
+
         const measurementsByDate = groupMeasurementsByDate(measurements);
 
         for (let i = 0; i < measurements.length; i++) {
