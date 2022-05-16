@@ -1,5 +1,5 @@
 <script src="../scripts/closeFlash.js"></script>
-<script src="../scripts/loader.js"></script>
+{{!-- <script src="../scripts/loader.js"></script> --}}
 <script src="../scripts/patientDataFilter.js"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 
@@ -44,7 +44,7 @@
             },
             xAxis: {
                 categories: dates.map(date => {
-                    return Highcharts.dateFormat('%Y-%m-%d', new Date(date).getTime());
+                    return Highcharts.dateFormat('%d-%m-%Y', new Date(date).getTime());
                 })
             },
             yAxis: {
@@ -78,9 +78,9 @@
     });
 </script>
 
-<div class="loader-wrapper" id="loader">
+{{!-- <div class="loader-wrapper" id="loader">
     <span class="loader"><span class="loader-inner"></span></span>
-</div>
+</div> --}}
 
 {{#if loggedIn}}
 {{> flashSuccess}}
@@ -138,7 +138,11 @@
                     <td>exercise</td>
                     <td>{{this.value}} steps</td>
                 {{/if}}
-                <td>{{this.comment}}</td>
+                {{#if (isEmptyStr this.comment)}}
+                    <td> - </td>
+                {{else}}
+                    <td>{{this.comment}}</td>
+                {{/if}}
                 <td>{{this.date}}</td>
             </tr>
             {{/each}}

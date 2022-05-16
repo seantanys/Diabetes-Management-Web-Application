@@ -1712,10 +1712,12 @@ hr.solid {
 }
 
 .patient-data-container {
-  background-color: var(--colour-h1);
+  background-color:white;
   width: 90%;
   margin-right: 5%;
   margin-left: 5%;
+  box-shadow: 0px 0px 10px rgba(114, 114, 113, 0.5);
+  border-radius: 15px;
 }
 
 .patient-data-filters {
@@ -1744,15 +1746,25 @@ hr.solid {
 }
 
 #patient-data-table {
-  border-collapse: collapse;
   width: 100%;
-  border: none;
   font-size: var(--text-p);
+  color: black;
+  border-collapse: collapse;
+  border-radius: 15px;
+  overflow: hidden;
 }
 
 #patient-data-table th, #patient-data-table td {
   text-align: left;
   padding: 12px;
+}
+
+#patient-data-table tr:nth-child(even) {
+  background-color: #eff2f5;
+}
+
+#patient-data-table tr:nth-child(even):hover {
+  background-color: #93b8f0bb;
 }
 
 .patient-data-header {
@@ -1918,7 +1930,65 @@ hr.solid {
     margin-right: 0%;
     margin-left:  0%;
   }
+
+  #patient-data-table, #patient-data-table tr, 
+  #patient-data-table th, #patient-data-table td 
+  {
+    display: block;
+  }
+
+  #patient-data-table tr th {
+    position: absolute;
+		top: -9999px;
+		left: -9999px;
+  }
+
+  #patient-data-table tr {
+    border: 1px solid #ccc;
+  }
+
+  #patient-data-table td {
+    border: none;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+		padding-left: 50%; 
+  }
+
+  #patient-data-table td:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+	}
+
+  #patient-data-table tr:nth-child(even) {
+    background-color: transparent;
+  }
+
+  #patient-data-table tr:nth-child(even):hover {
+    background-color: transparent;
+  }
+
+  #patient-data-table td:nth-of-type(1):before { content: "Measurement"; }
+  #patient-data-table td:nth-of-type(2):before { content: "Value"; }
+  #patient-data-table td:nth-of-type(3):before { content: "Comment"; }
+  #patient-data-table td:nth-of-type(4):before { content: "Time Recorded"; }
+
 }
+
+
+
+/* 
+
+
+CLINICIAN STUFF 
+
+
+*/
 
 .clinician-dashboard {
   display: flex;

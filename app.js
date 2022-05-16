@@ -27,6 +27,7 @@ app.engine(
             eqWeight: (str) => str === "weight",
             eqInsulin: (str) => str === "insulin",
             eqExercise: (str) => str === "exercise",
+            isEmptyStr: (str) => str === "",
             json(context) {
                 return JSON.stringify(context);
             }

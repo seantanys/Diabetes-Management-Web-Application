@@ -212,13 +212,18 @@ const getPatientDataPage = async (req, res) => {
     if (req.isAuthenticated()) {
         const user = req.user;
         // get the patient's recorded data today
-        const measurements = await Measurement.find({patientId: user.role_id}).lean(); 
+        const measurements = await Measurement.find({patientId: user.role_id}).sort({"date": 1}).lean(); 
         const dates = getDatesFromPatientObj(measurements);
 
         // group measurements by date, put into array or json? 
         // ['date', 'bcg', 'weight'] or {date: {"bcg" : 12, "weight": 13}}
 
         const measurementsByDate = groupMeasurementsByDate(measurements);
+
+        for (let i = 0; i < measurements.length; i++) {
+            var convertedDate = measurements[i].date;
+            measurements[i].date = convertedDate.toLocaleString(DateTime.DATETIME_MED);
+        }
 
         res.render('patientData', {loggedIn: req.isAuthenticated(), measurement: measurements, groupedByDate: measurementsByDate});
     }
