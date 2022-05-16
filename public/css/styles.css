@@ -13,7 +13,7 @@
   --colour-text: rgba(28, 70, 89, 1);
   --colour-h2: rgba(5, 85, 142, 1);
   --colour-background: rgba(255, 255, 255, 1);
-  --colour-black: rgba(0, 0, 0, 0);
+  --colour-black: black;
   --colour-first: rgb(204, 255, 197);
   --colour-second: rgba(252, 245, 147, 1);
   --colour-third: rgba(255, 175, 95, 1);
@@ -1784,6 +1784,45 @@ hr.solid {
   height:700px;
   margin-right:5%;
   margin-left: 5%;
+}
+
+.chart-toggle-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.chart-toggle-container h3 {
+  font-size: var(--text-h3);
+  color: var(--colour-h1);
+}
+
+.chart-toggles {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.chart-toggles button {
+  margin: 4px 0px;
+  border: 1px solid var(--colour-h1);
+  border-radius: 0;
+}
+
+.chart-toggles button:hover {
+  color: var(--colour-background);
+}
+
+.inactive-toggle {
+  color: var(--colour-h1);
+  background: none;
+}
+
+.active-toggle {
+  color: var(--colour-background);
+  background-color: var(--colour-h1);
 }
 
 /* Loading Screen */

@@ -3,10 +3,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     const searchFilter = document.getElementById("search-filter");
     var searchCategory = 0
 
-    
-
-    searchFilter.addEventListener("change", determineFilter)
-
+    searchFilter.addEventListener("change", determineFilter);
     searchInput.addEventListener("keyup", search);
 
     function search() {

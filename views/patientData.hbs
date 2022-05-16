@@ -2,81 +2,8 @@
 {{!-- <script src="../scripts/loader.js"></script> --}}
 <script src="../scripts/patientDataFilter.js"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="../scripts/patientChart.js"></script>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const measurements = JSON.parse(document.getElementById("pd-dates").value);
-        const dates = Object.keys(measurements);
-        const bcg = [];
-        const weight = [];
-        const insulin = [];
-        const exercise = [];
-
-        for (let i = 0; i < dates.length; i++) {
-            if ("bcg" in measurements[dates[i]]) {
-                bcg.push(measurements[dates[i]]["bcg"]);
-            }
-            if ("weight" in measurements[dates[i]]) {
-                weight.push(measurements[dates[i]]["weight"]);
-            }
-            if ("insulin" in measurements[dates[i]]) {
-                insulin.push(measurements[dates[i]]["insulin"]);
-            }
-            if ("exercise" in measurements[dates[i]]) {
-                exercise.push(measurements[dates[i]]["exercise"]);
-            }
-        }
-
-        Highcharts.setOptions({
-            chart: {
-                style: {
-                    fontFamily: 'Poppins ,sans-serif'
-                }
-            }
-        });
-
-        const chart = Highcharts.chart('patient-chart-container', {
-            chart: {
-                type: 'line'
-            },
-            title: {
-                text: 'Blood Glucose Level'
-            },
-            xAxis: {
-                categories: dates.map(date => {
-                    return Highcharts.dateFormat('%d-%m-%Y', new Date(date).getTime());
-                })
-            },
-            yAxis: {
-                title: {
-                    text: 'Blood Glucose Level (nmol/L)'
-                }
-            },
-            series: [{
-                name: 'Blood Glucose',
-                data: bcg
-            }],
-            responsive: {  
-                rules: [{  
-                    condition: {  
-                    maxWidth: 500  
-                    },  
-                    chartOptions: {  
-                        legend: {  
-                            enabled: false  
-                        },
-                        yAxis: {
-                            title: {
-                                enabled: false
-                            }
-                        } 
-                    }  
-                }]  
-            }
-        });
-
-    });
-</script>
 
 {{!-- <div class="loader-wrapper" id="loader">
     <span class="loader"><span class="loader-inner"></span></span>
@@ -91,15 +18,25 @@
     <h1>Your Data</h1>
     <hr class="divider">
     <h2>
-        You can view your data, sort by measurements and time.
+        You can view your progress for all your measurements, and 
+        you can search and filter your measurements.
     </h2>
     <hr class="divider">
+</div>
+
+<div class="chart-toggle-container">
+    <h3>Filter chart by</h3>
+    <div class="chart-toggles">
+        <button id="bcg-toggle" class="active-toggle">Blood Glucose Level</button>
+        <button id="insulin-toggle" class="inactive-toggle">Insulin</button>
+        <button id="weight-toggle" class="inactive-toggle">Weight</button>
+        <button id="exercise-toggle" class="inactive-toggle">Exercise</button>
+    </div>
 </div>
 
 <section class="patient-chart-section">
     <div id="patient-chart-container"></div>
 </section>
-
 
 <section class="patient-data-section">
     <div class="patient-data-filters">
