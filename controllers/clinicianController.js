@@ -239,10 +239,57 @@ const changeSupportMessage = async(req, res, next) =>{
 
 const getAccountPage = async (req, res) => {
     if (req.isAuthenticated()) {
-        res.render('clinicianAccount.hbs', {layout:"clinician.hbs", loggedIn: req.isAuthenticated()});
+        res.render('clinicianAccount.hbs', {layout:"clinician.hbs", loggedIn: req.isAuthenticated(), flash: req.flash('success'), errorFlash: req.flash('error')});
     } else {
         res.render('login');
 	}
+}
+
+const changePassword = async (req, res) => {
+
+    if (req.isAuthenticated()) {
+        const user = req.user;
+        const pw = req.body.curr_pw
+        const new_pw = req.body.new_pw
+        const confirm_pw = req.body.confirm_new_pw
+
+        const retrieved_user = await User.findById(user._id)
+
+        if (new_pw !== confirm_pw) {
+            req.flash('error', `Passwords do not match`)
+            res.redirect('/clinician/account');
+        }
+        if ((new_pw.length < 8) || (confirm_pw.length < 8)) {
+            req.flash('error', `Passwords must be at least 8 characters long!`)
+            res.redirect('/clinician/account');
+        }
+
+        retrieved_user.verifyPassword(pw, async (err, valid) => {
+            if (!err) {
+                // if the password matches
+                if (valid) {
+                    if (pw === new_pw) {
+                        req.flash('error', 'New password cannot be the same as your current password.')
+                        res.redirect('/clinician/account');
+                    }
+                    else {
+                        retrieved_user.password = new_pw;
+                        await retrieved_user.save();
+                        req.flash('success', 'Password Successfully Changed.')
+                        res.redirect('/clinician/account');
+                    }
+                } else {
+                    req.flash('error', 'Password is incorrect. Try again.')
+                    res.redirect('/clinician/account');
+                }
+            } else {
+                res.send(err);
+            }
+        });
+    }
+    else {
+        res.render('login');
+    }
 }
 
 // exports an object, which contain functions imported by router
@@ -253,5 +300,6 @@ module.exports = {
     getNewPatientForm,
     getPatientMessages,
     getAccountPage,
+    changePassword,
     changeSupportMessage
 }

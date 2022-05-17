@@ -28,6 +28,8 @@ clinicianRouter.get('/messages', app.hasRole('clinician'), clinicianController.g
 
 clinicianRouter.get('/account', app.hasRole('clinician'), clinicianController.getAccountPage);
 
+clinicianRouter.post('/account/change-password', app.hasRole('clinician'), clinicianController.changePassword);
+
 // route to handle the POST request new patient, adding to the database
 // clinicianRouter.post('/dashboard', clinicianController.insertData)
 
