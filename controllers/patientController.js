@@ -90,7 +90,7 @@ const submitMeasurement = async (req, res, next) => {
                 date: DateTime.now().setZone('Australia/Melbourne').toISO(),
                 comment: req.body.comment,
             })
-            calcEngagementRate(id);
+            // calcEngagementRate(id);
             await newMeasurement.save();
             // console.log("Measurement successfully saved to db")
             if (req.body.type === "bcg") {
