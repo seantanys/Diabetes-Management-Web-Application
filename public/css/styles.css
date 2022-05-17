@@ -2283,3 +2283,45 @@ CLINICIAN STUFF
   height: 20px;
 }
 
+.clinician-message{
+  padding: 2rem;
+  font-size: 1.5em;
+  color: darkblue;
+}
+
+.clinician-message-header {
+  display: inline-flex;
+}
+
+.clinician-message-header-sender{
+  margin-left: 200px;
+  display:inline; 
+  background-color:whitesmoke;
+  padding: 1.5rem;
+  padding-left: 2rem;
+}
+
+.clinician-message-header-time {
+  padding: 1.5rem;
+  font-weight: 550;
+}
+
+.clinician-message-body{
+  padding-top: 1rem;
+  padding-left: 2rem;
+  height: 90px;
+  margin-left: 200px;
+  margin-right: 200px;
+  border: 0px;
+  border-style: groove;
+  text-align: left;
+  background-color: whitesmoke;
+}
+
+a, a:visited{
+  color: darkblue;
+}
+
+
+
+

@@ -201,19 +201,21 @@ const getPatientMessages = async (req, res, next) => {
             for (let i = 0; i < measurement.length; i++){
                 patient = await Patient.findById(measurement[i].patientId.toString()).lean()
                 //console.log(patient.first_name)
-                patientComments.push({
-                    patient: patient.first_name,
-                    id: measurement[i]._id,
-                    type: measurement[i].type,
-                    comment: measurement[i].comment,
-                    date: measurement[i].date
-                })
+                if (measurement[i].comment != ""){
+                    patientComments.push({
+                        patient: patient.first_name+" "+ patient.last_name,
+                        id: measurement[i]._id,
+                        type: measurement[i].type,
+                        comment: measurement[i].comment,
+                        date: measurement[i].date.toLocaleString("en-US", {timeZone: "Australia/Sydney"}),
+                    })
+                }
             }
-
+    
             //console.log(patientComments)
-            return res.render('clinicianMessages', { data: patientComments, layout:"clinician.hbs"})
-
-
+            return res.render('clinicianMessages', { data: patientComments})
+    
+    
         } catch(err){
             return next(err)
         }
@@ -222,13 +224,26 @@ const getPatientMessages = async (req, res, next) => {
     } 
 }
 
+const changeSupportMessage = async(req, res, next) =>{
+    try{
+        const supportMessage = await Patient.updateOne({first_name:'test'},{$set: {supportMessage:"ferrari"}}).lean()
+        // console.log(supportMessage)
+        //patient = await Patient.findById("628328f868a793597b587e7c").lean()
+        //console.log("reached here")
+        console.log(supportMessage)
+        return supportMessage;
+    }catch(err){
+        return next(err);
+    }
+}
+
 const getAccountPage = async (req, res) => {
     console.log("yeah")
     if (req.isAuthenticated()) {
         res.render('clinicianAccount', {layout:"clinician.hbs"});
     } else {
         res.render('login');
-    }
+	}
 }
 
 // exports an object, which contain functions imported by router
@@ -238,5 +253,6 @@ module.exports = {
     insertData,
     getNewPatientForm,
     getPatientMessages,
-    getAccountPage
+    getAccountPage,
+    changeSupportMessage
 }

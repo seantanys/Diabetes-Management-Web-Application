@@ -1,15 +1,30 @@
-<h1>Displaying all messages</h1>
 
-{{!-- loops over the data set --}}
+<br>
+<br>
 
 <ul>
 {{#each data}}
-    <li style="color:blue;"><a href="/clinician/{{this.id}}"> {{this.patient}} </a></li>
-    <p>{{this.date}} </p>
-    <p>{{this.type}} </p>
-    <p>{{this.comment}}</p>
+    <div class="clinician-message">
+        <a href="/clinician/{{this.id}}">
+        <div class='clinician-message-header'>
+            <div class='clinician-message-header-sender'>
+                <h4>{{this.patient}}</h4>
+            </div> 
+            <div class='clinician-message-header-time'>
+                {{this.date}}
+            </div>
+        </div>      
+
+        <div class='clinician-message-body'>
+            {{this.type}} : {{this.comment}}
+        </div>
+        </a>
+    </div>
+
 {{/each}}
 </ul>
+
+
 
 
 
