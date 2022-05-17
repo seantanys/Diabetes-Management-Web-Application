@@ -1,5 +1,7 @@
 const express = require('express')
 const app = require('../app.js');
+// const {Clinician} = require('../models/clinician')
+// const {User} = require('../models/user')
 
 // create our Router object
 const clinicianRouter = express.Router()
@@ -26,5 +28,33 @@ clinicianRouter.get('/messages', clinicianController.getPatientMessages)
 // clinicianRouter.post('/dashboard', clinicianController.insertData)
 
 // export the router
-module.exports = clinicianRouter
 
+
+// clinicianRouter.post('/addClinician', async (req, res) => { // using POST for Postman demo
+//     const newClinician = new Clinician({
+//     first_name: "anh@dah.com",
+//     last_name: "pha",
+//     screen_name: "Clinician Anh",
+//     dob: new Date("2001-02-27"),
+//     })
+
+
+//     // extract the object id from the patient document
+//     const clinician = await newClinician.save();  
+//     const clinicianId = clinician._id;
+
+//     // then we create the user document and save to db
+//     const newUser = new User({
+//         username: "anh@dah.com",
+//         password: "anh",
+//         dob: new Date("2001-02-27"),
+//         role: "clinician",
+//         role_id: clinicianId,
+//         theme: "default"
+//     });
+
+//     await newUser.save();
+
+//     })
+
+module.exports = clinicianRouter
