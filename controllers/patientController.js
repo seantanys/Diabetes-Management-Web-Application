@@ -242,7 +242,6 @@ const changeTheme = async (req, res) => {
 const getPatientDataPage = async (req, res) => {
     if (req.isAuthenticated()) {
         const user = req.user;
-        // get the patient's recorded data today
         const measurements = await Measurement.find({patientId: user.role_id}).sort({"date": 1}).lean(); 
         const data = await Patient.findById(user.role_id).lean(); 
         const reqMeasurements = Object.keys(data["measurements"])
@@ -263,6 +262,7 @@ const getPatientDataPage = async (req, res) => {
     }
 }
 
+// this function aggragates measurements by date, mainly used for charts
 function groupMeasurementsByDate(measurements) {
     const groupedData = {};
 
