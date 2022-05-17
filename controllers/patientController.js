@@ -8,9 +8,6 @@ const { redirect } = require('express/lib/response');
 
 // const { isAuthenticated } = require('../app.js');
 
-// hard coded Patient Pat's id for D2
-// const id = "62660737332717bb9fe3eb55"; 
-
 const getMeasurementPage = async (req, res) => {
 
     if (req.isAuthenticated()) {
@@ -247,13 +244,13 @@ const getPatientDataPage = async (req, res) => {
         const user = req.user;
         // get the patient's recorded data today
         const measurements = await Measurement.find({patientId: user.role_id}).sort({"date": 1}).lean(); 
-        const dates = getDatesFromPatientObj(measurements);
-
         const data = await Patient.findById(user.role_id).lean(); 
         const reqMeasurements = Object.keys(data["measurements"])
 
+        // group measurements by date to be used in chart.
         const measurementsByDate = groupMeasurementsByDate(measurements);
 
+        // convert dates to more readable format.
         for (let i = 0; i < measurements.length; i++) {
             var convertedDate = measurements[i].date;
             measurements[i].date = convertedDate.toLocaleString(DateTime.DATETIME_MED);
@@ -266,19 +263,10 @@ const getPatientDataPage = async (req, res) => {
     }
 }
 
-function getDatesFromPatientObj(object) {
-    var dates = [];
-    for (let i = 0; i < object.length; i++) {
-        dates.push(object[i].date);
-    }
-    return dates;
-}
-
 function groupMeasurementsByDate(measurements) {
     const groupedData = {};
 
     for (let i = 0; i < measurements.length; i++) {
-        var date = `${measurements[i].date.getDate()}-${measurements[i].date.getMonth()}-${measurements[i].date.getFullYear()}`
         var time = new Date(measurements[i].date.getFullYear(), measurements[i].date.getMonth(), measurements[i].date.getDate(), 0, 0, 0);
 
         // if this date doesnt exist in the object, insert and initialize an empty dict.
