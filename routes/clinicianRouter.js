@@ -22,6 +22,8 @@ clinicianRouter.get('/:patient_id', app.hasRole('clinician'), clinicianControlle
 
 clinicianRouter.get('/messages', app.hasRole('clinician'), clinicianController.getPatientMessages)
 
+clinicianRouter.get('/account', app.hasRole('clinician'), clinicianController.getAccountPage);
+
 // route to handle the POST request new patient, adding to the database
 // clinicianRouter.post('/dashboard', clinicianController.insertData)
 

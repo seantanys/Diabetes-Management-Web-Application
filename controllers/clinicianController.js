@@ -222,11 +222,21 @@ const getPatientMessages = async (req, res, next) => {
     } 
 }
 
+const getAccountPage = async (req, res) => {
+    console.log("yeah")
+    if (req.isAuthenticated()) {
+        res.render('clinicianAccount', {layout:"clinician.hbs"});
+    } else {
+        res.render('login');
+    }
+}
+
 // exports an object, which contain functions imported by router
 module.exports = {
     getAllPatientData,
     getDataById,
     insertData,
     getNewPatientForm,
-    getPatientMessages
+    getPatientMessages,
+    getAccountPage
 }
