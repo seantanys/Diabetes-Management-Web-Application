@@ -2013,65 +2013,44 @@ td, th {
   height: 20px;
 }
 
-.box_top #li1 {
-  float: left;
-  width: 100px;
-  height: 35px;
-  margin-left: 10%;
-  border: 0px;
-  border-color: rgb(150, 150, 150);
-  border-style: groove;
-  text-align: left;
-  background-color: whitesmoke;
-  padding-left: 25px;
-  padding-top: 5px;
-}
-
-.box_top #pat_name {
-  margin-top: 5px;
-}
-
-.box_top #date1 {
-  float: left;
-  width: 800px;
-  height: 35px;
-  margin-left: 15px;
+.clinician-message{
+  padding: 2rem;
+  font-size: 1.5em;
   color: darkblue;
-  border: 1px;
-  border-color: rgb(150, 150, 150);
-  border-style: none;
-  text-align: left;
-  padding-top: 10px;
 }
 
-.box_bot {
-  float:left;
-  width: 700px;
-  height: 50px;
-  margin-left: 10%;
-  color: darkblue;
+.clinician-message-header {
+  display: inline-flex;
+}
+
+.clinician-message-header-sender{
+  margin-left: 200px;
+  display:inline; 
+  background-color:whitesmoke;
+  padding: 1.5rem;
+  padding-left: 2rem;
+}
+
+.clinician-message-header-time {
+  padding: 1.5rem;
+  font-weight: 550;
+}
+
+.clinician-message-body{
+  padding-top: 1rem;
+  padding-left: 2rem;
+  height: 90px;
+  margin-left: 200px;
+  margin-right: 200px;
   border: 0px;
   border-style: groove;
   text-align: left;
   background-color: whitesmoke;
 }
 
-.box_bot #box1 {
-  width: 200px;
-  margin-top: 15px;
-  margin-left: 25px;
-  text-align: left;
+a, a:visited{
+  color: darkblue;
 }
-
-.temp:after {
-  content:"";
-  display: table;
-  clear: both;
-}
-
-
-        
-
 
 
 

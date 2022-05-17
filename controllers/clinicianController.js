@@ -188,13 +188,15 @@ const getPatientMessages = async (req, res, next) => {
         for (let i = 0; i < measurement.length; i++){
             patient = await Patient.findById(measurement[i].patientId.toString()).lean()
             //console.log(patient.first_name)
-            patientComments.push({
-                patient: patient.first_name,
-                id: measurement[i]._id,
-                type: measurement[i].type,
-                comment: measurement[i].comment,
-                date: measurement[i].date
-            })
+            if (measurement[i].comment != ""){
+                patientComments.push({
+                    patient: patient.first_name+" "+ patient.last_name,
+                    id: measurement[i]._id,
+                    type: measurement[i].type,
+                    comment: measurement[i].comment,
+                    date: measurement[i].date.toLocaleString("en-US", {timeZone: "Australia/Sydney"}),
+                })
+            }
         }
 
         //console.log(patientComments)

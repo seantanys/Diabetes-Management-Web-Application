@@ -2,24 +2,27 @@
 <br>
 <br>
 
-{{!-- loops over the data set --}}
+<ul>
+{{#each data}}
+    <div class="clinician-message">
+        <a href="/clinician/{{this.id}}">
+        <div class='clinician-message-header'>
+            <div class='clinician-message-header-sender'>
+                <h4>{{this.patient}}</h4>
+            </div> 
+            <div class='clinician-message-header-time'>
+                {{this.date}}
+            </div>
+        </div>      
 
-
-    <ul>
-    {{#each data}}
-        <div class="temp">
-        <div class="box_top">
-        <li id="li1"><a href="/clinician/{{this.id}}">
-        <p id="pat_name">{{this.patient}}</p>
-        </a></li>
-        <p id="date1">{{this.date}} </p></div>
-        <div class="box_bot">
-        <p id="box1">{{this.type}} : {{this.comment}}</p></div>
+        <div class='clinician-message-body'>
+            {{this.type}} : {{this.comment}}
         </div>
-        <br>
-        <br>
-    {{/each}}
-    </ul>
+        </a>
+    </div>
+
+{{/each}}
+</ul>
 
 
 
