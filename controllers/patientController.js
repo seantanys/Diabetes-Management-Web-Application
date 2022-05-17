@@ -55,7 +55,8 @@ function getMeasurementTypes(arr) {
     return types;
 }
 
-function calcEngagementRate(patientId) {
+const calcEngagementRate = async(req,res) => {
+    const patientId = req.user.role_id;
     // get current melbourne time using luxon
     const currTime = DateTime.now().setZone('Australia/Melbourne');
     // get the beginning of the the current day
@@ -74,7 +75,8 @@ function calcEngagementRate(patientId) {
         const currEngRate = patientData.engagement_rate
         const daysSinceJoined = currDate - userData.join_date
         const newEngRate = ((currEngRate * (daysSinceJoined - 1)) + 1) / daysSinceJoined
-        return newEngRate
+        patientData.engagement_rate = newEngRate
+        await patientData.save();
     }
 }
 
