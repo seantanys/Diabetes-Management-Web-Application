@@ -3,6 +3,85 @@ const {Measurement} = require('../models/measurement')
 const {User} = require('../models/user')
 const { DateTime } = require("luxon");
 
+const mType = {
+    bcg: "bcg",
+    weight: "weight",
+    insulin: "insulin",
+    exercise: "exercise",
+};
+
+function getDatesFromPatientObj(object) {
+    var dates = [];
+    for (let i = 0; i < object.length; i++) {
+        dates.push(object[i].date);
+    }
+    return dates;
+}
+
+function groupMeasurementsByDate(measurements, dates) {
+    const groupedData = {};
+
+    for (i = 0; i < dates.length; i++) {
+        var date = new Date(dates[i].getFullYear(), dates[i].getMonth(), dates[i].getDate(), 0, 0, 0);
+
+        // if this date doesnt exist in the object, insert and initialize an empty dict.
+        if (!(date in groupedData)) {
+            groupData[date] = {};
+        }
+
+        for (j = 0; j < measurements.length; j++) {
+            var mDate = new Date(measurements[i].date.getFullYear(), measurements[i].date.getMonth(), measurements[i].date.getDate(), 0, 0, 0);
+            
+            // add the measurement for this current data
+            if (mDate == date) {
+                groupedData[date][measurements[i].type] = measurements[i].value
+            }
+        }
+    }
+    return groupedData;
+}
+
+function getDatesInRange(startDate, endDate) {
+    const date = new Date(endDate);
+    date.setUTCHours(0,0,0,0)
+
+    const dates = [];
+
+    while (date >= startDate) {
+        dates.push(new Date(date));
+        date.setDate(date.getDate() - 1);
+    } 
+    return dates;
+}
+
+function leftJoin(arr1, arr2, date1, date2) {
+    const resultArray = (arr1, arr2, date1, date2) => arr1.map(
+        item1 => ({
+            ...arr2.find(
+                item2 => item1[date1] === item2[date2.setUTCHours(0,0,0,0)]
+            ),
+            ...item1
+        })
+    )
+    return resultArray;
+}
+
+function getTableArray(dates, measurement) {
+    const outputArray = []
+    for (i in dates) {
+        date = dates[i]
+        for (j in measurement) {
+            dataDate = new Date(measurement[j].date)
+            dataDate.setUTCHours(0,0,0,0)
+            if (date.getTime() === dataDate.getTime()) {
+                outputArray.push(measurement[j])
+            } else {
+                outputArray.push(date)
+            }
+        }
+    }
+}
+
 // function which handles requests for displaying patient name and measurement on clinician 
 // dashboard finds the most recent measurement entered by a patient and displays it
 // it is highlighted if its not in the safety threshold
@@ -47,7 +126,14 @@ const getPatientById = async(req, res, next) => {
         try {
 
             const patient = await Patient.findById(req.params.patient_id).lean()
+            const measurements = await Measurement.find({patientId: patient._id}).sort({"date": -1}).lean(); 
+            const reqMeasurements = Object.keys(patient["measurements"])
             const dates = await getDatesInRange(new Date(patient.join_date), new Date())
+
+            for (let i = 0; i < measurements.length; i++) {
+                var convertedDate = measurements[i].date;
+                //measurements[i].date = convertedDate.toLocaleString(DateTime.DATETIME_MED);
+            }
 
             // Get arrays of measurements of each type
             bcgmeasurement = await Measurement.find({patientId: req.params.patient_id.toString(), type:'bcg'}).sort({"date": -1}).lean()
@@ -59,12 +145,13 @@ const getPatientById = async(req, res, next) => {
             mArray.push(bcgmeasurement)
             mArray.push(weightmeasurement)
             mArray.push(insulinmeasurement)
-            mArray.push(exercisemeasurement)        
+            mArray.push(exercisemeasurement)  
+            
 
             // Make new array with all the dates from join date to now, with measurements
-            
             mTrend = []
             for (m in mArray) {
+                // not required imput
                 if (mArray[m].length == 0) {
                     mTrend.push(mArray[m])
                 } else {
@@ -81,11 +168,11 @@ const getPatientById = async(req, res, next) => {
                             } 
                         }
                         if (!match) {
-                            tempArray.push({date: dates[i], value: undefined, comment: ''})
+                            tempArray.push({date: dates[i], value: null})
                         }
                     }
                 mTrend.push(tempArray)
-                console.log("m " + m + "adds"+  mTrend)
+                
                 }
             }
 
@@ -93,16 +180,44 @@ const getPatientById = async(req, res, next) => {
                 // no patient found in database
                 return res.render('notfound')
             }
+
+            bcg = mTrend[0]
+            weight = mTrend[1]
+            insulin = mTrend[2]
+            exercise = mTrend[3]            
             
-            
-            // found patient
             // render clinicianTabs -- base page is overview
-            return res.render('clinicianTabs', { oneItem: patient, dataset: mArray, dateRange:dates})
+            return res.render('patientOverview', {loggedIn: req.isAuthenticated(), required: reqMeasurements, patient: patient, bcg: bcg, weight: weight, insulin: insulin, exercise: exercise, measurements: measurements})
 
         } catch (err) {
             return next(err)
         }
     } else {
+        res.render('login');
+    }
+}
+
+const getDataById = async (req, res) => {
+    if (req.isAuthenticated()) {
+        const id = req.params.patient_id;
+        // get the patient's recorded data today
+        const measurements = await Measurement.find({patientId: id}).sort({"date": -1}).lean(); 
+        //const dates = getDatesFromPatientObj(measurements);
+
+        const patient = await Patient.findById(id).lean(); 
+        const dates = await getDatesInRange(new Date(patient.join_date), new Date())
+        const reqMeasurements = Object.keys(patient["measurements"])
+
+        const measurementsByDate = groupMeasurementsByDate(measurements, dates);
+
+        for (let i = 0; i < measurements.length; i++) {
+            var convertedDate = measurements[i].date;
+            measurements[i].date = convertedDate.toLocaleString(DateTime.DATETIME_MED);
+        }
+
+        res.render('patientOverview', {loggedIn: req.isAuthenticated(), required: reqMeasurements, measurement: measurements, groupedByDate: measurementsByDate});
+    }
+    else {
         res.render('login');
     }
 }
@@ -271,5 +386,6 @@ module.exports = {
     getPatientById,
     insertData,
     getNewPatientForm,
-    getPatientMessages
+    getPatientMessages,
+    getDataById
 }
