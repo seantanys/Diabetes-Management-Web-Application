@@ -28,7 +28,7 @@ var strategy = new LocalStrategy( (username, password, cb) => {
     // if there is a user with this username, check if the password matches
     user.verifyPassword(password, (err, valid) => {
       if (err) {  return cb(null, false, { message: 'Unknown error.' }) }
-      if (!valid) { return cb(null, false, { message: 'Incorrect password.' }) }
+      if (!valid) { return cb(null, false, { message: 'Incorrect username or password.' }) }
       return cb(null, user)
     })
   })
