@@ -22,7 +22,7 @@ clinicianRouter.get('/supportMessage', clinicianController.changeSupportMessage)
 clinicianRouter.get('/dashboard', app.hasRole('clinician'), clinicianController.getAllPatientData)
 
 // route to handle the GET request for one patient data
-clinicianRouter.get('/:patient_id', app.hasRole('clinician'), clinicianController.getDataById)
+clinicianRouter.get('/manage-patient/:patient_id', app.hasRole('clinician'), clinicianController.getDataById)
 
 clinicianRouter.get('/messages', app.hasRole('clinician'), clinicianController.getPatientMessages)
 

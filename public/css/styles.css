@@ -2318,9 +2318,12 @@ CLINICIAN STUFF
   background-color: whitesmoke;
 }
 
+
+/* 
+please give your anchors a class or id!!!!
 a, a:visited{
   color: darkblue;
-}
+} */
 
 
 

@@ -159,7 +159,19 @@ app.get('/', (req, res) => {
 })
 
 app.get('*', (req, res) => {
-    res.status(404).render('notfound')
+    if (req.isAuthenticated()) {
+        user = req.user;
+        if (req.user.role === "patient") {
+            res.status(404).render('notfound.hbs', {loggedIn: req.isAuthenticated(), theme: user.theme})
+        }
+        else {
+            res.status(404).render('notfound.hbs', {loggedIn: req.isAuthenticated(), layout: "clinician"})
+        }
+        
+    }
+    else {
+        res.status(404).render('notfound.hbs', {loggedIn: req.isAuthenticated()})
+    }
 })
 
 // link to our router

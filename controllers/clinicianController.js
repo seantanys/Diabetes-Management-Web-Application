@@ -238,9 +238,8 @@ const changeSupportMessage = async(req, res, next) =>{
 }
 
 const getAccountPage = async (req, res) => {
-    console.log("yeah")
     if (req.isAuthenticated()) {
-        res.render('clinicianAccount', {layout:"clinician.hbs"});
+        res.render('clinicianAccount.hbs', {layout:"clinician.hbs", loggedIn: req.isAuthenticated()});
     } else {
         res.render('login');
 	}
