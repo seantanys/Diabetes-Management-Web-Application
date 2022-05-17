@@ -10,6 +10,7 @@ const patientSchema = new mongoose.Schema({
     bio: {type: String, required: false},
     engagement_rate: {type: Number, required: false},
     clinicanId: {type: String, required: false},
+    supportMessage : {type: String, default:""},
     measurements: {
         bcg: {
             minimum: Number,

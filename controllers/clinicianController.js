@@ -206,11 +206,25 @@ const getPatientMessages = async (req, res, next) => {
     }
 }
 
+const changeSupportMessage = async(req, res, next) =>{
+    try{
+        const supportMessage = await Patient.updateOne({first_name:'test'},{$set: {supportMessage:"ferrari"}}).lean()
+        // console.log(supportMessage)
+        //patient = await Patient.findById("628328f868a793597b587e7c").lean()
+        //console.log("reached here")
+        console.log(supportMessage)
+        return supportMessage;
+    }catch(err){
+        return next(err);
+    }
+}
+
 // exports an object, which contain functions imported by router
 module.exports = {
     getAllPatientData,
     getDataById,
     insertData,
     getNewPatientForm,
-    getPatientMessages
+    getPatientMessages,
+    changeSupportMessage
 }
