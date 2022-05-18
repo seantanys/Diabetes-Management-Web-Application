@@ -12,11 +12,15 @@
 			<div class="create-patient-container-row">
 				<div class="create-patient-field">
 				<label for="first_name"><p>First Name</p></label>
-				<input type="text" placeholder="First name" name="first_name" pattern="^[a-zA-Z]+$" required />
+				<input type="text" placeholder="First name" name="first_name" pattern="^[a-zA-Z]+$" 
+				oninvalid="this.setCustomValidity('must be letters only ')"
+      			onchange="try{setCustomValidity('')}catch(e){}" required />
 			</div>
 			<div class="create-patient-field">
 				<label for="last_name"><p>Last Name</p></label>
-				<input type="text" placeholder="Last name" name="last_name" pattern="^[a-zA-Z]+$" required />
+				<input type="text" placeholder="Last name" name="last_name" pattern="^[a-zA-Z]+$"
+				oninvalid="this.setCustomValidity('must be letters only ')"
+      			onchange="try{setCustomValidity('')}catch(e){}" required />
 			</div>
 			</div>
 			
@@ -41,12 +45,19 @@
 			<div class="create-patient-container-row">
 				<div class="create-patient-field">
 					<label for="email"><p>Email Address</p></label>
-					<input type="email"  placeholder="email" name="email" required>
+					<input type="email"  placeholder="email" name="email" 
+					pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
+					title="must be a valid email address" 
+					oninvalid="this.setCustomValidity('must be a valid email address ')"
+      			onchange="try{setCustomValidity('')}catch(e){}" required>
 				</div>
 				<div class="create-patient-field">
 					<label for="password"><p>Password</p></label>
 					<input type="password" placeholder="password" name="password" 
-						   minlength="8" required>
+						   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
+						   title="must contain at least one number and one uppercase, lowercase letter, and be at least 8 characters"
+						   oninvalid="this.setCustomValidity('must at least one number and one uppercase and lowercase letter, and atleast 8 characters')"
+      						onchange="try{setCustomValidity('')}catch(e){}" required>
 				</div>
 			</div>
 
