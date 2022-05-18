@@ -14,58 +14,12 @@
 
 <input type="hidden" id="pd-dates" value="{{json groupedByDate}}" >
 
-<div class="page-heading-1">
-    <div class="patient-info-container">
-        <div class="patient-info"> 
-            {{!flexbox: 3 columns with first col small, mid and last col equal width}} 
-            <img src = "/images/male-profile.jpg">
-            <ul>
-                <li>Name: {{patient.first_name}} {{patient.last_name}}</li>
-                <li>Year of Birth: {{patient.dob}}</li>
-                <li>Join Date: {{patient.join_date}}</li>
-            </ul>
-        </div>
-    </div>
-    <hr class="divider">
-</div>
-
-<div class="functions-nav-bar">
-    {{!flexbox of 3 items}}
-    <ul class="nav-menu">
-        <li class="nav-item">
-            <a href="/#" class="nav-link">Overview</a>
-        </li>
-        <li>
-            {{#if (isIn "bcg" required)}}
-            <a href="/clinician/{{{patient._id}}}/bcg" class="nav-link">BCG</a>
-            {{/if}}
-        </li>
-        <li>
-            {{#if (isIn "weight" required)}}
-            <a href="/clinician/{{{patient._id}}}/weight" class="nav-link">Weight</a>
-            {{/if}}
-        </li>
-        <li>
-            {{#if (isIn "insulin" required)}}
-            <a href="/clinician/{{{patient._id}}}/insulin" class="nav-link">Insulin</a>
-            {{/if}}
-        </li>
-        <li>
-            {{#if (isIn "exercise" required)}}
-            <a href="/clinician/{{{patient._id}}}/exercise" class="nav-link">Exercise</a>
-            {{/if}}
-        </li>
-        
-        <li class="nav-item">      
-            <a href="/#" class="nav-link">Manage</a>
-        </li>
-        <li class="nav-item">
-            <a href="/#"class="nav-link">Support Message</a>
-        </li>
-    </ul>
-</div>
+{{> patientDrilldown}}
 
 <section class="patient-data-section">
+    <h1>All Data</h1>
+    <hr class="divider">
+    
     <div class="patient-data-filters">
         <select name="search-filter" id="search-filter">
             <option value="">Filter By</option>
@@ -112,46 +66,21 @@
             {{/each}}
         </table>
     </div>
-
-    {{!-- tables for each type --}}
-    {{!-- BCG --}}
-    <div class="patient-data-container">
-        <table id="patient-data-table">
-            <tr class="patient-data-header">
-                <th>Date</th>
-                <th>Time</th>
-                <th>Value (nmol/L)</th>
-                <th>Comments</th>
-            </tr>
-            {{#each weight}}
-            <tr class="patient-data-row">
-                {{#if this.value}}
-                    <td>{{formatDate this.date}}</td>
-                    <td>{{formatTime this.date}} </td>
-                    <td>{{this.value}}</td>
-                    {{#if (isEmptyStr this.comment)}}
-                        <td> - </td>
-                    {{else}}
-                        <td>{{this.comment}}</td>
-                    {{/if}}
-                {{else}}
-                    <td>{{formatDate this.date}}</td>
-                    <td> - </td>
-                    <td> - </td>
-                    <td> - </td>
-                {{/if}}
-            </tr>
-            {{/each}}
-        </table>
-    </div>
 </section>
 
-<div class="notes">
-    <h3>NOTES</h3>
-    {{#each note}}
-        {{date}}
-        {{comment}}
-    {{/each}}
+<section class="patient-notes">
+    <div class="patient-notes">
+        <h3>NOTES</h3>
+        <table id="notes-data-table">
+            {{#each notes}}
+            <tr class="notes-data-row">
+                {{!this.date}}
+                {{!this.comment}}
+            </tr>
+            {{/each}}
+            
+        </table>
+    </div>
 
     <form action="/patient/record" method="post">  
         <div class="comment-input">
@@ -159,7 +88,7 @@
         </div>
         <button class="record-button">Add note</button>
     </form>
-</div>
+</section>
 
 {{else}}
 

@@ -2,6 +2,7 @@ const {Patient} = require('../models/patient')
 const {Measurement} = require('../models/measurement')
 const {User} = require('../models/user')
 const { DateTime } = require("luxon");
+const { Note } = require('../models/note');
 
 const mType = {
     bcg: "bcg",
@@ -54,32 +55,25 @@ function getDatesInRange(startDate, endDate) {
     return dates;
 }
 
-function leftJoin(arr1, arr2, date1, date2) {
-    const resultArray = (arr1, arr2, date1, date2) => arr1.map(
-        item1 => ({
-            ...arr2.find(
-                item2 => item1[date1] === item2[date2.setUTCHours(0,0,0,0)]
-            ),
-            ...item1
-        })
-    )
-    return resultArray;
-}
 
 function getTableArray(dates, measurement) {
     const outputArray = []
     for (i in dates) {
-        date = dates[i]
+        match = false
         for (j in measurement) {
             dataDate = new Date(measurement[j].date)
             dataDate.setUTCHours(0,0,0,0)
-            if (date.getTime() === dataDate.getTime()) {
+            if (dates[i].getTime() === dataDate.getTime()) {
                 outputArray.push(measurement[j])
-            } else {
-                outputArray.push(date)
-            }
+                match = true
+                break
+            } 
+        }
+        if (!match) {
+            outputArray.push({date: dates[i], value: null})
         }
     }
+    return outputArray
 }
 
 // function which handles requests for displaying patient name and measurement on clinician 
@@ -121,73 +115,16 @@ const getAllPatientData = async (req, res, next) => {
     }
 }
 
-const getPatientById = async(req, res, next) => {
+const getPatientOverview = async(req, res, next) => {
     if (req.isAuthenticated()) {
         try {
-
             const patient = await Patient.findById(req.params.patient_id).lean()
             const measurements = await Measurement.find({patientId: patient._id}).sort({"date": -1}).lean(); 
             const reqMeasurements = Object.keys(patient["measurements"])
-            const dates = await getDatesInRange(new Date(patient.join_date), new Date())
-
-            for (let i = 0; i < measurements.length; i++) {
-                var convertedDate = measurements[i].date;
-                //measurements[i].date = convertedDate.toLocaleString(DateTime.DATETIME_MED);
-            }
-
-            // Get arrays of measurements of each type
-            bcgmeasurement = await Measurement.find({patientId: req.params.patient_id.toString(), type:'bcg'}).sort({"date": -1}).lean()
-            weightmeasurement = await Measurement.find({patientId: req.params.patient_id.toString(), type:'weight'}).sort({"date": -1}).lean()
-            insulinmeasurement = await Measurement.find({patientId: req.params.patient_id.toString(), type:'insulin'}).sort({"date": -1}).lean()
-            exercisemeasurement = await Measurement.find({patientId: req.params.patient_id.toString(), type:'exercise'}).sort({"date": -1}).lean()
+            //const notes = await Note.find({patientId: patient._id}).sort({"date": -1}).lean();
             
-            var mArray = []
-            mArray.push(bcgmeasurement)
-            mArray.push(weightmeasurement)
-            mArray.push(insulinmeasurement)
-            mArray.push(exercisemeasurement)  
-            
-
-            // Make new array with all the dates from join date to now, with measurements
-            mTrend = []
-            for (m in mArray) {
-                // not required imput
-                if (mArray[m].length == 0) {
-                    mTrend.push(mArray[m])
-                } else {
-                    tempArray = []
-                    for (i in dates) {
-                        match = false
-                        for (j in mArray[m]) {
-                            dataDate = new Date(mArray[m][j].date)
-                            dataDate.setUTCHours(0,0,0,0)
-                            if (dates[i].getTime() === dataDate.getTime()) {
-                                tempArray.push(mArray[m][j])
-                                match = true
-                                break
-                            } 
-                        }
-                        if (!match) {
-                            tempArray.push({date: dates[i], value: null})
-                        }
-                    }
-                mTrend.push(tempArray)
-                
-                }
-            }
-
-            if (!patient) {
-                // no patient found in database
-                return res.render('notfound')
-            }
-
-            bcg = mTrend[0]
-            weight = mTrend[1]
-            insulin = mTrend[2]
-            exercise = mTrend[3]            
-            
-            // render clinicianTabs -- base page is overview
-            return res.render('patientOverview', {loggedIn: req.isAuthenticated(), required: reqMeasurements, patient: patient, bcg: bcg, weight: weight, insulin: insulin, exercise: exercise, measurements: measurements})
+            //return res.render('partials/patientOverview', {loggedIn: req.isAuthenticated(), required: reqMeasurements, patient: patient, measurements: measurements, notes: notes})
+            return res.render('patientOverview', {loggedIn: req.isAuthenticated(), required: reqMeasurements, patient: patient, measurements: measurements})
 
         } catch (err) {
             return next(err)
@@ -196,32 +133,106 @@ const getPatientById = async(req, res, next) => {
         res.render('login');
     }
 }
-
-const getDataById = async (req, res) => {
+const getPatientBCG = async(req, res, next) => {
     if (req.isAuthenticated()) {
-        const id = req.params.patient_id;
-        // get the patient's recorded data today
-        const measurements = await Measurement.find({patientId: id}).sort({"date": -1}).lean(); 
-        //const dates = getDatesFromPatientObj(measurements);
+        try {
+            const patient = await Patient.findById(req.params.patient_id).lean()
+            const dates = await getDatesInRange(new Date(patient.join_date), new Date())
+            const measurement = await Measurement.find({patientId: req.params.patient_id.toString(), type:'bcg'}).sort({"date": -1}).lean() 
+            const reqMeasurements = Object.keys(patient["measurements"])
+            const type = 'bcg'
 
-        const patient = await Patient.findById(id).lean(); 
-        const dates = await getDatesInRange(new Date(patient.join_date), new Date())
-        const reqMeasurements = Object.keys(patient["measurements"])
+            formatted = getTableArray(dates, measurement)
 
-        const measurementsByDate = groupMeasurementsByDate(measurements, dates);
+            if (!patient) {
+                // no patient found in database
+                return res.render('notfound')
+            }
 
-        for (let i = 0; i < measurements.length; i++) {
-            var convertedDate = measurements[i].date;
-            measurements[i].date = convertedDate.toLocaleString(DateTime.DATETIME_MED);
+            return res.render('patientMeasurement', {loggedIn: req.isAuthenticated(), patient: patient, required: reqMeasurements, measurement: formatted, type: type})
+
+        } catch (err) {
+            return next(err)
         }
-
-        res.render('patientOverview', {loggedIn: req.isAuthenticated(), required: reqMeasurements, measurement: measurements, groupedByDate: measurementsByDate});
-    }
-    else {
+    } else {
         res.render('login');
     }
 }
+const getPatientWeight = async(req, res, next) => {
+    if (req.isAuthenticated()) {
+        try {
+            const patient = await Patient.findById(req.params.patient_id).lean()
+            const dates = await getDatesInRange(new Date(patient.join_date), new Date())
+            const measurement = await Measurement.find({patientId: req.params.patient_id.toString(), type:'weight'}).sort({"date": -1}).lean() 
+            const reqMeasurements = Object.keys(patient["measurements"])
+            const type = 'weight'
 
+            formatted = getTableArray(dates, measurement)
+
+            if (!patient) {
+                // no patient found in database
+                return res.render('notfound')
+            }
+
+            return res.render('patientMeasurement', {loggedIn: req.isAuthenticated(), patient: patient, required: reqMeasurements, measurement: formatted, type: type})
+
+        } catch (err) {
+            return next(err)
+        }
+    } else {
+        res.render('login');
+    }
+}
+const getPatientInsulin = async(req, res, next) => {
+    if (req.isAuthenticated()) {
+        try {
+            const patient = await Patient.findById(req.params.patient_id).lean()
+            const dates = await getDatesInRange(new Date(patient.join_date), new Date())
+            const measurement = await Measurement.find({patientId: req.params.patient_id.toString(), type:'insulin'}).sort({"date": -1}).lean() 
+            const reqMeasurements = Object.keys(patient["measurements"])
+            const type = 'insulin'
+
+            formatted = getTableArray(dates, measurement)
+
+            if (!patient) {
+                // no patient found in database
+                return res.render('notfound')
+            }
+
+            return res.render('patientMeasurement', {loggedIn: req.isAuthenticated(), patient: patient, required: reqMeasurements, measurement: formatted, type: type})
+
+        } catch (err) {
+            return next(err)
+        }
+    } else {
+        res.render('login');
+    }
+}
+const getPatientExercise = async(req, res, next) => {
+    if (req.isAuthenticated()) {
+        try {
+            const patient = await Patient.findById(req.params.patient_id).lean()
+            const dates = await getDatesInRange(new Date(patient.join_date), new Date())
+            const measurement = await Measurement.find({patientId: req.params.patient_id.toString(), type:'exercise'}).sort({"date": -1}).lean() 
+            const reqMeasurements = Object.keys(patient["measurements"])
+            const type = 'exercise'
+
+            formatted = getTableArray(dates, measurement)
+
+            if (!patient) {
+                // no patient found in database
+                return res.render('notfound')
+            }
+
+            return res.render('patientMeasurement', {loggedIn: req.isAuthenticated(), patient: patient, required: reqMeasurements, measurement: formatted, type: type})
+
+        } catch (err) {
+            return next(err)
+        }
+    } else {
+        res.render('login');
+    }
+}
 
 // function which handles requests for displaying the create form
 // will be implemented for D3
@@ -383,9 +394,12 @@ const getPatientMessages = async (req, res, next) => {
 // exports an object, which contain functions imported by router
 module.exports = {
     getAllPatientData,
-    getPatientById,
+    getPatientOverview,
+    getPatientBCG,
+    getPatientWeight,
+    getPatientInsulin,
+    getPatientExercise,
     insertData,
     getNewPatientForm,
     getPatientMessages,
-    getDataById
 }

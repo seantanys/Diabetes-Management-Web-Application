@@ -1,0 +1,50 @@
+<div class="page-heading-1">
+    <div class="patient-info-container">
+        <div class="patient-info"> 
+            {{!flexbox: 3 columns with first col small, mid and last col equal width}} 
+            <img src = "/images/male-profile.jpg">
+            <ul>
+                <li>Name: {{patient.first_name}} {{patient.last_name}}</li>
+                <li>Year of Birth: {{patient.dob}}</li>
+                <li>Join Date: {{patient.join_date}}</li>
+            </ul>
+        </div>
+    </div>
+    <hr class="divider">
+</div>
+
+<div class="functions-nav-bar">
+    {{!flexbox of 3 items}}
+    <ul class="nav-menu">
+        <li class="nav-item">
+            <a href="/clinician/{{{patient._id}}}" class="nav-link">Overview</a>
+        </li>
+        <li>
+            {{#if (isIn "bcg" required)}}
+            <a href="/clinician/{{{patient._id}}}/bcg" class="nav-link">BCG</a>
+            {{/if}}
+        </li>
+        <li>
+            {{#if (isIn "weight" required)}}
+            <a href="/clinician/{{{patient._id}}}/weight" class="nav-link">Weight</a>
+            {{/if}}
+        </li>
+        <li>
+            {{#if (isIn "insulin" required)}}
+            <a href="/clinician/{{{patient._id}}}/insulin" class="nav-link">Insulin</a>
+            {{/if}}
+        </li>
+        <li>
+            {{#if (isIn "exercise" required)}}
+            <a href="/clinician/{{{patient._id}}}/exercise" class="nav-link">Exercise</a>
+            {{/if}}
+        </li>
+        
+        <li class="nav-item">      
+            <a href="/#" class="nav-link">Manage</a>
+        </li>
+        <li class="nav-item">
+            <a href="/#"class="nav-link">Support Message</a>
+        </li>
+    </ul>
+</div>
