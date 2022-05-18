@@ -5,6 +5,7 @@ const exphbs = require('express-handlebars')
 const flash = require('express-flash')  // for showing login error messages
 const session = require('express-session')
 const passport = require('./passport.js')
+
 require('./models')
 
 const app = express()

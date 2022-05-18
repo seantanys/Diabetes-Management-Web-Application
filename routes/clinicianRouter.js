@@ -12,7 +12,7 @@ const clinicianController = require('../controllers/clinicianController')
 // route to handle the GET request for creating new patient
 clinicianRouter.get('/create', app.hasRole('clinician'), clinicianController.getNewPatientForm)
 
-clinicianRouter.post('/create', app.hasRole('clinician'), clinicianController.insertData)
+clinicianRouter.post('/create', app.hasRole('clinician'), clinicianController.validate('insertData'), clinicianController.insertData)
 
 clinicianRouter.get('/messages', app.hasRole('clinician'), clinicianController.getPatientMessages)
 

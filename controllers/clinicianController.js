@@ -2,6 +2,7 @@ const {Patient} = require('../models/patient')
 const {Measurement} = require('../models/measurement')
 const {User} = require('../models/user')
 const { DateTime } = require("luxon");
+const { body, validationResult } = require('express-validator')
 
 // function which handles requests for displaying patient name and measurement on clinician 
 // dashboard finds the most recent measurement entered by a patient and displays it
@@ -86,6 +87,13 @@ const insertData = async (req, res, next) => {
 
     if (req.isAuthenticated()) {
         try {
+            // Finds the validation errors in this request and wraps them in an object with handy functions
+            const errors = validationResult(req); 
+            if (!errors.isEmpty()) {
+              res.status(422).json({ errors: errors.array() });
+              res.render('login', {layout: 'clinician.hbs'});
+            }
+
             // first create the patient document and save to db
             const newPatient = new Patient({
                 first_name: req.body.first_name,
@@ -292,6 +300,22 @@ const changePassword = async (req, res) => {
     }
 }
 
+const validate = (method) =>{
+    switch (method) {
+        case 'insertData': {
+         return [ 
+            body('first_name', 'first_name doesnt exists').exists().isAlphanumeric(),
+            body('last_name', 'last_name doesnt exists').exists().isAlphanumeric(),
+            body('screen_name', 'screen_name doesnt exists').exists(),
+            body('email', 'Invalid email').exists().isEmail(),
+            body('password', 'userName doesnt exists').exists().isStrongPassword({ minLength: 8, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1 }),
+            body('dob', 'userName doesnt exists').exists().isDate(),
+            body('bio', 'userName doesnt exists').exists(),
+        ]   
+        }
+      }
+}
+
 // exports an object, which contain functions imported by router
 module.exports = {
     getAllPatientData,
@@ -301,5 +325,6 @@ module.exports = {
     getPatientMessages,
     getAccountPage,
     changePassword,
-    changeSupportMessage
+    changeSupportMessage,
+    validate
 }
