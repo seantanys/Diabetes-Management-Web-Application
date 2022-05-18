@@ -213,7 +213,7 @@ const getPatientMessages = async (req, res, next) => {
             }
     
             //console.log(patientComments)
-            return res.render('clinicianMessages', { data: patientComments})
+            return res.render('clinicianMessages', {layout: "clinician.hbs", loggedIn: req.isAuthenticated(), data: patientComments})
     
     
         } catch(err){
