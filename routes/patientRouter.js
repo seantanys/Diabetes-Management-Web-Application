@@ -7,6 +7,7 @@ const patientRouter = express.Router()
 
 // import people controller functions
 const patientController = require('../controllers/patientController')
+const clinicianController = require('../controllers/clinicianController')
 
 // route to handle the GET request for redirecting to patient dashboard
 patientRouter.get('/', patientController.redirectToDashboard)
@@ -25,7 +26,7 @@ patientRouter.get('/account', app.hasRole('patient'), patientController.getPatie
 
 patientRouter.get('/data', app.hasRole('patient'), patientController.getPatientDataPage)
 
-patientRouter.post('/account/change-password', patientController.validate('changePassword') , app.hasRole('patient'), patientController.changePassword)
+patientRouter.post('/account/change-password', clinicianController.validate('changePassword') , app.hasRole('patient'), patientController.changePassword)
 
 patientRouter.post('/account/change-theme', app.hasRole('patient'), patientController.changeTheme)
 

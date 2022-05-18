@@ -32,7 +32,7 @@ const getMeasurementPage = async (req, res) => {
         const notMeasured = reqMeasurements.filter(x => !alreadyMeasured.includes(x)); 
 
         if (data) {
-            res.render('record.hbs', {loggedIn: req.isAuthenticated(), flash: req.flash('success'), theme: user.theme, singlePatient: data, measured: alreadyMeasured, 
+            res.render('record.hbs', {loggedIn: req.isAuthenticated(), flash: req.flash('success'), title: "Record", theme: user.theme, singlePatient: data, measured: alreadyMeasured, 
                                     notMeasured: notMeasured, required: reqMeasurements,
                                     currentTime: displayTime})
         } else {
@@ -134,7 +134,7 @@ const getPatientPage = async (req, res) => {
             (data.dob.getMonth() + 1).toString().padStart(2,"0") + "/" + data.dob.getFullYear().toString() 
 
         if (data) {
-            res.render('patientDashboard.hbs', {loggedIn: req.isAuthenticated(), theme: user.theme, dob, singlePatient: data, measured: alreadyMeasured, notMeasured: notMeasured, required: reqMeasurements})
+            res.render('patientDashboard.hbs', {loggedIn: req.isAuthenticated(), title: "Dashboard", theme: user.theme, dob, singlePatient: data, measured: alreadyMeasured, notMeasured: notMeasured, required: reqMeasurements})
         } else {
             console.log("patient data not found")
             res.render('notfound')
@@ -163,7 +163,7 @@ const getPatientAccountPage = async (req, res) => {
         const age = currTime.year - data.dob.getFullYear()
 
         if (data) {
-            res.render('account', {loggedIn: req.isAuthenticated(), flash: req.flash('success'), errorFlash: req.flash('error'), age: age.toString(), singlePatient: data, theme: user.theme})
+            res.render('account', {loggedIn: req.isAuthenticated(), flash: req.flash('success'), errorFlash: req.flash('error'), title: "Account", age: age.toString(), singlePatient: data, theme: user.theme})
         } else {
             res.render('notfound')
         }
@@ -181,21 +181,22 @@ const changePassword = async (req, res) => {
         const new_pw = req.body.new_pw
         const confirm_pw = req.body.confirm_new_pw
 
-        const retrieved_user = await User.findById(user._id)
+        // const errors = validationResult(req); 
+        // if (!errors.isEmpty()) {
+        //     console.log(errors);
+        //     req.flash('error', `Password Validation Failed. Please try Again.`)
+        //     return res.redirect('/patient/account');
+        // }
 
-        const errors = validationResult(req); 
-        if (!errors.isEmpty()) {
-            req.flash('error', `Something went wrong, please try again.`)
-            res.redirect('/patient/account');
-        }
+        const retrieved_user = await User.findById(user._id)
 
         if (new_pw !== confirm_pw) {
             req.flash('error', `Passwords do not match`)
-            res.redirect('/patient/account');
+            return res.redirect('/patient/account');
         }
         if ((new_pw.length < 8) || (confirm_pw.length < 8)) {
             req.flash('error', `Passwords must be at least 8 characters long!`)
-            res.redirect('/patient/account');
+            return res.redirect('/patient/account');
         }
 
         retrieved_user.verifyPassword(pw, async (err, valid) => {
@@ -262,7 +263,7 @@ const getPatientDataPage = async (req, res) => {
             measurements[i].date = convertedDate.toLocaleString(DateTime.DATETIME_MED);
         }
 
-        res.render('patientData', {loggedIn: req.isAuthenticated(), required: reqMeasurements, measurement: measurements, groupedByDate: measurementsByDate});
+        res.render('patientData', {loggedIn: req.isAuthenticated(), title: "Your Data", required: reqMeasurements, measurement: measurements, groupedByDate: measurementsByDate});
     }
     else {
         res.render('login');
@@ -288,24 +289,6 @@ function groupMeasurementsByDate(measurements) {
     return groupedData;
 }
 
-const validate = (method) => {
-    switch (method) {
-        case 'changePassword': {
-         return [ 
-            body('new_pw', 'invalid password').exists().isStrongPassword({ minLength: 8, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1 }),
-            body('confirm_new_pw').custom(({ req }) => {
-                if (req.body.confirm_new_pw != req.body.new_pw) {
-                    throw new Error('Passwords do not match.')
-                }
-
-                return true;
-            }),
-                ]   
-        }
-    }
-}
-
-
 // exports an object, which contain functions imported by router
 module.exports = {
     getMeasurementPage,
@@ -316,5 +299,4 @@ module.exports = {
     changePassword,
     changeTheme,
     getPatientDataPage,
-    validate
 }

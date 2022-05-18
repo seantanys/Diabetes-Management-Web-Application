@@ -103,6 +103,13 @@ const insertData = async (req, res, next) => {
                 return res.redirect('/clinician/create');
             }
 
+            const screenNameExists = await Patient.find({screen_name: req.body.screen_name}).lean();
+
+            if (screenNameExists) {
+                req.flash('error', `This screen name has already been taken, please try another one.`)
+                return res.redirect('/clinician/create');
+            }
+
             // first create the patient document and save to db
             const newPatient = new Patient({
                 first_name: req.body.first_name,
@@ -312,7 +319,7 @@ const changePassword = async (req, res) => {
 const validate = (method) =>{
     switch (method) {
         case 'insertData': {
-         return [ 
+            return [ 
             body('first_name', 'first_name doesnt exists').exists().isAlphanumeric(),
             body('last_name', 'last_name doesnt exists').exists().isAlphanumeric(),
             body('screen_name', 'screen_name doesnt exists').exists(),
@@ -320,9 +327,25 @@ const validate = (method) =>{
             body('password', 'password doesnt exist').exists().isStrongPassword({ minLength: 8, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1 }),
             body('dob', 'userName doesnt exist').exists().isDate(),
             body('bio', 'bio doesnt exist').exists(),
-        ]   
+            ]   
+            }
+
+        case 'changePassword': {
+            return [
+                    body("new_pw", "invalid password")
+                        .isLength({ min: 8 })
+                        .custom((value,{req, loc, path}) => {
+                            if (value !== req.body.confirm_new_pw) {
+                                // trow error if passwords do not match
+                                throw new Error("Passwords don't match");
+                            } else {
+                                return value;
+                            }
+                        })
+                    ]   
+            }
         }
-      }
+        
 }
 
 // exports an object, which contain functions imported by router
