@@ -36,7 +36,7 @@ const getAllPatientData = async (req, res, next) => {
                                 })
         }
         
-        return res.render('clinicianDashboard', {layout: "clinician.hbs", loggedIn: req.isAuthenticated(), flash: req.flash('success'), user: user, data: patientDashboard, numPatients: patients.length, date: todaysDate})
+        return res.render('clinicianDashboard', {layout: "clinician.hbs", loggedIn: req.isAuthenticated(), flash: req.flash('success'), errorFlash: req.flash('error'), user: user, data: patientDashboard, numPatients: patients.length, date: todaysDate})
 
     } catch (err) {
         return next(err)
@@ -71,7 +71,7 @@ const getDataById = async(req, res, next) => {
 const getNewPatientForm = async (req, res, next) => {
     if (req.isAuthenticated()) {
         try {
-            return res.render('newPatient', {layout: 'clinician.hbs', loggedIn: req.isAuthenticated()})
+            return res.render('newPatient', {layout: 'clinician.hbs', errorFlash: req.flash('error'), loggedIn: req.isAuthenticated()})
         } catch (err) {
             return next(err)
         }
@@ -90,8 +90,17 @@ const insertData = async (req, res, next) => {
             // Finds the validation errors in this request and wraps them in an object with handy functions
             const errors = validationResult(req); 
             if (!errors.isEmpty()) {
-              res.status(422).json({ errors: errors.array() });
-              res.render('login', {layout: 'clinician.hbs'});
+              //res.send(errors);
+              req.flash('error', `Something went wrong when creating a patient, please try again.`)
+              return res.redirect('/clinician/create');
+            }
+
+            // checking to see if this email is taken.
+            const emailExists = await User.find({username: req.body.email}).lean();
+            
+            if (emailExists) {
+                req.flash('error', `The email address has already been taken, please try another one.`)
+                return res.redirect('/clinician/create');
             }
 
             // first create the patient document and save to db
@@ -308,9 +317,9 @@ const validate = (method) =>{
             body('last_name', 'last_name doesnt exists').exists().isAlphanumeric(),
             body('screen_name', 'screen_name doesnt exists').exists(),
             body('email', 'Invalid email').exists().isEmail(),
-            body('password', 'userName doesnt exists').exists().isStrongPassword({ minLength: 8, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1 }),
-            body('dob', 'userName doesnt exists').exists().isDate(),
-            body('bio', 'userName doesnt exists').exists(),
+            body('password', 'password doesnt exist').exists().isStrongPassword({ minLength: 8, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1 }),
+            body('dob', 'userName doesnt exist').exists().isDate(),
+            body('bio', 'bio doesnt exist').exists(),
         ]   
         }
       }

@@ -1,5 +1,6 @@
 const express = require('express')
 const app = require('../app.js');
+const { body, validationResult } = require('express-validator');
 
 // create our Router object
 const patientRouter = express.Router()
@@ -14,7 +15,7 @@ patientRouter.get('/', patientController.redirectToDashboard)
 patientRouter.get('/record', app.hasRole('patient'), patientController.getMeasurementPage)
 
 // route to handle the GET request for submitting a measurement 
-patientRouter.post('/record', patientController.submitMeasurement)
+patientRouter.post('/record', app.hasRole('patient'), patientController.submitMeasurement)
 
 // route to handle the GET request for patient dashboard 
 patientRouter.get('/dashboard', app.hasRole('patient'), patientController.getPatientPage)
@@ -24,7 +25,7 @@ patientRouter.get('/account', app.hasRole('patient'), patientController.getPatie
 
 patientRouter.get('/data', app.hasRole('patient'), patientController.getPatientDataPage)
 
-patientRouter.post('/account/change-password', app.hasRole('patient'), patientController.changePassword)
+patientRouter.post('/account/change-password', patientController.validate('changePassword') , app.hasRole('patient'), patientController.changePassword)
 
 patientRouter.post('/account/change-theme', app.hasRole('patient'), patientController.changeTheme)
 

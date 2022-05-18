@@ -5,6 +5,7 @@ const { User } = require('../models/user');
 const bcrypt = require('bcrypt');
 const e = require('connect-flash');
 const { redirect } = require('express/lib/response');
+const { body, validationResult } = require('express-validator')
 
 // const { isAuthenticated } = require('../app.js');
 
@@ -182,6 +183,12 @@ const changePassword = async (req, res) => {
 
         const retrieved_user = await User.findById(user._id)
 
+        const errors = validationResult(req); 
+        if (!errors.isEmpty()) {
+            req.flash('error', `Something went wrong, please try again.`)
+            res.redirect('/patient/account');
+        }
+
         if (new_pw !== confirm_pw) {
             req.flash('error', `Passwords do not match`)
             res.redirect('/patient/account');
@@ -281,6 +288,23 @@ function groupMeasurementsByDate(measurements) {
     return groupedData;
 }
 
+const validate = (method) => {
+    switch (method) {
+        case 'changePassword': {
+         return [ 
+            body('new_pw', 'invalid password').exists().isStrongPassword({ minLength: 8, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1 }),
+            body('confirm_new_pw').custom(({ req }) => {
+                if (req.body.confirm_new_pw != req.body.new_pw) {
+                    throw new Error('Passwords do not match.')
+                }
+
+                return true;
+            }),
+                ]   
+        }
+    }
+}
+
 
 // exports an object, which contain functions imported by router
 module.exports = {
@@ -291,5 +315,6 @@ module.exports = {
     getPatientAccountPage,
     changePassword,
     changeTheme,
-    getPatientDataPage
+    getPatientDataPage,
+    validate
 }

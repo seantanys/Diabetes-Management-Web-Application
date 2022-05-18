@@ -1,5 +1,7 @@
 <script src="../scripts/createPatient.js"></script>
 
+{{> flashError}}
+
 <div class="page-heading-1">
     <h1>Create New Patient</h1>
 </div>
@@ -56,7 +58,7 @@
 					<input type="password" placeholder="password" name="password" 
 						   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
 						   title="must contain at least one number and one uppercase, lowercase letter, and be at least 8 characters"
-						   oninvalid="this.setCustomValidity('must at least one number and one uppercase and lowercase letter, and atleast 8 characters')"
+						   oninvalid="this.setCustomValidity('must have at least one number and one uppercase and lowercase letter, and atleast 8 characters')"
       						onchange="try{setCustomValidity('')}catch(e){}" required>
 				</div>
 			</div>
