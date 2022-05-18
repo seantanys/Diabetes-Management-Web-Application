@@ -13,7 +13,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="../scripts/preventScroll.js"></script>
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    {{#if title}}
+    <title>{{title}}</title>
+    {{else}}
     <title>Diabetes@Home</title>
+    {{/if}}
 </head>
 <body> 
    <header id="header">

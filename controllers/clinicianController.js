@@ -103,6 +103,13 @@ const insertData = async (req, res, next) => {
             //     return res.redirect('/clinician/create');
             // }
 
+            const screenNameExists = await Patient.find({screen_name: req.body.screen_name}).lean();
+
+            if (screenNameExists) {
+                req.flash('error', `This screen name has already been taken, please try another one.`)
+                return res.redirect('/clinician/create');
+            }
+
             // first create the patient document and save to db
             const newPatient = new Patient({
                 first_name: req.body.first_name,
@@ -332,9 +339,25 @@ const validate = (method) =>{
             //body('exercise', 'invalid exercise checkbox').exists().isIn(['checked', 'unchecked']),
             // body('exercisemin','invalid exercise min').optional().isFloat().escape(),
             // body('exercisemax','invalid exercise max').optional().isFloat().escape(),
-        ]   
+            ]   
         }
-      }
+        case 'changePassword': {
+            return [
+                    body("new_pw", "invalid password")
+                        .isLength({ min: 8 })
+                        .custom((value,{req, loc, path}) => {
+                            if (value !== req.body.confirm_new_pw) {
+                                // trow error if passwords do not match
+                                throw new Error("Passwords don't match");
+                            } else {
+                                return value;
+                            }
+                        })
+                    ]   
+        }
+    }
+
+        
 }
 
 // exports an object, which contain functions imported by router
