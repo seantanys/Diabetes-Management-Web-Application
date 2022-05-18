@@ -90,18 +90,18 @@ const insertData = async (req, res, next) => {
             // Finds the validation errors in this request and wraps them in an object with handy functions
             const errors = validationResult(req); 
             if (!errors.isEmpty()) {
-              //res.send(errors);
-              req.flash('error', `Something went wrong when creating a patient, please try again.`)
-              return res.redirect('/clinician/create');
+              res.send(errors);
+              //req.flash('error', `Something went wrong when creating a patient, please try again.`)
+              //return res.redirect('/clinician/create');
             }
 
             // checking to see if this email is taken.
-            const emailExists = await User.find({username: req.body.email}).lean();
+            // const emailExists = await User.find({username: req.body.email}).lean();
             
-            if (emailExists) {
-                req.flash('error', `The email address has already been taken, please try another one.`)
-                return res.redirect('/clinician/create');
-            }
+            // if (emailExists) {
+            //     req.flash('error', `The email address has already been taken, please try another one.`)
+            //     return res.redirect('/clinician/create');
+            // }
 
             // first create the patient document and save to db
             const newPatient = new Patient({
@@ -313,13 +313,25 @@ const validate = (method) =>{
     switch (method) {
         case 'insertData': {
          return [ 
-            body('first_name', 'first_name doesnt exists').exists().isAlphanumeric(),
-            body('last_name', 'last_name doesnt exists').exists().isAlphanumeric(),
-            body('screen_name', 'screen_name doesnt exists').exists(),
-            body('email', 'Invalid email').exists().isEmail(),
-            body('password', 'password doesnt exist').exists().isStrongPassword({ minLength: 8, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1 }),
-            body('dob', 'userName doesnt exist').exists().isDate(),
-            body('bio', 'bio doesnt exist').exists(),
+            body('first_name', 'first_name doesnt exists').exists().isAlphanumeric().escape(),
+            body('last_name', 'last_name doesnt exists').exists().isAlphanumeric().escape(),
+            body('screen_name', 'screen_name doesnt exists').exists().escape(),
+            body('email', 'Invalid email').exists().isEmail().escape(),
+            body('password', 'password doesnt exist').exists().isLength({min:8}).escape(),//isStrongPassword({ minLength: 8, minLowercase: 1, minUppercase: 1, minNumbers: 1}),
+            body('dob', 'userName doesnt exist').exists().isDate().escape(),
+            body('bio', 'bio doesnt exist').exists().escape(),
+            //body('bcg', 'invalid bcg checkbox').exists().isIn(['checked', 'unchecked']),
+            // body('bcgmin','invalid bcg min').optional().isFloat().escape(),
+            // body('bcgmax','invalid bcg max').optional().isFloat().escape(),
+            //body('weight', 'invalid weight checkbox').exists().isIn(['checked', 'unchecked']),
+            // body('weightmin','invalid weight min').optional().isFloat().escape(),
+            // body('weightmax','invalid weight max').optional().isFloat().escape(),
+            //body('insulin', 'invalid insulin checkbox').exists().isIn(['checked', 'unchecked']),
+            // body('insulinmin','invalid insulin min').optional().isFloat().escape(),
+            // body('insulinmax','invalid insulin max').optional().isFloat().escape(),
+            //body('exercise', 'invalid exercise checkbox').exists().isIn(['checked', 'unchecked']),
+            // body('exercisemin','invalid exercise min').optional().isFloat().escape(),
+            // body('exercisemax','invalid exercise max').optional().isFloat().escape(),
         ]   
         }
       }
