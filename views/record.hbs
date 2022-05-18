@@ -161,7 +161,7 @@
             </div>
             <span class="label">Weight</span>
             <div class="record-input">
-                <input name="value" type="number" min=0 step=0.1 placeholder="Enter Weight" id="weight" required>
+                <input name="value" type="number" min=0 max=500 step=0.1 placeholder="Enter Weight" id="weight" required>
             </div>
             <br>
             <span class="label">Comment (optional)</span>
@@ -186,7 +186,7 @@
             </div>
             <span class="label">Insulin Doses</span>
             <div class="record-input">
-                <input name="value" type="number" min=0 step=1
+                <input name="value" type="number" min=0 max=100 step=1
                   onkeypress="return event.charCode >= 48 && event.charCode <= 57" placeholder="Enter Insulin doses" id="insulin" required>
             </div>
             <br>
@@ -212,7 +212,7 @@
             </div>
             <span class="label">Number Of Steps</span>
             <div class="record-input">
-                <input name="value" type="number" min=0 placeholder="Enter number of steps" id="exercise" required>
+                <input name="value" type="number" min=0 max=100000 placeholder="Enter number of steps" id="exercise" required>
             </div>
             <br>
             <span class="label">Comment (optional)</span>
