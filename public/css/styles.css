@@ -2360,6 +2360,7 @@ CLINICIAN STUFF
 
 .message-patient-contact:hover {
   background-color: var(--colour-background-teal);
+  color: rgba(1, 58, 99, 1);
 }
 
 .message-patient-heading {
