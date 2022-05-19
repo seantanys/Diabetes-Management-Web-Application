@@ -44,181 +44,181 @@ body {
   overflow: hidden;
 }
   
-  html {
-    box-sizing: border-box;
-  }
-  
-  *, *:before, *:after {
-    box-sizing: inherit;
-  }
+html {
+  box-sizing: border-box;
+}
 
-  .page-heading {
-    background-color: var(--colour-background-teal);
-    background-position: center;
-    background-size: 100%;
-    background-repeat: no-repeat;
-    box-shadow:inset 0 0 0 2000px rgba(14, 13, 13, 0.452);
-    padding-top: 3em;
-    padding-bottom: 3em;
-  }
+*, *:before, *:after {
+  box-sizing: inherit;
+}
 
-  .page-heading h1 {
-    font-size: var(--text-h1);
-    color: white;
-    text-align: center;
-    padding: 35px 0px;
-  }
+.page-heading {
+  background-color: var(--colour-background-teal);
+  background-position: center;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  box-shadow:inset 0 0 0 2000px rgba(14, 13, 13, 0.452);
+  padding-top: 3em;
+  padding-bottom: 3em;
+}
 
-  .what-is-diabetes {
-    background: var(--colour-h1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 25px;
-    padding-bottom: 50px;
-  }
+.page-heading h1 {
+  font-size: var(--text-h1);
+  color: white;
+  text-align: center;
+  padding: 35px 0px;
+}
 
-  .what-is-diabetes h2 {
-    font-size: var(--text-h2);
-    font-weight: 600;
-    color: white;
-    margin-top: 25px;
-    margin-bottom: 25px;
-  }
+.what-is-diabetes {
+  background: var(--colour-h1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 25px;
+  padding-bottom: 50px;
+}
 
-  .what-is-diabetes p {
-    margin-right: 25%;
-    margin-left: 25%;
-    font-size: var(--text-p);
-    color: white;
-    font-weight: 300;
-    text-align: center;
-  }
+.what-is-diabetes h2 {
+  font-size: var(--text-h2);
+  font-weight: 600;
+  color: white;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
 
-  .what-is-diabetes iframe{
-    width: 100%;
-    height: 300px;
-  }
-  
-  .what-is-diabetes .video-mask{
-      width: 50%;
-      height: 300px;
-      border-radius: var(--curved_corners); 
-      overflow: auto; 
-      margin: 0 auto;
-      /* margin-left: auto;   
-      margin-right: auto; */
-  }
+.what-is-diabetes p {
+  margin-right: 25%;
+  margin-left: 25%;
+  font-size: var(--text-p);
+  color: white;
+  font-weight: 300;
+  text-align: center;
+}
 
-  .filler-image {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* background-image: url('/images/girl-walking.jpg'); */
-    background-position: center;
-    background-size: 100%;
-    background-repeat: no-repeat;
-    box-shadow:inset 0 0 0 2000px rgba(36, 34, 34, 0.452);
-    padding-top: 3em;
-    padding-bottom: 3em;
+.what-is-diabetes iframe{
+  width: 100%;
+  height: 300px;
+}
 
-    height: 400px;
-  }
-
-  .filler-image h2 {
-    font-size: var(--text-h2);
-    color: white;
-    text-align: center;
-  }
-
-  .diabetes-type {
-    background-color: var(--colour-background-teal);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 25px;
-    padding-bottom: 50px;
-    text-align: center;
-  }
-
-  .diabetes-type h2 {
-    color: var(--colour-h1);
-    font-size: var(--text-h2);
-    font-weight: 600;
-  }
-
-  .diabetes-type h3 {
-    color: white;
-    font-size: var(--text-h3);
-    font-weight: 400;
-  }
-
-  .diabetes-type p{
-    padding-top: 25px;
-    padding-bottom: 25px;
-  }
-
-  .diabetes-type p {
-    font-size: var(--text-p);
-    color: var(--colour-h1);
-  }
-
-  .diabetes-type input {
-    position: absolute;
-    opacity: 0;
-    z-index: -1;
-  }
-
-  .accordion {
+.what-is-diabetes .video-mask{
     width: 50%;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 4px -2px rgba(0,0,0,0.5);
-  }
+    height: 300px;
+    border-radius: var(--curved_corners); 
+    overflow: auto; 
+    margin: 0 auto;
+    /* margin-left: auto;   
+    margin-right: auto; */
+}
 
-  .accordion-item {
-    color: white;
-    overflow: hidden;
-  }
+.filler-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-image: url('/images/girl-walking.jpg'); */
+  background-position: center;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  box-shadow:inset 0 0 0 2000px rgba(36, 34, 34, 0.452);
+  padding-top: 3em;
+  padding-bottom: 3em;
 
-  .accordion-label {
-    display: flex;
-    justify-content: space-between;
-    padding: 1em;
-    background: var(--colour-h1);
-    font-weight: bold;
-    cursor: pointer;
-   /* Icon */
- }
+  height: 400px;
+}
 
-  .accordion-label:hover {
-    background: rgb(4, 84, 141);
- }
+.filler-image h2 {
+  font-size: var(--text-h2);
+  color: white;
+  text-align: center;
+}
 
-  .accordion-label::after {
-    content: "\276F";
-    width: 1em;
-    height: 1em;
-    text-align: center;
-    transition: all 0.35s;
- }
+.diabetes-type {
+  background-color: var(--colour-background-teal);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 25px;
+  padding-bottom: 50px;
+  text-align: center;
+}
 
-  .accordion-content {
-    max-height: 0;
-    padding: 0 1em;
-    color: var(--colour-h1);
-    background: white;
-    transition: all 0.35s;
- }
+.diabetes-type h2 {
+  color: var(--colour-h1);
+  font-size: var(--text-h2);
+  font-weight: 600;
+}
 
-  .accordion-close {
-    display: flex;
-    justify-content: flex-end;
-    padding: 1em;
-    font-size: 0.75em;
-    background: var(--colour-h1);
-    cursor: pointer;
- }
+.diabetes-type h3 {
+  color: white;
+  font-size: var(--text-h3);
+  font-weight: 400;
+}
+
+.diabetes-type p{
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+.diabetes-type p {
+  font-size: var(--text-p);
+  color: var(--colour-h1);
+}
+
+.diabetes-type input {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+}
+
+.accordion {
+  width: 50%;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 4px -2px rgba(0,0,0,0.5);
+}
+
+.accordion-item {
+  color: white;
+  overflow: hidden;
+}
+
+.accordion-label {
+  display: flex;
+  justify-content: space-between;
+  padding: 1em;
+  background: var(--colour-h1);
+  font-weight: bold;
+  cursor: pointer;
+  /* Icon */
+}
+
+.accordion-label:hover {
+  background: rgb(4, 84, 141);
+}
+
+.accordion-label::after {
+  content: "\276F";
+  width: 1em;
+  height: 1em;
+  text-align: center;
+  transition: all 0.35s;
+}
+
+.accordion-content {
+  max-height: 0;
+  padding: 0 1em;
+  color: var(--colour-h1);
+  background: white;
+  transition: all 0.35s;
+}
+
+.accordion-close {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1em;
+  font-size: 0.75em;
+  background: var(--colour-h1);
+  cursor: pointer;
+}
 
   .accordion-close:hover {
     background: darken(var(--colour-h1), 10%);
@@ -553,32 +553,32 @@ textarea {
 }
 
 .feature-list-item .icon {
-    width: 30px;
-    height: 30px;
+  width: 30px;
+  height: 30px;
 }
 
 .contact-section {
-    background-color: var(--colour-background-teal);
-    color: var(--colour-h1);
-    display: flex;
-    flex-direction: column;
-    padding-top: 3em;
-    padding-bottom: 3em;
+  background-color: var(--colour-background-teal);
+  color: var(--colour-h1);
+  display: flex;
+  flex-direction: column;
+  padding-top: 3em;
+  padding-bottom: 3em;
 }
 
 .contact-section h1 {
-    width: 50%;
-    margin-right: 25%;
-    margin-left: 25%;
-    font-size: var(--text-h1);
-    font-weight: 600;
-    text-align: center;
+  width: 50%;
+  margin-right: 25%;
+  margin-left: 25%;
+  font-size: var(--text-h1);
+  font-weight: 600;
+  text-align: center;
 }
 
 .contact-section h3 {
-    font-size: var(--text-h3);
-    font-weight: 300;
-    text-align: center;
+  font-size: var(--text-h3);
+  font-weight: 300;
+  text-align: center;
 }
 
 /* RECORD/MEASUREMENT PAGE */
@@ -593,7 +593,7 @@ textarea {
 
 .page-heading-1 h1 {
   font-size: var(--text-h1);
-  color: var(--colour-h1);
+  color: white;
   text-align: center;
   padding: 35px 0px;
 }
@@ -604,7 +604,7 @@ textarea {
   margin-left: 25%;
   font-size: var(--text-h3);
   font-weight: 300;
-  color: black;
+  color: white;
   text-align: center;
   /* padding: 35px 0px; */
 }
@@ -752,8 +752,8 @@ textarea {
   font-weight: 600;
   font-size: var(--text-p);
   border: none;
-  color: white;
-  background-color: grey;
+  color: var(--colour-h1);
+  background-color: var(--colour-background-teal);
   padding: 5px 20px;
   text-align: center;
   text-decoration: none;
@@ -1279,22 +1279,30 @@ hr.solid {
 }
 }
 
-.create-patient-secion {
-  background-color: var(--colour-background-teal);
-  display: flex;
-  justify-content: center;
-}
 
-table {
-  border-collapse: collapse;
-  color: #fdfdfd;
-}
+/* TABLET SIZE */
+@media screen 
+  and (min-width: 768px) 
+  and (max-width: 1024px) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+  
+  .hero-section lottie-player {
+    width: 550px;
+    height: 550px;
+    margin-right: -50px
+  }
 
-td, th {
-  border: 1px solid #999;
-  padding: 0.5rem;
-}
+  .feature-list-item .icon {
+    width: 50px;
+    height: 50px;
+  }
 
+  .tabset {
+    width: 100%;
+  }
+
+
+}
 /* Patient dashboard stuff */
 
 #patient-dashboard {
@@ -1326,7 +1334,7 @@ td, th {
 
 #patient-details {
   background-color: var(--colour-background-teal);
-  color: white;
+  color: var(--colour-text);
   border-radius: 10%;
   display: flex;
   align-items: center;
@@ -1338,12 +1346,17 @@ td, th {
   padding-bottom: 5%;
   font-size: var(--text-p);
   text-align: center;
+  max-width: 60%;
 }
 
 #patient-details img {
-  max-width: 60%;
+  max-width: 40%;
   height: auto;
   margin-bottom: 5%;
+}
+
+#patient-details p {
+  max-width: 60%;
 }
 
 .patient-card {
@@ -1370,7 +1383,7 @@ td, th {
 
 .patient-card-content {
   background-color: var(--colour-background-teal);
-  color: white;
+  color: var(--colour-text);
   border-radius: 10%;
   height: 20em;
   width: 25em;
@@ -1430,7 +1443,7 @@ td, th {
 .patient-badge p {
   font-size: 15px;
   text-align: center;
-  color: white;
+  color: var(--colour-text);
   background-color: var(--colour-background);
   height: fit-content;
   padding: 4%;
@@ -1551,6 +1564,10 @@ td, th {
   font-size: var(--text-h3)
 }
 
+.tabset {
+  width: 100%;
+}
+
 .tabset > input[type="radio"] {
   position: absolute;
   left: -200vw;
@@ -1625,10 +1642,6 @@ td, th {
   margin-right:20%;
 }
 
-.tabset {
-  width: 100%;
-}
-
 .theme-color {
   height: 200px;
   width: 200px;
@@ -1697,6 +1710,125 @@ td, th {
   border-radius: 50%;
   width: 200px;
   height: 200px;
+}
+
+.patient-data-section {
+  margin-bottom: 25px;
+}
+
+.patient-data-container {
+  background-color:white;
+  width: 90%;
+  margin-right: 5%;
+  margin-left: 5%;
+  box-shadow: 0px 0px 10px rgba(114, 114, 113, 0.5);
+  border-radius: 15px;
+}
+
+.patient-data-filters {
+  width: 50%;
+  margin-right: 25%;
+  margin-left: 25%;
+
+  display: flex;
+  justify-content: center;
+}
+
+#pd-search-input {
+  height: 30px;
+  background-image: url('../images/icons/search.svg');
+  background-position: 10px 12px;
+  background-repeat: no-repeat;
+  font-size: var(--text-p);
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+  margin-left: 5px;
+}
+
+#search-filter {
+  height: 30px;
+}
+
+#patient-data-table {
+  width: 100%;
+  font-size: var(--text-p);
+  color: rgb(255, 255, 255);
+  border-collapse: collapse;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+#patient-data-table th, #patient-data-table td {
+  text-align: left;
+  padding: 12px;
+}
+
+#patient-data-table tr:nth-child(odd) {
+  background-color: rgb(31, 30, 30);
+}
+
+#patient-data-table tr:nth-child(even) {
+  background-color: var(--colour-background-teal);
+}
+
+.patient-data-header {
+  border-bottom: 1px solid #ddd;
+}
+
+.patient-data-row:hover {
+  background-color: #515152bb;
+}
+
+.patient-chart-section {
+  margin-bottom: 25px;
+}
+
+#patient-chart-container {
+  width: 90%;
+  height:700px;
+  margin-right:5%;
+  margin-left: 5%;
+}
+
+.chart-toggle-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.chart-toggle-container h3 {
+  font-size: var(--text-h3);
+  color: white;
+}
+
+.chart-toggles {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.chart-toggles button {
+  margin: 4px 0px;
+  border: 1px solid var(--colour-h1);
+  border-radius: 0;
+  color: white;
+}
+
+.chart-toggles button:hover {
+  color: var(--colour-background);
+}
+
+.inactive-toggle {
+  color: var(--colour-h1);
+  background: none;
+}
+
+.active-toggle {
+  color: var(--colour-background);
+  background-color: var(--colour-h1);
 }
 
 /* Loading Screen */
@@ -1806,7 +1938,118 @@ td, th {
     width: 80px;
     height: 80px;
   }
+
+  .patient-account-dashboard {
+    width: 90%;
+    margin-right: 5%;
+    margin-left: 5%;
+    height: 100vh;
+  }
+
+  .patient-account-dashboard p {
+    width: 80%;
+    margin-right:10%;
+    margin-left: 10%;
+  }
+
+  .tabset > input:checked + label {
+    border: none;
+  }
+  
+  .tab-panel {
+    border-top: none;
+  }
+
+  .theme {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+  
+    margin: 25px 0px 25px 0px;
+  }
+
+  #patient-chart-container {
+    width: 100%;
+    height:300px;
+    margin-right: 0%;
+    margin-left:  0%;
+  }
+
+  .patient-data-filters input{
+    width: 100px;
+  }
+
+  .patient-data-filters {
+    width: 90%;
+    margin-right: 5%;
+    margin-left: 5%;
+  }
+
+  #patient-data-table, #patient-data-table tr, 
+  #patient-data-table th, #patient-data-table td 
+  {
+    display: block;
+  }
+
+  #patient-data-table tr th {
+    position: absolute;
+		top: -9999px;
+		left: -9999px;
+  }
+
+  #patient-data-table tr {
+    border: 1px solid #ccc;
+  }
+
+  #patient-data-table td {
+    border: none;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+		padding-left: 50%; 
+  }
+
+  #patient-data-table td:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+	}
+
+  #patient-data-table tr:nth-child(even) {
+    background-color: transparent;
+  }
+
+  #patient-data-table tr:nth-child(even):hover {
+    background-color: transparent;
+  }
+
+  #patient-data-table td:nth-of-type(1):before { content: "Measurement"; }
+  #patient-data-table td:nth-of-type(2):before { content: "Value"; }
+  #patient-data-table td:nth-of-type(3):before { content: "Comment"; }
+  #patient-data-table td:nth-of-type(4):before { content: "Time Recorded"; }
+
+  .chart-toggles {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 }
+
+
+
+/* 
+
+
+CLINICIAN STUFF 
+
+
+*/
 
 .clinician-dashboard {
   display: flex;
@@ -1916,6 +2159,11 @@ td, th {
   cursor: pointer;
 }
 
+#clinician-button:nth-of-type(2) {
+  font-size: 16px;
+  height: 50px;
+}
+
 .clinician-nav {
   vertical-align: center;
   text-align: center;
@@ -1927,6 +2175,96 @@ td, th {
 #clinician-lottie {
   width: 400px;
   height: 400px;
+}
+
+.create-patient-section {
+  background-color: var(--colour-h1);
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+.create-patient-container {
+  background-color: var(--colour-h1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.create-patient-container-row {
+  background-color: var(--colour-h1);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.create-patient-container h3 {
+  font-size: var(--text-h3);
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.create-patient-container button {
+  margin-top: 25px;
+  color: var(--colour-h1);
+  background-color: var(--colour-background-teal);
+}
+
+.create-patient-field {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: baseline;
+
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.create-patient-field p {
+  font-size: var(--text-p);
+}
+
+.create-patient-field textarea {
+  height: 200px;
+}
+
+.create-patient-field-req {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.create-patient-checkbox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: var(--text-p);
+  margin-top: 15px;
+}
+
+.create-patient-checkbox label {
+  margin-right: 15px;
+}
+
+.threshold-container {
+  display: none;
+  background-color: #b9daeb96;
+  border-radius: 10px;
+}
+
+.threshold-container p {
+  margin-top: 15px;
+  text-align: center;
+  font-size: var(--text-p);
+  font-weight: 300;
+}
+
+.validator {
+  color: red;
 }
 
 .info {
@@ -1949,5 +2287,140 @@ td, th {
 .info img {
   width: 20px;
   height: 20px;
+}
+
+.clinician-message{
+  padding: 2rem;
+  font-size: 1.5em;
+  color: darkblue;
+}
+
+.clinician-message-header {
+  display: inline-flex;
+}
+
+.clinician-message-header-sender{
+  margin-left: 200px;
+  display:inline; 
+  background-color:whitesmoke;
+  padding: 1.5rem;
+  padding-left: 2rem;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+}
+
+.clinician-message-header-time {
+  padding: 1.5rem;
+  font-weight: 550;
+}
+
+.clinician-message-body{
+  padding-top: 1rem;
+  padding-left: 2rem;
+  height: 90px;
+  margin-left: 200px;
+  margin-right: 200px;
+  border: 0px;
+  border-style: groove;
+  text-align: left;
+  background-color: whitesmoke;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+  border-bottom-left-radius: 25px;
+}
+
+.clinician-message-body h3 {
+  font-weight: 600;
+}
+
+.support-message-section {
+  width: 75%;
+  margin-right: 12.5%;
+  margin-left: 12.5%;
+  background-color: var(--colour-h1);
+  margin-bottom: 100px;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+}
+
+.support-message-patient-list {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  background-color: #0a5388;
+  text-align: center;
+  border-radius: 25px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.message-patient-contact {
+  font-size: var(--text-p);
+  padding: 10px;
+  cursor: pointer;
+}
+
+.message-patient-contact:hover {
+  background-color: var(--colour-background-teal);
+  color: rgba(1, 58, 99, 1);
+}
+
+.active-message-patient {
+  background-color: var(--colour-background-teal);
+  color: rgba(1, 58, 99, 1);
+}
+
+.message-patient-heading {
+  font-size: var(--text-h3);
+  margin: 25px 15px;
+}
+
+.support-message-main {
+  width: 75%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.current-support-message {
+  margin: 25px 0px;
+}
+
+.current-support-message p {
+  font-size: var(--text-p);
+}
+
+.support-message-main p {
+  font-size: var(--text-p);
+}
+
+.compose-support-message input, textarea, button{
+  margin-bottom: 15px;
+}
+
+.compose-support-message label {
+  font-size: var(--text-p);
+}
+
+#hidden-support-msg-receiver {
+  display: none;
+}
+
+.compose-support-message button {
+  background-color: var(--colour-background-teal);
+  color: var(--colour-h1);
+}
+
+.flex-column-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-row-center {
+  display: flex;
+  flex-direction: row;
+}
+
+.clinician-message-link, .clinician-message-link:visited{
+  color: darkblue;
 }
 

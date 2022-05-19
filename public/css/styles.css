@@ -44,181 +44,181 @@ body {
   overflow: hidden;
 }
   
-  html {
-    box-sizing: border-box;
-  }
-  
-  *, *:before, *:after {
-    box-sizing: inherit;
-  }
+html {
+  box-sizing: border-box;
+}
 
-  .page-heading {
-    background-color: var(--colour-background-teal);
-    background-position: center;
-    background-size: 100%;
-    background-repeat: no-repeat;
-    box-shadow:inset 0 0 0 2000px rgba(14, 13, 13, 0.452);
-    padding-top: 3em;
-    padding-bottom: 3em;
-  }
+*, *:before, *:after {
+  box-sizing: inherit;
+}
 
-  .page-heading h1 {
-    font-size: var(--text-h1);
-    color: white;
-    text-align: center;
-    padding: 35px 0px;
-  }
+.page-heading {
+  background-color: var(--colour-background-teal);
+  background-position: center;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  box-shadow:inset 0 0 0 2000px rgba(14, 13, 13, 0.452);
+  padding-top: 3em;
+  padding-bottom: 3em;
+}
 
-  .what-is-diabetes {
-    background: var(--colour-h1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 25px;
-    padding-bottom: 50px;
-  }
+.page-heading h1 {
+  font-size: var(--text-h1);
+  color: white;
+  text-align: center;
+  padding: 35px 0px;
+}
 
-  .what-is-diabetes h2 {
-    font-size: var(--text-h2);
-    font-weight: 600;
-    color: white;
-    margin-top: 25px;
-    margin-bottom: 25px;
-  }
+.what-is-diabetes {
+  background: var(--colour-h1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 25px;
+  padding-bottom: 50px;
+}
 
-  .what-is-diabetes p {
-    margin-right: 25%;
-    margin-left: 25%;
-    font-size: var(--text-p);
-    color: white;
-    font-weight: 300;
-    text-align: center;
-  }
+.what-is-diabetes h2 {
+  font-size: var(--text-h2);
+  font-weight: 600;
+  color: white;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
 
-  .what-is-diabetes iframe{
-    width: 100%;
-    height: 300px;
-  }
-  
-  .what-is-diabetes .video-mask{
-      width: 50%;
-      height: 300px;
-      border-radius: var(--curved_corners); 
-      overflow: auto; 
-      margin: 0 auto;
-      /* margin-left: auto;   
-      margin-right: auto; */
-  }
+.what-is-diabetes p {
+  margin-right: 25%;
+  margin-left: 25%;
+  font-size: var(--text-p);
+  color: white;
+  font-weight: 300;
+  text-align: center;
+}
 
-  .filler-image {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* background-image: url('/images/girl-walking.jpg'); */
-    background-position: center;
-    background-size: 100%;
-    background-repeat: no-repeat;
-    box-shadow:inset 0 0 0 2000px rgba(36, 34, 34, 0.452);
-    padding-top: 3em;
-    padding-bottom: 3em;
+.what-is-diabetes iframe{
+  width: 100%;
+  height: 300px;
+}
 
-    height: 400px;
-  }
-
-  .filler-image h2 {
-    font-size: var(--text-h2);
-    color: white;
-    text-align: center;
-  }
-
-  .diabetes-type {
-    background-color: var(--colour-background-teal);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 25px;
-    padding-bottom: 50px;
-    text-align: center;
-  }
-
-  .diabetes-type h2 {
-    color: var(--colour-h1);
-    font-size: var(--text-h2);
-    font-weight: 600;
-  }
-
-  .diabetes-type h3 {
-    color: white;
-    font-size: var(--text-h3);
-    font-weight: 400;
-  }
-
-  .diabetes-type p{
-    padding-top: 25px;
-    padding-bottom: 25px;
-  }
-
-  .diabetes-type p {
-    font-size: var(--text-p);
-    color: var(--colour-h1);
-  }
-
-  .diabetes-type input {
-    position: absolute;
-    opacity: 0;
-    z-index: -1;
-  }
-
-  .accordion {
+.what-is-diabetes .video-mask{
     width: 50%;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 4px -2px rgba(0,0,0,0.5);
-  }
+    height: 300px;
+    border-radius: var(--curved_corners); 
+    overflow: auto; 
+    margin: 0 auto;
+    /* margin-left: auto;   
+    margin-right: auto; */
+}
 
-  .accordion-item {
-    color: white;
-    overflow: hidden;
-  }
+.filler-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-image: url('/images/girl-walking.jpg'); */
+  background-position: center;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  box-shadow:inset 0 0 0 2000px rgba(36, 34, 34, 0.452);
+  padding-top: 3em;
+  padding-bottom: 3em;
 
-  .accordion-label {
-    display: flex;
-    justify-content: space-between;
-    padding: 1em;
-    background: var(--colour-h1);
-    font-weight: bold;
-    cursor: pointer;
-   /* Icon */
- }
+  height: 400px;
+}
 
-  .accordion-label:hover {
-    background: rgb(4, 84, 141);
- }
+.filler-image h2 {
+  font-size: var(--text-h2);
+  color: white;
+  text-align: center;
+}
 
-  .accordion-label::after {
-    content: "\276F";
-    width: 1em;
-    height: 1em;
-    text-align: center;
-    transition: all 0.35s;
- }
+.diabetes-type {
+  background-color: var(--colour-background-teal);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 25px;
+  padding-bottom: 50px;
+  text-align: center;
+}
 
-  .accordion-content {
-    max-height: 0;
-    padding: 0 1em;
-    color: var(--colour-h1);
-    background: white;
-    transition: all 0.35s;
- }
+.diabetes-type h2 {
+  color: var(--colour-h1);
+  font-size: var(--text-h2);
+  font-weight: 600;
+}
 
-  .accordion-close {
-    display: flex;
-    justify-content: flex-end;
-    padding: 1em;
-    font-size: 0.75em;
-    background: var(--colour-h1);
-    cursor: pointer;
- }
+.diabetes-type h3 {
+  color: white;
+  font-size: var(--text-h3);
+  font-weight: 400;
+}
+
+.diabetes-type p{
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+.diabetes-type p {
+  font-size: var(--text-p);
+  color: var(--colour-h1);
+}
+
+.diabetes-type input {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+}
+
+.accordion {
+  width: 50%;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 4px -2px rgba(0,0,0,0.5);
+}
+
+.accordion-item {
+  color: white;
+  overflow: hidden;
+}
+
+.accordion-label {
+  display: flex;
+  justify-content: space-between;
+  padding: 1em;
+  background: var(--colour-h1);
+  font-weight: bold;
+  cursor: pointer;
+  /* Icon */
+}
+
+.accordion-label:hover {
+  background: rgb(4, 84, 141);
+}
+
+.accordion-label::after {
+  content: "\276F";
+  width: 1em;
+  height: 1em;
+  text-align: center;
+  transition: all 0.35s;
+}
+
+.accordion-content {
+  max-height: 0;
+  padding: 0 1em;
+  color: var(--colour-h1);
+  background: white;
+  transition: all 0.35s;
+}
+
+.accordion-close {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1em;
+  font-size: 0.75em;
+  background: var(--colour-h1);
+  cursor: pointer;
+}
 
   .accordion-close:hover {
     background: darken(var(--colour-h1), 10%);
@@ -553,32 +553,32 @@ textarea {
 }
 
 .feature-list-item .icon {
-    width: 30px;
-    height: 30px;
+  width: 30px;
+  height: 30px;
 }
 
 .contact-section {
-    background-color: var(--colour-background-teal);
-    color: var(--colour-h1);
-    display: flex;
-    flex-direction: column;
-    padding-top: 3em;
-    padding-bottom: 3em;
+  background-color: var(--colour-background-teal);
+  color: var(--colour-h1);
+  display: flex;
+  flex-direction: column;
+  padding-top: 3em;
+  padding-bottom: 3em;
 }
 
 .contact-section h1 {
-    width: 50%;
-    margin-right: 25%;
-    margin-left: 25%;
-    font-size: var(--text-h1);
-    font-weight: 600;
-    text-align: center;
+  width: 50%;
+  margin-right: 25%;
+  margin-left: 25%;
+  font-size: var(--text-h1);
+  font-weight: 600;
+  text-align: center;
 }
 
 .contact-section h3 {
-    font-size: var(--text-h3);
-    font-weight: 300;
-    text-align: center;
+  font-size: var(--text-h3);
+  font-weight: 300;
+  text-align: center;
 }
 
 /* RECORD/MEASUREMENT PAGE */
@@ -2418,7 +2418,6 @@ CLINICIAN STUFF
   display: flex;
   flex-direction: row;
 }
-
 
 .clinician-message-link, .clinician-message-link:visited{
   color: darkblue;

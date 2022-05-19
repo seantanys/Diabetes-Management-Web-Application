@@ -263,7 +263,7 @@ const getPatientDataPage = async (req, res) => {
             measurements[i].date = convertedDate.toLocaleString(DateTime.DATETIME_MED);
         }
 
-        res.render('patientData', {loggedIn: req.isAuthenticated(), title: "Your Data", required: reqMeasurements, measurement: measurements, groupedByDate: measurementsByDate});
+        res.render('patientData', {loggedIn: req.isAuthenticated(), title: "Your Data", theme: user.theme, required: reqMeasurements, measurement: measurements, groupedByDate: measurementsByDate});
     }
     else {
         res.render('login');
