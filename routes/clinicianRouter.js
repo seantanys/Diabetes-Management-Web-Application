@@ -34,7 +34,14 @@ clinicianRouter.post('/account/change-password', app.hasRole('clinician'), clini
 // clinicianRouter.post('/dashboard', clinicianController.insertData)
 
 // export the router
+const sendMessage = require('../socket').sendMessage
 
+clinicianRouter.post('/api/messages', (req, res) => {
+    const { message } = req.body
+    messages.push(message)
+    sendMessage(message)
+    return res.send(messages)
+})
 
 // clinicianRouter.post('/addClinician', async (req, res) => { // using POST for Postman demo
 //     const newClinician = new Clinician({
