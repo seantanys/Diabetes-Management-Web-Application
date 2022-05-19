@@ -1,21 +1,11 @@
+<h1>Range: {{max}} to {{min}} {{unit}}</h1>
+
 <div class="patient-data-container">
     <table id="patient-data-table">
-
         <tr class="patient-data-header">
             <th>Date</th>
             <th>Time</th>
-            {{#if (eqBcg type)}}
-                <th>BCG (nmol/L)</th>
-            {{/if}}
-            {{#if (eqWeight type)}}
-                <th>Weight (kg)</th>
-            {{/if}}
-            {{#if (eqInsulin type)}}
-                <th>Insulin (doses)</th>
-            {{/if}}
-            {{#if (eqExercise type)}}
-                <th>Exercise (steps)</th>
-            {{/if}}
+            <th>{{type}} {{unit}}</th>
             <th>Comments</th>
         </tr>
        
@@ -24,7 +14,11 @@
             {{#if this.value}}
                 <td>{{formatDate this.date}}</td>
                 <td>{{formatTime this.date}} </td>
-                <td>{{this.value}}</td>
+                {{#if (and (gte this.value min) (lte this.value max))}}
+                    <td>{{this.value}}</td>
+                {{else}}
+                    <td id ="red">{{this.value}}</td>
+                {{/if}}
                 {{#if (isEmptyStr this.comment)}}
                     <td> - </td>
                 {{else}}

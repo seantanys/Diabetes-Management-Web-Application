@@ -115,6 +115,30 @@ const getAllPatientData = async (req, res, next) => {
     }
 }
 
+const writeNote = async (req, res, next) => {
+    if (req.isAuthenticated()) {
+        try {
+            // create the note and save to db
+            const newNote = new Note({
+                patientId: req.body.patientId,
+                date: DateTime.now().setZone('Australia/Melbourne').toISO(),
+                comment: req.body.comment
+            });
+            const patient_id = newNote.patientId
+            await newNote.save();
+
+            req.flash('success',"Notes updated.")
+
+            res.redirect('/clinician/:patient_id') // potential error
+
+        } catch(err) {
+            next(err);
+        }
+    } else {
+        res.render('login')
+    }
+}
+
 const getPatientOverview = async(req, res, next) => {
     if (req.isAuthenticated()) {
         try {
@@ -141,6 +165,9 @@ const getPatientBCG = async(req, res, next) => {
             const measurement = await Measurement.find({patientId: req.params.patient_id.toString(), type:'bcg'}).sort({"date": -1}).lean() 
             const reqMeasurements = Object.keys(patient["measurements"])
             const type = 'bcg'
+            const max = patient.measurements.bcg.maximum
+            const min = patient.measurements.bcg.minimum
+            const unit = '(nmol/L)'
 
             formatted = getTableArray(dates, measurement)
 
@@ -149,7 +176,7 @@ const getPatientBCG = async(req, res, next) => {
                 return res.render('notfound')
             }
 
-            return res.render('patientMeasurement', {loggedIn: req.isAuthenticated(), patient: patient, required: reqMeasurements, measurement: formatted, type: type})
+            return res.render('patientMeasurement', {loggedIn: req.isAuthenticated(), patient: patient, required: reqMeasurements, measurement: formatted, type: type, max: max, min: min, unit: unit})
 
         } catch (err) {
             return next(err)
@@ -166,6 +193,9 @@ const getPatientWeight = async(req, res, next) => {
             const measurement = await Measurement.find({patientId: req.params.patient_id.toString(), type:'weight'}).sort({"date": -1}).lean() 
             const reqMeasurements = Object.keys(patient["measurements"])
             const type = 'weight'
+            const max = patient.measurements.weight.maximum
+            const min = patient.measurements.weight.minimum
+            const unit = '(kg)'
 
             formatted = getTableArray(dates, measurement)
 
@@ -174,7 +204,7 @@ const getPatientWeight = async(req, res, next) => {
                 return res.render('notfound')
             }
 
-            return res.render('patientMeasurement', {loggedIn: req.isAuthenticated(), patient: patient, required: reqMeasurements, measurement: formatted, type: type})
+            return res.render('patientMeasurement', {loggedIn: req.isAuthenticated(), patient: patient, required: reqMeasurements, measurement: formatted, type: type, max: max, min: min, unit: unit})
 
         } catch (err) {
             return next(err)
@@ -191,6 +221,9 @@ const getPatientInsulin = async(req, res, next) => {
             const measurement = await Measurement.find({patientId: req.params.patient_id.toString(), type:'insulin'}).sort({"date": -1}).lean() 
             const reqMeasurements = Object.keys(patient["measurements"])
             const type = 'insulin'
+            const max = patient.measurements.insulin.maximum
+            const min = patient.measurements.insulin.minimum
+            const unit = '(dose(s))'
 
             formatted = getTableArray(dates, measurement)
 
@@ -199,7 +232,7 @@ const getPatientInsulin = async(req, res, next) => {
                 return res.render('notfound')
             }
 
-            return res.render('patientMeasurement', {loggedIn: req.isAuthenticated(), patient: patient, required: reqMeasurements, measurement: formatted, type: type})
+            return res.render('patientMeasurement', {loggedIn: req.isAuthenticated(), patient: patient, required: reqMeasurements, measurement: formatted, type: type, max: max, min: min, unit: unit})
 
         } catch (err) {
             return next(err)
@@ -216,6 +249,9 @@ const getPatientExercise = async(req, res, next) => {
             const measurement = await Measurement.find({patientId: req.params.patient_id.toString(), type:'exercise'}).sort({"date": -1}).lean() 
             const reqMeasurements = Object.keys(patient["measurements"])
             const type = 'exercise'
+            const max = patient.measurements.exercise.maximum
+            const min = patient.measurements.exercise.minimum
+            const unit = '(steps)'
 
             formatted = getTableArray(dates, measurement)
 
@@ -224,7 +260,7 @@ const getPatientExercise = async(req, res, next) => {
                 return res.render('notfound')
             }
 
-            return res.render('patientMeasurement', {loggedIn: req.isAuthenticated(), patient: patient, required: reqMeasurements, measurement: formatted, type: type})
+            return res.render('patientMeasurement', {loggedIn: req.isAuthenticated(), patient: patient, required: reqMeasurements, measurement: formatted, type: type, max: max, min: min, unit: unit})
 
         } catch (err) {
             return next(err)
@@ -402,4 +438,5 @@ module.exports = {
     insertData,
     getNewPatientForm,
     getPatientMessages,
+    writeNote,
 }

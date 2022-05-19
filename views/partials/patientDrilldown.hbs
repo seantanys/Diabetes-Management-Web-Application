@@ -1,19 +1,17 @@
-<div class="page-heading-1">
-    <div class="patient-info-container">
-        <div class="patient-info"> 
-            {{!flexbox: 3 columns with first col small, mid and last col equal width}} 
-            <img src = "/images/male-profile.jpg">
-            <ul>
-                <li>Name: {{patient.first_name}} {{patient.last_name}}</li>
-                <li>Year of Birth: {{patient.dob}}</li>
-                <li>Join Date: {{patient.join_date}}</li>
-            </ul>
-        </div>
-    </div>
-    <hr class="divider">
+
+<div class="patient-info"> 
+    {{!flexbox: 3 columns with first col small, mid and last col equal width}} 
+    <img src = "/images/male-profile.jpg">
+    <ul>
+        <li>Name:   {{patient.first_name}} {{patient.last_name}}</li>
+        <li>Year of Birth:   {{formatDate patient.dob}}</li>
+        <li>Join Date:   {{formatDate patient.join_date}}</li>
+    </ul>
 </div>
 
-<div class="functions-nav-bar">
+<hr class="divider">
+
+<div class="drilldown-nav-bar">
     {{!flexbox of 3 items}}
     <ul class="nav-menu">
         <li class="nav-item">
@@ -48,3 +46,7 @@
         </li>
     </ul>
 </div>
+
+<hr class="divider">
+
+<br>
