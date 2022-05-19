@@ -2296,7 +2296,11 @@ CLINICIAN STUFF
   font-weight: 500;
 }
 
-.overview-container {
+.patient-info ul {
+  vertical-align: middle;
+}
+
+.notes-and-other-container {
   display: flex;
   align-items: stretch;
   gap: 10px;
@@ -2304,7 +2308,7 @@ CLINICIAN STUFF
   justify-content: space-evenly;
 }
 
-.data-table h1 {
+#title {
   font-size: var(--text-h2);
   color: var(--colour-black);
   text-align: centre;
@@ -2316,4 +2320,45 @@ CLINICIAN STUFF
   color: var(--colour-black);
   text-align: centre;
   font-weight: 600;
+}
+
+.notes-table {
+  background-color: white;
+}
+
+.notes-table td {
+  font-size: var(--text-p);
+  color: var(--colour-black);
+}
+
+.notes-table input {
+  border: none;
+  outline: none;
+  padding: 10px 5px;
+  background-color: #f6f6f6;
+  flex: 1;
+}
+
+.notes-table textarea {
+  border: none;
+  outline: none;
+  padding: 10px 5px;
+  background-color: #f6f6f6;
+  flex: 1;
+}
+
+.notes-table.record-button {
+  font-family: var(--font-family-body);
+  font-weight: 600;
+  font-size: var(--text-p);
+  border: var(--colour-h2);
+  color: var(--colour-h2);
+  background-color: var(--colour-background-teal);
+  padding: 5px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 999em;
 }

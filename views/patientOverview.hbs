@@ -15,9 +15,9 @@
 <input type="hidden" id="pd-dates" value="{{json groupedByDate}}" >
 
 {{> patientDrilldown}}
-<div class="overview-container">
+<div class="notes-and-other-container">
     <section class="data-table">
-        <h1>All Data</h1>
+        <h1 id="title">All Data</h1>
         <br>
         <div class="patient-data-filters">
             <select name="search-filter" id="search-filter">
@@ -67,29 +67,9 @@
         </div>
     </section>
 
-    <section class="patient-notes">
-        <div class="notes-table">
-            <h1>Notes</h1>
-            <br>
-            <table id="notes-data-table">
-                {{#each notes}}
-                <tr class="notes-data-row">
-                    {{!this.date}}
-                    {{!this.comment}}
-                </tr>
-                {{/each}}
-                
-            </table>
-        </div>
-
-        <form action="/patient/record" method="post">  
-            <div class="comment-input">
-                <textarea name="comment" id="comment" cols="30" rows="5" placeholder="Enter comment here"></textarea>
-            </div>
-            <button class="record-button">Add note</button>
-        </form>
-    </section>
+{{> notes}}
 </div>
+<br>
 
 {{else}}
 

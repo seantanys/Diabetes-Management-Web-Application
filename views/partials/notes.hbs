@@ -1,0 +1,21 @@
+<section class="patient-notes">
+    <div class="notes-table">
+        <h1 id="title">Notes</h1>
+        <br>
+        <table id="notes-data-table">
+            {{#each notes}}
+            <tr class="notes-data-row" style="word-wrap: break-word">
+                <td>{{formatDate this.date}}</td>
+                <td>{{this.comment}}</td>
+            </tr>
+            {{/each}} 
+        </table>
+    </div>
+
+    <form action="/clinician/overview" method="post">  
+        <div class="comment-input">
+            <textarea name="comment" id="comment" cols="30" rows="5" placeholder="Enter comment here"></textarea>
+        </div>
+        <button class="record-button">Add note</button>
+    </form>
+</section>

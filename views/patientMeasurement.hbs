@@ -14,7 +14,14 @@
 
 {{> patientDrilldown}}
 
-{{> tablesCharts}}
+<h1>Range: {{max}} to {{min}} {{unit}}</h1>
+
+<div class="notes-and-other-container">
+    {{> tablesCharts}}
+
+    {{> notes}}
+</div>
+<br>
 
 {{else}}
 
