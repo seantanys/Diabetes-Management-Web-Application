@@ -2407,6 +2407,12 @@ CLINICIAN STUFF
   color: var(--colour-h1);
 }
 
+.patient-overview-btn {
+  background-color: var(--colour-background-teal);
+  color: var(--colour-h1);
+  margin-top: 35px;
+}
+
 .flex-column-center {
   display: flex;
   flex-direction: column;
