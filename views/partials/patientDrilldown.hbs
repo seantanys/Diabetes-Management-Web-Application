@@ -15,26 +15,26 @@
     {{!flexbox of 3 items}}
     <ul class="nav-menu">
         <li class="nav-item">
-            <a href="/clinician/{{{patient._id}}}" class="nav-link">Overview</a>
+            <a href="/clinician/manage-patient/{{{patient._id}}}" class="nav-link">Overview</a>
         </li>
         <li>
             {{#if (isIn "bcg" required)}}
-            <a href="/clinician/{{{patient._id}}}/bcg" class="nav-link">BCG</a>
+            <a href="/clinician/manage-patient/{{{patient._id}}}/bcg" class="nav-link">BCG</a>
             {{/if}}
         </li>
         <li>
             {{#if (isIn "weight" required)}}
-            <a href="/clinician/{{{patient._id}}}/weight" class="nav-link">Weight</a>
+            <a href="/clinician/manage-patient/{{{patient._id}}}/weight" class="nav-link">Weight</a>
             {{/if}}
         </li>
         <li>
             {{#if (isIn "insulin" required)}}
-            <a href="/clinician/{{{patient._id}}}/insulin" class="nav-link">Insulin</a>
+            <a href="/clinician/manage-patient/{{{patient._id}}}/insulin" class="nav-link">Insulin</a>
             {{/if}}
         </li>
         <li>
             {{#if (isIn "exercise" required)}}
-            <a href="/clinician/{{{patient._id}}}/exercise" class="nav-link">Exercise</a>
+            <a href="/clinician/manage-patient/{{{patient._id}}}/exercise" class="nav-link">Exercise</a>
             {{/if}}
         </li>
         
@@ -42,7 +42,7 @@
             <a href="/#" class="nav-link">Manage</a>
         </li>
         <li class="nav-item">
-            <a href="/#"class="nav-link">Support Message</a>
+            <a href="/clinician/messages"class="nav-link">Support Message</a>
         </li>
     </ul>
 </div>

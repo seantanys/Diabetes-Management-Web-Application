@@ -153,7 +153,7 @@ const getPatientOverview = async(req, res, next) => {
             //const notes = await Note.find({patientId: patient._id}).sort({"date": -1}).lean();
             
             //return res.render('partials/patientOverview', {loggedIn: req.isAuthenticated(), required: reqMeasurements, patient: patient, measurements: measurements, notes: notes})
-            return res.render('patientOverview', {loggedIn: req.isAuthenticated(), required: reqMeasurements, patient: patient, measurements: measurements})
+            return res.render('patientOverview', {loggedIn: req.isAuthenticated(), layout: 'clinician.hbs', required: reqMeasurements, patient: patient, measurements: measurements})
 
         } catch (err) {
             return next(err)
