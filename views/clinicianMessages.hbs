@@ -1,6 +1,7 @@
 
-<br>
-<br>
+<div class="page-heading-1">
+    <h1>Most Recent Patient Comments</h1>
+</div>
 
 <ul>
 {{#each data}}
@@ -16,7 +17,20 @@
         </div>      
 
         <div class='clinician-message-body'>
-            {{this.type}} : {{this.comment}}
+            {{#if (eqBcg this.type)}}
+            <h3>Blood Glucose Level: {{this.value}}</h3>
+            {{/if}}    
+            {{#if (eqWeight this.type)}}
+            <h3>Weight: {{this.value}}</h3>
+            {{/if}} 
+            {{#if (eqInsulin this.type)}}
+            <h3>Insulin: {{this.value}}</h3>
+            {{/if}} 
+            {{#if (eqExercise this.type)}}
+            <h3>Exercise: {{this.value}}</h3>
+            {{/if}}
+
+            <p>{{this.comment}}</p>
         </div>
         </a>
     </div>

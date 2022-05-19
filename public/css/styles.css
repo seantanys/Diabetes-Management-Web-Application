@@ -2304,6 +2304,8 @@ CLINICIAN STUFF
   background-color:whitesmoke;
   padding: 1.5rem;
   padding-left: 2rem;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
 }
 
 .clinician-message-header-time {
@@ -2321,6 +2323,13 @@ CLINICIAN STUFF
   border-style: groove;
   text-align: left;
   background-color: whitesmoke;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+  border-bottom-left-radius: 25px;
+}
+
+.clinician-message-body h3 {
+  font-weight: 600;
 }
 
 

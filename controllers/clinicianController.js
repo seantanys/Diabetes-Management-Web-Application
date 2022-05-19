@@ -96,16 +96,14 @@ const insertData = async (req, res, next) => {
             }
 
             // checking to see if this email is taken.
-            // const emailExists = await User.find({username: req.body.email}).lean();
-            
-            // if (emailExists) {
-            //     req.flash('error', `The email address has already been taken, please try another one.`)
-            //     return res.redirect('/clinician/create');
-            // }
+            const emailExists = await User.find({username: req.body.email}).lean();
+            if (emailExists.length > 0) {
+                req.flash('error', `The email address has already been taken, please try another one.`)
+                return res.redirect('/clinician/create');
+            }
 
             const screenNameExists = await Patient.find({screen_name: req.body.screen_name}).lean();
-
-            if (screenNameExists) {
+            if (screenNameExists.length > 0) {
                 req.flash('error', `This screen name has already been taken, please try another one.`)
                 return res.redirect('/clinician/create');
             }
@@ -230,6 +228,7 @@ const getPatientMessages = async (req, res, next) => {
                         patient: patient.first_name+" "+ patient.last_name,
                         id: measurement[i]._id,
                         type: measurement[i].type,
+                        value: measurement[i].value,
                         comment: measurement[i].comment,
                         date: measurement[i].date.toLocaleString("en-US", {timeZone: "Australia/Sydney"}),
                     })
