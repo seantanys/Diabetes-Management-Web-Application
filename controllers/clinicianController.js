@@ -274,7 +274,7 @@ const getSupportMessagesPage = async (req, res, next) => {
                 messages[patientFullName] = [patient._id.toString(), patient.supportMessage];
             }
 
-            res.render('clinicianSupportMessage', {layout: "clinician.hbs", loggedIn: req.isAuthenticated(), flash: req.flash('success'), errorFlash: req.flash('error'), messages: messages});
+            res.render('clinicianSupportMessage', {layout: "clinician.hbs", loggedIn: req.isAuthenticated(), flash: req.flash('success'), errorFlash: req.flash('error'), clinician: clinician, messages: messages});
 
         } catch (err) {
             return next(err);
