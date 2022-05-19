@@ -287,16 +287,30 @@ const getSupportMessagesPage = async (req, res, next) => {
 }
 
 const changeSupportMessage = async(req, res, next) =>{
-    try{
-        const message = req.body.supportMsg;
-        const recipientId = req.body.recipientId;
 
-        await Patient.updateOne({_id: recipientId}, {$set: {supportMessage: message}});
+    if (req.isAuthenticated()) {
+        try{
+            const message = req.body.supportMsg;
+            const recipientId = req.body.recipientId;
 
-        req.flash('success', 'Support message successfully updated!')
-        res.redirect('/clinician/messages')
-    }catch(err){
-        return next(err);
+            if (message.length <= 3) {
+                req.flash('error', 'Error. Support message must be longer.')
+                return res.redirect('/clinician/messages')
+            }
+            if (recipientId.length <= 10) {
+                req.flash('error', 'Something went wrong processing your message. Please Try Again.')
+                return res.redirect('/clinician/messages')
+            }
+
+            await Patient.updateOne({_id: recipientId}, {$set: {supportMessage: message}});
+
+            req.flash('success', 'Support message successfully updated!')
+            res.redirect('/clinician/messages')
+        }catch(err){
+            return next(err);
+        }
+    } else {
+        res.render('login');
     }
 }
 
