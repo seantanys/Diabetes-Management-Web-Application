@@ -181,7 +181,7 @@ const getPatientBCG = async(req, res, next) => {
                 return res.render('notfound')
             }
 
-            return res.render('patientMeasurement', {loggedIn: req.isAuthenticated(), patient: patient, required: reqMeasurements, measurement: formatted, type: type, max: max, min: min, unit: unit})
+            return res.render('patientMeasurement', {loggedIn: req.isAuthenticated(), layout: 'clinician.hbs', patient: patient, required: reqMeasurements, measurement: formatted, type: type, max: max, min: min, unit: unit})
 
         } catch (err) {
             return next(err)
@@ -209,7 +209,7 @@ const getPatientWeight = async(req, res, next) => {
                 return res.render('notfound')
             }
 
-            return res.render('patientMeasurement', {loggedIn: req.isAuthenticated(), patient: patient, required: reqMeasurements, measurement: formatted, type: type, max: max, min: min, unit: unit})
+            return res.render('patientMeasurement', {loggedIn: req.isAuthenticated(), layout: 'clinician.hbs', patient: patient, required: reqMeasurements, measurement: formatted, type: type, max: max, min: min, unit: unit})
 
         } catch (err) {
             return next(err)
@@ -237,7 +237,7 @@ const getPatientInsulin = async(req, res, next) => {
                 return res.render('notfound')
             }
 
-            return res.render('patientMeasurement', {loggedIn: req.isAuthenticated(), patient: patient, required: reqMeasurements, measurement: formatted, type: type, max: max, min: min, unit: unit})
+            return res.render('patientMeasurement', {loggedIn: req.isAuthenticated(), layout: 'clinician.hbs', patient: patient, required: reqMeasurements, measurement: formatted, type: type, max: max, min: min, unit: unit})
 
         } catch (err) {
             return next(err)
@@ -265,7 +265,7 @@ const getPatientExercise = async(req, res, next) => {
                 return res.render('notfound')
             }
 
-            return res.render('patientMeasurement', {loggedIn: req.isAuthenticated(), patient: patient, required: reqMeasurements, measurement: formatted, type: type, max: max, min: min, unit: unit})
+            return res.render('patientMeasurement', {loggedIn: req.isAuthenticated(), layout: 'clinician.hbs', patient: patient, required: reqMeasurements, measurement: formatted, type: type, max: max, min: min, unit: unit})
 
         } catch (err) {
             return next(err)
