@@ -2337,7 +2337,9 @@ CLINICIAN STUFF
   margin-right: 12.5%;
   margin-left: 12.5%;
   background-color: var(--colour-h1);
-  margin-bottom: 25px;
+  margin-bottom: 100px;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
 }
 
 .support-message-patient-list {
@@ -2346,12 +2348,17 @@ CLINICIAN STUFF
   width: 25%;
   background-color: #0a5388;
   text-align: center;
+  border-radius: 25px;
 }
 
 .message-patient-contact {
   font-size: var(--text-p);
   padding: 10px;
-  border: 1px solid #153852;
+  cursor: pointer;
+}
+
+.message-patient-contact:hover {
+  background-color: var(--colour-background-teal);
 }
 
 .message-patient-heading {
@@ -2373,6 +2380,23 @@ CLINICIAN STUFF
 
 .support-message-main p {
   font-size: var(--text-p);
+}
+
+.compose-support-message input, textarea, button{
+  margin-bottom: 15px;
+}
+
+.compose-support-message label {
+  font-size: var(--text-p);
+}
+
+#hidden-support-msg-receiver {
+  display: none;
+}
+
+.compose-support-message button {
+  background-color: var(--colour-background-teal);
+  color: var(--colour-h1);
 }
 
 .flex-column-center {

@@ -16,7 +16,7 @@ clinicianRouter.post('/create', app.hasRole('clinician'), clinicianController.va
 
 clinicianRouter.get('/messages', app.hasRole('clinician'), clinicianController.getSupportMessagesPage)
 
-clinicianRouter.get('/supportMessage', clinicianController.changeSupportMessage)
+clinicianRouter.post('/messages', clinicianController.changeSupportMessage)
 
 // route to handle the GET request for all patients data
 clinicianRouter.get('/dashboard', app.hasRole('clinician'), clinicianController.getAllPatientData)

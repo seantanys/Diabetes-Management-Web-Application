@@ -1,16 +1,24 @@
+<script src="../scripts/supportMessages.js"></script>
+
+{{> flashSuccess}}
+{{> flashError}}
+
 <div class="page-heading-1">
     <h1>Messages</h1>
 </div>
 
+<input type="hidden" id="sp-hidden" value="{{json messages}}" >
 
 <section class="support-message-section flex-row-center">
     <div class="support-message-patient-list">
         <div class="message-patient-heading">
             <h3>Patients</h3>
         </div>
+        {{#each messages}}
         <div class="message-patient-contact">
-            <p>John Smith</p>
+            <p>{{@key}}</p>
         </div>
+        {{/each}}
     </div>
     <div class="support-message-main flex-column-center">
 
@@ -19,10 +27,9 @@
         </div>
 
         <div class="current-support-message flex-column-center">
-            <p>To John Smith</p>
+            <p id="msg-recipient">Select a patient to view and update messages.</p>
             <div class="msg-bubble msg-bubble-left">
                 <h3>Dr. Chris</h3>
-                <p>Good work man! keep it up, i see the good work </p>
             </div>
         </div>
 
@@ -31,9 +38,13 @@
         </div>
 
         <div class="compose-support-message">
-            <form action="">
-                <textarea name="support-msg" id="support-msg" cols="30" rows="10"></textarea>
-                <button>Send</button>
+            <form action="" class="flex-column-center" method="post">
+                <label for="recipient">Receiver</label>
+                <input type="text" id="support-msg-receiver" name="recipient" readonly required>
+                <input type="text" id="hidden-support-msg-receiver" name="recipientId" required>
+                <label for="support-msg">Message</label>
+                <textarea name="supportMsg" id="support-msg" cols="30" rows="10" required></textarea>
+                <button type="submit">Send</button>
             </form>
         </div>
 
