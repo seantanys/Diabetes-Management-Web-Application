@@ -3,18 +3,40 @@
 </div>
 
 
-<section class="support-message-section">
+<section class="support-message-section flex-row-center">
     <div class="support-message-patient-list">
-        <h3>Patients</h3>
+        <div class="message-patient-heading">
+            <h3>Patients</h3>
+        </div>
         <div class="message-patient-contact">
-            John Smith
+            <p>John Smith</p>
         </div>
     </div>
-    <div class="support-message-main">
-        <h3>Heading</h3>
-        <div class="selected-patients">
-            
+    <div class="support-message-main flex-column-center">
+
+        <div class="message-patient-heading">
+            <h3>Current Message</h3>
         </div>
+
+        <div class="current-support-message flex-column-center">
+            <p>To John Smith</p>
+            <div class="msg-bubble msg-bubble-left">
+                <h3>Dr. Chris</h3>
+                <p>Good work man! keep it up, i see the good work </p>
+            </div>
+        </div>
+
+        <div class="message-patient-heading">
+            <h3>Update Message</h3>
+        </div>
+
+        <div class="compose-support-message">
+            <form action="">
+                <textarea name="support-msg" id="support-msg" cols="30" rows="10"></textarea>
+                <button>Send</button>
+            </form>
+        </div>
+
     </div>
 </section>
 
