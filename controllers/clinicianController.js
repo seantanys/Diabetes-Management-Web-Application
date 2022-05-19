@@ -220,7 +220,7 @@ const insertData = async (req, res, next) => {
     }   
 }
 
-const getPatientMessages = async (req, res, next) => {
+const getPatientComments = async (req, res, next) => {
     if (req.isAuthenticated()) {
         try{
             patientComments = []
@@ -248,7 +248,7 @@ const getPatientMessages = async (req, res, next) => {
             }
     
             //console.log(patientComments)
-            return res.render('clinicianMessages', {layout: "clinician.hbs", loggedIn: req.isAuthenticated(), data: patientComments})
+            return res.render('patientComments', {layout: "clinician.hbs", loggedIn: req.isAuthenticated(), data: patientComments})
     
     
         } catch(err){
@@ -259,14 +259,42 @@ const getPatientMessages = async (req, res, next) => {
     } 
 }
 
+const getSupportMessagesPage = async (req, res, next) => {
+
+    if (req.isAuthenticated()) {
+        try {
+            const user = req.user;
+            const clinician = await Clinician.findById(user.role_id.toString()).lean();
+            const messages = {}
+
+            for (let i = 0; i < clinician.patients.length; i++) {
+                const patient = await Patient.findById(clinician.patients[i].toString()).lean()
+                var patientFullName = `${patient.first_name} ${patient.last_name}`;
+
+                messages[patientFullName] = [patient._id.toString(), patient.supportMessage];
+            }
+
+            res.render('clinicianSupportMessage', {layout: "clinician.hbs", loggedIn: req.isAuthenticated(), flash: req.flash('success'), errorFlash: req.flash('error'), clinician: clinician, messages: messages});
+
+        } catch (err) {
+            return next(err);
+        }
+
+        
+    } else {
+        res.render('login');
+    }
+}
+
 const changeSupportMessage = async(req, res, next) =>{
     try{
-        const supportMessage = await Patient.updateOne({first_name:'test'},{$set: {supportMessage:"ferrari"}}).lean()
-        // console.log(supportMessage)
-        //patient = await Patient.findById("628328f868a793597b587e7c").lean()
-        //console.log("reached here")
-        console.log(supportMessage)
-        return supportMessage;
+        const message = req.body.supportMsg;
+        const recipientId = req.body.recipientId;
+
+        await Patient.updateOne({_id: recipientId}, {$set: {supportMessage: message}});
+
+        req.flash('success', 'Support message successfully updated!')
+        res.redirect('/clinician/messages')
     }catch(err){
         return next(err);
     }
@@ -377,9 +405,10 @@ module.exports = {
     getDataById,
     insertData,
     getNewPatientForm,
-    getPatientMessages,
+    getPatientComments,
     getAccountPage,
     changePassword,
     changeSupportMessage,
+    getSupportMessagesPage,
     validate
 }

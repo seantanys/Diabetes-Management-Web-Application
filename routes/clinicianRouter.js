@@ -14,9 +14,9 @@ clinicianRouter.get('/create', app.hasRole('clinician'), clinicianController.get
 
 clinicianRouter.post('/create', app.hasRole('clinician'), clinicianController.validate('insertData'), clinicianController.insertData)
 
-clinicianRouter.get('/messages', app.hasRole('clinician'), clinicianController.getPatientMessages)
+clinicianRouter.get('/messages', app.hasRole('clinician'), clinicianController.getSupportMessagesPage)
 
-clinicianRouter.get('/supportMessage', clinicianController.changeSupportMessage)
+clinicianRouter.post('/messages', clinicianController.changeSupportMessage)
 
 // route to handle the GET request for all patients data
 clinicianRouter.get('/dashboard', app.hasRole('clinician'), clinicianController.getAllPatientData)
@@ -24,7 +24,7 @@ clinicianRouter.get('/dashboard', app.hasRole('clinician'), clinicianController.
 // route to handle the GET request for one patient data
 clinicianRouter.get('/manage-patient/:patient_id', app.hasRole('clinician'), clinicianController.getDataById)
 
-clinicianRouter.get('/messages', app.hasRole('clinician'), clinicianController.getPatientMessages)
+clinicianRouter.get('/comments', app.hasRole('clinician'), clinicianController.getPatientComments)
 
 clinicianRouter.get('/account', app.hasRole('clinician'), clinicianController.getAccountPage);
 
