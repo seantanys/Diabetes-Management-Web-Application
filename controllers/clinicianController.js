@@ -2,6 +2,7 @@ const {Patient} = require('../models/patient')
 const {Measurement} = require('../models/measurement')
 const {User} = require('../models/user')
 const { DateTime } = require("luxon");
+const {Clinician} = require('../models/clinician')
 const { body, validationResult } = require('express-validator')
 
 // function which handles requests for displaying patient name and measurement on clinician 
@@ -14,21 +15,24 @@ const getAllPatientData = async (req, res, next) => {
     const currDate = currTime.startOf('day').toISO()
     const todaysDate = currTime.toLocaleString(DateTime.DATETIME_MED);
 
+    const clinician = await Clinician.findById(user.role_id.toString()).lean();
+
     try {
         // for each patient in the Patients collection, we search for their latest measurements within the
         // Measurements collection and store it in the patient dashboard list which is sent to the 
         // clinician dashboard handlebar, along with the total number of patients for that clinician 
         // and todays date
-        const patients = await Patient.find().lean()
-        for (let i = 0; i < patients.length; i++) {
+        
+        for (let i = 0; i < clinician.patients.length; i++) {
 
-            bcgmeasurement = await Measurement.findOne({patientId: patients[i]._id.toString(), type:'bcg'}).sort({"date": -1}).lean()
-            weightmeasurement = await Measurement.findOne({patientId: patients[i]._id.toString(), type:'weight'}).sort({"date": -1}).lean()
-            insulinmeasurement = await Measurement.findOne({patientId: patients[i]._id.toString(), type:'insulin'}).sort({"date": -1}).lean()
-            exercisemeasurement = await Measurement.findOne({patientId: patients[i]._id.toString(), type:'exercise'}).sort({"date": -1}).lean()
+            const patient = await Patient.findById(clinician.patients[i].toString()).lean()
+            bcgmeasurement = await Measurement.findOne({patientId: clinician.patients[i].toString(), type:'bcg'}).sort({"date": -1}).lean()
+            weightmeasurement = await Measurement.findOne({patientId: clinician.patients[i].toString(), type:'weight'}).sort({"date": -1}).lean()
+            insulinmeasurement = await Measurement.findOne({patientId: clinician.patients[i].toString(), type:'insulin'}).sort({"date": -1}).lean()
+            exercisemeasurement = await Measurement.findOne({patientId: clinician.patients[i].toString(), type:'exercise'}).sort({"date": -1}).lean()
 
             patientDashboard.push({
-                                   patient: patients[i],
+                                   patient: patient,
                                    bcg: (bcgmeasurement)?bcgmeasurement['value']:"",
                                    weight: (weightmeasurement)?weightmeasurement['value']:"",
                                    insulin: (insulinmeasurement)?insulinmeasurement['value']:"",
@@ -36,7 +40,7 @@ const getAllPatientData = async (req, res, next) => {
                                 })
         }
         
-        return res.render('clinicianDashboard', {layout: "clinician.hbs", loggedIn: req.isAuthenticated(), flash: req.flash('success'), errorFlash: req.flash('error'), user: user, data: patientDashboard, numPatients: patients.length, date: todaysDate})
+        return res.render('clinicianDashboard', {layout: "clinician.hbs", loggedIn: req.isAuthenticated(), flash: req.flash('success'), errorFlash: req.flash('error'), user: clinician, data: patientDashboard, numPatients: clinician.patients.length, date: todaysDate})
 
     } catch (err) {
         return next(err)
@@ -96,17 +100,18 @@ const insertData = async (req, res, next) => {
             }
 
             // checking to see if this email is taken.
-            const emailExists = await User.find({username: req.body.email}).lean();
-            if (emailExists.length > 0) {
-                req.flash('error', `The email address has already been taken, please try another one.`)
-                return res.redirect('/clinician/create');
-            }
+            // const emailExists = await User.find({username: req.body.email}).lean();
+            // if (emailExists.length > 0) {
+            //     req.flash('error', `The email address has already been taken, please try another one.`)
+            //     return res.redirect('/clinician/create');
+            // }
 
-            const screenNameExists = await Patient.find({screen_name: req.body.screen_name}).lean();
-            if (screenNameExists.length > 0) {
-                req.flash('error', `This screen name has already been taken, please try another one.`)
-                return res.redirect('/clinician/create');
-            }
+            // const screenNameExists = await Patient.find({screen_name: req.body.screen_name}).lean();
+
+            // if (screenNameExists) {
+            //     req.flash('error', `This screen name has already been taken, please try another one.`)
+            //     return res.redirect('/clinician/create');
+            // }
 
             // first create the patient document and save to db
             const newPatient = new Patient({
@@ -134,6 +139,13 @@ const insertData = async (req, res, next) => {
             });
 
             await newUser.save();
+
+            const user = req.user
+            const clinician = await Clinician.findById(user.role_id.toString()).lean()
+            console.log(clinician.patients)
+            clinician.patients.push(patientId.toString())
+            await Clinician.findByIdAndUpdate(user.role_id.toString(), {patients: clinician.patients});
+            console.log(clinician.patients)
 
             // now we get the required measurements
             // and push it to the patient document.

@@ -1,0 +1,46 @@
+<h1>Messages</h1>
+<h2>Submit Message</h2>
+<form action="/messages" method="POST">
+<input type="text" name="message" />
+<input type="submit" />
+</form>
+<h2>List of messages</h2>
+<ul>
+{{#each messages}}
+<li>{{this}}</li>
+{{/each}}
+</ul>
+
+<script>
+// Recreates the unordered list with new messages
+function recreate_list(messages) {
+const list = document.querySelector('ul')
+const newList = document.createElement('ul')
+for (const message of messages) {
+const li = document.createElement('li')
+li.innerHTML = message
+newList.appendChild(li)
+}
+list.replaceWith(newList)
+}
+
+// Send new message and handle response
+function new_message() {
+const text = document.querySelector('input[name="message"]')
+// Create POST payload
+const formData = new URLSearchParams()
+formData.append('message', text.value)
+fetch('/api/messages', {
+method: 'POST',
+body: formData,
+})
+.then(res => res.json())
+.then(data => recreate_list(data))
+return false
+}
+document.onreadystatechange = function () {
+if (document.readyState === 'interactive') {
+document.querySelector('form').onsubmit = new_message
+}
+}
+</script>
