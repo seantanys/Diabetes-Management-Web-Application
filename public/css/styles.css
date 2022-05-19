@@ -2332,6 +2332,27 @@ CLINICIAN STUFF
   font-weight: 600;
 }
 
+.support-message-section {
+  display: flex;
+  flex-direction: row;
+  width: 75%;
+  margin-right: 12.5%;
+  margin-left: 12.5%;
+  background-color: var(--colour-h1);
+}
+
+.support-message-patient-list {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  background-color: #0a5388;
+}
+
+.support-message-main {
+  display: flex;
+  flex-direction: column;
+}
+
 
 /* 
 please give your anchors a class or id!!!!

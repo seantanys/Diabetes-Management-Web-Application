@@ -208,7 +208,7 @@ const insertData = async (req, res, next) => {
     }   
 }
 
-const getPatientMessages = async (req, res, next) => {
+const getPatientComments = async (req, res, next) => {
     if (req.isAuthenticated()) {
         try{
             patientComments = []
@@ -236,7 +236,7 @@ const getPatientMessages = async (req, res, next) => {
             }
     
             //console.log(patientComments)
-            return res.render('clinicianMessages', {layout: "clinician.hbs", loggedIn: req.isAuthenticated(), data: patientComments})
+            return res.render('patientComments', {layout: "clinician.hbs", loggedIn: req.isAuthenticated(), data: patientComments})
     
     
         } catch(err){
@@ -245,6 +245,15 @@ const getPatientMessages = async (req, res, next) => {
     } else {
         res.render('login');
     } 
+}
+
+const getSupportMessagesPage = async (req, res, next) => {
+
+    if (req.isAuthenticated()) {
+        res.render('clinicianSupportMessage');
+    } else {
+        res.render('login');
+    }
 }
 
 const changeSupportMessage = async(req, res, next) =>{
@@ -365,9 +374,10 @@ module.exports = {
     getDataById,
     insertData,
     getNewPatientForm,
-    getPatientMessages,
+    getPatientComments,
     getAccountPage,
     changePassword,
     changeSupportMessage,
+    getSupportMessagesPage,
     validate
 }
