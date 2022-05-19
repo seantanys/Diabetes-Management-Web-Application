@@ -2363,6 +2363,11 @@ CLINICIAN STUFF
   color: rgba(1, 58, 99, 1);
 }
 
+.active-message-patient {
+  background-color: var(--colour-background-teal);
+  color: rgba(1, 58, 99, 1);
+}
+
 .message-patient-heading {
   font-size: var(--text-h3);
   margin: 25px 15px;

@@ -14,6 +14,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     function switchPatient() {
         messageBubble.removeChild(messageBubble.lastChild);
         var patientName = this.innerText
+        toggleActivePatient(patientName);
 
         receiverInput.value = patientName;
         receiverIdInput.value = messages[patientName][0];
@@ -23,6 +24,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
         currentMsgContainer.innerText = `To ${patientName}`;
         messageBubble.appendChild(currMsg);
+    }
+
+    function toggleActivePatient(currPatient) {
+
+        patientDivs.forEach(patient => {
+            if (currPatient !== patient.innerText) {
+                patient.classList.remove("active-message-patient");
+            }
+            else {
+                patient.classList.add("active-message-patient");
+            }
+        })
     }
 
 });
