@@ -2332,12 +2332,9 @@ CLINICIAN STUFF
   font-weight: 600;
 }
 
-
-/* 
-please give your anchors a class or id!!!!
-a, a:visited{
+.clinician-message-link, clinician-message-link:visited{
   color: darkblue;
-} */
+}
 
 
 
