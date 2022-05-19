@@ -7,7 +7,7 @@ const session = require('express-session')
 const passport = require('./passport.js')
 const http = require('http')
 const messageRouter = require('./routes/message.js')
-
+const { DateTime } = require("luxon");
 require('./models')
 
 const app = express()
@@ -31,6 +31,9 @@ app.engine(
             eqInsulin: (str) => str === "insulin",
             eqExercise: (str) => str === "exercise",
             isEmptyStr: (str) => str === "",
+            formatDate: (date) => DateTime.fromJSDate(date).toLocaleString(DateTime.DATE_MED),
+            formatTime: (date) => DateTime.fromJSDate(date).toLocaleString(DateTime.TIME_SIMPLE),
+            formatDateTime: (date) => DateTime.fromJSDate(date).toLocaleString(DateTime.DATETIME_MED),
             json(context) {
                 return JSON.stringify(context);
             }

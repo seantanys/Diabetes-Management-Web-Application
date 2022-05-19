@@ -1,0 +1,101 @@
+<script src="../scripts/closeFlash.js"></script>
+{{!-- <script src="../scripts/loader.js"></script> --}}
+<script src="../scripts/patientDataFilter.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="../scripts/patientChart.js"></script>
+
+
+{{!-- <div class="loader-wrapper" id="loader">
+    <span class="loader"><span class="loader-inner"></span></span>
+</div> --}}
+
+{{#if loggedIn}}
+{{> flashSuccess}}
+
+<input type="hidden" id="pd-dates" value="{{json groupedByDate}}" >
+
+{{> patientDrilldown}}
+<div class="overview-container">
+    <section class="data-table">
+        <h1>All Data</h1>
+        <br>
+        <div class="patient-data-filters">
+            <select name="search-filter" id="search-filter">
+                <option value="">Filter By</option>
+                <option value="measurement">Measurement</option>
+                <option value="value">Value</option>
+                <option value="comment">Comment</option>
+                <option value="time">Time</option>
+            </select>
+            <input type="text" id="pd-search-input" onkeyup="search()" placeholder="Search for measurements.">
+        </div>
+        <div class="patient-data-container">
+            <table id="patient-data-table">
+                <tr class="patient-data-header">
+                    <th>Time Recorded</th>
+                    <th>Measurement</th>
+                    <th>Value</th>
+                    <th>Comment</th>
+                </tr>
+                {{#each measurements}}
+                <tr class="patient-data-row">
+                    <td>{{formatDateTime this.date}}</td>
+                    {{#if (eqBcg this.type)}}
+                        <td>Blood Glucose Level</td>
+                        <td>{{this.value}} nmol/L</td>
+                    {{/if}}
+                    {{#if (eqWeight this.type)}}
+                        <td>Weight</td>
+                        <td>{{this.value}} kg</td>
+                    {{/if}}
+                    {{#if (eqInsulin this.type)}}
+                        <td>Insulin Doses</td>
+                        <td>{{this.value}} dose(s)</td>
+                    {{/if}}
+                    {{#if (eqExercise this.type)}}
+                        <td>Exercise</td>
+                        <td>{{this.value}} steps</td>
+                    {{/if}}
+                    {{#if (isEmptyStr this.comment)}}
+                        <td> - </td>
+                    {{else}}
+                        <td>{{this.comment}}</td>
+                    {{/if}}
+                </tr>
+                {{/each}}
+            </table>
+        </div>
+    </section>
+
+    <section class="patient-notes">
+        <div class="notes-table">
+            <h1>Notes</h1>
+            <br>
+            <table id="notes-data-table">
+                {{#each notes}}
+                <tr class="notes-data-row">
+                    {{!this.date}}
+                    {{!this.comment}}
+                </tr>
+                {{/each}}
+                
+            </table>
+        </div>
+
+        <form action="/patient/record" method="post">  
+            <div class="comment-input">
+                <textarea name="comment" id="comment" cols="30" rows="5" placeholder="Enter comment here"></textarea>
+            </div>
+            <button class="record-button">Add note</button>
+        </form>
+    </section>
+</div>
+
+{{else}}
+
+{{> loggedOut}}
+
+{{/if}}
+
+
+    

@@ -22,13 +22,31 @@ clinicianRouter.post('/messages', clinicianController.changeSupportMessage)
 clinicianRouter.get('/dashboard', app.hasRole('clinician'), clinicianController.getAllPatientData)
 
 // route to handle the GET request for one patient data
-clinicianRouter.get('/manage-patient/:patient_id', app.hasRole('clinician'), clinicianController.getDataById)
+// clinicianRouter.get('/manage-patient/:patient_id', app.hasRole('clinician'), clinicianController.getDataById)
 
 clinicianRouter.get('/comments', app.hasRole('clinician'), clinicianController.getPatientComments)
 
 clinicianRouter.get('/account', app.hasRole('clinician'), clinicianController.getAccountPage);
 
 clinicianRouter.post('/account/change-password', app.hasRole('clinician'), clinicianController.changePassword);
+
+clinicianRouter.get('/manage-patient/:patient_id', app.hasRole('clinician'), clinicianController.getPatientOverview)
+// route to make note for patient
+clinicianRouter.post('/manage-patient/:patient_id', app.hasRole('clinician'), clinicianController.writeNote) // TO IMPLEMENTTTTTT
+
+clinicianRouter.get('/manage-patient/:patient_id/bcg', app.hasRole('clinician'), clinicianController.getPatientBCG) 
+clinicianRouter.get('/manage-patient/:patient_id/weight', app.hasRole('clinician'), clinicianController.getPatientWeight) 
+clinicianRouter.get('/manage-patient/:patient_id/insulin', app.hasRole('clinician'), clinicianController.getPatientInsulin) 
+clinicianRouter.get('/manage-patient/:patient_id/exercise', app.hasRole('clinician'), clinicianController.getPatientExercise) 
+
+// Manage patient tab
+//clinicianRouter.get('/:patient_id/manage', app.hasRole('clinician'), clinicianController.getDataBoudnds) // TO IMPLEMENTTTTTT
+//clinicianRouter.post('/:patient_id/manage', app.hasRole('clinician'), clinicianController.manageDataBounds) // TO IMPLEMENTTTTTT
+
+// Support messages tab
+//clinicianRouter.get('/:patient_id/message', app.hasRole('clinician'), clinicianController.getSupportMessages) // TO IMPLEMENTTTTTT
+//clinicianRouter.post('/:patient_id/message', app.hasRole('clinician'), clinicianController.writeSupportMessage) // TO IMPLEMENTTTTTT
+
 
 // route to handle the POST request new patient, adding to the database
 // clinicianRouter.post('/dashboard', clinicianController.insertData)

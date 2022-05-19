@@ -1,0 +1,36 @@
+<h1>Range: {{max}} to {{min}} {{unit}}</h1>
+
+<div class="patient-data-container">
+    <table id="patient-data-table">
+        <tr class="patient-data-header">
+            <th>Date</th>
+            <th>Time</th>
+            <th>{{type}} {{unit}}</th>
+            <th>Comments</th>
+        </tr>
+       
+        {{#each measurement}}
+        <tr class="patient-data-row">
+            {{#if this.value}}
+                <td>{{formatDate this.date}}</td>
+                <td>{{formatTime this.date}} </td>
+                {{#if (and (gte this.value min) (lte this.value max))}}
+                    <td>{{this.value}}</td>
+                {{else}}
+                    <td id ="red">{{this.value}}</td>
+                {{/if}}
+                {{#if (isEmptyStr this.comment)}}
+                    <td> - </td>
+                {{else}}
+                    <td>{{this.comment}}</td>
+                {{/if}}
+            {{else}}
+                <td>{{formatDate this.date}}</td>
+                <td> - </td>
+                <td> - </td>
+                <td> - </td>
+            {{/if}}
+        </tr>
+        {{/each}}
+    </table>
+</div>
