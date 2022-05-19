@@ -1,4 +1,20 @@
+<script src="../scripts/closeFlash.js"></script>
+{{!-- <script src="../scripts/loader.js"></script> --}}
+<script src="../scripts/patientDataFilter.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="../scripts/patientChart.js"></script>
+
+
+{{!-- <div class="loader-wrapper" id="loader">
+    <span class="loader"><span class="loader-inner"></span></span>
+</div> --}}
+
+{{#if loggedIn}}
+{{> flashSuccess}}
+
 <input type="hidden" id="pd-dates" value="{{json groupedByDate}}" >
+
+{{>patientDrilldown}}
 
 <div class="page-heading-1">
     <h1>Your Data</h1>
@@ -10,11 +26,83 @@
     <hr class="divider">
 </div>
 
-<section class="create-patient-section">
-	<form action="/clinician/manage" method="POST">
-		<div class="create-patient-container">
+<div class="chart-toggle-container">
+    <h3>Filter chart by</h3>
+    <div class="chart-toggles">
+        {{#if (isIn "bcg" required)}}
+        <button id="bcg-toggle" class="active-toggle">Blood Glucose Level</button>
+        {{/if}}
+        {{#if (isIn "insulin" required)}}
+        <button id="insulin-toggle" class="inactive-toggle">Insulin</button>
+        {{/if}}
+        {{#if (isIn "weight" required)}}
+        <button id="weight-toggle" class="inactive-toggle">Weight</button>
+        {{/if}}
+        {{#if (isIn "exercise" required)}}
+        <button id="exercise-toggle" class="inactive-toggle">Exercise</button>
+        {{/if}}
+    </div>
+</div>
 
-			<h3>Enter Patient Details</h3>
-        </div>
-    </form>
+<section class="patient-chart-section">
+    <div id="patient-chart-container"></div>
 </section>
+
+<section class="patient-data-section">
+    <div class="patient-data-filters">
+        <select name="search-filter" id="search-filter">
+            <option value="">Filter By</option>
+            <option value="measurement">Measurement</option>
+            <option value="value">Value</option>
+            <option value="comment">Comment</option>
+            <option value="time">Time</option>
+        </select>
+        <input type="text" id="pd-search-input" onkeyup="search()" placeholder="Search for measurements.">
+    </div>
+    <div class="patient-data-container">
+        <table id="patient-data-table">
+            <tr class="patient-data-header">
+                <th>Measurement</th>
+                <th>Value</th>
+                <th>Comment</th>
+                <th>Time Recorded</th>
+            </tr>
+            {{#each measurement}}
+            <tr class="patient-data-row">
+                {{#if (eqBcg this.type)}}
+                    <td>blood glucose level</td>
+                    <td>{{this.value}} nmol/L</td>
+                {{/if}}
+                {{#if (eqWeight this.type)}}
+                    <td>weight</td>
+                    <td>{{this.value}} kg</td>
+                {{/if}}
+                {{#if (eqInsulin this.type)}}
+                    <td>insulin doses</td>
+                    <td>{{this.value}} unit(s)</td>
+                {{/if}}
+                {{#if (eqExercise this.type)}}
+                    <td>exercise</td>
+                    <td>{{this.value}} steps</td>
+                {{/if}}
+                {{#if (isEmptyStr this.comment)}}
+                    <td> - </td>
+                {{else}}
+                    <td>{{this.comment}}</td>
+                {{/if}}
+                <td>{{this.date}}</td>
+            </tr>
+            {{/each}}
+        </table>
+
+    </div>
+</section>
+
+{{else}}
+
+{{> loggedOut}}
+
+{{/if}}
+
+
+    
