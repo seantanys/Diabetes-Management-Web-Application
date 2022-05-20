@@ -5,54 +5,60 @@
 
 <input type="hidden" id="pd-dates" value="{{json groupedByDate}}" > --}}
 
-<div class="patient-info"> 
-    {{!flexbox: 3 columns with first col small, mid and last col equal width}} 
-    <img src = "/images/male-profile.jpg">
-    <ul>
-        <li>Name:   {{patient.first_name}} {{patient.last_name}}</li>
-        <li>Year of Birth:   {{formatDate patient.dob}}</li>
-        <li>Join Date:   {{formatDate patient.join_date}}</li>
-    </ul>
-</div>
+<div class="drilldown-container flex-column-center">
 
-<hr class="divider">
-
-<div class="drilldown-nav-bar">
-    {{!flexbox of 3 items}}
-    <ul class="nav-menu">
-        <li class="nav-item">
-            <a href="/clinician/manage-patient/{{{patient._id}}}" class="nav-link" id="overview-tab">Overview</a>
-        </li>
-        <li>
-            {{#if (isIn "bcg" required)}}
-            <a href="/clinician/manage-patient/{{{patient._id}}}/bcg" class="nav-link" id="bcg-tab">Blood Glucose</a>
-            {{/if}}
-        </li>
-        <li>
-            {{#if (isIn "weight" required)}}
-            <a href="/clinician/manage-patient/{{{patient._id}}}/weight" class="nav-link" id="weight-tab">Weight</a>
-            {{/if}}
-        </li>
-        <li>
-            {{#if (isIn "insulin" required)}}
-            <a href="/clinician/manage-patient/{{{patient._id}}}/insulin" class="nav-link" id="insulin-tab">Insulin</a>
-            {{/if}}
-        </li>
-        <li>
-            {{#if (isIn "exercise" required)}}
-            <a href="/clinician/manage-patient/{{{patient._id}}}/exercise" class="nav-link" id="exercise-tab">Exercise</a>
-            {{/if}}
-        </li>
+    <div class="patient-info"> 
+        {{!flexbox: 3 columns with first col small, mid and last col equal width}}
+        <div class="patient-overview-details">
+            <img src = "/images/male-profile.jpg">
+            <ul>
+                <li>Name:   {{patient.first_name}} {{patient.last_name}}</li>
+                <li>Date of Birth:   {{formatDate patient.dob}}</li>
+                <li>Join Date:   {{formatDate patient.join_date}}</li>
+            </ul>
+        </div>
+        <a href="/clinician/messages"><button>Send Support Message</button></a>
         
-        <li class="nav-item">      
-            <a href="/#" class="nav-link">Manage</a>
-        </li>
-        <li class="nav-item">
-            <a href="/clinician/messages"class="nav-link">Support Message</a>
-        </li>
-    </ul>
+
+    </div>
+
+    <hr class="divider-white">
+
+    <div class="drilldown-nav-bar">
+        {{!flexbox of 3 items}}
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="/clinician/manage-patient/{{{patient._id}}}" class="nav-link" id="overview-tab">Overview</a>
+            </li>
+            <li>
+                {{#if (isIn "bcg" required)}}
+                <a href="/clinician/manage-patient/{{{patient._id}}}/bcg" class="nav-link" id="bcg-tab">Blood Glucose</a>
+                {{/if}}
+            </li>
+            <li>
+                {{#if (isIn "weight" required)}}
+                <a href="/clinician/manage-patient/{{{patient._id}}}/weight" class="nav-link" id="weight-tab">Weight</a>
+                {{/if}}
+            </li>
+            <li>
+                {{#if (isIn "insulin" required)}}
+                <a href="/clinician/manage-patient/{{{patient._id}}}/insulin" class="nav-link" id="insulin-tab">Insulin</a>
+                {{/if}}
+            </li>
+            <li>
+                {{#if (isIn "exercise" required)}}
+                <a href="/clinician/manage-patient/{{{patient._id}}}/exercise" class="nav-link" id="exercise-tab">Exercise</a>
+                {{/if}}
+            </li>
+            
+            <li class="nav-item">      
+                <a href="/#" class="nav-link">Manage</a>
+            </li>
+
+        </ul>
+    </div>
+
+    {{!-- <hr class="divider"> --}}
+
+    <br>
 </div>
-
-<hr class="divider">
-
-<br>
