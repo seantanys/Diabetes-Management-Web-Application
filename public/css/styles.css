@@ -2543,9 +2543,15 @@ CLINICIAN STUFF
   color: var(--colour-h1);
   background-color: #fff740;
   margin-bottom: 10px;
-  min-height: 100px;
+  min-height: 120px;
+  max-height: 200px;
   padding: 15px;
   position: relative;
+
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
 }
 
 .note-container img {
