@@ -2521,7 +2521,9 @@ CLINICIAN STUFF
 }
 
 .patient-notes {
+  background-color: var(--colour-h1);
   width: 25%;
+  border-radius: 25px;
 }
 
 .notes-table h1 {
