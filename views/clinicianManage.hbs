@@ -1,0 +1,25 @@
+<script src="../scripts/closeFlash.js"></script>
+{{!-- <script src="../scripts/loader.js"></script> --}}
+<script src="../scripts/patientDataFilter.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="../scripts/patientChart.js"></script>
+
+
+{{!-- <div class="loader-wrapper" id="loader">
+    <span class="loader"><span class="loader-inner"></span></span>
+</div> --}}
+
+{{#if loggedIn}}
+{{> flashSuccess}}
+
+<input type="hidden" id="pd-dates" value="{{json groupedByDate}}" >
+
+{{>patientDrilldown}}
+
+
+
+{{else}}
+
+{{> loggedOut}}
+
+{{/if}}
