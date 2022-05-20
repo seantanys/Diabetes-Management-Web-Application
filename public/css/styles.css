@@ -2540,6 +2540,23 @@ CLINICIAN STUFF
   background-color: var(--colour-h1);
   width: 25%;
   border-radius: 25px;
+  padding: 10px;
+}
+
+.patient-notes .info {
+  display: flex;
+  align-items: center;
+  border-radius: 15px;
+  background-color: rgba(126, 126, 126, 0.575);
+  padding: 0 0 0 5px;
+  width: 400px;
+  text-align: left;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.patient-notes .info-text {
+  color: white;
 }
 
 .notes-table {
@@ -2592,7 +2609,9 @@ CLINICIAN STUFF
 }
 
 .comment-input textarea {
+  margin-top: 25px;
   white-space: pre-wrap;
+  width: 400px;
 }
 
 .note-container p:nth-of-type(2) {
