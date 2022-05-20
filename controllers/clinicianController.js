@@ -298,6 +298,72 @@ const getPatientExercise = async(req, res, next) => {
     }
 }
 
+const getDataBounds = async(req, res, next) => {
+    if (req.isAuthenticated()) {
+        try {
+            const patient = await Patient.findById(req.params.patient_id).lean()
+            const measurement = await Measurement.find({patientId: req.params.patient_id.toString(), type:'exercise'})
+            const required_measurements = [];const 
+            reqMeasurements = Object.keys(patient["measurements"])
+
+            if (req.body.bcg) {
+                const thresholds = [];
+                thresholds.get(req.body.bcg);
+                if (req.body.bcgmin) {
+                    thresholds.get(req.body.bcgmin)
+                }
+                if (req.body.bcgmax) {
+                    thresholds.get(req.body.bcgmax)
+                }
+                required_measurements.get(thresholds)
+            }
+            
+            if (req.body.weight) {
+                const thresholds = [];
+                thresholds.get(req.body.weight);
+                if (req.body.weightmin) {
+                    thresholds.get(req.body.weightmin)
+                }
+                if (req.body.weightmax) {
+                    thresholds.get(req.body.weightmax)
+                }
+                required_measurements.get(thresholds)
+            }
+            
+            if (req.body.insulin) {
+                const thresholds = [];
+                thresholds.get(req.body.insulin);
+                if (req.body.insulinmin) {
+                    thresholds.get(req.body.insulinmin)
+                }
+                if (req.body.insulinmax) {
+                    thresholds.get(req.body.insulinmax)
+                }
+                required_measurements.get(thresholds)
+            }
+            
+            if (req.body.exercise) {
+                const thresholds = [];
+                thresholds.get(req.body.exercise);
+                if (req.body.exercisemin) {
+                    thresholds.get(req.body.exercisemin)
+                }
+                if (req.body.exercisemax) {
+                    thresholds.get(req.body.exercisemax)
+                }
+                required_measurements.get(thresholds)
+            }
+
+            res.render('clinicianManage', {layout: 'clinician.hbs', loggedIn: req.isAuthenticated(), required: reqMeasurements})
+            
+        } catch (err) {
+            return next(err)
+        }
+    } else {
+        res.render('login');
+    }
+}
+
 // function which handles requests for displaying the create form
 // will be implemented for D3
 const getNewPatientForm = async (req, res, next) => {
@@ -649,6 +715,7 @@ module.exports = {
     getPatientWeight,
     getPatientInsulin,
     getPatientExercise,
+    getDataBounds,
     insertData,
     getNewPatientForm,
     getPatientComments,
