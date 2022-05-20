@@ -1,8 +1,8 @@
-<script src="../scripts/closeFlash.js"></script>
-<script src="../scripts/patientOverview.js"></script>
-<script src="../scripts/patientDataFilter.js"></script>
+<script src="/scripts/closeFlash.js"></script>
+<script src="/scripts/patientOverview.js"></script>
+<script src="/scripts/patientDataFilter.js"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="../scripts/patientChart.js"></script>
+<script src="/scripts/patientChart.js"></script>
 
 
 {{!-- <div class="loader-wrapper" id="loader">
@@ -13,9 +13,34 @@
 {{> flashSuccess}}
 
 {{> patientDrilldown}}
+
+<input type="hidden" id="pd-dates" value="{{json groupedByDate}}" >
 <div class="overview-container">
     <section class="data-table flex-column-center">
         <h1>All Data</h1>
+
+        <div class="chart-toggle-container">
+            <h3>Filter chart by</h3>
+            <div class="chart-toggles">
+                {{#if (isIn "bcg" required)}}
+                <button id="bcg-toggle" class="active-toggle">Blood Glucose Level</button>
+                {{/if}}
+                {{#if (isIn "insulin" required)}}
+                <button id="insulin-toggle" class="inactive-toggle">Insulin</button>
+                {{/if}}
+                {{#if (isIn "weight" required)}}
+                <button id="weight-toggle" class="inactive-toggle">Weight</button>
+                {{/if}}
+                {{#if (isIn "exercise" required)}}
+                <button id="exercise-toggle" class="inactive-toggle">Exercise</button>
+                {{/if}}
+            </div>
+        </div>
+
+        <section class="patient-chart-section">
+            <div id="patient-chart-container"></div>
+        </section>
+        
         <br>
         <div class="patient-data-filters">
             <select name="search-filter" id="search-filter">
@@ -30,14 +55,13 @@
         <div class="patient-data-container">
             <table id="patient-data-table">
                 <tr class="patient-data-header">
-                    <th>Time Recorded</th>
                     <th>Measurement</th>
                     <th>Value</th>
                     <th>Comment</th>
+                    <th>Time Recorded</th>
                 </tr>
                 {{#each measurements}}
-                <tr class="patient-data-row">
-                    <td>{{formatDateTime this.date}}</td>
+                <tr class="patient-data-row">     
                     {{#if (eqBcg this.type)}}
                         <td>Blood Glucose Level</td>
                         <td>{{this.value}} nmol/L</td>
@@ -59,6 +83,7 @@
                     {{else}}
                         <td>{{this.comment}}</td>
                     {{/if}}
+                    <td>{{formatDateTime this.date}}</td>
                 </tr>
                 {{/each}}
             </table>

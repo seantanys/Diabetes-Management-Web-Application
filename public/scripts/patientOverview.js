@@ -1,6 +1,6 @@
 window.addEventListener('DOMContentLoaded', (event) => {
     const tabs = document.querySelectorAll('.drilldown-nav-bar a')
-    console.log(tabs)
+
     tabs.forEach(tab => {
         tab.addEventListener('click', switchTab);
     })

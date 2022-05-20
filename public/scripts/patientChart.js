@@ -37,8 +37,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    console.log(exerciseDates)
-
     if (bcgToggle) {
         toggles.push(bcgToggle);
     }

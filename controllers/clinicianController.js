@@ -21,26 +21,44 @@ function getDatesFromPatientObj(object) {
     return dates;
 }
 
-function groupMeasurementsByDate(measurements, dates) {
+// function groupMeasurementsByDate(measurements, dates) {
+//     const groupedData = {};
+
+//     for (i = 0; i < dates.length; i++) {
+//         var date = new Date(dates[i].getFullYear(), dates[i].getMonth(), dates[i].getDate(), 0, 0, 0);
+
+//         // if this date doesnt exist in the object, insert and initialize an empty dict.
+//         if (!(date in groupedData)) {
+//             groupData[date] = {};
+//         }
+
+//         for (j = 0; j < measurements.length; j++) {
+//             var mDate = new Date(measurements[i].date.getFullYear(), measurements[i].date.getMonth(), measurements[i].date.getDate(), 0, 0, 0);
+            
+//             // add the measurement for this current data
+//             if (mDate == date) {
+//                 groupedData[date][measurements[i].type] = measurements[i].value
+//             }
+//         }
+//     }
+//     return groupedData;
+// }
+
+function groupMeasurementsByDate(measurements) {
     const groupedData = {};
 
-    for (i = 0; i < dates.length; i++) {
-        var date = new Date(dates[i].getFullYear(), dates[i].getMonth(), dates[i].getDate(), 0, 0, 0);
+    for (let i = 0; i < measurements.length; i++) {
+        var time = new Date(measurements[i].date.getFullYear(), measurements[i].date.getMonth(), measurements[i].date.getDate(), 0, 0, 0);
 
         // if this date doesnt exist in the object, insert and initialize an empty dict.
-        if (!(date in groupedData)) {
-            groupData[date] = {};
+        if (!(time in groupedData)) {
+            groupedData[time] = {};
         }
 
-        for (j = 0; j < measurements.length; j++) {
-            var mDate = new Date(measurements[i].date.getFullYear(), measurements[i].date.getMonth(), measurements[i].date.getDate(), 0, 0, 0);
-            
-            // add the measurement for this current data
-            if (mDate == date) {
-                groupedData[date][measurements[i].type] = measurements[i].value
-            }
-        }
+        // add the measurement for this current data
+        groupedData[time][measurements[i].type] = measurements[i].value
     }
+
     return groupedData;
 }
 
@@ -151,9 +169,12 @@ const getPatientOverview = async(req, res, next) => {
             const measurements = await Measurement.find({patientId: patient._id}).sort({"date": -1}).lean(); 
             const reqMeasurements = Object.keys(patient["measurements"])
             //const notes = await Note.find({patientId: patient._id}).sort({"date": -1}).lean();
+
+            const measurementsForChart = await Measurement.find({patientId: patient._id}).sort({"date": 1}).lean(); 
+            const measurementsByDate = groupMeasurementsByDate(measurementsForChart);
             
             //return res.render('partials/patientOverview', {loggedIn: req.isAuthenticated(), required: reqMeasurements, patient: patient, measurements: measurements, notes: notes})
-            return res.render('patientOverview', {loggedIn: req.isAuthenticated(), layout: 'clinician.hbs', required: reqMeasurements, patient: patient, measurements: measurements})
+            return res.render('patientOverview', {loggedIn: req.isAuthenticated(), layout: 'clinician.hbs', required: reqMeasurements, patient: patient, measurements: measurements, groupedByDate: measurementsByDate})
 
         } catch (err) {
             return next(err)

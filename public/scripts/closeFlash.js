@@ -9,7 +9,4 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
         }
     )}
-    else {
-        console.log("button not found")
-    }
 })
