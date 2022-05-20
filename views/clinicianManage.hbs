@@ -15,8 +15,8 @@
     </thead>
     <tbody>
         <tr>
-            <th><input type="checkbox" checked="checked"></th>
-            <th>Blood Glucose Level</th>
+            <th><input type="checkbox" {{#if patient.measurements.bcg}}checked="checked"{{/if}}></th>
+            <th>Blood Glucose Level (nmol/L)</th>
             <th><form>
                 <input type="number" id="minbcg" name="minbcg" value="{{patient.measurements.bcg.minimum}}" >
             </form></th>
@@ -25,8 +25,8 @@
             </form></th>
         </tr>
         <tr>
-            <th><input type="checkbox"></th>
-            <th>Weight</th>
+            <th><input type="checkbox" {{#if patient.measurements.weight}}checked="checked"{{/if}}></th>
+            <th>Weight(kg)</th>
             <th><form>
                 <input type="number" id="minweight" name="minweight" value="{{patient.measurements.weight.minimum}}">
             </form></th>
@@ -35,8 +35,8 @@
             </form></th>
         </tr>
          <tr>
-            <th><input type="checkbox"></th>
-            <th>Doses of Insulin</th>
+            <th><input type="checkbox" {{#if patient.measurements.insulin}}checked="checked"{{/if}}></th>
+            <th>Insulin (dose(s))</th>
             <th><form>
                 <input type="number" id="mindose" name="mindose" value="{{patient.measurements.insulin.minimum}}">
             </form></th>
@@ -45,8 +45,8 @@
             </form></th>
         </tr>
         <tr>
-            <th><input type="checkbox"></th>
-            <th>Steps</th>
+            <th><input type="checkbox" {{#if patient.measurements.exercise}}checked="checked"{{/if}}></th>
+            <th>Exercise(steps)</th>
             <th><form>
                 <input type="number" id="minsteps" name="minsteps" value="{{patient.measurements.exercise.minimum}}">
             </form></th>
