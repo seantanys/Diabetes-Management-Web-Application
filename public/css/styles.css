@@ -1928,6 +1928,7 @@ hr.solid {
   #patient-details {
     background-color: var(--colour-background);
     margin-bottom: 10%;
+    
   }
   .patient-card-content {
     max-width: 90%;
@@ -2046,6 +2047,10 @@ hr.solid {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+
+  .patient-data-filters {
+    display: none;
   }
 }
 
