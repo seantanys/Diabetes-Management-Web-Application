@@ -2548,7 +2548,7 @@ CLINICIAN STUFF
   padding: 15px;
   position: relative;
 
-  overflow: auto;
+  /* overflow: auto; */
   display: flex;
   flex-direction: column;
 }
@@ -2558,6 +2558,10 @@ CLINICIAN STUFF
   top: 0px;
   right: 0px;
   cursor: pointer;
+}
+
+.note-container p {
+  word-wrap: break-word;
 }
 
 .note-container p:nth-of-type(2) {
