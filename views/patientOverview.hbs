@@ -1,5 +1,5 @@
 <script src="../scripts/closeFlash.js"></script>
-{{!-- <script src="../scripts/loader.js"></script> --}}
+<script src="../scripts/patientOverview.js"></script>
 <script src="../scripts/patientDataFilter.js"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="../scripts/patientChart.js"></script>
@@ -12,11 +12,9 @@
 {{#if loggedIn}}
 {{> flashSuccess}}
 
-<input type="hidden" id="pd-dates" value="{{json groupedByDate}}" >
-
 {{> patientDrilldown}}
 <div class="overview-container">
-    <section class="data-table">
+    <section class="data-table flex-column-center">
         <h1>All Data</h1>
         <br>
         <div class="patient-data-filters">
@@ -67,7 +65,7 @@
         </div>
     </section>
 
-    <section class="patient-notes">
+    <section class="patient-notes flex-column-center">
         <div class="notes-table">
             <h1>Notes</h1>
             <br>

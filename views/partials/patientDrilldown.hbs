@@ -1,3 +1,10 @@
+{{!-- <script src="../scripts/closeFlash.js"></script>
+<script src="../scripts/patientOverview.js"></script>
+<script src="../scripts/patientDataFilter.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="../scripts/patientChart.js"></script> --}}
+
+<input type="hidden" id="pd-dates" value="{{json groupedByDate}}" >
 
 <div class="patient-info"> 
     {{!flexbox: 3 columns with first col small, mid and last col equal width}} 
@@ -15,26 +22,26 @@
     {{!flexbox of 3 items}}
     <ul class="nav-menu">
         <li class="nav-item">
-            <a href="/clinician/manage-patient/{{{patient._id}}}" class="nav-link">Overview</a>
+            <a href="/clinician/manage-patient/{{{patient._id}}}" class="nav-link" id="overview-tab">Overview</a>
         </li>
         <li>
             {{#if (isIn "bcg" required)}}
-            <a href="/clinician/manage-patient/{{{patient._id}}}/bcg" class="nav-link">BCG</a>
+            <a href="/clinician/manage-patient/{{{patient._id}}}/bcg" class="nav-link" id="bcg-tab">Blood Glucose</a>
             {{/if}}
         </li>
         <li>
             {{#if (isIn "weight" required)}}
-            <a href="/clinician/manage-patient/{{{patient._id}}}/weight" class="nav-link">Weight</a>
+            <a href="/clinician/manage-patient/{{{patient._id}}}/weight" class="nav-link" id="weight-tab">Weight</a>
             {{/if}}
         </li>
         <li>
             {{#if (isIn "insulin" required)}}
-            <a href="/clinician/manage-patient/{{{patient._id}}}/insulin" class="nav-link">Insulin</a>
+            <a href="/clinician/manage-patient/{{{patient._id}}}/insulin" class="nav-link" id="insulin-tab">Insulin</a>
             {{/if}}
         </li>
         <li>
             {{#if (isIn "exercise" required)}}
-            <a href="/clinician/manage-patient/{{{patient._id}}}/exercise" class="nav-link">Exercise</a>
+            <a href="/clinician/manage-patient/{{{patient._id}}}/exercise" class="nav-link" id="exercise-tab">Exercise</a>
             {{/if}}
         </li>
         

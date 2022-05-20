@@ -2413,27 +2413,16 @@ CLINICIAN STUFF
   margin-top: 35px;
 }
 
-.flex-column-center {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.flex-row-center {
-  display: flex;
-  flex-direction: row;
-}
-
 .clinician-message-link, .clinician-message-link:visited{
   color: darkblue;
 }
 
 .patient-info {
   display: flex;
-  align-items: centre;
+  align-items: center;
   gap: 70px;
   margin: 20px;
+  width: 50%;
 }
 
 .patient-info img {
@@ -2447,24 +2436,52 @@ CLINICIAN STUFF
   font-weight: 500;
 }
 
+.active-overview-tab {
+  color: white;
+}
+
 .overview-container {
+  background-color: var(--colour-h1);
   display: flex;
-  align-items: stretch;
+  align-items: baseline;
   gap: 10px;
-  align-content: stretch;
-  justify-content: space-evenly;
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 80%;
+  border-radius: 25px;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.data-table {
+  width: 75%;
+  margin: 50px 0px;
 }
 
 .data-table h1 {
   font-size: var(--text-h2);
-  color: var(--colour-black);
   text-align: centre;
   font-weight: 600;
 }
 
+.patient-notes {
+  width: 25%;
+}
+
 .notes-table h1 {
   font-size: var(--text-h2);
-  color: var(--colour-black);
   text-align: centre;
   font-weight: 600;
+}
+
+.flex-column-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-row-center {
+  display: flex;
+  flex-direction: row;
 }
