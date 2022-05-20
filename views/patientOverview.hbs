@@ -11,6 +11,7 @@
 
 {{#if loggedIn}}
 {{> flashSuccess}}
+{{> flashError}}
 
 {{> patientDrilldown}}
 
@@ -98,14 +99,18 @@
             {{#each notes}}
             <div class="note-container">
                 <p>{{this.comment}}</p>
-                <img src="/images/icons/close-note.svg" alt="close-button" id="note-del-btn">
-                <input type="hidden" value={{this.patientId}} id="note-patientId">
-                <input type="hidden" value={{this._id}} id="note-id">
+                <img src="/images/icons/close-note.svg" alt="close-button" class="note-del-btn">
+                <form action="/clinician/manage-patient/{{this.patientId}}/delete-note" method="post" class="note-del-form">
+                    <input type="hidden" value={{this.patientId}} name="pid">
+                    <input type="hidden" value={{this._id}} name="nid">
+                    {{!-- <button type="submit" style="display: none;"></button> --}}
+                </form>
             </div>
             {{/each}}
         </div>
 
-        <form action="/patient/record" method="post">  
+        <form action="/clinician/manage-patient/{{patient._id}}/add-note" method="post">  
+            <input type="hidden" value={{patient._id}} name="pid">
             <div class="comment-input">
                 <textarea name="comment" id="comment" cols="30" rows="5" placeholder="Enter note here"></textarea>
             </div>
