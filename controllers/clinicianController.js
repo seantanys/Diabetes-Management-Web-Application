@@ -354,7 +354,7 @@ const getDataBounds = async(req, res, next) => {
                 required_measurements.get(thresholds)
             }
 
-            res.render('clinicianManage', {layout: 'clinician.hbs', loggedIn: req.isAuthenticated(), required: reqMeasurements})
+            res.render('clinicianManage', {layout: 'clinician.hbs', loggedIn: req.isAuthenticated(), patient: patient, required: reqMeasurements})
             
         } catch (err) {
             return next(err)
