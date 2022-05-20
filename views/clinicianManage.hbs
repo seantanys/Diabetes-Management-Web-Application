@@ -4,45 +4,61 @@
 
 
 {{>patientDrilldown}}
-<div class="clinician-table-container">
-        <table class="clinician-table-styled">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>Record</th>
-                    <th>minimum</th>
-                    <th>maximum</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th><input type="checkbox"></th>
-                    <th>Blood Glucose</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-                <tr>
-                    <th><input type="checkbox"></th>
-                    <th>Weight</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-                <tr>
-                    <th><input type="checkbox"></th>
-                    <th>Doses of Insulin</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-                <tr>
-                    <th><input type="checkbox"></th>
-                    <th>Steps</th>
-                    <th></th>
-                    <th></th>
-                </tr>
+<table class="clinician-table-styled"> 
+    <thead>
+        <tr>
+            <th></th>
+            <th>Record</th>
+            <th>minimum</th>
+            <th>maximum</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th><input type="checkbox"></th>
+            <th>Blood Glucose Level</th>
+            <th><form>
+                <input type="number" id="minbcg" name="minbcg">
+            </form></th>
+            <th><form>
+                <input type="number" id="maxbcg" name="maxbcg">
+            </form></th>
+        </tr>
+        <tr>
+            <th><input type="checkbox"></th>
+            <th>Weight</th>
+            <th><form>
+                <input type="number" id="minweight" name="minweight">
+            </form></th>
+            <th><form>
+                <input type="number" id="maxweight" name="maxweight">
+            </form></th>
+        </tr>
+         <tr>
+            <th><input type="checkbox"></th>
+            <th>Doses of Insulin</th>
+            <th><form>
+                <input type="number" id="mindose" name="mindose">
+            </form></th>
+            <th><form>
+                <input type="number" id="maxdose" name="maxdose">
+            </form></th>
+        </tr>
+        <tr>
+            <th><input type="checkbox"></th>
+            <th>Steps</th>
+            <th><form>
+                <input type="number" id="minsteps" name="minsteps">
+            </form></th>
+            <th><form>
+                <input type="number" id="maxsteps" name="maxsteps">
+            </form></th>
+        </tr>
 
-            </tbody>
+    </tbody>
+</table>
 
-
+<button><a href="/clinician/manage-patient/{{this.patient._id}}" Style="color:white;">Save</a></button>
 
 
 
