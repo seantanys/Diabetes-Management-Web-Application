@@ -2581,6 +2581,15 @@ CLINICIAN STUFF
 
 .note-container p {
   word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+#copy-to-note:hover {
+  cursor: pointer;
+}
+
+.comment-input textarea {
+  white-space: pre-wrap;
 }
 
 .note-container p:nth-of-type(2) {

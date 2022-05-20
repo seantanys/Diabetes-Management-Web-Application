@@ -1,6 +1,8 @@
 window.addEventListener('DOMContentLoaded', (event) => {
     const tabs = document.querySelectorAll('.drilldown-nav-bar a')
     const noteContainers = document.querySelectorAll('.note-container');
+    const dataRows = document.querySelectorAll('.patient-data-row');
+    const noteInput = document.getElementById('comment')
 
     noteContainers.forEach(note => {
         const btn = note.querySelector('.note-del-btn')
@@ -11,6 +13,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 form.submit();
             }
         });
+    })
+
+    dataRows.forEach(row => {
+        const noteBtn = row.childNodes[9];
+        const measurementType = row.childNodes[1];
+        const measurementValue = row.childNodes[3];
+        const measurementDate = row.childNodes[7];
+
+        noteBtn.addEventListener('click', function() {
+            noteInput.value = `${measurementType.innerText}, ${measurementValue.innerText}, measured on ${measurementDate.innerText}.
+                                    `
+        })
     })
 
     tabs.forEach(tab => {

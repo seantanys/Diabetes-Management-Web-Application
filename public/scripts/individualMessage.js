@@ -45,15 +45,4 @@ window.addEventListener('DOMContentLoaded', (event) => {
         messageBubble.appendChild(currMsg);
     }
 
-    function toggleActivePatient(currPatient) {
-        patientDivs.forEach(patient => {
-            if (currPatient !== patient.innerText) {
-                patient.classList.remove("active-message-patient");
-            }
-            else {
-                patient.classList.add("active-message-patient");
-            }
-        })
-    }
-
 });
