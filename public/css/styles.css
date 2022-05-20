@@ -2560,6 +2560,10 @@ CLINICIAN STUFF
   cursor: pointer;
 }
 
+.note-container:nth-of-type(even) {
+  background-color: #feff9c;
+}
+
 .note-container p {
   word-wrap: break-word;
 }
