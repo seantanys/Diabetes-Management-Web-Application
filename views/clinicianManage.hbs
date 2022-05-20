@@ -4,6 +4,7 @@
 
 
 {{>patientDrilldown}}
+<form>
 <table class="clinician-table-styled" style:"align=center"> 
     <thead>
         <tr>
@@ -14,7 +15,6 @@
         </tr>
     </thead>
     <tbody>
-        <form>
         <tr>
             <th><input type="checkbox" id="check-bcg" name="check-bcg"{{#if patient.measurements.bcg}}checked="checked"{{/if}}></th>
             <th>Blood Glucose Level (nmol/L)</th>
@@ -55,13 +55,12 @@
                 <input type="number" id="maxsteps" name="maxsteps"value="{{patient.measurements.exercise.maximum}}">
             </th>
         </tr>
-        </form>
 
     </tbody>
 </table>
 
 <button><a href="/clinician/manage-patient/{{this.patient._id}}" Style="color:white;">Save</a></button>
-
+</form>
 
 
 {{else}}
