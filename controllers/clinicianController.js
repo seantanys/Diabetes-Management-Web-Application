@@ -138,24 +138,52 @@ const getAllPatientData = async (req, res, next) => {
     }
 }
 
-const writeNote = async (req, res, next) => {
+const writeNote = async (req, res) => {
     if (req.isAuthenticated()) {
         try {
+            if (!(req.body.pid) || !(req.body.comment)) {
+                req.flash('error',"Error. Please fill out the required fields to add a note.")
+                res.redirect(`/clinician/manage-patient/${req.body.pid}`);
+            }
             // create the note and save to db
             const newNote = new Note({
-                patientId: req.body.patientId,
+                patientId: req.body.pid,
                 date: DateTime.now().setZone('Australia/Melbourne').toISO(),
                 comment: req.body.comment
             });
-            const patient_id = newNote.patientId
             await newNote.save();
 
-            req.flash('success',"Notes updated.")
-
-            res.redirect('/clinician/:patient_id') // potential error
+            req.flash('success',"Note successfully added!")
+            res.redirect(`/clinician/manage-patient/${req.body.pid}`);
 
         } catch(err) {
-            next(err);
+            console.log(err);
+            req.flash('error',"Error Adding Note. Please Try Again")
+            res.redirect(`/clinician/manage-patient/${req.body.pid}`);
+        }
+    } else {
+        res.render('login')
+    }
+}
+
+const deleteNote = async (req, res) => {
+    if (req.isAuthenticated()) {
+        try {
+            const patientId = req.body.pid
+            const noteId = req.body.nid
+
+            await Note.deleteOne({_id: noteId}, function (err) {
+                if (err) {
+                    req.flash('error',"Something went wrong deleting the note. Please try again.");
+                    return res.redirect(`/clinician/manage-patient/${patientId}`);
+                }
+            }).clone()
+
+            req.flash('success',"Notes updated.")
+            res.redirect(`/clinician/manage-patient/${patientId}`);
+
+        } catch(err) {
+            console.log(err);
         }
     } else {
         res.render('login')
@@ -170,13 +198,11 @@ const getPatientOverview = async(req, res, next) => {
             const reqMeasurements = Object.keys(patient["measurements"])
             const notes = await Note.find({patientId: patient._id}).sort({"date": -1}).lean();
 
-            console.log(notes)
-
             const measurementsForChart = await Measurement.find({patientId: patient._id}).sort({"date": 1}).lean(); 
             const measurementsByDate = groupMeasurementsByDate(measurementsForChart);
             
             //return res.render('partials/patientOverview', {loggedIn: req.isAuthenticated(), required: reqMeasurements, patient: patient, measurements: measurements, notes: notes})
-            return res.render('patientOverview', {loggedIn: req.isAuthenticated(), layout: 'clinician.hbs', required: reqMeasurements, patient: patient, measurements: measurements, groupedByDate: measurementsByDate, notes: notes})
+            return res.render('patientOverview', {loggedIn: req.isAuthenticated(), flash: req.flash('success'), errorFlash: req.flash('error'), layout: 'clinician.hbs', required: reqMeasurements, join_date: req.user.join_date, patient: patient, measurements: measurements, groupedByDate: measurementsByDate, notes: notes})
 
         } catch (err) {
             return next(err)
@@ -725,4 +751,5 @@ module.exports = {
     getSupportMessagesPage,
     validate,
     writeNote,
+    deleteNote
 }

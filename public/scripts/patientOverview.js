@@ -1,5 +1,17 @@
 window.addEventListener('DOMContentLoaded', (event) => {
     const tabs = document.querySelectorAll('.drilldown-nav-bar a')
+    const noteContainers = document.querySelectorAll('.note-container');
+
+    noteContainers.forEach(note => {
+        const btn = note.querySelector('.note-del-btn')
+        const form = note.querySelector('.note-del-form')
+
+        btn.addEventListener("click", function() {
+            if (form) {
+                form.submit();
+            }
+        });
+    })
 
     tabs.forEach(tab => {
         tab.addEventListener('click', switchTab);
@@ -19,4 +31,5 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
         })
     }
+
 });
