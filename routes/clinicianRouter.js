@@ -41,6 +41,9 @@ clinicianRouter.get('/manage-patient/:patient_id/exercise', app.hasRole('clinici
 
 clinicianRouter.get('/manage-patient/:patient_id/manage', app.hasRole('clinician'), clinicianController.getDataBounds);
 
+clinicianRouter.get('/manage-patient/:patient_id/message', app.hasRole('clinician'), clinicianController.getIndividualMessage);
+clinicianRouter.post('/manage-patient/:patient_id/message', app.hasRole('clinician'), clinicianController.changeIndividualMessage);
+
 clinicianRouter.post('/manage-patient/:patient_id/delete-note', app.hasRole('clinician'), clinicianController.deleteNote);
 clinicianRouter.post('/manage-patient/:patient_id/add-note', app.hasRole('clinician'), clinicianController.writeNote);
 

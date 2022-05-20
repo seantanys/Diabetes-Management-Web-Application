@@ -606,6 +606,59 @@ const getSupportMessagesPage = async (req, res, next) => {
     }
 }
 
+const getIndividualMessage = async (req, res) => {
+    if (req.isAuthenticated()) {
+
+        try {
+            const user = req.user;
+            const patient = await Patient.findById(req.params.patient_id).lean()
+            const clinician = await Clinician.findById(user.role_id.toString()).lean();
+            const measurement = await Measurement.find({patientId: req.params.patient_id.toString(), type:'insulin'}).sort({"date": -1}).lean() 
+            const reqMeasurements = Object.keys(patient["measurements"])
+            const message = patient.supportMessage;
+
+            res.render('individualSupportMessage', {layout: "clinician.hbs", loggedIn: req.isAuthenticated(), flash: req.flash('success'), errorFlash: req.flash('error'),
+                                                    patient: patient, join_date: user.join_date, clinician: clinician, message: message,
+                                                    required: reqMeasurements});
+
+        } catch (err) {
+            return next(err);
+        }
+
+
+    } else {
+        res.render('login');
+    }
+}
+
+const changeIndividualMessage = async(req, res, next) =>{
+
+    if (req.isAuthenticated()) {
+        try{
+            const message = req.body.supportMsg;
+            const recipientId = req.body.recipientId;
+
+            if (message.length <= 3) {
+                req.flash('error', 'Error. Support message must be longer.')
+                return res.redirect('/clinician/messages')
+            }
+            if (recipientId.length <= 10) {
+                req.flash('error', 'Something went wrong processing your message. Please Try Again.')
+                return res.redirect('/clinician/messages')
+            }
+
+            await Patient.updateOne({_id: recipientId}, {$set: {supportMessage: message}});
+
+            req.flash('success', 'Support message successfully updated!')
+            res.redirect(`/clinician/manage-patient/${recipientId}/message`)
+        }catch(err){
+            return next(err);
+        }
+    } else {
+        res.render('login');
+    }
+}
+
 const changeSupportMessage = async(req, res, next) =>{
 
     if (req.isAuthenticated()) {
@@ -749,6 +802,8 @@ module.exports = {
     changePassword,
     changeSupportMessage,
     getSupportMessagesPage,
+    getIndividualMessage,
+    changeIndividualMessage,
     validate,
     writeNote,
     deleteNote

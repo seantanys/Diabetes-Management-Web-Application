@@ -17,9 +17,6 @@
                 <li>Join Date:   {{formatDate join_date}}</li>
             </ul>
         </div>
-        <a href="/clinician/messages"><button>Send Support Message</button></a>
-        
-
     </div>
 
     <hr class="divider-white">
@@ -53,6 +50,10 @@
             
             <li class="nav-item">      
                 <a href="/clinician/manage-patient/{{{patient._id}}}/manage" class="nav-link">Manage</a>
+            </li>
+
+            <li class="nav-item">      
+                <a href="/clinician/manage-patient/{{{patient._id}}}/message" class="nav-link">Message</a>
             </li>
 
         </ul>

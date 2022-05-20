@@ -2346,16 +2346,6 @@ CLINICIAN STUFF
   font-weight: 600;
 }
 
-.support-message-section {
-  width: 75%;
-  margin-right: 12.5%;
-  margin-left: 12.5%;
-  background-color: var(--colour-h1);
-  margin-bottom: 100px;
-  border-top-left-radius: 25px;
-  border-bottom-left-radius: 25px;
-}
-
 .support-message-patient-list {
   display: flex;
   flex-direction: column;
@@ -2431,6 +2421,26 @@ CLINICIAN STUFF
   color: darkblue;
 }
 
+.support-message-section {
+  width: 75%;
+  margin-right: 12.5%;
+  margin-left: 12.5%;
+  background-color: var(--colour-h1);
+  margin-bottom: 100px;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+}
+
+.individual-msg-section {
+  margin: 50px 0px;
+  color: var(--colour-h1);
+}
+
+.compose-support-message button {
+  background-color: var(--colour-h1);
+  color: var(--colour-background-teal);
+}
+
 .drilldown-container {
   width: 90%;
   margin-left: 5%;
@@ -2444,7 +2454,7 @@ CLINICIAN STUFF
 .patient-info {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   gap: 70px;
   margin: 25px;
