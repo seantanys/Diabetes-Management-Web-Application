@@ -143,8 +143,16 @@ const writeNote = async (req, res) => {
         try {
             if (!(req.body.pid) || !(req.body.comment)) {
                 req.flash('error',"Error. Please fill out the required fields to add a note.")
-                res.redirect(`/clinician/manage-patient/${req.body.pid}`);
+                return res.redirect(`/clinician/manage-patient/${req.body.pid}`);
             }
+
+            const patientExists = await Patient.findById(req.body.pid).lean();
+
+            if (!(patientExists)) {
+                req.flash('error',"Error. Something Went Wrong. Please try again.")
+                return res.redirect(`/clinician/manage-patient/${req.body.pid}`);
+            }
+
             // create the note and save to db
             const newNote = new Note({
                 patientId: req.body.pid,
