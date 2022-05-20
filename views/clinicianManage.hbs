@@ -4,7 +4,7 @@
 
 
 {{>patientDrilldown}}
-<table class="clinician-table-styled"> 
+<table class="clinician-table-styled" style:"align=center"> 
     <thead>
         <tr>
             <th></th>
@@ -15,43 +15,43 @@
     </thead>
     <tbody>
         <tr>
-            <th><input type="checkbox"></th>
+            <th><input type="checkbox" checked="checked"></th>
             <th>Blood Glucose Level</th>
             <th><form>
-                <input type="number" id="minbcg" name="minbcg">
+                <input type="number" id="minbcg" name="minbcg" value="{{patient.measurements.bcg.minimum}}" >
             </form></th>
             <th><form>
-                <input type="number" id="maxbcg" name="maxbcg">
+                <input type="number" id="maxbcg" name="maxbcg" value="{{patient.measurements.bcg.maximum}}">
             </form></th>
         </tr>
         <tr>
             <th><input type="checkbox"></th>
             <th>Weight</th>
             <th><form>
-                <input type="number" id="minweight" name="minweight">
+                <input type="number" id="minweight" name="minweight" value="{{patient.measurements.weight.minimum}}">
             </form></th>
             <th><form>
-                <input type="number" id="maxweight" name="maxweight">
+                <input type="number" id="maxweight" name="maxweight" value="{{patient.measurements.weight.maximum}}">
             </form></th>
         </tr>
          <tr>
             <th><input type="checkbox"></th>
             <th>Doses of Insulin</th>
             <th><form>
-                <input type="number" id="mindose" name="mindose">
+                <input type="number" id="mindose" name="mindose" value="{{patient.measurements.insulin.minimum}}">
             </form></th>
             <th><form>
-                <input type="number" id="maxdose" name="maxdose">
+                <input type="number" id="maxdose" name="maxdose" value="{{patient.measurements.insulin.maximum}}">
             </form></th>
         </tr>
         <tr>
             <th><input type="checkbox"></th>
             <th>Steps</th>
             <th><form>
-                <input type="number" id="minsteps" name="minsteps">
+                <input type="number" id="minsteps" name="minsteps" value="{{patient.measurements.exercise.minimum}}">
             </form></th>
             <th><form>
-                <input type="number" id="maxsteps" name="maxsteps">
+                <input type="number" id="maxsteps" name="maxsteps"value="{{patient.measurements.exercise.maximum}}">
             </form></th>
         </tr>
 
