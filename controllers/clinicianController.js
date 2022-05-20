@@ -168,13 +168,15 @@ const getPatientOverview = async(req, res, next) => {
             const patient = await Patient.findById(req.params.patient_id).lean()
             const measurements = await Measurement.find({patientId: patient._id}).sort({"date": -1}).lean(); 
             const reqMeasurements = Object.keys(patient["measurements"])
-            //const notes = await Note.find({patientId: patient._id}).sort({"date": -1}).lean();
+            const notes = await Note.find({patientId: patient._id}).sort({"date": -1}).lean();
+
+            console.log(notes)
 
             const measurementsForChart = await Measurement.find({patientId: patient._id}).sort({"date": 1}).lean(); 
             const measurementsByDate = groupMeasurementsByDate(measurementsForChart);
             
             //return res.render('partials/patientOverview', {loggedIn: req.isAuthenticated(), required: reqMeasurements, patient: patient, measurements: measurements, notes: notes})
-            return res.render('patientOverview', {loggedIn: req.isAuthenticated(), layout: 'clinician.hbs', required: reqMeasurements, patient: patient, measurements: measurements, groupedByDate: measurementsByDate})
+            return res.render('patientOverview', {loggedIn: req.isAuthenticated(), layout: 'clinician.hbs', required: reqMeasurements, patient: patient, measurements: measurements, groupedByDate: measurementsByDate, notes: notes})
 
         } catch (err) {
             return next(err)

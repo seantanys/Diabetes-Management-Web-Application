@@ -2526,10 +2526,33 @@ CLINICIAN STUFF
   border-radius: 25px;
 }
 
+.notes-table {
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
 .notes-table h1 {
   font-size: var(--text-h2);
-  text-align: centre;
+  text-align: center;
   font-weight: 600;
+}
+
+.note-container {
+  font-size: var(--text-p);
+  color: var(--colour-h1);
+  background-color: #fff740;
+  margin-bottom: 10px;
+  min-height: 100px;
+  padding: 10px;
+  position: relative;
+}
+
+.note-container img {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  cursor: pointer;
 }
 
 .flex-column-center {
