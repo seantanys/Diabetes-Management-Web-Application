@@ -45,7 +45,6 @@ clinicianRouter.post('/manage-patient/:patient_id/delete-note', app.hasRole('cli
 clinicianRouter.post('/manage-patient/:patient_id/add-note', app.hasRole('clinician'), clinicianController.writeNote);
 
 // Manage patient tab
-//clinicianRouter.get('/:patient_id/manage', app.hasRole('clinician'), clinicianController.getDataBoudnds) // TO IMPLEMENTTTTTT
 //clinicianRouter.post('/:patient_id/manage', app.hasRole('clinician'), clinicianController.manageDataBounds) // TO IMPLEMENTTTTTT
 
 // Support messages tab
