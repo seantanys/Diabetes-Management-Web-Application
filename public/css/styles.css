@@ -2551,7 +2551,6 @@ CLINICIAN STUFF
   overflow: auto;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
 }
 
 .note-container img {
@@ -2559,6 +2558,11 @@ CLINICIAN STUFF
   top: 0px;
   right: 0px;
   cursor: pointer;
+}
+
+.note-container p:nth-of-type(2) {
+  font-weight: 300;
+  font-style: italic;
 }
 
 .flex-column-center {
