@@ -24,9 +24,9 @@ clinicianRouter.get('/:patient_id/bcg', app.hasRole('clinician'), clinicianContr
 clinicianRouter.get('/:patient_id/weight', app.hasRole('clinician'), clinicianController.getPatientWeight) 
 clinicianRouter.get('/:patient_id/insulin', app.hasRole('clinician'), clinicianController.getPatientInsulin) 
 clinicianRouter.get('/:patient_id/exercise', app.hasRole('clinician'), clinicianController.getPatientExercise) 
+clinicianRouter.get('/:patient_id/manage', app.hasRole('clinician'), clinicianController.getDataBounds) 
 
 // Manage patient tab
-//clinicianRouter.get('/:patient_id/manage', app.hasRole('clinician'), clinicianController.getDataBoudnds) // TO IMPLEMENTTTTTT
 //clinicianRouter.post('/:patient_id/manage', app.hasRole('clinician'), clinicianController.manageDataBounds) // TO IMPLEMENTTTTTT
 
 // Support messages tab
