@@ -164,7 +164,8 @@ const writeNote = async (req, res) => {
             const newNote = new Note({
                 patientId: req.body.pid,
                 date: DateTime.now().setZone('Australia/Melbourne').toISO(),
-                comment: req.body.comment
+                comment: req.body.comment,
+                color: req.body.notecolor,
             });
             await newNote.save();
 

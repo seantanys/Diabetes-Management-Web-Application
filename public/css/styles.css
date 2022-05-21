@@ -2619,10 +2619,6 @@ CLINICIAN STUFF
   cursor: pointer;
 }
 
-.note-container:nth-of-type(even) {
-  background-color: #feff9c;
-}
-
 .note-container p {
   word-wrap: break-word;
   white-space: pre-wrap;
@@ -2635,7 +2631,6 @@ CLINICIAN STUFF
 }
 
 .patient-notes textarea {
-  margin-top: 25px;
   white-space: pre-wrap;
   width: 400px;
 }
@@ -2643,6 +2638,42 @@ CLINICIAN STUFF
 .note-container p:nth-of-type(2) {
   font-weight: 300;
   font-style: italic;
+}
+
+.note-options {
+  justify-content: flex-start;
+  margin-top: 25px;
+  margin-bottom: 5px;
+}
+
+.note-option {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  margin-left: 5px;
+  margin-right: 5px;
+
+  cursor: pointer;
+}
+
+.note-selected-option {
+  border: 2px solid white;
+  
+  width: 35px;
+  height: 35px;
+}
+
+.dark-yellow {
+  background-color: #fff740;
+}
+.light-yellow {
+  background-color: #feff9c;
+}
+.dark-pink {
+  background-color: #ff65a3;
+}
+.light-pink {
+  background-color: #ff7eb9;
 }
 
 #back-to-top-btn {
