@@ -570,7 +570,7 @@ const getPatientComments = async (req, res, next) => {
                 if (measurement[i].comment != ""){
                     patientComments.push({
                         patient: patient.first_name+" "+ patient.last_name,
-                        id: measurement[i]._id,
+                        id: measurement[i].patientId,
                         type: measurement[i].type,
                         value: measurement[i].value,
                         comment: measurement[i].comment,
