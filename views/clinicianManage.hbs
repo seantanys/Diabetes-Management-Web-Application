@@ -4,7 +4,10 @@
 
 
 {{>patientDrilldown}}
-<form methof="post">
+<form method="post">
+    <input type="text" id="hidden-support-msg-receiver" name="recipientId" required value="{{patient.id}}">
+
+
 <table class="clinician-table-styled" style:"align=center"> 
     <thead>
         <tr>
