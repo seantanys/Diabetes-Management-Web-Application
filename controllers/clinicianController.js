@@ -331,8 +331,6 @@ const getDataBounds = async(req, res, next) => {
             const measurement = await Measurement.find({patientId: req.params.patient_id.toString()})
             const reqMeasurements = Object.keys(patient["measurements"])
             
-
-
             res.render('clinicianManage', {layout: 'clinician.hbs', loggedIn: req.isAuthenticated(), patient: patient, required: reqMeasurements})
             
         } catch (err) {
@@ -343,11 +341,11 @@ const getDataBounds = async(req, res, next) => {
     }
 }
 
-
-
 const manageDataBounds = async(req, res, next) => {
     if (req.isAuthenticated()) {
         try {
+            console.log("hey its me");
+
             const patientId = req.body.recipientId;
             const minbcg = req.body.minbcg;
             const maxbcg = req.body.maxbcg;
@@ -363,7 +361,70 @@ const manageDataBounds = async(req, res, next) => {
                 return res.redirect('/clinician/manage-patient')
             }
 
-            await Patient.updateOne({_id: recipientId}, {$set:{minbcg:minbcg}});
+            const required_measurements = [];
+
+            if (req.body.check-bcg) {
+                const thresholds = [];
+                thresholds.push(req.body.check-bcg);
+                if (minbcg) {
+                    thresholds.push(minbcg)
+                }
+                if (maxbcg) {
+                    thresholds.push(maxbcg)
+                }
+                required_measurements.push(thresholds)
+            }
+            
+            if (req.body.check-weight) {
+                const thresholds = [];
+                thresholds.push(req.body.check-weight);
+                if (minweight) {
+                    thresholds.push(minweight)
+                }
+                if (maxweight) {
+                    thresholds.push(maxweight)
+                }
+                required_measurements.push(thresholds)
+            }
+            
+            if (req.body.check-dose) {
+                const thresholds = [];
+                thresholds.push(req.body.check-dose);
+                if (mindose) {
+                    thresholds.push(mindose)
+                }
+                if (maxdose) {
+                    thresholds.push(maxdose)
+                }
+                required_measurements.push(thresholds)
+            }
+            
+            if (req.body.check-step) {
+                const thresholds = [];
+                thresholds.push(req.body.check-step);
+                if (minsteps) {
+                    thresholds.push(minsteps)
+                }
+                if (maxsteps) {
+                    thresholds.push(maxsteps)
+                }
+                required_measurements.push(thresholds)
+            }
+
+            var measurementJson = {}
+            for (let i = 0; i < required_measurements.length; i++) {
+                const measurement = required_measurements[i][0];
+                const min = required_measurements[i][1];
+                const max = required_measurements[i][2];
+
+                measurementJson[measurement] = {minimum: min, maximum: max}
+            }
+
+            await Patient.findByIdAndUpdate(patientId, {measurements: measurementJson});
+
+            console.log(patientId,measurementJson);
+
+            // await Patient.updateOne({_id: recipientId}, {$set:{minbcg:minbcg}});
             res.redirect('/clinician/manage-patient')
             
             
