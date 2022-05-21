@@ -5,7 +5,8 @@ const { User } = require('../models/user');
 const bcrypt = require('bcrypt');
 const e = require('connect-flash');
 const { redirect } = require('express/lib/response');
-const { body, validationResult } = require('express-validator')
+const { body, validationResult } = require('express-validator');
+const { Clinician } = require('../models/clinician');
 
 // const { isAuthenticated } = require('../app.js');
 
@@ -166,9 +167,11 @@ const getPatientPage = async (req, res) => {
         const dob = data.dob.getDate().toString().padStart(2,"0") + "/" + 
             (data.dob.getMonth() + 1).toString().padStart(2,"0") + "/" + data.dob.getFullYear().toString() 
 
+        const clinician = await Clinician.findById(data.clinicianId).lean();
+
         if (data) {
             res.render('patientDashboard.hbs', {loggedIn: req.isAuthenticated(), title: "Dashboard", theme: user.theme, dob, singlePatient: data, 
-                measured: alreadyMeasured, notMeasured: notMeasured, required: reqMeasurements})
+                measured: alreadyMeasured, notMeasured: notMeasured, required: reqMeasurements, clinician: clinician})
         } else {
             console.log("patient data not found")
             res.render('notfound')

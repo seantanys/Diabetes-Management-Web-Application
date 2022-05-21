@@ -1370,7 +1370,7 @@ hr.solid {
   padding-bottom: 5%;
   font-size: var(--text-p);
   text-align: center;
-  max-width: 60%;
+  /* max-width: 60%; */
 }
 
 #patient-details img {
@@ -1956,6 +1956,10 @@ hr.solid {
   #patient-details {
     background-color: var(--colour-background);
     margin-bottom: 10%;
+
+    width: 80%;
+    margin-right: 10%;
+    margin-left: 10%;
     
   }
   .patient-card-content {
