@@ -4,64 +4,65 @@
 
 
 {{>patientDrilldown}}
-<form action="" method="post">
+<form action='manage-patient/{{patient.measurement.patientID}}/manage' method="post">
     <input type="text" id="hidden-id-receiver" name="patientId" required value="{{patient.measurement.patientID}}">
 
 
-<table class="clinician-table-styled" style:"align=center"> 
-    <thead>
-        <tr>
-            <th></th>
-            <th>Record</th>
-            <th>minimum</th>
-            <th>maximum</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <th><input type="checkbox" id="check-bcg" name="check-bcg"{{#if patient.measurements.bcg}}checked="checked"{{/if}}></th>
-            <th>Blood Glucose Level (nmol/L)</th>
-            <th>
-                <input type="number" id="minbcg" name="minbcg" value="{{patient.measurements.bcg.minimum}}" >
+    <table class="clinician-table-styled" style:"align=center"> 
+        <thead>
+            <tr>
+                <th></th>
+                <th>Record</th>
+                <th>minimum</th>
+                <th>maximum</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th><input type="checkbox" id="check-bcg" name="check-bcg"{{#if patient.measurements.bcg}}checked="checked"{{/if}}></th>
+                <th>Blood Glucose Level (nmol/L)</th>
+                <th>
+                    <input type="number" id="minbcg" name="minbcg" value="{{patient.measurements.bcg.minimum}}" >
+                </th>
+                <th>
+                    <input type="number" id="maxbcg" name="maxbcg" value="{{patient.measurements.bcg.maximum}}">
+                </th>
+            </tr>
+            <tr>
+                <th><input type="checkbox" id="check-weight" name="check-weight" {{#if patient.measurements.weight}}checked="checked"{{/if}}></th>
+                <th>Weight(kg)</th>
+                <th>
+                    <input type="number" id="minweight" name="minweight" value="{{patient.measurements.weight.minimum}}">
+                </th>
+                <th>
+                    <input type="number" id="maxweight" name="maxweight" value="{{patient.measurements.weight.maximum}}">
+                </th>
+            </tr>
+            <tr>
+                <th><input type="checkbox" id="check-dose" name="check-dose" {{#if patient.measurements.insulin}}checked="checked"{{/if}}></th>
+                <th>Insulin (dose(s))</th>
+                <th>
+                    <input type="number" id="mindose" name="mindose" value="{{patient.measurements.insulin.minimum}}">
+                </th>
+                <th>
+                    <input type="number" id="maxdose" name="maxdose" value="{{patient.measurements.insulin.maximum}}">
             </th>
-            <th>
-                <input type="number" id="maxbcg" name="maxbcg" value="{{patient.measurements.bcg.maximum}}">
-            </th>
-        </tr>
-        <tr>
-            <th><input type="checkbox" id="check-weight" name="check-weight" {{#if patient.measurements.weight}}checked="checked"{{/if}}></th>
-            <th>Weight(kg)</th>
-            <th>
-                <input type="number" id="minweight" name="minweight" value="{{patient.measurements.weight.minimum}}">
-            </th>
-            <th>
-                <input type="number" id="maxweight" name="maxweight" value="{{patient.measurements.weight.maximum}}">
-            </th>
-        </tr>
-         <tr>
-            <th><input type="checkbox" id="check-dose" name="check-dose" {{#if patient.measurements.insulin}}checked="checked"{{/if}}></th>
-            <th>Insulin (dose(s))</th>
-            <th>
-                <input type="number" id="mindose" name="mindose" value="{{patient.measurements.insulin.minimum}}">
-            </th>
-            <th>
-                <input type="number" id="maxdose" name="maxdose" value="{{patient.measurements.insulin.maximum}}">
-           </th>
-        </tr>
-        <tr>
-            <th><input type="checkbox" id="check-step" name="check-step" {{#if patient.measurements.exercise}}checked="checked"{{/if}}></th>
-            <th>Exercise(steps)</th>
-            <th>
-                <input type="number" id="minsteps" name="minsteps" value="{{patient.measurements.exercise.minimum}}">
-            </th>
-            <th>
-                <input type="number" id="maxsteps" name="maxsteps"value="{{patient.measurements.exercise.maximum}}">
-            </th>
-        </tr>
+            </tr>
+            <tr>
+                <th><input type="checkbox" id="check-step" name="check-step" {{#if patient.measurements.exercise}}checked="checked"{{/if}}></th>
+                <th>Exercise(steps)</th>
+                <th>
+                    <input type="number" id="minsteps" name="minsteps" value="{{patient.measurements.exercise.minimum}}">
+                </th>
+                <th>
+                    <input type="number" id="maxsteps" name="maxsteps"value="{{patient.measurements.exercise.maximum}}">
+                </th>
+            </tr>
 
-    </tbody>
-</table>
-<button type="submit">Send</button>
+        </tbody>
+    </table>
+
+    <button type="submit">Submit</button>
 {{!-- <button><a href="/clinician/manage-patient/{{this.patient._id}}" Style="color:white;">Save</a></button> --}}
 </form>
 
