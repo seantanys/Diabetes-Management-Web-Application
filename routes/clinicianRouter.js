@@ -2,6 +2,7 @@ const express = require('express')
 const app = require('../app.js');
 // const {Clinician} = require('../models/clinician')
 // const {User} = require('../models/user')
+const { body, check, validationResult } = require('express-validator');
 
 // create our Router object
 const clinicianRouter = express.Router()
@@ -28,7 +29,17 @@ clinicianRouter.get('/comments', app.hasRole('clinician'), clinicianController.g
 
 clinicianRouter.get('/account', app.hasRole('clinician'), clinicianController.getAccountPage);
 
-clinicianRouter.post('/account/change-password', app.hasRole('clinician'), clinicianController.changePassword);
+clinicianRouter.post('/account/change-password',
+                    body('curr_pw').not().isEmpty().escape(),
+                    body('new_pw').not().isEmpty().escape(),
+                    body('confirm_new_pw').not().isEmpty().escape(),
+                    check('new_pw')
+                        .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/)
+                        .withMessage('Password must contain minimum eight characters, at least one uppercase letter, one lowercase letter and one number'),
+                    check('confirm_new_pw')
+                        .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/)
+                        .withMessage('Password must minimum eight characters, at least one uppercase letter, one lowercase letter and one number'),
+                    app.hasRole('clinician'), clinicianController.changePassword);
 
 clinicianRouter.get('/manage-patient/:patient_id', app.hasRole('clinician'), clinicianController.getPatientOverview)
 // route to make note for patient
@@ -45,7 +56,9 @@ clinicianRouter.get('/manage-patient/:patient_id/message', app.hasRole('clinicia
 clinicianRouter.post('/manage-patient/:patient_id/message', app.hasRole('clinician'), clinicianController.changeIndividualMessage);
 
 clinicianRouter.post('/manage-patient/:patient_id/delete-note', app.hasRole('clinician'), clinicianController.deleteNote);
-clinicianRouter.post('/manage-patient/:patient_id/add-note', app.hasRole('clinician'), clinicianController.writeNote);
+clinicianRouter.post('/manage-patient/:patient_id/add-note', 
+                    body('comment').not().isEmpty().escape(),
+                    app.hasRole('clinician'), clinicianController.writeNote);
 
 // Manage patient tab
 //clinicianRouter.get('/:patient_id/manage', app.hasRole('clinician'), clinicianController.getDataBoudnds) // TO IMPLEMENTTTTTT
@@ -68,32 +81,5 @@ clinicianRouter.post('/api/messages', (req, res) => {
     sendMessage(message)
     return res.send(messages)
 })
-
-// clinicianRouter.post('/addClinician', async (req, res) => { // using POST for Postman demo
-//     const newClinician = new Clinician({
-//     first_name: "anh@dah.com",
-//     last_name: "pha",
-//     screen_name: "Clinician Anh",
-//     dob: new Date("2001-02-27"),
-//     })
-
-
-//     // extract the object id from the patient document
-//     const clinician = await newClinician.save();  
-//     const clinicianId = clinician._id;
-
-//     // then we create the user document and save to db
-//     const newUser = new User({
-//         username: "anh@dah.com",
-//         password: "anh",
-//         dob: new Date("2001-02-27"),
-//         role: "clinician",
-//         role_id: clinicianId,
-//         theme: "default"
-//     });
-
-//     await newUser.save();
-
-//     })
 
 module.exports = clinicianRouter

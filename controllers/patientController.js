@@ -32,7 +32,7 @@ const getMeasurementPage = async (req, res) => {
         const notMeasured = reqMeasurements.filter(x => !alreadyMeasured.includes(x)); 
 
         if (data) {
-            res.render('record.hbs', {loggedIn: req.isAuthenticated(), flash: req.flash('success'), title: "Record", theme: user.theme, singlePatient: data, measured: alreadyMeasured, 
+            res.render('record.hbs', {loggedIn: req.isAuthenticated(), flash: req.flash('success'), errorFlash: req.flash('error'), title: "Record", theme: user.theme, singlePatient: data, measured: alreadyMeasured, 
                                     notMeasured: notMeasured, required: reqMeasurements,
                                     currentTime: displayTime})
         } else {
@@ -83,6 +83,13 @@ const calcEngagementRate = async(req,res) => {
 const submitMeasurement = async (req, res, next) => {
     if (req.isAuthenticated()) {
         const id = req.user.role_id
+
+        const errors = validationResult(req); 
+        if (!errors.isEmpty()) {
+            req.flash('error', `Something went wrong, please enter valid data and try again.`)
+            return res.redirect('/patient/record');
+        }
+
         try {
             const newMeasurement = new Measurement ({
                 type: req.body.type,
@@ -176,17 +183,17 @@ const getPatientAccountPage = async (req, res) => {
 const changePassword = async (req, res) => {
 
     if (req.isAuthenticated()) {
+
+        const errors = validationResult(req); 
+        if (!errors.isEmpty()) {
+            req.flash('error', `${errors.array()[0].msg}`)
+            return res.redirect('/patient/account');
+        }
+
         const user = req.user;
         const pw = req.body.curr_pw
         const new_pw = req.body.new_pw
         const confirm_pw = req.body.confirm_new_pw
-
-        // const errors = validationResult(req); 
-        // if (!errors.isEmpty()) {
-        //     console.log(errors);
-        //     req.flash('error', `Password Validation Failed. Please try Again.`)
-        //     return res.redirect('/patient/account');
-        // }
 
         const retrieved_user = await User.findById(user._id)
 

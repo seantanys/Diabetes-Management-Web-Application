@@ -8,6 +8,7 @@ const passport = require('./passport.js')
 const http = require('http')
 const messageRouter = require('./routes/message.js')
 const { DateTime } = require("luxon");
+const { body, validationResult } = require('express-validator')
 require('./models')
 
 const app = express()
@@ -122,7 +123,6 @@ app.post('/login',
 )
 
 app.post('/logout', (req, res) => {
-    console.log("bro")
     req.logout();
     res.redirect('/');
 })

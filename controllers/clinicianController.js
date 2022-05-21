@@ -140,6 +140,13 @@ const getAllPatientData = async (req, res, next) => {
 
 const writeNote = async (req, res) => {
     if (req.isAuthenticated()) {
+
+        const errors = validationResult(req); 
+        if (!errors.isEmpty()) {
+            req.flash('error', `Something went wrong, please enter a valid note and try again.`)
+            return res.redirect(`/clinician/manage-patient/${req.body.pid}`);
+        }
+
         try {
             if (!(req.body.pid) || !(req.body.comment)) {
                 req.flash('error',"Error. Please fill out the required fields to add a note.")
@@ -706,6 +713,13 @@ const getAccountPage = async (req, res) => {
 const changePassword = async (req, res) => {
 
     if (req.isAuthenticated()) {
+
+        const errors = validationResult(req); 
+        if (!errors.isEmpty()) {
+            req.flash('error', `${errors.array()[0].msg}`)
+            return res.redirect('/clinician/account');
+        }
+
         const user = req.user;
         const pw = req.body.curr_pw
         const new_pw = req.body.new_pw
