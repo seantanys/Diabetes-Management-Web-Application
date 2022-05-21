@@ -356,6 +356,11 @@ const manageDataBounds = async(req, res, next) => {
             const minsteps = req.body.minsteps;
             const maxsteps = req.body.maxsteps;
 
+            if (minsteps>maxsteps||minbcg>maxbcg||mindose>maxdose||minweight>maxweight) {
+                req.flash('error', 'Error. reverting to old values.')
+                return res.redirect('/clinician/manage-patient')
+            }
+
             await Patient.updateOne({patient: patient}, {$set:{minbcg:minbcg}});
             res.redirect('/clinician/manage-patient')
             
