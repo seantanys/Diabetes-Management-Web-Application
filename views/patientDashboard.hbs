@@ -21,20 +21,6 @@
             <button><a href="/patient/account" style="color: white;">Account settings</a></button>
         </div>
 
-        {{!-- Messages are hard coded for now. --}}
-        <div class="patient-card">
-            <div class="patient-card-label">
-                <h3>Messages</h3>
-            </div>
-            <div class="patient-card-content">
-                <div class="msg-bubble msg-bubble-left">
-                    {{singlePatient.supportMessage}}
-                    <br>
-                    <i>- Dr. Chris (29/04/22)</i>
-                </div>
-            </div>
-        </div>
-
         <div class="patient-card">
             <div class="patient-card-label">
                 <h3>Reminders</h3>
@@ -72,6 +58,20 @@
                     {{/if}}
                 </ul>
                 <a href="/patient/record">Record measurements</a>
+            </div>
+        </div>
+
+        {{!-- Messages are hard coded for now. --}}
+        <div class="patient-card">
+            <div class="patient-card-label">
+                <h3>Messages</h3>
+            </div>
+            <div class="patient-card-content">
+                <div class="msg-bubble msg-bubble-left">
+                    {{singlePatient.supportMessage}}
+                    <br>
+                    <i>- Dr. {{clinician.first_name}}</i>
+                </div>
             </div>
         </div>
 

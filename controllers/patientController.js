@@ -5,7 +5,8 @@ const { User } = require('../models/user');
 const bcrypt = require('bcrypt');
 const e = require('connect-flash');
 const { redirect } = require('express/lib/response');
-const { body, validationResult } = require('express-validator')
+const { body, validationResult } = require('express-validator');
+const { Clinician } = require('../models/clinician');
 
 // const { isAuthenticated } = require('../app.js');
 
@@ -72,9 +73,9 @@ function countMeasureDays(dates, measurements) {
     return count;
 }
 
-/*const calcEngagementAll = async(req,res) => {
+const calcEngagementAll = async (req,res) => {
     await Patient.find().forEach({
-        calcEngagementRate(patientData) {
+        async calcEngagementRate(patientData) {
             // Get patient ID
             const patientId = patientData._id;
             // get current melbourne time using luxon
@@ -99,7 +100,7 @@ function countMeasureDays(dates, measurements) {
             //await patientData.save();
         }
     });
-}*/
+}
 
 // this function instantiates a new measurement object and saves it to the db
 const submitMeasurement = async (req, res, next) => {
@@ -109,6 +110,11 @@ const submitMeasurement = async (req, res, next) => {
         const errors = validationResult(req); 
         if (!errors.isEmpty()) {
             req.flash('error', `Something went wrong, please enter valid data and try again.`)
+            return res.redirect('/patient/record');
+        }
+
+        if (req.body.value < 0) {
+            req.flash('error', `Measurement values must be a positive number.`)
             return res.redirect('/patient/record');
         }
 
@@ -166,9 +172,11 @@ const getPatientPage = async (req, res) => {
         const dob = data.dob.getDate().toString().padStart(2,"0") + "/" + 
             (data.dob.getMonth() + 1).toString().padStart(2,"0") + "/" + data.dob.getFullYear().toString() 
 
+        const clinician = await Clinician.findById(data.clinicianId).lean();
+
         if (data) {
             res.render('patientDashboard.hbs', {loggedIn: req.isAuthenticated(), title: "Dashboard", theme: user.theme, dob, singlePatient: data, 
-                measured: alreadyMeasured, notMeasured: notMeasured, required: reqMeasurements})
+                measured: alreadyMeasured, notMeasured: notMeasured, required: reqMeasurements, clinician: clinician})
         } else {
             console.log("patient data not found")
             res.render('notfound')

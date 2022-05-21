@@ -3,6 +3,7 @@
 <script src="/scripts/patientDataFilter.js"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="/scripts/patientChart.js"></script>
+<script src="/scripts/backToTop.js"></script>
 
 
 {{!-- <div class="loader-wrapper" id="loader">
@@ -98,7 +99,7 @@
             <h1>Notes</h1>
             <br>
             {{#each notes}}
-            <div class="note-container">
+            <div class="note-container {{#if this.color}}{{this.color}}{{else}}dark-yellow{{/if}}">
                 <p>{{this.comment}}</p>
                 <br>
                 <p>{{formatDateTime this.date}}</p>
@@ -112,13 +113,29 @@
             {{/each}}
         </div>
 
-        <form action="/clinician/manage-patient/{{patient._id}}/add-note" method="post">  
+        <div class="note-input-container">
+            <div class="note-options flex-row-center">
+                <div id="dark-yellow" class="note-option dark-yellow note-selected-option"></div>
+                <div id="light-yellow" class="note-option light-yellow"></div>
+                <div id="dark-pink" class="note-option dark-pink"></div>
+                <div id="light-pink" class="note-option light-pink"></div>
+            </div>
+            <form action="/clinician/manage-patient/{{patient._id}}/add-note" method="post">  
+                <input type="hidden" value={{patient._id}} name="pid">
+                <input type="hidden" name="notecolor" id="note-color" value="dark-yellow">
+                <div class="comment-input">
+                    <textarea name="comment" id="comment" cols="30" rows="5" placeholder="Enter note here" required></textarea>
+                </div>
+                <button class="record-button">Add note</button>
+            </form>
+        </div>
+        {{!-- <form action="/clinician/manage-patient/{{patient._id}}/add-note" method="post">  
             <input type="hidden" value={{patient._id}} name="pid">
             <div class="comment-input">
                 <textarea name="comment" id="comment" cols="30" rows="5" placeholder="Enter note here" required></textarea>
             </div>
             <button class="record-button">Add note</button>
-        </form>
+        </form> --}}
 
         <div class="info">
             <img src="/images/icons/info.svg" alt="info-sign">
@@ -128,6 +145,8 @@
         </div>
     </section>
 </div>
+
+<button id="back-to-top-btn" title="Go to top"><img src="/images/icons/top.svg" style="width: 30px; height: 30px;" alt="back to top button"></button>
 
 {{else}}
 

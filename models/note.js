@@ -4,7 +4,8 @@ const mongoose = require('mongoose')
 const noteSchema = new mongoose.Schema({
     patientId: { type: String, required: true },
     date: { type: Date, default: Date.now },
-    comment: { type: String, required: true }
+    comment: { type: String, required: true },
+    color: {type: String, default: "dark-yellow"}
 });
 
 // compile the noteSchemas into Model

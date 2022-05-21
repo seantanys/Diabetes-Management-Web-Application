@@ -6,12 +6,6 @@ const {Clinician} = require('../models/clinician')
 const { body, validationResult } = require('express-validator')
 const { Note } = require('../models/note');
 
-const mType = {
-    bcg: "bcg",
-    weight: "weight",
-    insulin: "insulin",
-    exercise: "exercise",
-};
 
 function getDatesFromPatientObj(object) {
     var dates = [];
@@ -72,6 +66,10 @@ function getDatesInRange(startDate, endDate) {
         dates.push(new Date(date));
         date.setDate(date.getDate() - 1);
     } 
+
+    const joinDate = new Date(startDate);
+    joinDate.setUTCHours(0,0,0,0);
+    dates.push(new Date(joinDate));
     return dates;
 }
 
@@ -117,10 +115,11 @@ const getAllPatientData = async (req, res, next) => {
         for (let i = 0; i < clinician.patients.length; i++) {
 
             const patient = await Patient.findById(clinician.patients[i].toString()).lean()
-            bcgmeasurement = await Measurement.findOne({patientId: clinician.patients[i].toString(), type:'bcg'}).sort({"date": -1}).lean()
-            weightmeasurement = await Measurement.findOne({patientId: clinician.patients[i].toString(), type:'weight'}).sort({"date": -1}).lean()
-            insulinmeasurement = await Measurement.findOne({patientId: clinician.patients[i].toString(), type:'insulin'}).sort({"date": -1}).lean()
-            exercisemeasurement = await Measurement.findOne({patientId: clinician.patients[i].toString(), type:'exercise'}).sort({"date": -1}).lean()
+
+            bcgmeasurement = await Measurement.findOne({patientId: clinician.patients[i].toString(), type:'bcg', date: { $gte: currDate}}).lean()
+            weightmeasurement = await Measurement.findOne({patientId: clinician.patients[i].toString(), type:'weight', date: { $gte: currDate}}).lean()
+            insulinmeasurement = await Measurement.findOne({patientId: clinician.patients[i].toString(), type:'insulin', date: { $gte: currDate}}).lean()
+            exercisemeasurement = await Measurement.findOne({patientId: clinician.patients[i].toString(), type:'exercise', date: { $gte: currDate}}).lean()
 
             patientDashboard.push({
                                    patient: patient,
@@ -164,7 +163,8 @@ const writeNote = async (req, res) => {
             const newNote = new Note({
                 patientId: req.body.pid,
                 date: DateTime.now().setZone('Australia/Melbourne').toISO(),
-                comment: req.body.comment
+                comment: req.body.comment,
+                color: req.body.notecolor,
             });
             await newNote.save();
 
@@ -230,7 +230,8 @@ const getPatientBCG = async(req, res, next) => {
     if (req.isAuthenticated()) {
         try {
             const patient = await Patient.findById(req.params.patient_id).lean()
-            const dates = await getDatesInRange(new Date(patient.join_date), new Date())
+            const user = await User.findOne({role_id: patient._id}).lean();
+            const dates = await getDatesInRange(new Date(user.join_date), new Date())
             const measurement = await Measurement.find({patientId: req.params.patient_id.toString(), type:'bcg'}).sort({"date": -1}).lean() 
             const reqMeasurements = Object.keys(patient["measurements"])
             const type = 'bcg'
@@ -258,12 +259,16 @@ const getPatientWeight = async(req, res, next) => {
     if (req.isAuthenticated()) {
         try {
             const patient = await Patient.findById(req.params.patient_id).lean()
-            const dates = await getDatesInRange(new Date(patient.join_date), new Date())
+            const user = await User.findOne({role_id: patient._id}).lean();
+            const dates = await getDatesInRange(new Date(user.join_date), new Date())
+
             const measurement = await Measurement.find({patientId: req.params.patient_id.toString(), type:'weight'}).sort({"date": -1}).lean() 
             const reqMeasurements = Object.keys(patient["measurements"])
             const type = 'weight'
             const max = patient.measurements.weight.maximum
             const min = patient.measurements.weight.minimum
+            console.log(max)
+            console.log(min)
             const unit = '(kg)'
 
             formatted = getTableArray(dates, measurement)
@@ -286,7 +291,8 @@ const getPatientInsulin = async(req, res, next) => {
     if (req.isAuthenticated()) {
         try {
             const patient = await Patient.findById(req.params.patient_id).lean()
-            const dates = await getDatesInRange(new Date(patient.join_date), new Date())
+            const user = await User.findOne({role_id: patient._id}).lean();
+            const dates = await getDatesInRange(new Date(user.join_date), new Date())
             const measurement = await Measurement.find({patientId: req.params.patient_id.toString(), type:'insulin'}).sort({"date": -1}).lean() 
             const reqMeasurements = Object.keys(patient["measurements"])
             const type = 'insulin'
@@ -314,7 +320,8 @@ const getPatientExercise = async(req, res, next) => {
     if (req.isAuthenticated()) {
         try {
             const patient = await Patient.findById(req.params.patient_id).lean()
-            const dates = await getDatesInRange(new Date(patient.join_date), new Date())
+            const user = await User.findOne({role_id: patient._id}).lean();
+            const dates = await getDatesInRange(new Date(user.join_date), new Date())
             const measurement = await Measurement.find({patientId: req.params.patient_id.toString(), type:'exercise'}).sort({"date": -1}).lean() 
             const reqMeasurements = Object.keys(patient["measurements"])
             const type = 'exercise'
@@ -343,60 +350,123 @@ const getDataBounds = async(req, res, next) => {
     if (req.isAuthenticated()) {
         try {
             const patient = await Patient.findById(req.params.patient_id).lean()
-            const measurement = await Measurement.find({patientId: req.params.patient_id.toString(), type:'exercise'})
-            const required_measurements = [];const 
-            reqMeasurements = Object.keys(patient["measurements"])
+            const measurement = await Measurement.find({patientId: req.params.patient_id.toString()})
+            const reqMeasurements = Object.keys(patient["measurements"])
+            
+            res.render('clinicianManage', {layout: 'clinician.hbs', loggedIn: req.isAuthenticated(), flash: req.flash('success'), errorFlash: req.flash('error'), join_date: req.user.join_date, patient: patient, required: reqMeasurements})
+            
+        } catch (err) {
+            return next(err)
+        }
+    } else {
+        res.render('login');
+    }
+}
+
+const manageDataBounds = async(req, res, next) => {
+    if (req.isAuthenticated()) {
+        try {
+            const patientId = req.params.patient_id;
+            const minbcg = req.body.minbcg;
+            const maxbcg = req.body.maxbcg;
+            const minweight = req.body.minweight;
+            const maxweight = req.body.maxweight;
+            const mindose = req.body.mindose;
+            const maxdose = req.body.maxdose;
+            const minsteps = req.body.minsteps;
+            const maxsteps = req.body.maxsteps;
+
+            const required_measurements = [];
 
             if (req.body.bcg) {
+
+                if(parseInt(minbcg)>=parseInt(maxbcg)){
+                    req.flash('error', 'Error. Blood Glucose minimum threshold must not be equal to or exceeding maximum threshold.')
+                    return res.redirect(`/clinician/manage-patient/${patientId}/manage`)
+                }
+
                 const thresholds = [];
-                thresholds.get(req.body.bcg);
-                if (req.body.bcgmin) {
-                    thresholds.get(req.body.bcgmin)
+                thresholds.push('bcg');
+                if (minbcg) {
+                    thresholds.push(minbcg)
                 }
-                if (req.body.bcgmax) {
-                    thresholds.get(req.body.bcgmax)
+                if (maxbcg) {
+                    thresholds.push(maxbcg)
                 }
-                required_measurements.get(thresholds)
+                required_measurements.push(thresholds)
             }
             
             if (req.body.weight) {
+
+                if(parseInt(minweight)>=parseInt(maxweight)){
+                    req.flash('error', 'Error. Weight minimum threshold must not be equal to or exceeding maximum threshold.')
+                    return res.redirect(`/clinician/manage-patient/${patientId}/manage`)
+                }
+
                 const thresholds = [];
-                thresholds.get(req.body.weight);
-                if (req.body.weightmin) {
-                    thresholds.get(req.body.weightmin)
+                thresholds.push('weight');
+                if (minweight) {
+                    thresholds.push(minweight)
                 }
-                if (req.body.weightmax) {
-                    thresholds.get(req.body.weightmax)
+                if (maxweight) {
+                    thresholds.push(maxweight)
                 }
-                required_measurements.get(thresholds)
+                required_measurements.push(thresholds)
             }
             
             if (req.body.insulin) {
+
+                if(parseInt(mindose)>=parseInt(maxdose)){
+                    req.flash('error', 'Error. Insulin dose minimum threshold must not be equal to or exceeding maximum threshold.')
+                    return res.redirect(`/clinician/manage-patient/${patientId}/manage`)
+                }
+
                 const thresholds = [];
-                thresholds.get(req.body.insulin);
-                if (req.body.insulinmin) {
-                    thresholds.get(req.body.insulinmin)
+                thresholds.push('insulin');
+                if (mindose) {
+                    thresholds.push(mindose)
                 }
-                if (req.body.insulinmax) {
-                    thresholds.get(req.body.insulinmax)
+                if (maxdose) {
+                    thresholds.push(maxdose)
                 }
-                required_measurements.get(thresholds)
+                required_measurements.push(thresholds)
             }
             
             if (req.body.exercise) {
+
+                if(parseInt(minsteps)>=parseInt(maxsteps)){
+                    req.flash('error', 'Error. Exercise minimum threshold must not be equal to or exceeding maximum threshold.')
+                    return res.redirect(`/clinician/manage-patient/${patientId}/manage`)
+                }
+
                 const thresholds = [];
-                thresholds.get(req.body.exercise);
-                if (req.body.exercisemin) {
-                    thresholds.get(req.body.exercisemin)
+                thresholds.push('exercise');
+                if (minsteps) {
+                    thresholds.push(minsteps)
                 }
-                if (req.body.exercisemax) {
-                    thresholds.get(req.body.exercisemax)
+                if (maxsteps) {
+                    thresholds.push(maxsteps)
                 }
-                required_measurements.get(thresholds)
+                required_measurements.push(thresholds)
             }
 
-            res.render('clinicianManage', {layout: 'clinician.hbs', loggedIn: req.isAuthenticated(), patient: patient, required: reqMeasurements})
+            var measurementJson = {}
+            for (let i = 0; i < required_measurements.length; i++) {
+                const measurement = required_measurements[i][0];
+                const min = required_measurements[i][1];
+                const max = required_measurements[i][2];
+
+                measurementJson[measurement] = {minimum: min, maximum: max}
+            }
+
+            await Patient.findByIdAndUpdate(patientId, {measurements: measurementJson});
+
+            // await Patient.updateOne({_id: recipientId}, {$set:{minbcg:minbcg}});
+            req.flash('success', 'Measurement thresholds successfully updated!')
+            res.redirect(`/clinician/manage-patient/${patientId}/manage`)
             
+            
+        
         } catch (err) {
             return next(err)
         }
@@ -814,6 +884,7 @@ module.exports = {
     getPatientInsulin,
     getPatientExercise,
     getDataBounds,
+    manageDataBounds,
     insertData,
     getNewPatientForm,
     getPatientComments,

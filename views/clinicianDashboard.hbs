@@ -41,6 +41,9 @@
                     {{else}}
                         <p id ="red">{{this.bcg}}</p>
                     {{/if}}
+                    {{#if (isEmpty this.bcg)}}
+                        <p id ="grey">Not updated</p>
+                    {{/if}}
                 </th>
                 {{else}}
                 <th style="background-color: rgba(110, 107, 107, 0.404);"> 
@@ -53,6 +56,9 @@
                         {{this.weight}}
                     {{else}}
                         <p id ="red">{{this.weight}}</p>
+                    {{/if}}
+                    {{#if (isEmpty this.weight)}}
+                        <p id ="grey">Not updated</p>
                     {{/if}}
                 </th>
                 {{else}}
@@ -67,6 +73,9 @@
                     {{else}}
                         <p id ="red">{{this.insulin}}</p>
                     {{/if}}
+                    {{#if (isEmpty this.insulin)}}
+                        <p id ="grey">Not updated</p>
+                    {{/if}}
                 </th>
                 {{else}}
                 <th style="background-color: rgba(110, 107, 107, 0.404);"> 
@@ -79,6 +88,9 @@
                         {{this.exercise}}
                     {{else}}
                         <p id ="red">{{this.exercise}}</p>
+                    {{/if}}
+                    {{#if (isEmpty this.exercise)}}
+                        <p id ="grey">Not updated</p>
                     {{/if}}
                 </th>
                 {{else}}

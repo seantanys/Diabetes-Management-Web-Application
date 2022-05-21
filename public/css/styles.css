@@ -1370,7 +1370,7 @@ hr.solid {
   padding-bottom: 5%;
   font-size: var(--text-p);
   text-align: center;
-  max-width: 60%;
+  /* max-width: 60%; */
 }
 
 #patient-details img {
@@ -1956,6 +1956,10 @@ hr.solid {
   #patient-details {
     background-color: var(--colour-background);
     margin-bottom: 10%;
+
+    width: 80%;
+    margin-right: 10%;
+    margin-left: 10%;
     
   }
   .patient-card-content {
@@ -2146,6 +2150,10 @@ CLINICIAN STUFF
   color: red;
 }
 
+#grey{
+  color: grey;
+}
+
 .clinician-info{
   text-align:center;
 }
@@ -2199,6 +2207,8 @@ CLINICIAN STUFF
   padding: 15px 32px;
   cursor: pointer;
 }
+
+
 
 #clinician-button:nth-of-type(2) {
   font-size: 16px;
@@ -2433,6 +2443,10 @@ CLINICIAN STUFF
   display: none;
 }
 
+#hidden-id-receiver {
+  display: none;
+}
+
 .compose-support-message button {
   background-color: var(--colour-background-teal);
   color: var(--colour-h1);
@@ -2603,11 +2617,11 @@ CLINICIAN STUFF
   background-color: #fff740;
   margin-bottom: 10px;
   min-height: 120px;
-  max-height: 200px;
+  max-height: 300px;
   padding: 15px;
   position: relative;
 
-  /* overflow: auto; */
+  overflow: auto;
   display: flex;
   flex-direction: column;
 }
@@ -2617,10 +2631,6 @@ CLINICIAN STUFF
   top: 0px;
   right: 0px;
   cursor: pointer;
-}
-
-.note-container:nth-of-type(even) {
-  background-color: #feff9c;
 }
 
 .note-container p {
@@ -2635,7 +2645,6 @@ CLINICIAN STUFF
 }
 
 .patient-notes textarea {
-  margin-top: 25px;
   white-space: pre-wrap;
   width: 400px;
 }
@@ -2643,6 +2652,62 @@ CLINICIAN STUFF
 .note-container p:nth-of-type(2) {
   font-weight: 300;
   font-style: italic;
+}
+
+.note-options {
+  justify-content: flex-start;
+  margin-top: 25px;
+  margin-bottom: 5px;
+}
+
+.note-option {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  margin-left: 5px;
+  margin-right: 5px;
+
+  cursor: pointer;
+}
+
+.note-selected-option {
+  border: 2px solid white;
+  
+  width: 35px;
+  height: 35px;
+}
+
+.dark-yellow {
+  background-color: #fff740;
+}
+.light-yellow {
+  background-color: #feff9c;
+}
+.dark-pink {
+  background-color: #ff65a3;
+}
+.light-pink {
+  background-color: #ff7eb9;
+}
+
+#back-to-top-btn {
+  display: none; /* Hidden by default */
+  position: fixed; /* Fixed/sticky position */
+  bottom: 20px; /* Place the button at the bottom of the page */
+  right: 30px; /* Place the button 30px from the right */
+  z-index: 99; /* Make sure it does not overlap */
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  background-color: var(--colour-h1);/* Set a background color */
+  color: white; /* Text color */
+  cursor: pointer; /* Add a mouse pointer on hover */
+  padding: 10px; /* Some padding */
+  border-radius: 10px; /* Rounded corners */
+  font-size: 18px; /* Increase font size */
+}
+
+#back-to-top-btn:hover {
+  background-color: #555;
 }
 
 .flex-column-center {
@@ -2655,4 +2720,31 @@ CLINICIAN STUFF
 .flex-row-center {
   display: flex;
   flex-direction: row;
+}
+
+.patient-threshold-container h2 {
+  color: var(--colour-h1);
+  font-size: var(--text-h2);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.patient-threshold-container h3 {
+  color: var(--colour-h2);
+  font-size: var(--text-h3);
+  font-weight: 600;
+  text-align: center;
+}
+
+.patient-threshold-container p {
+  color: var(--colour-h2);
+  font-size: var(--text-p);
+  font-weight: 300;
+  text-align: center;
+}
+
+.table-align{
+  margin-left:auto;
+  margin-right:auto;
 }

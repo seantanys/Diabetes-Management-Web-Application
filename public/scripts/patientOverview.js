@@ -1,8 +1,10 @@
 window.addEventListener('DOMContentLoaded', (event) => {
     const tabs = document.querySelectorAll('.drilldown-nav-bar a')
     const noteContainers = document.querySelectorAll('.note-container');
+    const noteOptions = document.querySelectorAll('.note-option')
     const dataRows = document.querySelectorAll('.patient-data-row');
-    const noteInput = document.getElementById('comment')
+    const noteInput = document.getElementById('comment');
+    const noteColorInput = document.getElementById('note-color')
 
     noteContainers.forEach(note => {
         const btn = note.querySelector('.note-del-btn')
@@ -31,6 +33,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
         tab.addEventListener('click', switchTab);
     })
 
+    noteOptions.forEach(noteOption => {
+        noteOption.addEventListener('click', toggleOption)
+    })
+
     function switchTab() {
         toggleActive(this.innerText)
     }
@@ -44,6 +50,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 tab.classList.add("active-overview-tab");
             }
         })
+    }
+
+    function toggleOption() {      
+        noteOptions.forEach(o => {
+            o.classList.remove('note-selected-option');
+        })
+        this.classList.add('note-selected-option');
+        noteColorInput.value = this.id;
     }
 
 });
