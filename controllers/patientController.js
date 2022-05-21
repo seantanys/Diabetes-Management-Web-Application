@@ -113,6 +113,11 @@ const submitMeasurement = async (req, res, next) => {
             return res.redirect('/patient/record');
         }
 
+        if (req.body.value < 0) {
+            req.flash('error', `Measurement values must be a positive number.`)
+            return res.redirect('/patient/record');
+        }
+
         try {
             const newMeasurement = new Measurement ({
                 type: req.body.type,
