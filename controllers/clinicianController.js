@@ -329,7 +329,7 @@ const getDataBounds = async(req, res, next) => {
         try {
             const patient = await Patient.findById(req.params.patient_id).lean()
             const measurement = await Measurement.find({patientId: req.params.patient_id.toString()})
-            
+
 
             res.render('clinicianManage', {layout: 'clinician.hbs', loggedIn: req.isAuthenticated(), patient: patient, required: reqMeasurements})
             
@@ -348,8 +348,15 @@ const manageDataBounds = async(req, res, next) => {
         try {
             const patient = await Patient.findById(req.params.patient_id).lean()
             const minbcg = req.body.minbcg;
+            const maxbcg = req.body.maxbcg;
+            const minweight = req.body.minweight;
+            const maxweight = req.body.maxweight;
+            const mindose = req.body.mindose;
+            const maxdose = req.body.maxdose;
+            const minsteps = req.body.minsteps;
+            const maxsteps = req.body.maxsteps;
 
-            await Patient.updateOne({_id: patient_id}, {$set:{bcgmin:minbcg}});
+            await Patient.updateOne({patient: patient}, {$set:{minbcg:minbcg}});
             res.redirect('/clinician/manage-patient')
             
             
