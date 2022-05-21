@@ -6,18 +6,11 @@ const bcrypt = require('bcrypt')
 const userSchema = new mongoose.Schema({
     username: {type: String, required: true},
     password: {type: String, required: true},
-    dob: {type: Date, required: true},
     join_date: {type: Date, default: Date.now},
     role: {type: String, required: true},
     role_id: {type: String, required: true},
     theme: {type: String, default:'default', required: true}
 });
-
-// derive age from patientSchema using date of birth
-userSchema.virtual('age').get(function () {
-    currentDate = new Date()
-    return `${currentDate.getYear() - this.dob.getYear()}`
-})
 
 userSchema.plugin(passportLocalMongoose);
 

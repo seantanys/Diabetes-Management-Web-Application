@@ -467,7 +467,6 @@ const insertData = async (req, res, next) => {
             const newUser = new User({
                 username: req.body.email,
                 password: req.body.password,
-                dob: req.body.dob,
                 role: "patient",
                 role_id: patientId,
                 theme: "default"
@@ -477,10 +476,8 @@ const insertData = async (req, res, next) => {
 
             const user = req.user
             const clinician = await Clinician.findById(user.role_id.toString()).lean()
-            console.log(clinician.patients)
             clinician.patients.push(patientId.toString())
             await Clinician.findByIdAndUpdate(user.role_id.toString(), {patients: clinician.patients});
-            console.log(clinician.patients)
 
             // now we get the required measurements
             // and push it to the patient document.
