@@ -58,7 +58,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
         })
         this.classList.add('note-selected-option');
         noteColorInput.value = this.id;
-        console.log(this.id);
     }
 
 });
