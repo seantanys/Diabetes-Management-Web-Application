@@ -81,10 +81,12 @@
             </div>
             <div class="patient-card-content">
                 <div id="patient-badges">
+                    {{#if singlePatient.engagement_rate >= 0.8}}
                     <div class="patient-badge">
                         <lottie-player id="trophyLottie" src="../images/lottie/trophy.json" autoplay loop>"></lottie-player>
                         <p>80+ engagement</p>
                     </div>
+                    {{/if}}
                     <div class="patient-badge">
                         <lottie-player id="trophyLottie" src="../images/lottie/trophy.json" autoplay loop>"></lottie-player>
                         <p>Top 1000</p>

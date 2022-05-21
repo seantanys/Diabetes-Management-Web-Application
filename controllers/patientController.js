@@ -54,35 +54,61 @@ function getMeasurementTypes(arr) {
     return types;
 }
 
-const calcEngagementRate = async(req,res) => {
-    const patientId = req.user.role_id;
-    // get current melbourne time using luxon
-    const currTime = DateTime.now().setZone('Australia/Melbourne');
-    // get the beginning of the the current day
-    const currDate = currTime.startOf('day').toISO();
-    // get the patient's user data
-    const userData = await User.find({role_id: patientId}).lean();
-    // get the patient's data
-    const patientData = await Patient.findById(patientId).lean();
-    // get the patient's recorded data today
-    const todayData = await Measurement.find({patientId: patientId, date: { $gte: currDate}}).lean();
-    // get the measurments that have already been recorded for today
-    const alreadyMeasured = getMeasurementTypes(todayData); 
-
-    // checks if first measurement of the day
-    if (alreadyMeasured.length == 0) {
-        const currEngRate = patientData.engagement_rate
-        const daysSinceJoined = currDate - userData.join_date
-        const newEngRate = ((currEngRate * (daysSinceJoined - 1)) + 1) / daysSinceJoined
-        patientData.engagement_rate = newEngRate
-        await patientData.save();
+function countMeasureDays(dates, measurements) {
+    const count = 0
+    for (i in dates) {
+        const match = false;
+        for (j in measurements) {
+            if (dates[i] == measurements[j].date) {
+                count++;
+                match = true;
+            }
+            if (match) {
+                match = false;
+                break;
+            }
+        }
     }
+    return count;
 }
+
+/*const calcEngagementAll = async(req,res) => {
+    await Patient.find().forEach({
+        calcEngagementRate(patientData) {
+            // Get patient ID
+            const patientId = patientData._id;
+            // get current melbourne time using luxon
+            const currTime = DateTime.now().setZone('Australia/Melbourne');
+            // get the beginning of the current day
+            const currDate = currTime.startOf('day').toISO();
+            // Get yesterdays date
+            const yesterdayDate = currDate.getDate() - 1;
+            // get the patient's user data
+            const userData = await User.find({role_id: patientId}).lean();
+            // get the patient's recorded data up until yesterday
+            const measurementData = await Measurement.find({patientId: patientId, date: { $gte: yesterdayDate}}).lean();
+            // get interval of dates user has been on platform
+            const joinInterval = fromDateTimes(userData.join_date, yesterdayDate);
+            // get number of days user has been on platform
+            const joinLength = yesterdayDate - userData.join_date;
+            // calculate engagement rate
+            engRate = countMeasureDays(joinInterval, measurementData) / joinLength;
+            patientData.engagement_rate = engRate;
+            console.log(engRate);
+            // save engagement rate
+            //await patientData.save();
+        }
+    });
+}*/
 
 // this function instantiates a new measurement object and saves it to the db
 const submitMeasurement = async (req, res, next) => {
     if (req.isAuthenticated()) {
         const id = req.user.role_id
+        // get current melbourne time using luxon
+        const currTime = DateTime.now().setZone('Australia/Melbourne');
+        // get the beginning of the the current day
+        const currDate = currTime.startOf('day').toISO();
         try {
             const newMeasurement = new Measurement ({
                 type: req.body.type,
@@ -91,6 +117,10 @@ const submitMeasurement = async (req, res, next) => {
                 date: DateTime.now().setZone('Australia/Melbourne').toISO(),
                 comment: req.body.comment,
             })
+             // Checks if first measurement of the day then updates the engagement rate of all users
+             //if ((await Measurement.find({date:{$gte: currDate}})).length() == 0) {
+            //calcEngagementAll;
+             //}
             // calcEngagementRate(id);
             await newMeasurement.save();
             // console.log("Measurement successfully saved to db")
