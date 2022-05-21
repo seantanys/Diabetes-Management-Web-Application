@@ -72,7 +72,7 @@ function countMeasureDays(dates, measurements) {
     return count;
 }
 
-/*const calcEngagementAll = async(req,res) => {
+const calcEngagementAll = async(req,res) => {
     await Patient.find().forEach({
         calcEngagementRate(patientData) {
             // Get patient ID
@@ -99,7 +99,7 @@ function countMeasureDays(dates, measurements) {
             //await patientData.save();
         }
     });
-}*/
+}
 
 // this function instantiates a new measurement object and saves it to the db
 const submitMeasurement = async (req, res, next) => {
@@ -167,7 +167,8 @@ const getPatientPage = async (req, res) => {
             (data.dob.getMonth() + 1).toString().padStart(2,"0") + "/" + data.dob.getFullYear().toString() 
 
         if (data) {
-            res.render('patientDashboard.hbs', {loggedIn: req.isAuthenticated(), title: "Dashboard", theme: user.theme, dob, singlePatient: data, measured: alreadyMeasured, notMeasured: notMeasured, required: reqMeasurements})
+            res.render('patientDashboard.hbs', {loggedIn: req.isAuthenticated(), title: "Dashboard", theme: user.theme, dob, singlePatient: data, 
+                measured: alreadyMeasured, notMeasured: notMeasured, required: reqMeasurements})
         } else {
             console.log("patient data not found")
             res.render('notfound')
