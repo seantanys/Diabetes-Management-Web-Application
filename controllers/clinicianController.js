@@ -346,60 +346,112 @@ const getDataBounds = async(req, res, next) => {
     if (req.isAuthenticated()) {
         try {
             const patient = await Patient.findById(req.params.patient_id).lean()
-            const measurement = await Measurement.find({patientId: req.params.patient_id.toString(), type:'exercise'})
-            const required_measurements = [];const 
-            reqMeasurements = Object.keys(patient["measurements"])
+            const measurement = await Measurement.find({patientId: req.params.patient_id.toString()})
+            const reqMeasurements = Object.keys(patient["measurements"])
+            
+            res.render('clinicianManage', {layout: 'clinician.hbs', loggedIn: req.isAuthenticated(), patient: patient, required: reqMeasurements})
+            
+        } catch (err) {
+            return next(err)
+        }
+    } else {
+        res.render('login');
+    }
+}
+
+const manageDataBounds = async(req, res, next) => {
+    if (req.isAuthenticated()) {
+        try {
+            console.log("hey its me");
+
+            const patientId = req.params.patient_id;
+            const minbcg = req.body.minbcg;
+            const maxbcg = req.body.maxbcg;
+            const minweight = req.body.minweight;
+            const maxweight = req.body.maxweight;
+            const mindose = req.body.mindose;
+            const maxdose = req.body.maxdose;
+            const minsteps = req.body.minsteps;
+            const maxsteps = req.body.maxsteps;
+
+            console.log(patientId)
+            console.log("bcg",req.body.bcg)
+            console.log("minbcg",minbcg);
+            console.log("max",maxbcg);
+
+            // if (minsteps>maxsteps||minbcg>maxbcg||mindose>maxdose||minweight>maxweight) {
+            //     req.flash('error', 'Error. reverting to old values.')
+            //     return res.redirect('/clinician/manage-patient/'+patientId.toString())
+            // }
+
+            const required_measurements = [];
 
             if (req.body.bcg) {
                 const thresholds = [];
-                thresholds.get(req.body.bcg);
-                if (req.body.bcgmin) {
-                    thresholds.get(req.body.bcgmin)
+                thresholds.push('bcg');
+                if (minbcg) {
+                    thresholds.push(minbcg)
                 }
-                if (req.body.bcgmax) {
-                    thresholds.get(req.body.bcgmax)
+                if (maxbcg) {
+                    thresholds.push(maxbcg)
                 }
-                required_measurements.get(thresholds)
+                required_measurements.push(thresholds)
             }
             
             if (req.body.weight) {
                 const thresholds = [];
-                thresholds.get(req.body.weight);
-                if (req.body.weightmin) {
-                    thresholds.get(req.body.weightmin)
+                thresholds.push('weight');
+                if (minweight) {
+                    thresholds.push(minweight)
                 }
-                if (req.body.weightmax) {
-                    thresholds.get(req.body.weightmax)
+                if (maxweight) {
+                    thresholds.push(maxweight)
                 }
-                required_measurements.get(thresholds)
+                required_measurements.push(thresholds)
             }
             
             if (req.body.insulin) {
                 const thresholds = [];
-                thresholds.get(req.body.insulin);
-                if (req.body.insulinmin) {
-                    thresholds.get(req.body.insulinmin)
+                thresholds.push('insulin');
+                if (mindose) {
+                    thresholds.push(mindose)
                 }
-                if (req.body.insulinmax) {
-                    thresholds.get(req.body.insulinmax)
+                if (maxdose) {
+                    thresholds.push(maxdose)
                 }
-                required_measurements.get(thresholds)
+                required_measurements.push(thresholds)
             }
             
             if (req.body.exercise) {
                 const thresholds = [];
-                thresholds.get(req.body.exercise);
-                if (req.body.exercisemin) {
-                    thresholds.get(req.body.exercisemin)
+                thresholds.push('exercise');
+                if (minsteps) {
+                    thresholds.push(minsteps)
                 }
-                if (req.body.exercisemax) {
-                    thresholds.get(req.body.exercisemax)
+                if (maxsteps) {
+                    thresholds.push(maxsteps)
                 }
-                required_measurements.get(thresholds)
+                required_measurements.push(thresholds)
             }
 
-            res.render('clinicianManage', {layout: 'clinician.hbs', loggedIn: req.isAuthenticated(), patient: patient, required: reqMeasurements})
+            var measurementJson = {}
+            for (let i = 0; i < required_measurements.length; i++) {
+                const measurement = required_measurements[i][0];
+                const min = required_measurements[i][1];
+                const max = required_measurements[i][2];
+
+                measurementJson[measurement] = {minimum: min, maximum: max}
+            }
+
+            await Patient.findByIdAndUpdate(patientId, {measurements: measurementJson});
+
+            console.log(patientId,measurementJson);
+
+            // await Patient.updateOne({_id: recipientId}, {$set:{minbcg:minbcg}});
+            res.redirect('/clinician/manage-patient/'+patientId.toString())
             
+            
+        
         } catch (err) {
             return next(err)
         }
@@ -817,6 +869,7 @@ module.exports = {
     getPatientInsulin,
     getPatientExercise,
     getDataBounds,
+    manageDataBounds,
     insertData,
     getNewPatientForm,
     getPatientComments,

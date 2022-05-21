@@ -2204,6 +2204,8 @@ CLINICIAN STUFF
   cursor: pointer;
 }
 
+
+
 #clinician-button:nth-of-type(2) {
   font-size: 16px;
   height: 50px;
@@ -2434,6 +2436,10 @@ CLINICIAN STUFF
 }
 
 #hidden-support-msg-receiver {
+  display: none;
+}
+
+#hidden-id-receiver {
   display: none;
 }
 
@@ -2717,4 +2723,9 @@ CLINICIAN STUFF
   font-size: var(--text-h2);
   font-weight: 300;
   text-align: centre;
+}
+
+.table-align{
+  margin-left:auto;
+  margin-right:auto;
 }
