@@ -14,9 +14,29 @@
 
 {{> patientDrilldown}}
 
-<br>
-<div class="range">
-    <h1>Range: {{max}} to {{min}} {{unit}}</h1>
+<div class="page-heading-1">
+    <h1>{{#if (eqBcg type)}}
+        Blood Glucose Level
+        {{/if}}
+        {{#if (eqInsulin type)}}
+        Insulin
+        {{/if}}
+        {{#if (eqWeight type)}}
+        Weight
+        {{/if}}
+        {{#if (eqExercise type)}}
+        Exercise
+        {{/if}}
+    </h1>
+</div>
+
+<div class="patient-threshold-container flex-column-center">
+    <h2>Threshold</h2>
+    <div class="patient-threshold flex-column-center">
+        <h3>{{min}} {{unit}}</h3>
+        <p>to</p>
+        <h3>{{max}} {{unit}}</h3>
+    </div>
 </div>
 <br>
 
