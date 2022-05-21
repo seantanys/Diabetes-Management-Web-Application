@@ -328,12 +328,32 @@ const getDataBounds = async(req, res, next) => {
     if (req.isAuthenticated()) {
         try {
             const patient = await Patient.findById(req.params.patient_id).lean()
-            const measurement = await Measurement.find({patientId: req.params.patient_id.toString(), type:'exercise'})
-            const required_measurements = [];const 
-            reqMeasurements = Object.keys(patient["measurements"])
+            const measurement = await Measurement.find({patientId: req.params.patient_id.toString()})
+            
 
             res.render('clinicianManage', {layout: 'clinician.hbs', loggedIn: req.isAuthenticated(), patient: patient, required: reqMeasurements})
             
+        } catch (err) {
+            return next(err)
+        }
+    } else {
+        res.render('login');
+    }
+}
+
+
+
+const manageDataBounds = async(req, res, next) => {
+    if (req.isAuthenticated()) {
+        try {
+            const patient = await Patient.findById(req.params.patient_id).lean()
+            const minbcg = req.body.minbcg;
+
+            await Patient.updateOne({_id: patient_id}, {$set:{bcgmin:minbcg}});
+            res.redirect('/clinician/manage-patient')
+            
+            
+        
         } catch (err) {
             return next(err)
         }
@@ -694,6 +714,7 @@ module.exports = {
     getPatientInsulin,
     getPatientExercise,
     getDataBounds,
+    manageDataBounds,
     insertData,
     getNewPatientForm,
     getPatientComments,

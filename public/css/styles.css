@@ -2167,6 +2167,8 @@ CLINICIAN STUFF
   cursor: pointer;
 }
 
+
+
 #clinician-button:nth-of-type(2) {
   font-size: 16px;
   height: 50px;
@@ -2565,4 +2567,9 @@ CLINICIAN STUFF
 .flex-row-center {
   display: flex;
   flex-direction: row;
+}
+
+.table-align{
+  margin-left:auto;
+  margin-right:auto;
 }
