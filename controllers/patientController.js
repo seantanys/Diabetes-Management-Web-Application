@@ -128,7 +128,7 @@ const submitMeasurement = async (req, res, next) => {
             })
              // Checks if first measurement of the day then updates the engagement rate of all users
              //if ((await Measurement.find({date:{$gte: currDate}})).length() == 0) {
-            //calcEngagementAll;
+            calcEngagementAll;
              //}
             // calcEngagementRate(id);
             await newMeasurement.save();
