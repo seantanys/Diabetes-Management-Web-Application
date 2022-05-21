@@ -117,10 +117,11 @@ const getAllPatientData = async (req, res, next) => {
         for (let i = 0; i < clinician.patients.length; i++) {
 
             const patient = await Patient.findById(clinician.patients[i].toString()).lean()
-            bcgmeasurement = await Measurement.findOne({patientId: clinician.patients[i].toString(), type:'bcg'}).sort({"date": -1}).lean()
-            weightmeasurement = await Measurement.findOne({patientId: clinician.patients[i].toString(), type:'weight'}).sort({"date": -1}).lean()
-            insulinmeasurement = await Measurement.findOne({patientId: clinician.patients[i].toString(), type:'insulin'}).sort({"date": -1}).lean()
-            exercisemeasurement = await Measurement.findOne({patientId: clinician.patients[i].toString(), type:'exercise'}).sort({"date": -1}).lean()
+
+            bcgmeasurement = await Measurement.findOne({patientId: clinician.patients[i].toString(), type:'bcg', date: { $gte: currDate}}).lean()
+            weightmeasurement = await Measurement.findOne({patientId: clinician.patients[i].toString(), type:'weight', date: { $gte: currDate}}).lean()
+            insulinmeasurement = await Measurement.findOne({patientId: clinician.patients[i].toString(), type:'insulin', date: { $gte: currDate}}).lean()
+            exercisemeasurement = await Measurement.findOne({patientId: clinician.patients[i].toString(), type:'exercise', date: { $gte: currDate}}).lean()
 
             patientDashboard.push({
                                    patient: patient,

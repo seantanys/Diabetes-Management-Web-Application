@@ -2146,6 +2146,10 @@ CLINICIAN STUFF
   color: red;
 }
 
+#grey{
+  color: grey;
+}
+
 .clinician-info{
   text-align:center;
 }
