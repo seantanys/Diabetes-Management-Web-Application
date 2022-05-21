@@ -257,15 +257,18 @@ const getPatientWeight = async(req, res, next) => {
     if (req.isAuthenticated()) {
         try {
             const patient = await Patient.findById(req.params.patient_id).lean()
-            const dates = await getDatesInRange(new Date(patient.join_date), new Date())
-            console.log(dates)
-            console.log("***")
-            console.log(patient.join_date)
+            const user = await User.find({role_id: patient._id}).lean()
+            console.log(user)
+            console.log(user.theme)
+            console.log(user.join_date)
+            const dates = getDatesInRange(new Date(user.join_date), new Date(2022, 04, 21, 0,0,0,0))
             const measurement = await Measurement.find({patientId: req.params.patient_id.toString(), type:'weight'}).sort({"date": -1}).lean() 
             const reqMeasurements = Object.keys(patient["measurements"])
             const type = 'weight'
             const max = patient.measurements.weight.maximum
             const min = patient.measurements.weight.minimum
+            console.log(max)
+            console.log(min)
             const unit = '(kg)'
 
             formatted = getTableArray(dates, measurement)
