@@ -374,37 +374,15 @@ const manageDataBounds = async(req, res, next) => {
             const minsteps = req.body.minsteps;
             const maxsteps = req.body.maxsteps;
 
-            if (req.body.bcg) {
-                if(minbcg>=maxbcg){
-                    req.flash('error', 'Error. Blood Glucose minimum threshold must not exceed maximum threshold.')
-                    return res.redirect(`/clinician/manage-patient/${patientId}/manage`)
-                }
-            }
-
-            if (req.body.weight) {
-                if(minweight>=maxweight){
-                    req.flash('error', 'Error. Weight minimum threshold must not exceed maximum threshold.')
-                    return res.redirect(`/clinician/manage-patient/${patientId}/manage`)
-                }
-            }
-
-            if (req.body.exercise) {
-                if(minsteps>=maxsteps){
-                    req.flash('error', 'Error. Exercise minimum threshold must not exceed maximum threshold.')
-                    return res.redirect(`/clinician/manage-patient/${patientId}/manage`)
-                }
-            }
-
-            if (req.body.insulin) {
-                if(mindose>=maxdose){
-                    req.flash('error', 'Error. Insulin dose minimum threshold must not exceed maximum threshold.')
-                    return res.redirect(`/clinician/manage-patient/${patientId}/manage`)
-                }
-            }
-            
             const required_measurements = [];
 
             if (req.body.bcg) {
+
+                if(parseInt(minbcg)>=parseInt(maxbcg)){
+                    req.flash('error', 'Error. Blood Glucose minimum threshold must not be equal to or exceeding maximum threshold.')
+                    return res.redirect(`/clinician/manage-patient/${patientId}/manage`)
+                }
+
                 const thresholds = [];
                 thresholds.push('bcg');
                 if (minbcg) {
@@ -417,6 +395,12 @@ const manageDataBounds = async(req, res, next) => {
             }
             
             if (req.body.weight) {
+
+                if(parseInt(minweight)>=parseInt(maxweight)){
+                    req.flash('error', 'Error. Weight minimum threshold must not be equal to or exceeding maximum threshold.')
+                    return res.redirect(`/clinician/manage-patient/${patientId}/manage`)
+                }
+
                 const thresholds = [];
                 thresholds.push('weight');
                 if (minweight) {
@@ -429,6 +413,12 @@ const manageDataBounds = async(req, res, next) => {
             }
             
             if (req.body.insulin) {
+
+                if(parseInt(mindose)>=parseInt(maxdose)){
+                    req.flash('error', 'Error. Insulin dose minimum threshold must not be equal to or exceeding maximum threshold.')
+                    return res.redirect(`/clinician/manage-patient/${patientId}/manage`)
+                }
+
                 const thresholds = [];
                 thresholds.push('insulin');
                 if (mindose) {
@@ -441,6 +431,12 @@ const manageDataBounds = async(req, res, next) => {
             }
             
             if (req.body.exercise) {
+
+                if(parseInt(minsteps)>=parseInt(maxsteps)){
+                    req.flash('error', 'Error. Exercise minimum threshold must not be equal to or exceeding maximum threshold.')
+                    return res.redirect(`/clinician/manage-patient/${patientId}/manage`)
+                }
+
                 const thresholds = [];
                 thresholds.push('exercise');
                 if (minsteps) {
