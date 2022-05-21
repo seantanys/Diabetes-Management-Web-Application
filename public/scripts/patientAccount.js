@@ -39,7 +39,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
         detailsRadio.addEventListener("change", function () {
             if (detailsRadio.checked) {
-                dashboard.style.height = "800px";
+                dashboard.style.height = "1200px";
             }
         })
         

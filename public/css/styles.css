@@ -1659,11 +1659,24 @@ hr.solid {
   align-items: center;
 }
 
+#account-details h3 {
+  text-align: center;
+  font-weight: 600;
+  font-size: var(--text-h3);
+  margin-top: 25px;
+}
+
+#account-details p {
+  text-align: center;
+  font-weight: 300;
+  font-size: var(--text-p);
+}
+
 #account-details img {
   height: 300px;
   width: 300px;
-  margin-left:20%;
-  margin-right:20%;
+  margin-left: 35%;
+  margin-right: 30%;
 }
 
 .theme-color {
@@ -1967,7 +1980,7 @@ hr.solid {
     width: 90%;
     margin-right: 5%;
     margin-left: 5%;
-    height: 100vh;
+    height: 1200px;
   }
 
   .patient-account-dashboard p {
