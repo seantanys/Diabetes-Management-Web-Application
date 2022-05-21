@@ -329,6 +329,8 @@ const getDataBounds = async(req, res, next) => {
         try {
             const patient = await Patient.findById(req.params.patient_id).lean()
             const measurement = await Measurement.find({patientId: req.params.patient_id.toString()})
+            const reqMeasurements = Object.keys(patient["measurements"])
+            
 
 
             res.render('clinicianManage', {layout: 'clinician.hbs', loggedIn: req.isAuthenticated(), patient: patient, required: reqMeasurements})
