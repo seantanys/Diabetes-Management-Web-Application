@@ -28,7 +28,7 @@ patientRouter.get('/account', app.hasRole('patient'), patientController.getPatie
 
 patientRouter.get('/data', app.hasRole('patient'), patientController.getPatientDataPage)
 
-patientRouter.post('/account/change-password', clinicianController.validate('changePassword'),
+patientRouter.post('/account/change-password',
                     body('curr_pw').not().isEmpty().escape(),
                     body('new_pw').not().isEmpty().escape(),
                     body('confirm_new_pw').not().isEmpty().escape(),
