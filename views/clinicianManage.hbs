@@ -4,10 +4,10 @@
 
 
 {{>patientDrilldown}}
-<form action='' method="post">
+<form action='' method="post"  class="flex-column-center">
     <input type="text" id="hidden-id-receiver" name="patientId" required value="{{patient._id}}">
 
-    <table class="clinician-table-styled" style:"align=center"> 
+    <table class="clinician-table-styled"> 
         <thead>
             <tr>
                 <th></th>
@@ -21,10 +21,10 @@
                 <th><input type="checkbox" id="bcg" name="bcg"{{#if patient.measurements.bcg}}checked="checked"{{/if}}></th>
                 <th>Blood Glucose Level (nmol/L)</th>
                 <th>
-                    <input type="number" id="minbcg" name="minbcg" value="{{patient.measurements.bcg.minimum}}" >
+                    <input type="number" step="0.01" id="minbcg" name="minbcg" value="{{patient.measurements.bcg.minimum}}" >
                 </th>
                 <th>
-                    <input type="number" id="maxbcg" name="maxbcg" value="{{patient.measurements.bcg.maximum}}">
+                    <input type="number" step="0.01" id="maxbcg" name="maxbcg" value="{{patient.measurements.bcg.maximum}}">
                 </th>
             </tr>
             <tr>
