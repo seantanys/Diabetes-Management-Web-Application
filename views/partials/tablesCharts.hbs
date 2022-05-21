@@ -12,11 +12,7 @@
             {{#if this.value}}
                 <td>{{formatDate this.date}}</td>
                 <td>{{formatTime this.date}} </td>
-                {{#if (and (gte this.value min) (lte this.value max))}}
-                    <td>{{this.value}}</td>
-                {{else}}
-                    <td id ="red">{{this.value}}</td>
-                {{/if}}
+                <td>{{this.value}}</td>
                 {{#if (isEmptyStr this.comment)}}
                     <td> - </td>
                 {{else}}
