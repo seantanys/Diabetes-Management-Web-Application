@@ -353,7 +353,7 @@ const getDataBounds = async(req, res, next) => {
             const measurement = await Measurement.find({patientId: req.params.patient_id.toString()})
             const reqMeasurements = Object.keys(patient["measurements"])
             
-            res.render('clinicianManage', {layout: 'clinician.hbs', loggedIn: req.isAuthenticated(), join_date: req.user.join_date, patient: patient, required: reqMeasurements})
+            res.render('clinicianManage', {layout: 'clinician.hbs', loggedIn: req.isAuthenticated(), flash: req.flash('success'), errorFlash: req.flash('error'), join_date: req.user.join_date, patient: patient, required: reqMeasurements})
             
         } catch (err) {
             return next(err)
@@ -366,8 +366,6 @@ const getDataBounds = async(req, res, next) => {
 const manageDataBounds = async(req, res, next) => {
     if (req.isAuthenticated()) {
         try {
-            console.log("hey its me");
-
             const patientId = req.params.patient_id;
             const minbcg = req.body.minbcg;
             const maxbcg = req.body.maxbcg;
@@ -378,19 +376,15 @@ const manageDataBounds = async(req, res, next) => {
             const minsteps = req.body.minsteps;
             const maxsteps = req.body.maxsteps;
 
-            console.log(patientId)
-            console.log("bcg",req.body.bcg)
-            console.log("minbcg",minbcg);
-            console.log("max",maxbcg);
-
-            // if (minsteps>maxsteps||minbcg>maxbcg||mindose>maxdose||minweight>maxweight) {
-            //     req.flash('error', 'Error. reverting to old values.')
-            //     return res.redirect('/clinician/manage-patient/'+patientId.toString())
-            // }
-
             const required_measurements = [];
 
             if (req.body.bcg) {
+
+                if(parseInt(minbcg)>=parseInt(maxbcg)){
+                    req.flash('error', 'Error. Blood Glucose minimum threshold must not be equal to or exceeding maximum threshold.')
+                    return res.redirect(`/clinician/manage-patient/${patientId}/manage`)
+                }
+
                 const thresholds = [];
                 thresholds.push('bcg');
                 if (minbcg) {
@@ -403,6 +397,12 @@ const manageDataBounds = async(req, res, next) => {
             }
             
             if (req.body.weight) {
+
+                if(parseInt(minweight)>=parseInt(maxweight)){
+                    req.flash('error', 'Error. Weight minimum threshold must not be equal to or exceeding maximum threshold.')
+                    return res.redirect(`/clinician/manage-patient/${patientId}/manage`)
+                }
+
                 const thresholds = [];
                 thresholds.push('weight');
                 if (minweight) {
@@ -415,6 +415,12 @@ const manageDataBounds = async(req, res, next) => {
             }
             
             if (req.body.insulin) {
+
+                if(parseInt(mindose)>=parseInt(maxdose)){
+                    req.flash('error', 'Error. Insulin dose minimum threshold must not be equal to or exceeding maximum threshold.')
+                    return res.redirect(`/clinician/manage-patient/${patientId}/manage`)
+                }
+
                 const thresholds = [];
                 thresholds.push('insulin');
                 if (mindose) {
@@ -427,6 +433,12 @@ const manageDataBounds = async(req, res, next) => {
             }
             
             if (req.body.exercise) {
+
+                if(parseInt(minsteps)>=parseInt(maxsteps)){
+                    req.flash('error', 'Error. Exercise minimum threshold must not be equal to or exceeding maximum threshold.')
+                    return res.redirect(`/clinician/manage-patient/${patientId}/manage`)
+                }
+
                 const thresholds = [];
                 thresholds.push('exercise');
                 if (minsteps) {
@@ -449,10 +461,9 @@ const manageDataBounds = async(req, res, next) => {
 
             await Patient.findByIdAndUpdate(patientId, {measurements: measurementJson});
 
-            console.log(patientId,measurementJson);
-
             // await Patient.updateOne({_id: recipientId}, {$set:{minbcg:minbcg}});
-            res.redirect('/clinician/manage-patient/'+patientId.toString())
+            req.flash('success', 'Measurement thresholds successfully updated!')
+            res.redirect(`/clinician/manage-patient/${patientId}/manage`)
             
             
         
