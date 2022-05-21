@@ -72,7 +72,7 @@ function countMeasureDays(dates, measurements) {
     return count;
 }
 
-const calcEngagementAll = async(req,res) => {
+/*const calcEngagementAll = async(req,res) => {
     await Patient.find().forEach({
         calcEngagementRate(patientData) {
             // Get patient ID
@@ -99,7 +99,7 @@ const calcEngagementAll = async(req,res) => {
             //await patientData.save();
         }
     });
-}
+}*/
 
 // this function instantiates a new measurement object and saves it to the db
 const submitMeasurement = async (req, res, next) => {
