@@ -3,7 +3,7 @@
         <tr class="patient-data-header">
             <th>Date</th>
             <th>Time</th>
-            <th>{{type}} {{unit}}</th>
+            <th>{{#if (eqBcg type)}} blood glucose level {{else}} {{type}} {{/if}}{{unit}}</th>
             <th>Comments</th>
         </tr>
        
