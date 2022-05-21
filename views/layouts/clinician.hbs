@@ -16,16 +16,21 @@
             <a href="/" class="logo"><span style="color:black">D</span>@H</a>
             {{!-- <a href="#" class="nav-name">Dr.Chris</a> --}}
             <ul class="nav-menu">
-                <li class="nav-item">
-                    {{#if loggedIn}}
-                    <a href="/clinician/dashboard" class="nav-link">Dashboard</a>
-                    {{/if}}
+                {{#if loggedIn}}
+                <li class="nav-item">  
+                    <a href="/clinician/dashboard" class="nav-link">Dashboard</a>    
                 </li>
-                <li class="nav-item"> 
-                    {{#if loggedIn}}     
+                {{/if}}
+                {{#if loggedIn}} 
+                <li class="nav-item">    
                     <a href="/clinician/messages" class="nav-link">Messages</a>
-                    {{/if}}
                 </li>
+                {{/if}}
+                {{#if loggedIn}} 
+                <li class="nav-item">    
+                    <a href="/clinician/comments" class="nav-link">Comments</a>
+                </li>
+                {{/if}}
                 <li class="nav-item">
                      {{#if loggedIn}}
                     <form action="/logout" method="post">

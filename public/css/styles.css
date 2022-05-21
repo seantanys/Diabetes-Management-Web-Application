@@ -2343,9 +2343,8 @@ CLINICIAN STUFF
 }
 
 .clinician-message-body{
-  padding-top: 1rem;
-  padding-left: 2rem;
-  height: 90px;
+  padding: 15px;
+  min-height: 100px;
   margin-left: 200px;
   margin-right: 200px;
   border: 0px;

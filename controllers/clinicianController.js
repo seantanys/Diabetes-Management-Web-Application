@@ -140,6 +140,13 @@ const getAllPatientData = async (req, res, next) => {
 
 const writeNote = async (req, res) => {
     if (req.isAuthenticated()) {
+
+        const errors = validationResult(req); 
+        if (!errors.isEmpty()) {
+            req.flash('error', `Something went wrong, please enter a valid note and try again.`)
+            return res.redirect(`/clinician/manage-patient/${req.body.pid}`);
+        }
+
         try {
             if (!(req.body.pid) || !(req.body.comment)) {
                 req.flash('error',"Error. Please fill out the required fields to add a note.")
@@ -460,7 +467,6 @@ const insertData = async (req, res, next) => {
             const newUser = new User({
                 username: req.body.email,
                 password: req.body.password,
-                dob: req.body.dob,
                 role: "patient",
                 role_id: patientId,
                 theme: "default"
@@ -470,10 +476,8 @@ const insertData = async (req, res, next) => {
 
             const user = req.user
             const clinician = await Clinician.findById(user.role_id.toString()).lean()
-            console.log(clinician.patients)
             clinician.patients.push(patientId.toString())
             await Clinician.findByIdAndUpdate(user.role_id.toString(), {patients: clinician.patients});
-            console.log(clinician.patients)
 
             // now we get the required measurements
             // and push it to the patient document.
@@ -566,7 +570,7 @@ const getPatientComments = async (req, res, next) => {
                 if (measurement[i].comment != ""){
                     patientComments.push({
                         patient: patient.first_name+" "+ patient.last_name,
-                        id: measurement[i]._id,
+                        id: measurement[i].patientId,
                         type: measurement[i].type,
                         value: measurement[i].value,
                         comment: measurement[i].comment,
@@ -706,6 +710,13 @@ const getAccountPage = async (req, res) => {
 const changePassword = async (req, res) => {
 
     if (req.isAuthenticated()) {
+
+        const errors = validationResult(req); 
+        if (!errors.isEmpty()) {
+            req.flash('error', `${errors.array()[0].msg}`)
+            return res.redirect('/clinician/account');
+        }
+
         const user = req.user;
         const pw = req.body.curr_pw
         const new_pw = req.body.new_pw

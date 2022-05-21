@@ -12,7 +12,7 @@
                 <h4>{{this.patient}}</h4>
             </div> 
             <div class='clinician-message-header-time'>
-                {{this.date}}
+                Recorded on {{this.date}}
             </div>
         </div>      
 
@@ -29,7 +29,6 @@
             {{#if (eqExercise this.type)}}
             <h3>Exercise: {{this.value}}</h3>
             {{/if}}
-
             <p>{{this.comment}}</p>
         </div>
         </a>
@@ -37,8 +36,3 @@
 
 {{/each}}
 </ul>
-
-
-
-
-

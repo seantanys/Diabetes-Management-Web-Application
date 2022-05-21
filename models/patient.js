@@ -9,7 +9,7 @@ const patientSchema = new mongoose.Schema({
     dob: {type: Date, required: true},
     bio: {type: String, required: true},
     engagement_rate: {type: Number, default: 0, required: true},
-    clinicanId: {type: String, required: false},
+    clinicanId: {type: String, required: true},
     supportMessage : {type: String, default:""},
     measurements: {
         bcg: {
