@@ -122,6 +122,7 @@ app.post('/login',
 )
 
 app.post('/logout', (req, res) => {
+    console.log("bro")
     req.logout();
     res.redirect('/');
 })

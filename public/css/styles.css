@@ -62,6 +62,22 @@ html {
   padding-bottom: 3em;
 }
 
+button {
+  font-family: var(--font-family-body);
+  font-weight: 600;
+  font-size: var(--text-p);
+  border: none;
+  color: white;
+  background-color: var(--colour-h1);
+  padding: 5px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 999em;
+}
+
 .page-heading h1 {
   font-size: var(--text-h1);
   color: white;
@@ -807,21 +823,8 @@ textarea {
   height: 500px;
 }
 
-
-button {
-  font-family: var(--font-family-body);
-  font-weight: 600;
-  font-size: var(--text-p);
-  border: none;
-  color: white;
-  background-color: var(--colour-h1);
-  padding: 5px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 999em;
+#menu button {
+ margin-top: 25px;
 }
 
 html {

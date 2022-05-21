@@ -80,7 +80,10 @@
                     <a href="/about/website"><li>About this Website</li></a>
                     <hr class="solid">
                     {{#if loggedIn}}
-                    <a href="/logout"><li>Log Out</li></a>
+                    <form action="/logout" method="post">
+                        <button>logout</button>
+                        {{!-- <a href="/logout"><li>Log Out</li></a> --}}
+                    </form>
                     {{else}}
                     <a href="/login"><li>Log In</li></a>
                     {{/if}}
