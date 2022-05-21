@@ -1069,6 +1069,7 @@ font-size: var(--text-p);
 
 .requirement-section {
   padding: 15px;
+  margin-bottom: 25px;
 }
 
 .checklist-container {
@@ -1106,6 +1107,7 @@ font-size: var(--text-p);
 .reminder-section {
   height: 250px;
   border: none;
+  margin-bottom: 25px;
 }
 
 .reminder-container {
@@ -2617,7 +2619,7 @@ CLINICIAN STUFF
   transition: transform .3s ease-out;
 }
 
-.comment-input textarea {
+.patient-notes textarea {
   margin-top: 25px;
   white-space: pre-wrap;
   width: 400px;
