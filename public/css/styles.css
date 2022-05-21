@@ -2707,3 +2707,10 @@ CLINICIAN STUFF
   display: flex;
   flex-direction: row;
 }
+
+.range h1 {
+  color: var(--colour-h2);
+  font-size: var(--text-h2);
+  font-weight: 300;
+  text-align: centre;
+}

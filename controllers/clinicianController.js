@@ -6,12 +6,6 @@ const {Clinician} = require('../models/clinician')
 const { body, validationResult } = require('express-validator')
 const { Note } = require('../models/note');
 
-const mType = {
-    bcg: "bcg",
-    weight: "weight",
-    insulin: "insulin",
-    exercise: "exercise",
-};
 
 function getDatesFromPatientObj(object) {
     var dates = [];
@@ -72,6 +66,10 @@ function getDatesInRange(startDate, endDate) {
         dates.push(new Date(date));
         date.setDate(date.getDate() - 1);
     } 
+
+    const joinDate = new Date(startDate);
+    joinDate.setUTCHours(0,0,0,0);
+    dates.push(new Date(joinDate));
     return dates;
 }
 
@@ -260,6 +258,9 @@ const getPatientWeight = async(req, res, next) => {
         try {
             const patient = await Patient.findById(req.params.patient_id).lean()
             const dates = await getDatesInRange(new Date(patient.join_date), new Date())
+            console.log(dates)
+            console.log("***")
+            console.log(patient.join_date)
             const measurement = await Measurement.find({patientId: req.params.patient_id.toString(), type:'weight'}).sort({"date": -1}).lean() 
             const reqMeasurements = Object.keys(patient["measurements"])
             const type = 'weight'
