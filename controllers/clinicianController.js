@@ -230,7 +230,8 @@ const getPatientBCG = async(req, res, next) => {
     if (req.isAuthenticated()) {
         try {
             const patient = await Patient.findById(req.params.patient_id).lean()
-            const dates = await getDatesInRange(new Date(patient.join_date), new Date())
+            const user = await User.findOne({role_id: patient._id}).lean();
+            const dates = await getDatesInRange(new Date(user.join_date), new Date())
             const measurement = await Measurement.find({patientId: req.params.patient_id.toString(), type:'bcg'}).sort({"date": -1}).lean() 
             const reqMeasurements = Object.keys(patient["measurements"])
             const type = 'bcg'
@@ -258,10 +259,9 @@ const getPatientWeight = async(req, res, next) => {
     if (req.isAuthenticated()) {
         try {
             const patient = await Patient.findById(req.params.patient_id).lean()
-            const dates = await getDatesInRange(new Date(patient.join_date), new Date())
-            console.log(dates)
-            console.log("***")
-            console.log(patient.join_date)
+            const user = await User.findOne({role_id: patient._id}).lean();
+            const dates = await getDatesInRange(new Date(user.join_date), new Date())
+
             const measurement = await Measurement.find({patientId: req.params.patient_id.toString(), type:'weight'}).sort({"date": -1}).lean() 
             const reqMeasurements = Object.keys(patient["measurements"])
             const type = 'weight'
@@ -289,7 +289,8 @@ const getPatientInsulin = async(req, res, next) => {
     if (req.isAuthenticated()) {
         try {
             const patient = await Patient.findById(req.params.patient_id).lean()
-            const dates = await getDatesInRange(new Date(patient.join_date), new Date())
+            const user = await User.findOne({role_id: patient._id}).lean();
+            const dates = await getDatesInRange(new Date(user.join_date), new Date())
             const measurement = await Measurement.find({patientId: req.params.patient_id.toString(), type:'insulin'}).sort({"date": -1}).lean() 
             const reqMeasurements = Object.keys(patient["measurements"])
             const type = 'insulin'
@@ -317,7 +318,8 @@ const getPatientExercise = async(req, res, next) => {
     if (req.isAuthenticated()) {
         try {
             const patient = await Patient.findById(req.params.patient_id).lean()
-            const dates = await getDatesInRange(new Date(patient.join_date), new Date())
+            const user = await User.findOne({role_id: patient._id}).lean();
+            const dates = await getDatesInRange(new Date(user.join_date), new Date())
             const measurement = await Measurement.find({patientId: req.params.patient_id.toString(), type:'exercise'}).sort({"date": -1}).lean() 
             const reqMeasurements = Object.keys(patient["measurements"])
             const type = 'exercise'
@@ -349,7 +351,7 @@ const getDataBounds = async(req, res, next) => {
             const measurement = await Measurement.find({patientId: req.params.patient_id.toString()})
             const reqMeasurements = Object.keys(patient["measurements"])
             
-            res.render('clinicianManage', {layout: 'clinician.hbs', loggedIn: req.isAuthenticated(), patient: patient, required: reqMeasurements})
+            res.render('clinicianManage', {layout: 'clinician.hbs', loggedIn: req.isAuthenticated(), join_date: req.user.join_date, patient: patient, required: reqMeasurements})
             
         } catch (err) {
             return next(err)
