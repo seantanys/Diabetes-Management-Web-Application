@@ -72,9 +72,9 @@ function countMeasureDays(dates, measurements) {
     return count;
 }
 
-const calcEngagementAll = async(req,res) => {
+const calcEngagementAll = async (req,res) => {
     await Patient.find().forEach({
-        calcEngagementRate(patientData) {
+        async calcEngagementRate(patientData) {
             // Get patient ID
             const patientId = patientData._id;
             // get current melbourne time using luxon
