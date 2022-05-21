@@ -5,7 +5,7 @@
 
 {{>patientDrilldown}}
 <form method="post">
-    <input type="text" id="hidden-support-msg-receiver" name="recipientId" required value="{{patient.id}}">
+    <input type="text" id="hidden-id-receiver" name="patientId" required value="{{patient.measurement.patientID}}">
 
 
 <table class="clinician-table-styled" style:"align=center"> 

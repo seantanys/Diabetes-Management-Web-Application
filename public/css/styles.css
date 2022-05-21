@@ -2413,6 +2413,10 @@ CLINICIAN STUFF
   display: none;
 }
 
+#hidden-id-receiver {
+  display: none;
+}
+
 .compose-support-message button {
   background-color: var(--colour-background-teal);
   color: var(--colour-h1);

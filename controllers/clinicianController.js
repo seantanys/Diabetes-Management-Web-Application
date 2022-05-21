@@ -346,7 +346,7 @@ const getDataBounds = async(req, res, next) => {
 const manageDataBounds = async(req, res, next) => {
     if (req.isAuthenticated()) {
         try {
-            const patient = await Patient.findById(req.params.patient_id).lean()
+            const patientId = req.body.recipientId;
             const minbcg = req.body.minbcg;
             const maxbcg = req.body.maxbcg;
             const minweight = req.body.minweight;
@@ -361,7 +361,7 @@ const manageDataBounds = async(req, res, next) => {
                 return res.redirect('/clinician/manage-patient')
             }
 
-            await Patient.updateOne({patient: patient}, {$set:{minbcg:minbcg}});
+            await Patient.updateOne({_id: recipientId}, {$set:{minbcg:minbcg}});
             res.redirect('/clinician/manage-patient')
             
             
