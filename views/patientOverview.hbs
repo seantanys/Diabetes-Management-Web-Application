@@ -83,7 +83,7 @@
                     {{#if (isEmptyStr this.comment)}}
                         <td> - </td>
                     {{else}}
-                        <td>{{this.comment}}</td>
+                        <td style="overflow: auto;">{{this.comment}}</td>
                     {{/if}}
                     <td>{{formatDateTime this.date}}</td>
                     <td><img src="/images/icons/note.svg" alt="note-pen" id="copy-to-note"></td>
