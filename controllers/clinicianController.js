@@ -366,6 +366,11 @@ const manageDataBounds = async(req, res, next) => {
             //     return res.redirect('/clinician/manage-patient/'+patientId.toString())
             // }
 
+            if(minbcg[minimum]<=maxbcg[maximum]){
+                eq.flash('error', 'Error. reverting to old values.')
+                return res.redirect('/clinician/manage-patient/'+patientId.toString())
+            }
+
             const required_measurements = [];
 
             if (req.body.bcg) {
