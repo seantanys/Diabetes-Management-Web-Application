@@ -346,7 +346,7 @@ const manageDataBounds = async(req, res, next) => {
         try {
             console.log("hey its me");
 
-            const patientId = req.body.recipientId;
+            const patientId = req.params.patient_id;
             const minbcg = req.body.minbcg;
             const maxbcg = req.body.maxbcg;
             const minweight = req.body.minweight;
@@ -356,16 +356,21 @@ const manageDataBounds = async(req, res, next) => {
             const minsteps = req.body.minsteps;
             const maxsteps = req.body.maxsteps;
 
-            if (minsteps>maxsteps||minbcg>maxbcg||mindose>maxdose||minweight>maxweight) {
-                req.flash('error', 'Error. reverting to old values.')
-                return res.redirect('/clinician/manage-patient')
-            }
+            console.log(patientId)
+            console.log("bcg",req.body.bcg)
+            console.log("minbcg",minbcg);
+            console.log("max",maxbcg);
+
+            // if (minsteps>maxsteps||minbcg>maxbcg||mindose>maxdose||minweight>maxweight) {
+            //     req.flash('error', 'Error. reverting to old values.')
+            //     return res.redirect('/clinician/manage-patient/'+patientId.toString())
+            // }
 
             const required_measurements = [];
 
-            if (req.body.check-bcg) {
+            if (req.body.bcg) {
                 const thresholds = [];
-                thresholds.push(req.body.check-bcg);
+                thresholds.push('bcg');
                 if (minbcg) {
                     thresholds.push(minbcg)
                 }
@@ -375,9 +380,9 @@ const manageDataBounds = async(req, res, next) => {
                 required_measurements.push(thresholds)
             }
             
-            if (req.body.check-weight) {
+            if (req.body.weight) {
                 const thresholds = [];
-                thresholds.push(req.body.check-weight);
+                thresholds.push('weight');
                 if (minweight) {
                     thresholds.push(minweight)
                 }
@@ -387,9 +392,9 @@ const manageDataBounds = async(req, res, next) => {
                 required_measurements.push(thresholds)
             }
             
-            if (req.body.check-dose) {
+            if (req.body.insulin) {
                 const thresholds = [];
-                thresholds.push(req.body.check-dose);
+                thresholds.push('insulin');
                 if (mindose) {
                     thresholds.push(mindose)
                 }
@@ -399,9 +404,9 @@ const manageDataBounds = async(req, res, next) => {
                 required_measurements.push(thresholds)
             }
             
-            if (req.body.check-step) {
+            if (req.body.exercise) {
                 const thresholds = [];
-                thresholds.push(req.body.check-step);
+                thresholds.push('exercise');
                 if (minsteps) {
                     thresholds.push(minsteps)
                 }
@@ -425,7 +430,7 @@ const manageDataBounds = async(req, res, next) => {
             console.log(patientId,measurementJson);
 
             // await Patient.updateOne({_id: recipientId}, {$set:{minbcg:minbcg}});
-            res.redirect('/clinician/manage-patient')
+            res.redirect('/clinician/manage-patient/'+patientId.toString())
             
             
         

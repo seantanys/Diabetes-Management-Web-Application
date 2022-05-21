@@ -40,7 +40,7 @@ clinicianRouter.get('/manage-patient/:patient_id/insulin', app.hasRole('clinicia
 clinicianRouter.get('/manage-patient/:patient_id/exercise', app.hasRole('clinician'), clinicianController.getPatientExercise) 
 
 clinicianRouter.get('/manage-patient/:patient_id/manage', app.hasRole('clinician'), clinicianController.getDataBounds);
-clinicianRouter.post('manage-patient/:patient_id/manage', app.hasRole('clinician'), clinicianController.manageDataBounds) 
+clinicianRouter.post('/manage-patient/:patient_id/manage', app.hasRole('clinician'), clinicianController.manageDataBounds) 
 
 clinicianRouter.post('/manage-patient/:patient_id/delete-note', app.hasRole('clinician'), clinicianController.deleteNote);
 clinicianRouter.post('/manage-patient/:patient_id/add-note', app.hasRole('clinician'), clinicianController.writeNote);
