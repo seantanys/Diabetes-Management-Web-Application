@@ -104,18 +104,21 @@ Maybe you can mention me or this repo in the acknowledgements too
 ### :dart: Features
 
 - Feature 1
+  Record patient data
 - Feature 2
+  Manage patient data
 - Feature 3
+  Take notes
+- And many more...
 
 <!-- Color Reference -->
 ### :art: Color Reference
 
 | Color             | Hex                                                                |
 | ----------------- | ------------------------------------------------------------------ |
-| Primary Color | ![#222831](https://via.placeholder.com/10/222831?text=+) #222831 |
-| Secondary Color | ![#393E46](https://via.placeholder.com/10/393E46?text=+) #393E46 |
-| Accent Color | ![#00ADB5](https://via.placeholder.com/10/00ADB5?text=+) #00ADB5 |
-| Text Color | ![#EEEEEE](https://via.placeholder.com/10/EEEEEE?text=+) #EEEEEE |
+| Primary Color | ![rgba(1, 58, 99, 1)](https://via.placeholder.com/10/222831?text=+) rgba(1, 58, 99, 1) |
+| Secondary Color | ![rgba(185, 218, 235, 1)](https://via.placeholder.com/10/393E46?text=+) rgba(185, 218, 235, 1) |
+| Accent Color | ![rgba(5, 85, 142, 1)](https://via.placeholder.com/10/00ADB5?text=+) rgba(5, 85, 142, 1) |
 
 
 <!-- Env Variables -->
@@ -123,9 +126,7 @@ Maybe you can mention me or this repo in the acknowledgements too
 
 To run this project, you will need to add the following environment variables to your .env file
 
-`MONGO_URL`
-
-`SESSION_SECRET`
+`MONGO_URL="mongodb+srv://username:password@cluster0.gv1sn.mongodb.net/test"`
 
 <!-- Getting Started -->
 ## 	:toolbox: Getting Started
@@ -137,25 +138,6 @@ This project uses npm as package manager
 
 ```bash
  npm install --package here
-```
-
-<!-- Installation -->
-### :gear: Installation
-
-Install my-project with npm
-
-```bash
-  yarn install my-project
-  cd my-project
-```
-   
-<!-- Running Tests -->
-### :test_tube: Running Tests
-
-To run tests, run the following command
-
-```bash
-  yarn test test
 ```
 
 <!-- Run Locally -->
@@ -170,51 +152,34 @@ Clone the project
 Go to the project directory
 
 ```bash
-  cd my-project
+  cd Web-IT-group
 ```
 
 Install dependencies
 
 ```bash
-  yarn install
+  npm install luxon
+  npm install express-validator
+  npm install express
+  npm install passport
+  npm install bcrypt
 ```
 
 Start the server
 
 ```bash
-  yarn start
+  node app.js
+  or
+  nodemon app.js
 ```
 
-
-<!-- Deployment -->
-### :triangular_flag_on_post: Deployment
-
-To deploy this project run
-
-```bash
-  yarn deploy
-```
-
-
-<!-- Usage -->
-## :eyes: Usage
-
-This is how you use our app
-
-```javascript
-import Component from 'my-project'
-
-function App() {
-  return <Component />
-}
-```
 
 <!-- Roadmap -->
 ## :compass: Roadmap
 
 * [x] Deliverable 1
 * [x] Deliverable 2
-* [ ] Deliverable 3
+* [x] Deliverable 3
 
 <!-- Code of Conduct -->
 ### :scroll: Code of Conduct
@@ -244,6 +209,9 @@ This web app is only for use for INFO30005 Web Information Technologies 2022 Sem
 
 Yi Sheon Tan - ystan@student.unimelb.edu.au
 Kian Dsouza - kiand@student.unimelb.edu.au
+Nic
+Anh
+Sanskar
 
 Project Link: [https://github.com/ncko10/Web-IT-group/](https://github.com/ncko10/Web-IT-group/)
 
