@@ -15,13 +15,15 @@
 			<div class="create-patient-container-row">
 				<div class="create-patient-field">
 				<label for="first_name"><p>First Name</p></label>
-				<input type="text" placeholder="First name" name="first_name" pattern="^[a-zA-Z]+$" 
+				<input type="text" placeholder="First name" name="first_name" 
+				{{!-- pattern="^[a-zA-Z]+$"  --}}
 				oninvalid="this.setCustomValidity('must be letters only ')"
       			onchange="try{setCustomValidity('')}catch(e){}" required />
 			</div>
 			<div class="create-patient-field">
 				<label for="last_name"><p>Last Name</p></label>
-				<input type="text" placeholder="Last name" name="last_name" pattern="^[a-zA-Z]+$"
+				<input type="text" placeholder="Last name" name="last_name" 
+				{{!-- pattern="^[a-zA-Z]+$" --}}
 				oninvalid="this.setCustomValidity('must be letters only ')"
       			onchange="try{setCustomValidity('')}catch(e){}" required />
 			</div>
@@ -30,7 +32,9 @@
 			<div class="create-patient-container-row">
 				<div class="create-patient-field">
 					<label for="screen_name"><p>Screen Name</p></label>
-					<input type="text" placeholder="Screen Name" name="screen_name" pattern="[a-zA-Z0-9_-\.]+" required />
+					<input type="text" placeholder="Screen Name" name="screen_name" 
+					{{!-- pattern="[a-zA-Z0-9_-\.]+"  --}}
+					required />
 				</div>
 				<div class="create-patient-field">
 					<label for="dob"><p>Date Of Birth</p></label>
@@ -49,7 +53,7 @@
 				<div class="create-patient-field">
 					<label for="email"><p>Email Address</p></label>
 					<input type="email"  placeholder="email" name="email" 
-					pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
+					{{!-- pattern="[a-z0-9._%+-]+[a-z0-9.-]+\.[a-z]{2,}$"  --}}
 					title="must be a valid email address" 
 					oninvalid="this.setCustomValidity('must be a valid email address ')"
       			onchange="try{setCustomValidity('')}catch(e){}" required>
@@ -57,7 +61,7 @@
 				<div class="create-patient-field">
 					<label for="password"><p>Password</p></label>
 					<input type="password" placeholder="password" name="password" 
-						   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
+						   {{!-- pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"  --}}
 						   title="must contain at least one number and one uppercase, lowercase letter, and be at least 8 characters"
 						   oninvalid="this.setCustomValidity('must have at least one number and one uppercase and lowercase letter, and atleast 8 characters')"
       						onchange="try{setCustomValidity('')}catch(e){}" required>
@@ -76,12 +80,12 @@
 				<div class="create-patient-field-req">		
 					<div class="create-patient-field">
 						<label for="BCGmin"><p>Minimum</p></label>
-						<input type="text" placeholder="minimum" name="bcgmin" />
+						<input type="number" step="0.01" placeholder="minimum" name="bcgmin" />
 					</div>
 
 					<div class="create-patient-field">
 						<label for="BCGmax"><p>Maximum</p></label>
-						<input type="text" placeholder="maximum" name="bcgmax" />
+						<input type="number" step="0.01" placeholder="maximum" name="bcgmax" />
 					</div>
 				</div>
 			</div>
@@ -97,12 +101,12 @@
 				<div class="create-patient-field-req">		
 					<div class="create-patient-field">
 						<label for="weightmin"><p>Minimum</p></label>
-						<input type="text" placeholder="minimum" name="weightmin" />
+						<input type="number" step="0.01" placeholder="minimum" name="weightmin" />
 					</div>
 
 					<div class="create-patient-field">
 						<label for="weightmax"><p>Maximum</p></label>
-						<input type="text" placeholder="maximum" name="weightmax" />
+						<input type="number" step="0.01" placeholder="maximum" name="weightmax" />
 					</div>
 				</div>
 			</div>
@@ -117,12 +121,12 @@
 				<div class="create-patient-field-req">		
 					<div class="create-patient-field">
 						<label for="insulinmin"><p>Minimum</p></label>
-						<input type="text" placeholder="minimum" name="insulinmin" />
+						<input type="number" step="0.01" placeholder="minimum" name="insulinmin" />
 					</div>
 
 					<div class="create-patient-field">
 						<label for="insulinmax"><p>Maximum</p></label>
-						<input type="text" placeholder="maximum" name="insulinmax" />
+						<input type="number" step="0.01" placeholder="maximum" name="insulinmax" />
 					</div>
 				</div>
 			</div>
@@ -137,12 +141,12 @@
 				<div class="create-patient-field-req">		
 					<div class="create-patient-field">
 						<label for="exercisemin"><p>Minimum</p></label>
-						<input type="text" placeholder="minimum" name="exercisemin" />
+						<input type="number" step="0.01" placeholder="minimum" name="exercisemin" />
 					</div>
 
 					<div class="create-patient-field">
 						<label for="exercisemax"><p>Maximum</p></label>
-						<input type="text" placeholder="maximum" name="exercisemax" />
+						<input type="number" step="0.01" placeholder="maximum" name="exercisemax" />
 					</div>
 				</div>
 			</div>

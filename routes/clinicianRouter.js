@@ -58,7 +58,7 @@ clinicianRouter.post('/manage-patient/:patient_id/message', app.hasRole('clinici
 
 clinicianRouter.post('/manage-patient/:patient_id/delete-note', app.hasRole('clinician'), clinicianController.deleteNote);
 clinicianRouter.post('/manage-patient/:patient_id/add-note', 
-                    body('comment').not().isEmpty(),
+                    body('comment').not().isEmpty().escape(),
                     app.hasRole('clinician'), clinicianController.writeNote);
 
 

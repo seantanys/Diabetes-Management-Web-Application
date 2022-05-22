@@ -3,7 +3,7 @@ const {Measurement} = require('../models/measurement')
 const {User} = require('../models/user')
 const { DateTime } = require("luxon");
 const {Clinician} = require('../models/clinician')
-const { body, validationResult } = require('express-validator')
+const { body, check, validationResult } = require('express-validator')
 const { Note } = require('../models/note');
 
 
@@ -498,11 +498,14 @@ const insertData = async (req, res, next) => {
         try {
             // Finds the validation errors in this request and wraps them in an object with handy functions
             const errors = validationResult(req); 
+            const user = req.user
             if (!errors.isEmpty()) {
-              res.send(errors);
-              //req.flash('error', `Something went wrong when creating a patient, please try again.`)
-              //return res.redirect('/clinician/create');
+              console.log(errors);
+              req.flash('error', `Something went wrong when creating a patient, please try again.`)
+              return res.redirect('/clinician/create');
             }
+
+            console.log(req)
 
             // checking to see if this email is taken.
             // const emailExists = await User.find({username: req.body.email}).lean();
@@ -526,6 +529,7 @@ const insertData = async (req, res, next) => {
                 dob: req.body.dob,
                 bio: req.body.bio,
                 engagement_rate: 0,
+                clinicanId: user.role_id.toString(),
                 measurements: {}  
             });
             
@@ -544,7 +548,7 @@ const insertData = async (req, res, next) => {
 
             await newUser.save();
 
-            const user = req.user
+            
             const clinician = await Clinician.findById(user.role_id.toString()).lean()
             clinician.patients.push(patientId.toString())
             await Clinician.findByIdAndUpdate(user.role_id.toString(), {patients: clinician.patients});
@@ -835,25 +839,25 @@ const validate = (method) =>{
     switch (method) {
         case 'insertData': {
          return [ 
-            body('first_name', 'first_name doesnt exists').exists().isAlphanumeric().escape(),
-            body('last_name', 'last_name doesnt exists').exists().isAlphanumeric().escape(),
-            body('screen_name', 'screen_name doesnt exists').exists().escape(),
+            body('first_name', 'first_name invalid').exists().isAlphanumeric().escape(),
+            body('last_name', 'last_name invalid').exists().isAlphanumeric().escape(),
+            body('screen_name', 'screen_name invalid').exists().escape(),
             body('email', 'Invalid email').exists().isEmail().escape(),
-            body('password', 'password doesnt exist').exists().isLength({min:8}).escape(),//isStrongPassword({ minLength: 8, minLowercase: 1, minUppercase: 1, minNumbers: 1}),
-            body('dob', 'userName doesnt exist').exists().isDate().escape(),
-            body('bio', 'bio doesnt exist').exists().escape(),
+            body('password', 'password invalid').exists().isLength({min:8}).escape(),//isStrongPassword({ minLength: 8, minLowercase: 1, minUppercase: 1, minNumbers: 1}),
+            body('dob', 'userName invalid').exists().isDate().escape(),
+            body('bio', 'bio invalid').exists().escape(),
             //body('bcg', 'invalid bcg checkbox').exists().isIn(['checked', 'unchecked']),
-            // body('bcgmin','invalid bcg min').optional().isFloat().escape(),
-            // body('bcgmax','invalid bcg max').optional().isFloat().escape(),
+            body('bcgmin','invalid bcg min').optional({checkFalsy: true}).isFloat().escape(),
+            body('bcgmax','invalid bcg max').optional({checkFalsy: true}).isFloat().escape(),
             //body('weight', 'invalid weight checkbox').exists().isIn(['checked', 'unchecked']),
-            // body('weightmin','invalid weight min').optional().isFloat().escape(),
-            // body('weightmax','invalid weight max').optional().isFloat().escape(),
+            body('weightmin','invalid weight min').optional({checkFalsy: true}).isFloat().escape(),
+            body('weightmax','invalid weight max').optional({checkFalsy: true}).isFloat().escape(),
             //body('insulin', 'invalid insulin checkbox').exists().isIn(['checked', 'unchecked']),
-            // body('insulinmin','invalid insulin min').optional().isFloat().escape(),
-            // body('insulinmax','invalid insulin max').optional().isFloat().escape(),
+            body('insulinmin','invalid insulin min').optional({checkFalsy: true}).isFloat().escape(),
+            body('insulinmax','invalid insulin max').optional({checkFalsy: true}).isFloat().escape(),
             //body('exercise', 'invalid exercise checkbox').exists().isIn(['checked', 'unchecked']),
-            // body('exercisemin','invalid exercise min').optional().isFloat().escape(),
-            // body('exercisemax','invalid exercise max').optional().isFloat().escape(),
+            body('exercisemin','invalid exercise min').optional({checkFalsy: true}).isFloat().escape(),
+            body('exercisemax','invalid exercise max').optional({checkFalsy: true}).isFloat().escape(),
             ]   
         }
         case 'changePassword': {
