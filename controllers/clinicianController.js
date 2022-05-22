@@ -461,6 +461,7 @@ const manageDataBounds = async(req, res, next) => {
                 measurementJson[measurement] = {minimum: min, maximum: max}
             }
 
+            //updating required measurements for patient
             await Patient.findByIdAndUpdate(patientId, {measurements: measurementJson});
 
         
