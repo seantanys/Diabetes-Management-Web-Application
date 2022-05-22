@@ -185,6 +185,7 @@ const getPatientPage = async (req, res) => {
         const data = await Patient.findById(user.role_id).lean(); 
         // get the patient's recorded data today
         const todayData = await Measurement.find({patientId: user.role_id, date: { $gte: currDate}}).lean(); 
+        const clinician = await Clinician.findById(data.clinicianId).lean();
 
         // get the patients required measurements.
         const reqMeasurements = Object.keys(data["measurements"])
@@ -196,7 +197,7 @@ const getPatientPage = async (req, res) => {
         const dob = data.dob.getDate().toString().padStart(2,"0") + "/" + 
             (data.dob.getMonth() + 1).toString().padStart(2,"0") + "/" + data.dob.getFullYear().toString() 
 
-        const clinician = await Clinician.findById(data.clinicianId).lean();
+        
 
         var leaderboardEntries = await Patient.find().sort({engagement_rate: -1}).lean();
         leaderboardEntries = leaderboardEntries.slice(0, 5);
