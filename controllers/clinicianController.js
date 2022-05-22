@@ -6,38 +6,6 @@ const {Clinician} = require('../models/clinician')
 const { body, check, validationResult } = require('express-validator')
 const { Note } = require('../models/note');
 
-
-function getDatesFromPatientObj(object) {
-    var dates = [];
-    for (let i = 0; i < object.length; i++) {
-        dates.push(object[i].date);
-    }
-    return dates;
-}
-
-// function groupMeasurementsByDate(measurements, dates) {
-//     const groupedData = {};
-
-//     for (i = 0; i < dates.length; i++) {
-//         var date = new Date(dates[i].getFullYear(), dates[i].getMonth(), dates[i].getDate(), 0, 0, 0);
-
-//         // if this date doesnt exist in the object, insert and initialize an empty dict.
-//         if (!(date in groupedData)) {
-//             groupData[date] = {};
-//         }
-
-//         for (j = 0; j < measurements.length; j++) {
-//             var mDate = new Date(measurements[i].date.getFullYear(), measurements[i].date.getMonth(), measurements[i].date.getDate(), 0, 0, 0);
-            
-//             // add the measurement for this current data
-//             if (mDate == date) {
-//                 groupedData[date][measurements[i].type] = measurements[i].value
-//             }
-//         }
-//     }
-//     return groupedData;
-// }
-
 function groupMeasurementsByDate(measurements) {
     const groupedData = {};
 
@@ -378,7 +346,7 @@ const manageDataBounds = async(req, res, next) => {
             const maxsteps = req.body.maxsteps;
 
             const required_measurements = [];
-            
+
             const errors = validationResult(req); 
             if (!errors.isEmpty()) {
               console.log(errors);
