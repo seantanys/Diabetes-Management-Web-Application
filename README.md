@@ -186,18 +186,6 @@ Start the server
 
 Please read the [Code of Conduct](https://github.com/ncko10/Web-IT-group/)
 
-<!-- FAQ -->
-## :grey_question: FAQ
-
-- Question 1
-
-  + Answer 1
-
-- Question 2
-
-  + Answer 2
-
-
 <!-- License -->
 ## :warning: License
 
