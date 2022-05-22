@@ -26,8 +26,7 @@ function groupMeasurementsByDate(measurements) {
 
 // Gets an array of dates between and including startDate and endDate
 function getDatesInRange(startDate, endDate) {
-    const date = new Date(endDate);
-    date.setUTCHours(0,0,0,0)
+    const date = new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate(), 0, 0, 0);
 
     const dates = [];
 
@@ -36,8 +35,7 @@ function getDatesInRange(startDate, endDate) {
         date.setDate(date.getDate() - 1);
     } 
 
-    const joinDate = new Date(startDate);
-    joinDate.setUTCHours(0,0,0,0);
+    const joinDate = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate(), 0, 0, 0);
     dates.push(new Date(joinDate));
     return dates;
 }
@@ -48,8 +46,7 @@ function getTableArray(dates, measurement) {
     for (i in dates) {
         match = false
         for (j in measurement) {
-            dataDate = new Date(measurement[j].date)
-            dataDate.setUTCHours(0,0,0,0)
+            dataDate = new Date(measurement[j].date.getFullYear(), measurement[j].date.getMonth(), measurement[j].date.getDate(), 0, 0, 0)
             if (dates[i].getTime() === dataDate.getTime()) {
                 outputArray.push(measurement[j])
                 match = true
