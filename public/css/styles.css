@@ -1364,13 +1364,12 @@ hr.solid {
   align-items: center;
   flex-direction: column;
   margin-top: 2%;
-  margin-left: 3em;
-  margin-right: 3em;
   padding-top: 5%;
   padding-bottom: 5%;
   font-size: var(--text-p);
   text-align: center;
-  /* max-width: 60%; */
+  min-width: 18em;
+  max-width: 25em;
 }
 
 #patient-details img {
