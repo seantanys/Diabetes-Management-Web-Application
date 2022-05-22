@@ -17,7 +17,10 @@ clinicianRouter.post('/create', app.hasRole('clinician'), clinicianController.va
 
 clinicianRouter.get('/messages', app.hasRole('clinician'), clinicianController.getSupportMessagesPage)
 
-clinicianRouter.post('/messages', clinicianController.changeSupportMessage)
+clinicianRouter.post('/messages',
+                    body('supportMsg').not().isEmpty().escape(),
+                    body('recipientId').not().isEmpty().escape(),
+                    app.hasRole('clinician'), clinicianController.changeSupportMessage)
 
 // route to handle the GET request for all patients data
 clinicianRouter.get('/dashboard', app.hasRole('clinician'), clinicianController.getAllPatientData)
@@ -54,7 +57,10 @@ clinicianRouter.get('/manage-patient/:patient_id/manage', app.hasRole('clinician
 clinicianRouter.post('/manage-patient/:patient_id/manage', app.hasRole('clinician'),  clinicianController.validate('manageDataBounds'), clinicianController.manageDataBounds) 
 
 clinicianRouter.get('/manage-patient/:patient_id/message', app.hasRole('clinician'), clinicianController.getIndividualMessage);
-clinicianRouter.post('/manage-patient/:patient_id/message', app.hasRole('clinician'), clinicianController.changeIndividualMessage);
+clinicianRouter.post('/manage-patient/:patient_id/message', 
+                    body('supportMsg').not().isEmpty().escape(),
+                    body('recipientId').not().isEmpty().escape(),
+                    app.hasRole('clinician'), clinicianController.changeIndividualMessage);
 
 clinicianRouter.post('/manage-patient/:patient_id/delete-note', app.hasRole('clinician'), clinicianController.deleteNote);
 clinicianRouter.post('/manage-patient/:patient_id/add-note', 

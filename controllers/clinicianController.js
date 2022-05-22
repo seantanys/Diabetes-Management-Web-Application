@@ -749,6 +749,13 @@ const getIndividualMessage = async (req, res) => {
 const changeIndividualMessage = async(req, res, next) =>{
 
     if (req.isAuthenticated()) {
+
+        const errors = validationResult(req); 
+        if (!errors.isEmpty()) {
+            req.flash('error', `${errors.array()[0].msg}`)
+            return res.redirect('/clinician/messages');
+        }
+
         try{
             const message = req.body.supportMsg;
             const recipientId = req.body.recipientId;
@@ -777,6 +784,13 @@ const changeIndividualMessage = async(req, res, next) =>{
 const changeSupportMessage = async(req, res, next) =>{
 
     if (req.isAuthenticated()) {
+
+        const errors = validationResult(req); 
+        if (!errors.isEmpty()) {
+            req.flash('error', `${errors.array()[0].msg}`)
+            return res.redirect('/clinician/account');
+        }
+
         try{
             const message = req.body.supportMsg;
             const recipientId = req.body.recipientId;
