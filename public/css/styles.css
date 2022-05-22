@@ -1452,6 +1452,12 @@ hr.solid {
   justify-content: space-between;
 }
 
+#patient-badges p {
+  text-align: center;
+  align-items: center;
+  display: flex;
+}
+
 .patient-badge {
   display: flex;
   flex-direction: column;
