@@ -321,7 +321,7 @@ const getPatientExercise = async(req, res, next) => {
         res.render('login');
     }
 }
-
+//controller to get data bounds on clinician manage
 const getDataBounds = async(req, res, next) => {
     if (req.isAuthenticated()) {
         try {
@@ -338,7 +338,7 @@ const getDataBounds = async(req, res, next) => {
         res.render('login');
     }
 }
-
+//controller to manage data bounds on clinician manage
 const manageDataBounds = async(req, res, next) => {
     if (req.isAuthenticated()) {
         try {
