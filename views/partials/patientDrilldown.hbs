@@ -1,14 +1,7 @@
-{{!-- <script src="/scripts/patientOverview.js"></script>
-<script src="/scripts/patientDataFilter.js"></script>
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="/scripts/patientChart.js"></script>
-
-<input type="hidden" id="pd-dates" value="{{json groupedByDate}}" > --}}
-
+{{!partial patient details at the top of each patient drilldown page}}
 <div class="drilldown-container flex-column-center">
 
     <div class="patient-info"> 
-        {{!flexbox: 3 columns with first col small, mid and last col equal width}}
         <div class="patient-overview-details">
             <img src = "/images/male-profile.jpg">
             <ul>
@@ -23,7 +16,6 @@
     <hr class="divider-white">
 
     <div class="drilldown-nav-bar">
-        {{!flexbox of 3 items}}
         <ul class="nav-menu">
             <li class="nav-item">
                 <a href="/clinician/manage-patient/{{{patient._id}}}" class="nav-link" id="overview-tab">Overview</a>
@@ -59,8 +51,6 @@
 
         </ul>
     </div>
-
-    {{!-- <hr class="divider"> --}}
 
     <br>
 </div>

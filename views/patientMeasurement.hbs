@@ -5,15 +5,14 @@
 <script src="/scripts/patientChart.js"></script>
 
 
-{{!-- <div class="loader-wrapper" id="loader">
-    <span class="loader"><span class="loader-inner"></span></span>
-</div> --}}
+
 
 {{#if loggedIn}}
 {{> flashSuccess}}
 
 {{> patientDrilldown}}
 
+{{!-- Measurement lable and thresholds --}}
 <div class="page-heading-1">
     <h1>{{#if (eqBcg type)}}
         Blood Glucose Level
