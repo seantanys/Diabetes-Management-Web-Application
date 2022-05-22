@@ -16,14 +16,14 @@
 				<div class="create-patient-field">
 				<label for="first_name"><p>First Name</p></label>
 				<input type="text" placeholder="First name" name="first_name" 
-				{{!-- pattern="^[a-zA-Z]+$"  --}}
+				pattern="^[a-zA-Z]+$" 
 				oninvalid="this.setCustomValidity('must be letters only ')"
       			onchange="try{setCustomValidity('')}catch(e){}" required />
 			</div>
 			<div class="create-patient-field">
 				<label for="last_name"><p>Last Name</p></label>
 				<input type="text" placeholder="Last name" name="last_name" 
-				{{!-- pattern="^[a-zA-Z]+$" --}}
+				pattern="^[a-zA-Z]+$"
 				oninvalid="this.setCustomValidity('must be letters only ')"
       			onchange="try{setCustomValidity('')}catch(e){}" required />
 			</div>
@@ -33,7 +33,7 @@
 				<div class="create-patient-field">
 					<label for="screen_name"><p>Screen Name</p></label>
 					<input type="text" placeholder="Screen Name" name="screen_name" 
-					{{!-- pattern="[a-zA-Z0-9_-\.]+"  --}}
+					pattern="[a-zA-Z0-9_-\.]+" 
 					required />
 				</div>
 				<div class="create-patient-field">
@@ -61,7 +61,7 @@
 				<div class="create-patient-field">
 					<label for="password"><p>Password</p></label>
 					<input type="password" placeholder="password" name="password" 
-						   {{!-- pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"  --}}
+						   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
 						   title="must contain at least one number and one uppercase, lowercase letter, and be at least 8 characters"
 						   oninvalid="this.setCustomValidity('must have at least one number and one uppercase and lowercase letter, and atleast 8 characters')"
       						onchange="try{setCustomValidity('')}catch(e){}" required>

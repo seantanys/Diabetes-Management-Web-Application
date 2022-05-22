@@ -5,8 +5,6 @@ const exphbs = require('express-handlebars')
 const flash = require('express-flash')  // for showing login error messages
 const session = require('express-session')
 const passport = require('./passport.js')
-const http = require('http')
-const messageRouter = require('./routes/message.js')
 const { DateTime } = require("luxon");
 const { body, validationResult } = require('express-validator')
 require('./models')
@@ -139,14 +137,6 @@ const patientRouter = require('./routes/patientRouter')
 
 app.use('/patient', patientRouter)
 
-// const loginRouter = require('./routes/loginRouter')
-
-// app.use('/login', loginRouter)
-
-// app.use((err, req, res, next) => {
-//     res.send('Something Went Wrong.')
-// })
-
 app.get('/', (req, res) => {
     
     if (req.isAuthenticated()) {
@@ -181,27 +171,14 @@ app.get('*', (req, res) => {
     }
 })
 
-app.use('/message', messageRouter)
-
-const server = http.createServer(app)
-const io = require('./socket').socket
-io(server)
-
-// link to our router
-// const peopleRouter = require('./routes/peopleRouter')
-
 // middleware to log a message each time a request arrives at the server - handy for debugging
 // app.use((req, res, next) => {
 //     console.log('message arrived: ' + req.method + ' ' + req.path)
 //     next()
 // })
 
-// the demo routes are added to the end of the '/demo-management' path
-// app.use('/people', peopleRouter)
-
 // Tells the app to listen on port 3000 and logs tha tinformation to the console.
-// app.listen(process.env.PORT || 3000, () => {
-//     console.log('The library app is running!')
-// })
+app.listen(process.env.PORT || 3000, () => {
+    console.log('The library app is running!')
+})
 
-server.listen(process.env.PORT || 3000)

@@ -1452,15 +1452,21 @@ hr.solid {
   justify-content: space-between;
 }
 
+#patient-badges p {
+  text-align: center;
+  align-items: center;
+  display: flex;
+}
+
 .patient-badge {
   display: flex;
   flex-direction: column;
-  width: 27%;
+  width: auto;
+  justify-content: center;
 }
 
-.patient-badge img {
-  width: 90%;
-  color: var(--colour-gold);
+#trophyLottie {
+  width: auto;
 }
 
 .patient-badge p {
