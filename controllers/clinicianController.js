@@ -15,29 +15,6 @@ function getDatesFromPatientObj(object) {
     return dates;
 }
 
-// function groupMeasurementsByDate(measurements, dates) {
-//     const groupedData = {};
-
-//     for (i = 0; i < dates.length; i++) {
-//         var date = new Date(dates[i].getFullYear(), dates[i].getMonth(), dates[i].getDate(), 0, 0, 0);
-
-//         // if this date doesnt exist in the object, insert and initialize an empty dict.
-//         if (!(date in groupedData)) {
-//             groupData[date] = {};
-//         }
-
-//         for (j = 0; j < measurements.length; j++) {
-//             var mDate = new Date(measurements[i].date.getFullYear(), measurements[i].date.getMonth(), measurements[i].date.getDate(), 0, 0, 0);
-            
-//             // add the measurement for this current data
-//             if (mDate == date) {
-//                 groupedData[date][measurements[i].type] = measurements[i].value
-//             }
-//         }
-//     }
-//     return groupedData;
-// }
-
 function groupMeasurementsByDate(measurements) {
     const groupedData = {};
 
@@ -56,6 +33,7 @@ function groupMeasurementsByDate(measurements) {
     return groupedData;
 }
 
+// Gets an array of dates between and including startDate and endDate
 function getDatesInRange(startDate, endDate) {
     const date = new Date(endDate);
     date.setUTCHours(0,0,0,0)
@@ -73,7 +51,7 @@ function getDatesInRange(startDate, endDate) {
     return dates;
 }
 
-
+// A function to get the tables formatted with the measurement values and list of dates
 function getTableArray(dates, measurement) {
     const outputArray = []
     for (i in dates) {
@@ -205,6 +183,7 @@ const deleteNote = async (req, res) => {
     }
 }
 
+// Controller for the patient overview page
 const getPatientOverview = async(req, res, next) => {
     if (req.isAuthenticated()) {
         try {
@@ -217,7 +196,6 @@ const getPatientOverview = async(req, res, next) => {
             const measurementsForChart = await Measurement.find({patientId: patient._id}).sort({"date": 1}).lean(); 
             const measurementsByDate = groupMeasurementsByDate(measurementsForChart);
             
-            //return res.render('partials/patientOverview', {loggedIn: req.isAuthenticated(), required: reqMeasurements, patient: patient, measurements: measurements, notes: notes})
             return res.render('patientOverview', {loggedIn: req.isAuthenticated(), flash: req.flash('success'), errorFlash: req.flash('error'), layout: 'clinician.hbs', required: reqMeasurements, join_date: user.join_date, patient: patient, measurements: measurements, groupedByDate: measurementsByDate, notes: notes})
 
         } catch (err) {
@@ -227,6 +205,8 @@ const getPatientOverview = async(req, res, next) => {
         res.render('login');
     }
 }
+
+// controller for patient's bcg page
 const getPatientBCG = async(req, res, next) => {
     if (req.isAuthenticated()) {
         try {
@@ -256,6 +236,8 @@ const getPatientBCG = async(req, res, next) => {
         res.render('login');
     }
 }
+
+// controller for patient's weight page
 const getPatientWeight = async(req, res, next) => {
     if (req.isAuthenticated()) {
         try {
@@ -286,6 +268,8 @@ const getPatientWeight = async(req, res, next) => {
         res.render('login');
     }
 }
+
+// controller for patient's insulin page
 const getPatientInsulin = async(req, res, next) => {
     if (req.isAuthenticated()) {
         try {
@@ -315,6 +299,8 @@ const getPatientInsulin = async(req, res, next) => {
         res.render('login');
     }
 }
+
+// controller for patient's exercise page
 const getPatientExercise = async(req, res, next) => {
     if (req.isAuthenticated()) {
         try {
