@@ -33,9 +33,9 @@ const getMeasurementPage = async (req, res) => {
         const notMeasured = reqMeasurements.filter(x => !alreadyMeasured.includes(x)); 
 
         if (data) {
-            res.render('record.hbs', {loggedIn: req.isAuthenticated(), flash: req.flash('success'), errorFlash: req.flash('error'), title: "Record", theme: user.theme, singlePatient: data, measured: alreadyMeasured, 
-                                    notMeasured: notMeasured, required: reqMeasurements,
-                                    currentTime: displayTime})
+            res.render('record.hbs', {loggedIn: req.isAuthenticated(), flash: req.flash('success'), errorFlash: req.flash('error'), 
+                                        title: "Record", theme: user.theme, singlePatient: data, measured: alreadyMeasured, 
+                                        notMeasured: notMeasured,  required: reqMeasurements, currentTime: displayTime})
         } else {
             console.log("patient data not found")
             res.render('notfound')
@@ -238,7 +238,8 @@ const getPatientAccountPage = async (req, res) => {
         const age = currTime.year - data.dob.getFullYear()
 
         if (data) {
-            res.render('account', {loggedIn: req.isAuthenticated(), flash: req.flash('success'), errorFlash: req.flash('error'), title: "Account", age: age.toString(), singlePatient: data, theme: user.theme})
+            res.render('account', {loggedIn: req.isAuthenticated(), flash: req.flash('success'), errorFlash: req.flash('error'), 
+                title: "Account", age: age.toString(), singlePatient: data, theme: user.theme})
         } else {
             res.render('notfound')
         }
@@ -338,7 +339,8 @@ const getPatientDataPage = async (req, res) => {
             measurements[i].date = convertedDate.toLocaleString(DateTime.DATETIME_MED);
         }
 
-        res.render('patientData', {loggedIn: req.isAuthenticated(), title: "Your Data", theme: user.theme, required: reqMeasurements, measurement: measurements, groupedByDate: measurementsByDate});
+        res.render('patientData', {loggedIn: req.isAuthenticated(), title: "Your Data", theme: user.theme, required: reqMeasurements, 
+            measurement: measurements, groupedByDate: measurementsByDate});
     }
     else {
         res.render('login');
