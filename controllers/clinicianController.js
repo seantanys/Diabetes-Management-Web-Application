@@ -105,6 +105,7 @@ const getAllPatientData = async (req, res, next) => {
     }
 }
 
+//controller to write notes
 const writeNote = async (req, res) => {
     if (req.isAuthenticated()) {
 
@@ -149,6 +150,7 @@ const writeNote = async (req, res) => {
     }
 }
 
+//contorller to delete note
 const deleteNote = async (req, res) => {
     if (req.isAuthenticated()) {
         try {
@@ -520,6 +522,7 @@ const insertData = async (req, res, next) => {
                     return res.redirect('/clinician/create');
                 }
             }
+
             if (req.body.weight) {
                 if(parseFloat(req.body.weightmin)>=parseFloat(req.body.weightmax)){
                     req.flash('error', 'Error. weight minimum threshold must not be equal to or exceeding maximum threshold.')
@@ -699,6 +702,7 @@ const getPatientComments = async (req, res, next) => {
     } 
 }
 
+//function to retrieve support messages and display them on clinican messages
 const getSupportMessagesPage = async (req, res, next) => {
 
     if (req.isAuthenticated()) {
@@ -727,6 +731,7 @@ const getSupportMessagesPage = async (req, res, next) => {
     }
 }
 
+//function to get individual patient messages
 const getIndividualMessage = async (req, res) => {
     if (req.isAuthenticated()) {
 
@@ -752,6 +757,8 @@ const getIndividualMessage = async (req, res) => {
     }
 }
 
+//function updates individual messages for patient and displays error
+//if the message is less than 3 charecters or patient id is invalid
 const changeIndividualMessage = async(req, res, next) =>{
 
     if (req.isAuthenticated()) {
@@ -787,6 +794,9 @@ const changeIndividualMessage = async(req, res, next) =>{
     }
 }
 
+//function to change support message for individual patients
+//function displays error if message is shorter than 3 charecters 
+//or patient id is invalid
 const changeSupportMessage = async(req, res, next) =>{
 
     if (req.isAuthenticated()) {
@@ -822,6 +832,7 @@ const changeSupportMessage = async(req, res, next) =>{
     }
 }
 
+//function to login to clincian account
 const getAccountPage = async (req, res) => {
     if (req.isAuthenticated()) {
         res.render('clinicianAccount.hbs', {layout:"clinician.hbs", loggedIn: req.isAuthenticated(), 
@@ -831,6 +842,9 @@ const getAccountPage = async (req, res) => {
 	}
 }
 
+//function to change passowrd with validations 
+//password cannot be empty, password cannot have length less than 8
+//also checks if the password matches
 const changePassword = async (req, res) => {
 
     if (req.isAuthenticated()) {

@@ -1364,8 +1364,8 @@ hr.solid {
   align-items: center;
   flex-direction: column;
   margin-top: 2%;
-  padding-top: 5%;
-  padding-bottom: 5%;
+  padding-top: 3%;
+  padding-bottom: 3%;
   font-size: var(--text-p);
   text-align: center;
   min-width: 18em;
@@ -1390,6 +1390,11 @@ hr.solid {
   width: fit-content;
   height: fit-content;
   margin-top: 2%;
+}
+
+.patient-card-content .msg-bubble {
+  min-height: 5em;
+  height: fit-content;
 }
 
 .patient-card-label {
