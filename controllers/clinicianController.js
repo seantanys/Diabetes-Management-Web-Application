@@ -564,7 +564,7 @@ const insertData = async (req, res, next) => {
                 dob: req.body.dob,
                 bio: req.body.bio,
                 engagement_rate: 0,
-                clinicanId: user.role_id.toString(),
+                clinicianId: user.role_id.toString(),
                 measurements: {}  
             });
             
