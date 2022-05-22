@@ -1379,7 +1379,7 @@ hr.solid {
 }
 
 #patient-details p {
-  max-width: 60%;
+  max-width: 90%;
 }
 
 .patient-card {
@@ -1446,23 +1446,18 @@ hr.solid {
   width: 10px;
 }
 
-#patient-badges {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-#patient-badges p {
-  text-align: center;
-  align-items: center;
-  display: flex;
-}
-
 .patient-badge {
   display: flex;
   flex-direction: column;
-  width: auto;
   justify-content: center;
+  background-color: var(--colour-background);
+  border-radius: 10em;
+  width: 7em;
+}
+
+.patient-badge lottie-player {
+  width: 100px;
+  height: 100px;
 }
 
 #trophyLottie {
@@ -1473,11 +1468,7 @@ hr.solid {
   font-size: 15px;
   text-align: center;
   color: var(--colour-text);
-  background-color: var(--colour-background);
   height: fit-content;
-  padding: 4%;
-  margin-top: 10%;
-  border-radius: 2em;
 }
 
 .leaderboard {
@@ -1527,11 +1518,6 @@ hr.solid {
 
 .leaderboard #fifth {
   background-color: var(--colour-fifth);
-}
-
-.patient-badge lottie-player {
-  width: 100px;
-  height: 100px;
 }
 
 .msg-bubble {
@@ -1973,9 +1959,9 @@ hr.solid {
     margin-left: 5%;
     background-color: var(--colour-background);
   }
-  .patient-badge p {
+  .patient-badge {
     background-color: var(--colour-background-teal);
-    font-size: 12px;
+    width: 6em;
   }
   .leaderboard th p {
     background-color: var(--colour-background-teal);
