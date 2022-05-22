@@ -125,7 +125,7 @@ async function calcEngagementRate(patientData) {
         // calculate engagement rate
         const engRate = countEngagedDays(measurementData) / joinLength;
         //console.log(engRate);
-        return engRate*100
+        return Math.floor(engRate*100)
     }
 }
 
