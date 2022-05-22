@@ -459,7 +459,7 @@ const manageDataBounds = async(req, res, next) => {
 }
 
 // function which handles requests for displaying the create form
-// will be implemented for D3
+// renders the newPatient handlebar
 const getNewPatientForm = async (req, res, next) => {
     if (req.isAuthenticated()) {
         try {
@@ -474,7 +474,9 @@ const getNewPatientForm = async (req, res, next) => {
 }
 
 // function which handles requests for creating a new patient
-// will be implemented for D3
+// checks for validation on server side, if there are errors it doesnt create the patient
+// and displays a flash error
+// else if all the validation passes, it will create a new patient and user
 const insertData = async (req, res, next) => {
 
     if (req.isAuthenticated()) {
@@ -482,12 +484,15 @@ const insertData = async (req, res, next) => {
             // Finds the validation errors in this request and wraps them in an object with handy functions
             const errors = validationResult(req); 
             const user = req.user
+
             if (!errors.isEmpty()) {
               console.log(errors);
               req.flash('error', `Something went wrong when creating a patient, please try again.`)
               return res.redirect('/clinician/create');
             }
 
+            // checks to see if any of the inputted measurement mins are greater than maxs
+            // else display flash and not create a patient
             if (req.body.bcg) {
                 if(parseFloat(req.body.bcgmin)>=parseFloat(req.body.bcgmax)){
                     req.flash('error', 'Error. BCG minimum threshold must not be equal to or exceeding maximum threshold.')
@@ -632,13 +637,16 @@ const insertData = async (req, res, next) => {
     }   
 }
 
+
+// function which handles requests for displaying latest patients comments
+// sorts the measurement in latest to oldest order and displays them 
+// rendering the patientComment handlebar
 const getPatientComments = async (req, res, next) => {
     if (req.isAuthenticated()) {
         try{
             patientComments = []
 
             measurement = await Measurement.find().sort({"date": -1}).lean()
-            //console.log(measurement)
 
             if (!measurement) {
                 return res.render('notfound')
@@ -646,7 +654,7 @@ const getPatientComments = async (req, res, next) => {
 
             for (let i = 0; i < measurement.length; i++){
                 patient = await Patient.findById(measurement[i].patientId.toString()).lean()
-                //console.log(patient.first_name)
+
                 if (measurement[i].comment != ""){
                     patientComments.push({
                         patient: patient.first_name+" "+ patient.last_name,
@@ -659,7 +667,6 @@ const getPatientComments = async (req, res, next) => {
                 }
             }
     
-            //console.log(patientComments)
             return res.render('patientComments', {layout: "clinician.hbs", loggedIn: req.isAuthenticated(), data: patientComments})
     
     
@@ -841,6 +848,7 @@ const changePassword = async (req, res) => {
     }
 }
 
+// using express validator we valid the create new patient forms, change password and manage data bounds
 const validate = (method) =>{
     switch (method) {
         case 'insertData': {
@@ -856,10 +864,10 @@ const validate = (method) =>{
             body('bcgmax','invalid bcg max').optional({checkFalsy: true}).isFloat({min:0, max:1000}).escape(),
             body('weightmin','invalid weight min').optional({checkFalsy: true}).isFloat({min:0, max:1000}).escape(),
             body('weightmax','invalid weight max').optional({checkFalsy: true}).isFloat({min:0, max:1000}).escape(),
-            body('insulinmin','invalid insulin min').optional({checkFalsy: true}).isFloat({min:0, max:500}).escape(),
-            body('insulinmax','invalid insulin max').optional({checkFalsy: true}).isFloat({min:0, max:500}).escape(),
-            body('exercisemin','invalid exercise min').optional({checkFalsy: true}).isFloat({min:0, max:50000}).escape(),
-            body('exercisemax','invalid exercise max').optional({checkFalsy: true}).isFloat({min:0, max:50000}).escape(),
+            body('insulinmin','invalid insulin min').optional({checkFalsy: true}).isInt({min:0, max:500}).escape(),
+            body('insulinmax','invalid insulin max').optional({checkFalsy: true}).isInt({min:0, max:500}).escape(),
+            body('exercisemin','invalid exercise min').optional({checkFalsy: true}).isInt({min:0, max:50000}).escape(),
+            body('exercisemax','invalid exercise max').optional({checkFalsy: true}).isInt({min:0, max:50000}).escape(),
             ]   
         }
         case 'changePassword': {
@@ -882,10 +890,10 @@ const validate = (method) =>{
                 body('maxbcg', 'invalid max bcg').optional({checkFalsy: true}).isFloat({min:0, max:1000}).escape(),
                 body('minweight', 'invalid min weight').optional({checkFalsy: true}).isFloat({min:0, max:1000}).escape(),
                 body('maxweight', 'invalid max weight').optional({checkFalsy: true}).isFloat({min:0, max:1000}).escape(),
-                body('mindose', 'invalid min insulin').optional({checkFalsy: true}).isFloat({min:0, max:500}).escape(),
-                body('maxdose', 'invalid max insulin').optional({checkFalsy: true}).isFloat({min:0, max:500}).escape(),
-                body('minsteps', 'invalid min exercise').optional({checkFalsy: true}).isFloat({min:0, max:50000}).escape(),
-                body('maxsteps', 'invalid max exercise').optional({checkFalsy: true}).isFloat({min:0, max:50000}).escape(),
+                body('mindose', 'invalid min insulin').optional({checkFalsy: true}).isInt({min:0, max:500}).escape(),
+                body('maxdose', 'invalid max insulin').optional({checkFalsy: true}).isFloisIntat({min:0, max:500}).escape(),
+                body('minsteps', 'invalid min exercise').optional({checkFalsy: true}).isInt({min:0, max:50000}).escape(),
+                body('maxsteps', 'invalid max exercise').optional({checkFalsy: true}).isInt({min:0, max:50000}).escape(),
             ]
         }
     }

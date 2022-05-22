@@ -32,10 +32,10 @@
                 <th><input type="checkbox" id="weight" name="weight" {{#if patient.measurements.weight}}checked="checked"{{/if}}></th>
                 <th>Weight(kg)</th>
                 <th>
-                    <input type="number" id="minweight" name="minweight" min="0" value="{{patient.measurements.weight.minimum}}">
+                    <input type="number" id="minweight" step="0.01" name="minweight" min="0" value="{{patient.measurements.weight.minimum}}">
                 </th>
                 <th>
-                    <input type="number" id="maxweight" name="maxweight" min="0" value="{{patient.measurements.weight.maximum}}">
+                    <input type="number" id="maxweight" step="0.01" name="maxweight" min="0" value="{{patient.measurements.weight.maximum}}">
                 </th>
             </tr>
             <tr>
