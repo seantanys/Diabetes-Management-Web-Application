@@ -33,9 +33,9 @@ const getMeasurementPage = async (req, res) => {
         const notMeasured = reqMeasurements.filter(x => !alreadyMeasured.includes(x)); 
 
         if (data) {
-            res.render('record.hbs', {loggedIn: req.isAuthenticated(), flash: req.flash('success'), errorFlash: req.flash('error'), title: "Record", theme: user.theme, singlePatient: data, measured: alreadyMeasured, 
-                                    notMeasured: notMeasured, required: reqMeasurements,
-                                    currentTime: displayTime})
+            res.render('record.hbs', {loggedIn: req.isAuthenticated(), flash: req.flash('success'), errorFlash: req.flash('error'), 
+                                        title: "Record", theme: user.theme, singlePatient: data, measured: alreadyMeasured, 
+                                        notMeasured: notMeasured,  required: reqMeasurements, currentTime: displayTime})
         } else {
             console.log("patient data not found")
             res.render('notfound')
@@ -97,18 +97,12 @@ async function calcEngagementRate(patientData) {
     // get the beginning of the current day
     const currDate = currTime.startOf('day').toISO();
     // Get yesterdays date
-    // const yesterdayDate = currDate.getDate() - 1;
     const yesterdayDate = currTime.minus({ days: 1});
 
     // get the patient's user data
     const userData = await User.findOne({role_id: patientId}).lean();
-    
-    // get interval of dates user has been on platform
-    // const joinInterval = fromDateTimes(userData.join_date, yesterdayDate);
 
     const join_date = DateTime.fromISO(userData.join_date.toISOString()).setZone('Australia/Melbourne');
-
-    const joinInterval = yesterdayDate.diff(join_date, ["years", "months", "days", "hours"]);
 
     // get the patient's recorded data up until yesterday
     const measurementData = await Measurement.find({patientId: patientId}).lean();
@@ -238,7 +232,8 @@ const getPatientAccountPage = async (req, res) => {
         const age = currTime.year - data.dob.getFullYear()
 
         if (data) {
-            res.render('account', {loggedIn: req.isAuthenticated(), flash: req.flash('success'), errorFlash: req.flash('error'), title: "Account", age: age.toString(), singlePatient: data, theme: user.theme})
+            res.render('account', {loggedIn: req.isAuthenticated(), flash: req.flash('success'), errorFlash: req.flash('error'), 
+                title: "Account", age: age.toString(), singlePatient: data, theme: user.theme})
         } else {
             res.render('notfound')
         }
@@ -338,7 +333,8 @@ const getPatientDataPage = async (req, res) => {
             measurements[i].date = convertedDate.toLocaleString(DateTime.DATETIME_MED);
         }
 
-        res.render('patientData', {loggedIn: req.isAuthenticated(), title: "Your Data", theme: user.theme, required: reqMeasurements, measurement: measurements, groupedByDate: measurementsByDate});
+        res.render('patientData', {loggedIn: req.isAuthenticated(), title: "Your Data", theme: user.theme, required: reqMeasurements, 
+            measurement: measurements, groupedByDate: measurementsByDate});
     }
     else {
         res.render('login');

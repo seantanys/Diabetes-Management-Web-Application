@@ -16,9 +16,14 @@ patientRouter.get('/', patientController.redirectToDashboard)
 patientRouter.get('/record', app.hasRole('patient'), patientController.getMeasurementPage)
 
 // route to handle the GET request for submitting a measurement 
-patientRouter.post('/record', app.hasRole('patient'),
-                    body('value').not().isEmpty().isNumeric(),
-                     patientController.submitMeasurement)
+patientRouter.post('/record', 
+                    body('value').not().isEmpty().isNumeric()
+                        .withMessage('Value must be numeric and not empty.'),
+                    body('comment').escape(),
+                    check('value')
+                        .isFloat({ min: 0, max: 100000})
+                        .withMessage('Value must be positive and not exceed a ridiculously high number'),
+                    app.hasRole('patient'), patientController.submitMeasurement)
 
 // route to handle the GET request for patient dashboard 
 patientRouter.get('/dashboard', app.hasRole('patient'), patientController.getPatientPage)

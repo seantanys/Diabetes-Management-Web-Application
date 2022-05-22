@@ -75,22 +75,6 @@
             </div>
         </div>
 
-        <div class="patient-card">   
-            <div class="patient-card-label">
-                <h3>Badges</h3>
-            </div>
-            <div class="patient-card-content">
-                <div id="patient-badges">
-                    {{#if (gte singlePatient.engagement_rate 0.8)}}
-                    <div class="patient-badge">
-                        <lottie-player id="trophyLottie" src="../images/lottie/trophy.json" autoplay loop>"></lottie-player>
-                        <p>80+ engagement</p>
-                    </div>
-                    {{/if}}
-                </div>
-            </div>
-        </div>
-
         <div class="patient-card">
             <div class="patient-card-label">
                 <h3>Leaderboard</h3>
@@ -134,6 +118,24 @@
                         <td>{{entry.4.engagement_rate}}%</td>
                     </tr>
                 </table>
+            </div>
+        </div>
+
+        <div class="patient-card">   
+            <div class="patient-card-label">
+                <h3>Badges</h3>
+            </div>
+            <div class="patient-card-content">
+                <div id="patient-badges">
+                    {{#if (gte singlePatient.engagement_rate 80)}}
+                    <div class="patient-badge">
+                        <lottie-player id="trophyLottie" src="../images/lottie/trophy.json" autoplay loop>"></lottie-player>
+                        <p>80+ engagement</p>
+                    </div>
+                    {{else}}
+                    <p>Here's where all your cool achievements will go!</p>
+                    {{/if}}
+                </div>
             </div>
         </div>
 
