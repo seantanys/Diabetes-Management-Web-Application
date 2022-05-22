@@ -99,7 +99,9 @@ const getAllPatientData = async (req, res, next) => {
                                 })
         }
         
-        return res.render('clinicianDashboard', {layout: "clinician.hbs", loggedIn: req.isAuthenticated(), flash: req.flash('success'), errorFlash: req.flash('error'), user: clinician, data: patientDashboard, numPatients: clinician.patients.length, date: todaysDate})
+        return res.render('clinicianDashboard', {layout: "clinician.hbs", loggedIn: req.isAuthenticated(), 
+            flash: req.flash('success'), errorFlash: req.flash('error'), user: clinician, data: patientDashboard, 
+            numPatients: clinician.patients.length, date: todaysDate})
 
     } catch (err) {
         return next(err)
@@ -187,7 +189,9 @@ const getPatientOverview = async(req, res, next) => {
             const measurementsForChart = await Measurement.find({patientId: patient._id}).sort({"date": 1}).lean(); 
             const measurementsByDate = groupMeasurementsByDate(measurementsForChart);
             
-            return res.render('patientOverview', {loggedIn: req.isAuthenticated(), flash: req.flash('success'), errorFlash: req.flash('error'), layout: 'clinician.hbs', required: reqMeasurements, join_date: user.join_date, patient: patient, measurements: measurements, groupedByDate: measurementsByDate, notes: notes})
+            return res.render('patientOverview', {loggedIn: req.isAuthenticated(), flash: req.flash('success'), 
+                errorFlash: req.flash('error'), layout: 'clinician.hbs', required: reqMeasurements, 
+                join_date: user.join_date, patient: patient, measurements: measurements, groupedByDate: measurementsByDate, notes: notes})
 
         } catch (err) {
             return next(err)
@@ -218,7 +222,9 @@ const getPatientBCG = async(req, res, next) => {
                 return res.render('notfound')
             }
 
-            return res.render('patientMeasurement', {loggedIn: req.isAuthenticated(), layout: 'clinician.hbs', join_date: user.join_date, patient: patient, required: reqMeasurements, measurement: formatted, type: type, max: max, min: min, unit: unit})
+            return res.render('patientMeasurement', {loggedIn: req.isAuthenticated(), layout: 'clinician.hbs', 
+                join_date: user.join_date, patient: patient, required: reqMeasurements, measurement: formatted, 
+                type: type, max: max, min: min, unit: unit})
 
         } catch (err) {
             return next(err)
@@ -250,7 +256,9 @@ const getPatientWeight = async(req, res, next) => {
                 return res.render('notfound')
             }
 
-            return res.render('patientMeasurement', {loggedIn: req.isAuthenticated(), layout: 'clinician.hbs', join_date: user.join_date, patient: patient, required: reqMeasurements, measurement: formatted, type: type, max: max, min: min, unit: unit})
+            return res.render('patientMeasurement', {loggedIn: req.isAuthenticated(), layout: 'clinician.hbs', 
+                join_date: user.join_date, patient: patient, required: reqMeasurements, measurement: formatted, 
+                type: type, max: max, min: min, unit: unit})
 
         } catch (err) {
             return next(err)
@@ -281,7 +289,9 @@ const getPatientInsulin = async(req, res, next) => {
                 return res.render('notfound')
             }
 
-            return res.render('patientMeasurement', {loggedIn: req.isAuthenticated(), layout: 'clinician.hbs', join_date: user.join_date, patient: patient, required: reqMeasurements, measurement: formatted, type: type, max: max, min: min, unit: unit})
+            return res.render('patientMeasurement', {loggedIn: req.isAuthenticated(), layout: 'clinician.hbs', 
+                join_date: user.join_date, patient: patient, required: reqMeasurements, measurement: formatted, 
+                type: type, max: max, min: min, unit: unit})
 
         } catch (err) {
             return next(err)
@@ -312,7 +322,9 @@ const getPatientExercise = async(req, res, next) => {
                 return res.render('notfound')
             }
 
-            return res.render('patientMeasurement', {loggedIn: req.isAuthenticated(), layout: 'clinician.hbs', join_date: user.join_date, patient: patient, required: reqMeasurements, measurement: formatted, type: type, max: max, min: min, unit: unit})
+            return res.render('patientMeasurement', {loggedIn: req.isAuthenticated(), layout: 'clinician.hbs', 
+                join_date: user.join_date, patient: patient, required: reqMeasurements, measurement: formatted, 
+                type: type, max: max, min: min, unit: unit})
 
         } catch (err) {
             return next(err)
@@ -329,7 +341,9 @@ const getDataBounds = async(req, res, next) => {
             const measurement = await Measurement.find({patientId: req.params.patient_id.toString()})
             const reqMeasurements = Object.keys(patient["measurements"])
             
-            res.render('clinicianManage', {layout: 'clinician.hbs', loggedIn: req.isAuthenticated(), flash: req.flash('success'), errorFlash: req.flash('error'), join_date: user.join_date, patient: patient, required: reqMeasurements})
+            res.render('clinicianManage', {layout: 'clinician.hbs', loggedIn: req.isAuthenticated(), 
+                flash: req.flash('success'), errorFlash: req.flash('error'), join_date: user.join_date, 
+                patient: patient, required: reqMeasurements})
             
         } catch (err) {
             return next(err)
@@ -686,7 +700,8 @@ const getSupportMessagesPage = async (req, res, next) => {
                 messages[patientFullName] = [patient._id.toString(), patient.supportMessage];
             }
 
-            res.render('clinicianSupportMessage', {layout: "clinician.hbs", loggedIn: req.isAuthenticated(), flash: req.flash('success'), errorFlash: req.flash('error'), clinician: clinician, messages: messages});
+            res.render('clinicianSupportMessage', {layout: "clinician.hbs", loggedIn: req.isAuthenticated(), 
+                flash: req.flash('success'), errorFlash: req.flash('error'), clinician: clinician, messages: messages});
 
         } catch (err) {
             return next(err);
@@ -709,9 +724,9 @@ const getIndividualMessage = async (req, res) => {
             const reqMeasurements = Object.keys(patient["measurements"])
             const message = patient.supportMessage;
 
-            res.render('individualSupportMessage', {layout: "clinician.hbs", loggedIn: req.isAuthenticated(), flash: req.flash('success'), errorFlash: req.flash('error'),
-                                                    patient: patient, join_date: user.join_date, clinician: clinician, message: message,
-                                                    required: reqMeasurements});
+            res.render('individualSupportMessage', {layout: "clinician.hbs", loggedIn: req.isAuthenticated(), flash: req.flash('success'), 
+                errorFlash: req.flash('error'), patient: patient, join_date: user.join_date, clinician: clinician, 
+                message: message, required: reqMeasurements});
 
         } catch (err) {
             return next(err);
@@ -781,7 +796,8 @@ const changeSupportMessage = async(req, res, next) =>{
 
 const getAccountPage = async (req, res) => {
     if (req.isAuthenticated()) {
-        res.render('clinicianAccount.hbs', {layout:"clinician.hbs", loggedIn: req.isAuthenticated(), flash: req.flash('success'), errorFlash: req.flash('error')});
+        res.render('clinicianAccount.hbs', {layout:"clinician.hbs", loggedIn: req.isAuthenticated(), 
+            flash: req.flash('success'), errorFlash: req.flash('error')});
     } else {
         res.render('login');
 	}
