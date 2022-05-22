@@ -55,51 +55,78 @@ function getMeasurementTypes(arr) {
     return types;
 }
 
-function countMeasureDays(dates, measurements) {
-    const count = 0
-    for (i in dates) {
-        const match = false;
-        for (j in measurements) {
-            if (dates[i] == measurements[j].date) {
-                count++;
-                match = true;
-            }
-            if (match) {
-                match = false;
+function countEngagedDays(measurements) {
+    const datesMeasured = {};
+
+    for (let i = 0; i < measurements.length; i++) {
+        var time = new Date(measurements[i].date.getFullYear(), measurements[i].date.getMonth(), measurements[i].date.getDate(), 0, 0, 0);
+
+        // if this date doesnt exist in the object, insert and initialize an empty dict.
+        if (!(time in datesMeasured)) {
+            datesMeasured[time] = {};
+        }
+
+        // add the measurement for this current data
+        datesMeasured[time] = []
+    }
+    return Object.keys(datesMeasured).length;
+}
+
+async function calcEngagementAll() {
+    const allPatients = await Patient.find().lean()
+
+    for (let i = 0; i < allPatients.length; i++) {
+
+        const engRate = await calcEngagementRate(allPatients[i]);
+
+        while (1) {
+            if (engRate) {
+                await Patient.updateOne({_id: allPatients[i]._id}, {$set:{engagement_rate: engRate}})
                 break;
             }
         }
+
     }
-    return count;
 }
 
-const calcEngagementAll = async (req,res) => {
-    await Patient.find().forEach({
-        async calcEngagementRate(patientData) {
-            // Get patient ID
-            const patientId = patientData._id;
-            // get current melbourne time using luxon
-            const currTime = DateTime.now().setZone('Australia/Melbourne');
-            // get the beginning of the current day
-            const currDate = currTime.startOf('day').toISO();
-            // Get yesterdays date
-            const yesterdayDate = currDate.getDate() - 1;
-            // get the patient's user data
-            const userData = await User.find({role_id: patientId}).lean();
-            // get the patient's recorded data up until yesterday
-            const measurementData = await Measurement.find({patientId: patientId, date: { $gte: yesterdayDate}}).lean();
-            // get interval of dates user has been on platform
-            const joinInterval = fromDateTimes(userData.join_date, yesterdayDate);
-            // get number of days user has been on platform
-            const joinLength = yesterdayDate - userData.join_date;
-            // calculate engagement rate
-            engRate = countMeasureDays(joinInterval, measurementData) / joinLength;
-            patientData.engagement_rate = engRate;
-            console.log(engRate);
-            // save engagement rate
-            //await patientData.save();
-        }
-    });
+async function calcEngagementRate(patientData) {
+    // Get patient ID
+    const patientId = patientData._id;
+    // get current melbourne time using luxon
+    const currTime = DateTime.now().setZone('Australia/Melbourne');
+    // get the beginning of the current day
+    const currDate = currTime.startOf('day').toISO();
+    // Get yesterdays date
+    // const yesterdayDate = currDate.getDate() - 1;
+    const yesterdayDate = currTime.minus({ days: 1});
+
+    // get the patient's user data
+    const userData = await User.findOne({role_id: patientId}).lean();
+    
+    // get interval of dates user has been on platform
+    // const joinInterval = fromDateTimes(userData.join_date, yesterdayDate);
+
+    const join_date = DateTime.fromISO(userData.join_date.toISOString()).setZone('Australia/Melbourne');
+
+    const joinInterval = yesterdayDate.diff(join_date, ["years", "months", "days", "hours"]);
+
+    // get the patient's recorded data up until yesterday
+    const measurementData = await Measurement.find({patientId: patientId}).lean();
+
+    // get number of days user has been on platform
+    const joinLength = yesterdayDate.diff(join_date, ["days"]).toObject()['days'];
+
+    // if this patient never measured a single thing before, just set engagement rate to zero.
+    if (measurementData.length <= 0) {
+        const engRate = 0;
+        return engRate        
+    }
+    else {
+        // calculate engagement rate
+        const engRate = countEngagedDays(measurementData) / joinLength;
+        //console.log(engRate);
+        return Math.floor(engRate*100)
+    }
 }
 
 // this function instantiates a new measurement object and saves it to the db
@@ -128,7 +155,7 @@ const submitMeasurement = async (req, res, next) => {
             })
              // Checks if first measurement of the day then updates the engagement rate of all users
              //if ((await Measurement.find({date:{$gte: currDate}})).length() == 0) {
-            //calcEngagementAll;
+            calcEngagementAll();
              //}
             // calcEngagementRate(id);
             await newMeasurement.save();
