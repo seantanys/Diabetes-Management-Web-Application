@@ -201,9 +201,12 @@ const getPatientPage = async (req, res) => {
 
         const clinician = await Clinician.findById(data.clinicianId).lean();
 
+        var leaderboardEntries = await Patient.find().sort({engagement_rate: -1}).lean();
+        leaderboardEntries = leaderboardEntries.slice(0, 5);
+
         if (data) {
             res.render('patientDashboard.hbs', {loggedIn: req.isAuthenticated(), title: "Dashboard", theme: user.theme, dob, singlePatient: data, 
-                measured: alreadyMeasured, notMeasured: notMeasured, required: reqMeasurements, clinician: clinician})
+                measured: alreadyMeasured, notMeasured: notMeasured, required: reqMeasurements, clinician: clinician, entry: leaderboardEntries})
         } else {
             console.log("patient data not found")
             res.render('notfound')
