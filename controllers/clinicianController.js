@@ -338,6 +338,7 @@ const getDataBounds = async(req, res, next) => {
             const patient = await Patient.findById(req.params.patient_id).lean()
             const measurement = await Measurement.find({patientId: req.params.patient_id.toString()})
             const reqMeasurements = Object.keys(patient["measurements"])
+            const user = await User.findOne({role_id: patient._id}).lean();
             
             //rendering to page
             res.render('clinicianManage', {layout: 'clinician.hbs', loggedIn: req.isAuthenticated(), 
@@ -927,7 +928,7 @@ const validate = (method) =>{
                 body('minweight', 'invalid min weight').optional({checkFalsy: true}).isFloat({min:0, max:1000}).escape(),
                 body('maxweight', 'invalid max weight').optional({checkFalsy: true}).isFloat({min:0, max:1000}).escape(),
                 body('mindose', 'invalid min insulin').optional({checkFalsy: true}).isInt({min:0, max:500}).escape(),
-                body('maxdose', 'invalid max insulin').optional({checkFalsy: true}).isFloisIntat({min:0, max:500}).escape(),
+                body('maxdose', 'invalid max insulin').optional({checkFalsy: true}).isInt({min:0, max:500}).escape(),
                 body('minsteps', 'invalid min exercise').optional({checkFalsy: true}).isInt({min:0, max:50000}).escape(),
                 body('maxsteps', 'invalid max exercise').optional({checkFalsy: true}).isInt({min:0, max:50000}).escape(),
             ]
