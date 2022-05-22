@@ -6,15 +6,6 @@ const {Clinician} = require('../models/clinician')
 const { body, check, validationResult } = require('express-validator')
 const { Note } = require('../models/note');
 
-
-function getDatesFromPatientObj(object) {
-    var dates = [];
-    for (let i = 0; i < object.length; i++) {
-        dates.push(object[i].date);
-    }
-    return dates;
-}
-
 function groupMeasurementsByDate(measurements) {
     const groupedData = {};
 
@@ -362,7 +353,7 @@ const manageDataBounds = async(req, res, next) => {
             const maxsteps = req.body.maxsteps;
 
             const required_measurements = [];
-            
+
             const errors = validationResult(req); 
             if (!errors.isEmpty()) {
               console.log(errors);
