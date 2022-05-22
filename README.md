@@ -116,9 +116,9 @@ Maybe you can mention me or this repo in the acknowledgements too
 
 | Color             | Hex                                                                |
 | ----------------- | ------------------------------------------------------------------ |
-| Primary Color | ![rgba(1, 58, 99, 1)](https://via.placeholder.com/10/222831?text=+) rgba(1, 58, 99, 1) |
-| Secondary Color | ![rgba(185, 218, 235, 1)](https://via.placeholder.com/10/393E46?text=+) rgba(185, 218, 235, 1) |
-| Accent Color | ![rgba(5, 85, 142, 1)](https://via.placeholder.com/10/00ADB5?text=+) rgba(5, 85, 142, 1) |
+| Primary Color | rgba(1, 58, 99, 1) |
+| Secondary Color | rgba(185, 218, 235, 1) |
+| Accent Color | rgba(5, 85, 142, 1) |
 
 
 <!-- Env Variables -->
