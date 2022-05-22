@@ -51,7 +51,7 @@ clinicianRouter.get('/manage-patient/:patient_id/insulin', app.hasRole('clinicia
 clinicianRouter.get('/manage-patient/:patient_id/exercise', app.hasRole('clinician'), clinicianController.getPatientExercise) 
 
 clinicianRouter.get('/manage-patient/:patient_id/manage', app.hasRole('clinician'), clinicianController.getDataBounds);
-clinicianRouter.post('/manage-patient/:patient_id/manage', app.hasRole('clinician'), clinicianController.manageDataBounds) 
+clinicianRouter.post('/manage-patient/:patient_id/manage', app.hasRole('clinician'),  clinicianController.validate('manageDataBounds'), clinicianController.manageDataBounds) 
 
 clinicianRouter.get('/manage-patient/:patient_id/message', app.hasRole('clinician'), clinicianController.getIndividualMessage);
 clinicianRouter.post('/manage-patient/:patient_id/message', app.hasRole('clinician'), clinicianController.changeIndividualMessage);
@@ -62,23 +62,5 @@ clinicianRouter.post('/manage-patient/:patient_id/add-note',
                     app.hasRole('clinician'), clinicianController.writeNote);
 
 
-
-// Support messages tab
-//clinicianRouter.get('/:patient_id/message', app.hasRole('clinician'), clinicianController.getSupportMessages) // TO IMPLEMENTTTTTT
-//clinicianRouter.post('/:patient_id/message', app.hasRole('clinician'), clinicianController.writeSupportMessage) // TO IMPLEMENTTTTTT
-
-
-// route to handle the POST request new patient, adding to the database
-// clinicianRouter.post('/dashboard', clinicianController.insertData)
-
 // export the router
-const sendMessage = require('../socket').sendMessage
-
-clinicianRouter.post('/api/messages', (req, res) => {
-    const { message } = req.body
-    messages.push(message)
-    sendMessage(message)
-    return res.send(messages)
-})
-
 module.exports = clinicianRouter

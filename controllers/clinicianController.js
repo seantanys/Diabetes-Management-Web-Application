@@ -377,10 +377,17 @@ const manageDataBounds = async(req, res, next) => {
             const maxsteps = req.body.maxsteps;
 
             const required_measurements = [];
+            
+            const errors = validationResult(req); 
+            if (!errors.isEmpty()) {
+              console.log(errors);
+              req.flash('error', `Something went wrong when updating values, please try again.`)
+              return res.redirect(`/clinician/manage-patient/${patientId}/manage`)
+            }
 
             if (req.body.bcg) {
 
-                if(parseInt(minbcg)>=parseInt(maxbcg)){
+                if(parseFloat(minbcg)>=parseFloat(maxbcg)){
                     req.flash('error', 'Error. Blood Glucose minimum threshold must not be equal to or exceeding maximum threshold.')
                     return res.redirect(`/clinician/manage-patient/${patientId}/manage`)
                 }
@@ -398,7 +405,7 @@ const manageDataBounds = async(req, res, next) => {
             
             if (req.body.weight) {
 
-                if(parseInt(minweight)>=parseInt(maxweight)){
+                if(parseFloat(minweight)>=parseFloat(maxweight)){
                     req.flash('error', 'Error. Weight minimum threshold must not be equal to or exceeding maximum threshold.')
                     return res.redirect(`/clinician/manage-patient/${patientId}/manage`)
                 }
@@ -416,7 +423,7 @@ const manageDataBounds = async(req, res, next) => {
             
             if (req.body.insulin) {
 
-                if(parseInt(mindose)>=parseInt(maxdose)){
+                if(parseFloat(mindose)>=parseFloat(maxdose)){
                     req.flash('error', 'Error. Insulin dose minimum threshold must not be equal to or exceeding maximum threshold.')
                     return res.redirect(`/clinician/manage-patient/${patientId}/manage`)
                 }
@@ -434,7 +441,7 @@ const manageDataBounds = async(req, res, next) => {
             
             if (req.body.exercise) {
 
-                if(parseInt(minsteps)>=parseInt(maxsteps)){
+                if(parseFloat(minsteps)>=parseFloat(maxsteps)){
                     req.flash('error', 'Error. Exercise minimum threshold must not be equal to or exceeding maximum threshold.')
                     return res.redirect(`/clinician/manage-patient/${patientId}/manage`)
                 }
@@ -505,7 +512,30 @@ const insertData = async (req, res, next) => {
               return res.redirect('/clinician/create');
             }
 
-            console.log(req)
+            if (req.body.bcg) {
+                if(parseFloat(req.body.bcgmin)>=parseFloat(req.body.bcgmax)){
+                    req.flash('error', 'Error. BCG minimum threshold must not be equal to or exceeding maximum threshold.')
+                    return res.redirect('/clinician/create');
+                }
+            }
+            if (req.body.weight) {
+                if(parseFloat(req.body.weightmin)>=parseFloat(req.body.weightmax)){
+                    req.flash('error', 'Error. weight minimum threshold must not be equal to or exceeding maximum threshold.')
+                    return res.redirect('/clinician/create');
+                }
+            }
+            if (req.body.insulin) {
+                if(parseFloat(req.body.insulinmin)>=parseFloat(req.body.insulinmax)){
+                    req.flash('error', 'Error. insulin minimum threshold must not be equal to or exceeding maximum threshold.')
+                    return res.redirect('/clinician/create');
+                }
+            }
+            if (req.body.exercise) {
+                if(parseFloat(req.body.exercisemin)>=parseFloat(req.body.exercisemax)){
+                    req.flash('error', 'Error. exercise minimum threshold must not be equal to or exceeding maximum threshold.')
+                    return res.redirect('/clinician/create');
+                }
+            }
 
             // checking to see if this email is taken.
             // const emailExists = await User.find({username: req.body.email}).lean();
@@ -846,18 +876,14 @@ const validate = (method) =>{
             body('password', 'password invalid').exists().isLength({min:8}).escape(),//isStrongPassword({ minLength: 8, minLowercase: 1, minUppercase: 1, minNumbers: 1}),
             body('dob', 'userName invalid').exists().isDate().escape(),
             body('bio', 'bio invalid').exists().escape(),
-            //body('bcg', 'invalid bcg checkbox').exists().isIn(['checked', 'unchecked']),
-            body('bcgmin','invalid bcg min').optional({checkFalsy: true}).isFloat().escape(),
-            body('bcgmax','invalid bcg max').optional({checkFalsy: true}).isFloat().escape(),
-            //body('weight', 'invalid weight checkbox').exists().isIn(['checked', 'unchecked']),
-            body('weightmin','invalid weight min').optional({checkFalsy: true}).isFloat().escape(),
-            body('weightmax','invalid weight max').optional({checkFalsy: true}).isFloat().escape(),
-            //body('insulin', 'invalid insulin checkbox').exists().isIn(['checked', 'unchecked']),
-            body('insulinmin','invalid insulin min').optional({checkFalsy: true}).isFloat().escape(),
-            body('insulinmax','invalid insulin max').optional({checkFalsy: true}).isFloat().escape(),
-            //body('exercise', 'invalid exercise checkbox').exists().isIn(['checked', 'unchecked']),
-            body('exercisemin','invalid exercise min').optional({checkFalsy: true}).isFloat().escape(),
-            body('exercisemax','invalid exercise max').optional({checkFalsy: true}).isFloat().escape(),
+            body('bcgmin','invalid bcg min').optional({checkFalsy: true}).isFloat({min:0, max:1000}).escape(),
+            body('bcgmax','invalid bcg max').optional({checkFalsy: true}).isFloat({min:0, max:1000}).escape(),
+            body('weightmin','invalid weight min').optional({checkFalsy: true}).isFloat({min:0, max:1000}).escape(),
+            body('weightmax','invalid weight max').optional({checkFalsy: true}).isFloat({min:0, max:1000}).escape(),
+            body('insulinmin','invalid insulin min').optional({checkFalsy: true}).isFloat({min:0, max:500}).escape(),
+            body('insulinmax','invalid insulin max').optional({checkFalsy: true}).isFloat({min:0, max:500}).escape(),
+            body('exercisemin','invalid exercise min').optional({checkFalsy: true}).isFloat({min:0, max:50000}).escape(),
+            body('exercisemax','invalid exercise max').optional({checkFalsy: true}).isFloat({min:0, max:50000}).escape(),
             ]   
         }
         case 'changePassword': {
@@ -874,9 +900,20 @@ const validate = (method) =>{
                         })
                     ]   
         }
+        case 'manageDataBounds':{
+            return [
+                body('minbcg', 'invalid min bcg').optional({checkFalsy: true}).isFloat({min:0, max:1000}).escape(),
+                body('maxbcg', 'invalid max bcg').optional({checkFalsy: true}).isFloat({min:0, max:1000}).escape(),
+                body('minweight', 'invalid min weight').optional({checkFalsy: true}).isFloat({min:0, max:1000}).escape(),
+                body('maxweight', 'invalid max weight').optional({checkFalsy: true}).isFloat({min:0, max:1000}).escape(),
+                body('mindose', 'invalid min insulin').optional({checkFalsy: true}).isFloat({min:0, max:500}).escape(),
+                body('maxdose', 'invalid max insulin').optional({checkFalsy: true}).isFloat({min:0, max:500}).escape(),
+                body('minsteps', 'invalid min exercise').optional({checkFalsy: true}).isFloat({min:0, max:50000}).escape(),
+                body('maxsteps', 'invalid max exercise').optional({checkFalsy: true}).isFloat({min:0, max:50000}).escape(),
+            ]
+        }
     }
 
-        
 }
 
 // exports an object, which contain functions imported by router
