@@ -334,10 +334,12 @@ const getPatientExercise = async(req, res, next) => {
 const getDataBounds = async(req, res, next) => {
     if (req.isAuthenticated()) {
         try {
+            //retrieving patient measurements
             const patient = await Patient.findById(req.params.patient_id).lean()
             const measurement = await Measurement.find({patientId: req.params.patient_id.toString()})
             const reqMeasurements = Object.keys(patient["measurements"])
             
+            //rendering to page
             res.render('clinicianManage', {layout: 'clinician.hbs', loggedIn: req.isAuthenticated(), 
                 flash: req.flash('success'), errorFlash: req.flash('error'), join_date: user.join_date, 
                 patient: patient, required: reqMeasurements})
