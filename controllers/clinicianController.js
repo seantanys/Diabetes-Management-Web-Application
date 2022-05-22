@@ -355,6 +355,7 @@ const getDataBounds = async(req, res, next) => {
 const manageDataBounds = async(req, res, next) => {
     if (req.isAuthenticated()) {
         try {
+            //retrives all patient data from form
             const patientId = req.params.patient_id;
             const minbcg = req.body.minbcg;
             const maxbcg = req.body.maxbcg;
@@ -367,6 +368,7 @@ const manageDataBounds = async(req, res, next) => {
 
             const required_measurements = [];
 
+            //validation to see if form is empty
             const errors = validationResult(req); 
             if (!errors.isEmpty()) {
               console.log(errors);
@@ -376,6 +378,7 @@ const manageDataBounds = async(req, res, next) => {
 
             if (req.body.bcg) {
 
+                //validation to see if minimum is not larger than maximum in bcg
                 if(parseFloat(minbcg)>=parseFloat(maxbcg)){
                     req.flash('error', 'Error. Blood Glucose minimum threshold must not be equal to or exceeding maximum threshold.')
                     return res.redirect(`/clinician/manage-patient/${patientId}/manage`)
@@ -394,6 +397,7 @@ const manageDataBounds = async(req, res, next) => {
             
             if (req.body.weight) {
 
+                //validation to see if minimum is not larger than maximum in weight
                 if(parseFloat(minweight)>=parseFloat(maxweight)){
                     req.flash('error', 'Error. Weight minimum threshold must not be equal to or exceeding maximum threshold.')
                     return res.redirect(`/clinician/manage-patient/${patientId}/manage`)
@@ -412,6 +416,7 @@ const manageDataBounds = async(req, res, next) => {
             
             if (req.body.insulin) {
 
+                //validation to see if minimum is not larger than maximum in dose
                 if(parseFloat(mindose)>=parseFloat(maxdose)){
                     req.flash('error', 'Error. Insulin dose minimum threshold must not be equal to or exceeding maximum threshold.')
                     return res.redirect(`/clinician/manage-patient/${patientId}/manage`)
@@ -430,6 +435,7 @@ const manageDataBounds = async(req, res, next) => {
             
             if (req.body.exercise) {
 
+                //validation to see if minimum is not larger than maximum in steps
                 if(parseFloat(minsteps)>=parseFloat(maxsteps)){
                     req.flash('error', 'Error. Exercise minimum threshold must not be equal to or exceeding maximum threshold.')
                     return res.redirect(`/clinician/manage-patient/${patientId}/manage`)
@@ -457,7 +463,7 @@ const manageDataBounds = async(req, res, next) => {
 
             await Patient.findByIdAndUpdate(patientId, {measurements: measurementJson});
 
-            // await Patient.updateOne({_id: recipientId}, {$set:{minbcg:minbcg}});
+        
             req.flash('success', 'Measurement thresholds successfully updated!')
             res.redirect(`/clinician/manage-patient/${patientId}/manage`)
             
