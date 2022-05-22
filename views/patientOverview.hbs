@@ -5,17 +5,13 @@
 <script src="/scripts/patientChart.js"></script>
 <script src="/scripts/backToTop.js"></script>
 
-
-{{!-- <div class="loader-wrapper" id="loader">
-    <span class="loader"><span class="loader-inner"></span></span>
-</div> --}}
-
 {{#if loggedIn}}
 {{> flashSuccess}}
 {{> flashError}}
 
 {{> patientDrilldown}}
 
+{{!-- all data code: has charts, and table with filters to filter the data --}}
 <input type="hidden" id="pd-dates" value="{{json groupedByDate}}" >
 <div class="overview-container">
     <section class="data-table flex-column-center">
@@ -129,13 +125,6 @@
                 <button class="record-button">Add note</button>
             </form>
         </div>
-        {{!-- <form action="/clinician/manage-patient/{{patient._id}}/add-note" method="post">  
-            <input type="hidden" value={{patient._id}} name="pid">
-            <div class="comment-input">
-                <textarea name="comment" id="comment" cols="30" rows="5" placeholder="Enter note here" required></textarea>
-            </div>
-            <button class="record-button">Add note</button>
-        </form> --}}
 
         <div class="info">
             <img src="/images/icons/info.svg" alt="info-sign">
