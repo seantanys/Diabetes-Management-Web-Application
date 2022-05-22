@@ -6,8 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="https://www.svgrepo.com/show/55261/doctor.svg">
     {{#if theme}}
-    {{!-- <link rel="stylesheet" type="text/css" href="/themes/{{theme}}.css" /> --}}
+    {{#if (equals theme "default")}}
     <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+    {{else}}
+     <link rel="stylesheet" type="text/css" href="/themes/{{theme}}.css" />
+    {{/if}}
     {{else}}
     <link rel="stylesheet" type="text/css" href="/css/styles.css" />
     {{/if}}

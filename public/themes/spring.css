@@ -8,12 +8,12 @@
   --text-p-mobile: 15px;
   --font-family-body: 'Poppins', sans-serif;
   --font-family-heading: 'Poppins', sans-serif;
-  --colour-h1: #121212;
-  --colour-background-teal: #424242;
-  --colour-text: white;
-  --colour-h2: black;
-  --colour-background: black;
-  --colour-black: rgba(0, 0, 0, 0);
+  --colour-h1: #0C6301;
+  --colour-background-teal: #60AF02;
+  --colour-text: #204d3a;
+  --colour-h2: #204d3a;
+  --colour-background: rgba(255, 255, 255, 1);
+  --colour-black: black;
   --colour-first: rgb(204, 255, 197);
   --colour-second: rgba(252, 245, 147, 1);
   --colour-third: rgba(255, 175, 95, 1);
@@ -619,7 +619,7 @@ textarea {
 
 .page-heading-1 h1 {
   font-size: var(--text-h1);
-  color: white;
+  color: var(--colour-h1);
   text-align: center;
   padding: 35px 0px;
 }
@@ -630,7 +630,7 @@ textarea {
   margin-left: 25%;
   font-size: var(--text-h3);
   font-weight: 300;
-  color: white;
+  color: black;
   text-align: center;
   /* padding: 35px 0px; */
 }
@@ -1344,7 +1344,7 @@ hr.solid {
 }
 
 #patient-dashboard-content {
-  background-color: var(--colour-background);
+  background-color: var(--colour-h2);
   width: 85vw;
   margin-top: 1%;
   margin-bottom: 5%;
@@ -1364,8 +1364,8 @@ hr.solid {
   align-items: center;
   flex-direction: column;
   margin-top: 2%;
-  padding-top: 5%;
-  padding-bottom: 5%;
+  padding-top: 3%;
+  padding-bottom: 3%;
   font-size: var(--text-p);
   text-align: center;
   min-width: 18em;
@@ -1392,6 +1392,11 @@ hr.solid {
   margin-top: 2%;
 }
 
+.patient-card-content .msg-bubble {
+  min-height: 5em;
+  height: fit-content;
+}
+
 .patient-card-label {
   width: 10em;
   height: 5em;
@@ -1399,9 +1404,9 @@ hr.solid {
   padding-top: 0.5em;
   margin-left: 5%;
   border-radius: 1em;
-  background-color: var(--colour-text);
+  background-color: var(--colour-background-teal);
   font-size: var(--text-h3);
-  color: var(--colour-background);
+  color: var(--colour-h1);
 }
 
 .patient-card-content {
@@ -1518,10 +1523,6 @@ hr.solid {
 
 .leaderboard #fifth {
   background-color: var(--colour-fifth);
-}
-
-.patient-card-content .msg-bubble {
-  min-height: 200px;
 }
 
 .msg-bubble {
@@ -1789,21 +1790,20 @@ hr.solid {
   border-collapse: collapse;
   border-radius: 15px;
   overflow: hidden;
+  background-color: var(--colour-h1);
 }
 
 #patient-data-table th, #patient-data-table td {
-  color: white;
-  background-color: rgb(56, 56, 56);
   text-align: left;
   padding: 12px;
 }
 
 #patient-data-table tr:nth-child(even) {
-  background-color: black;
+  background-color: var(--colour-text);
 }
 
 #patient-data-table tr:nth-child(even):hover {
-  background-color: #131414bb;
+  background-color: var(--colour-background-teal);
 }
 
 .patient-data-header {
@@ -1811,7 +1811,7 @@ hr.solid {
 }
 
 .patient-data-row:hover {
-  background-color: #303133bb;
+  background-color: var(--colour-background-teal);
 }
 
 .patient-chart-section {
@@ -1834,7 +1834,7 @@ hr.solid {
 
 .chart-toggle-container h3 {
   font-size: var(--text-h3);
-  color: white;
+  color: var(--colour-h1);
 }
 
 .chart-toggles {
@@ -1851,7 +1851,7 @@ hr.solid {
 }
 
 .chart-toggles button:hover {
-  color: white;
+  color: var(--colour-background);
 }
 
 .inactive-toggle {
@@ -1860,7 +1860,7 @@ hr.solid {
 }
 
 .active-toggle {
-  color: white;
+  color: var(--colour-background);
   background-color: var(--colour-h1);
 }
 
@@ -1873,7 +1873,7 @@ hr.solid {
   position: fixed;
   top: 0;
   left: 0;
-  background-color: var(--colour-background-teal);
+  background-color: rgb(7, 59, 7);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -2745,4 +2745,3 @@ CLINICIAN STUFF
   margin-left:auto;
   margin-right:auto;
 }
-

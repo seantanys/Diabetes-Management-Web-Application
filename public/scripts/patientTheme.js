@@ -5,7 +5,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     const default_btn = document.getElementById("default-theme");
     const dark_btn = document.getElementById("dark-theme");
     const spring_btn = document.getElementById("spring-theme");
-    const autumn_btn = document.getElementById("autumn-theme");
+    const autumn_btn = document.getElementById("matrix-theme");
     const theme_text = document.getElementById("selected-theme");
 
     const btns = [default_btn, dark_btn, spring_btn, autumn_btn];
@@ -27,8 +27,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
         else if (selected === 'dark') {
             theme_text.innerText = "dark";
         }
-        else if (selected === 'autumn') {
-            theme_text.innerText = "autumn";
+        else if (selected === 'matrix') {
+            theme_text.innerText = "matrix";
         }
         else if (selected === 'spring') {
             theme_text.innerText = "spring";
