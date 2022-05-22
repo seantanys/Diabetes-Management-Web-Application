@@ -843,7 +843,8 @@ const getAccountPage = async (req, res) => {
 }
 
 //function to change passowrd with validations 
-//passowrd cannot be empty, password cannot have length less than 8
+//password cannot be empty, password cannot have length less than 8
+//also checks if the password matches
 const changePassword = async (req, res) => {
 
     if (req.isAuthenticated()) {
