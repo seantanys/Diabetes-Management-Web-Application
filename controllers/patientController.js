@@ -134,6 +134,9 @@ const submitMeasurement = async (req, res, next) => {
     if (req.isAuthenticated()) {
         const id = req.user.role_id
 
+        const currTime = DateTime.now().setZone('Australia/Melbourne'); 
+        const currDate = currTime.startOf('day').toISO();
+
         const errors = validationResult(req); 
         if (!errors.isEmpty()) {
             req.flash('error', `Something went wrong, please enter valid data and try again.`)
@@ -153,10 +156,11 @@ const submitMeasurement = async (req, res, next) => {
                 date: DateTime.now().setZone('Australia/Melbourne').toISO(),
                 comment: req.body.comment,
             })
-             // Checks if first measurement of the day then updates the engagement rate of all users
-             //if ((await Measurement.find({date:{$gte: currDate}})).length() == 0) {
-            calcEngagementAll();
-             //}
+            // Checks if first measurement of the day then updates the engagement rate of all users
+            if ((await Measurement.find({date:{$gte: currDate}})).length == 0) {
+                calcEngagementAll();
+            }
+
             await newMeasurement.save();
             // console.log("Measurement successfully saved to db")
             if (req.body.type === "bcg") {
