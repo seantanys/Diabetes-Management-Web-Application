@@ -268,8 +268,6 @@ const getPatientWeight = async(req, res, next) => {
             const type = 'weight'
             const max = patient.measurements.weight.maximum
             const min = patient.measurements.weight.minimum
-            console.log(max)
-            console.log(min)
             const unit = '(kg)'
 
             formatted = getTableArray(dates, measurement)
