@@ -157,7 +157,6 @@ const submitMeasurement = async (req, res, next) => {
              //if ((await Measurement.find({date:{$gte: currDate}})).length() == 0) {
             calcEngagementAll();
              //}
-            // calcEngagementRate(id);
             await newMeasurement.save();
             // console.log("Measurement successfully saved to db")
             if (req.body.type === "bcg") {
