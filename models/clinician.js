@@ -1,8 +1,7 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
-const {Patient} = require('../models/patient')
 
-// define the patientSchema
+// define the clinicianSchema
 const clinicianSchema = new mongoose.Schema({
     first_name: {type: String, required: true},
     last_name: {type: String, required: true},

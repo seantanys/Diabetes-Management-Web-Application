@@ -33,3 +33,6 @@ db.once('open', async () => {
 
 require('./patient')
 require('./measurement')
+require('./message')
+require('./note')
+require('./user')

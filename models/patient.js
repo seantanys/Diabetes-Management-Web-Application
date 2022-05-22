@@ -32,17 +32,6 @@ const patientSchema = new mongoose.Schema({
     }
 });
 
-// // derive full name from patientSchema using first and last name
-// patientSchema.virtual('fullName').get(function () {
-//     return `${this.first_name} ${this.last_name}`
-// })
-
-// // derive age from patientSchema using date of birth
-// patientSchema.virtual('age').get(function () {
-//     currentDate = new Date()
-//     return `${currentDate.getYear() - this.dob.getYear()}`
-// })
-
 patientSchema.methods.verifyPassword = function (password, callback) {
     bcrypt.compare(password, this.password, (err, valid) => {
         callback(err, valid)
