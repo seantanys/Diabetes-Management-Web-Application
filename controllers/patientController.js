@@ -97,18 +97,12 @@ async function calcEngagementRate(patientData) {
     // get the beginning of the current day
     const currDate = currTime.startOf('day').toISO();
     // Get yesterdays date
-    // const yesterdayDate = currDate.getDate() - 1;
     const yesterdayDate = currTime.minus({ days: 1});
 
     // get the patient's user data
     const userData = await User.findOne({role_id: patientId}).lean();
-    
-    // get interval of dates user has been on platform
-    // const joinInterval = fromDateTimes(userData.join_date, yesterdayDate);
 
     const join_date = DateTime.fromISO(userData.join_date.toISOString()).setZone('Australia/Melbourne');
-
-    const joinInterval = yesterdayDate.diff(join_date, ["years", "months", "days", "hours"]);
 
     // get the patient's recorded data up until yesterday
     const measurementData = await Measurement.find({patientId: patientId}).lean();
