@@ -44,4 +44,32 @@ window.addEventListener('DOMContentLoaded', (event) => {
         })
         
     }
+
+    const mediaQueryTablet = window.matchMedia('(min-width: 1024px)')
+    if (mediaQueryTablet.matches) {
+
+        const detailsRadio = document.getElementById("tab1");
+        const passRadio = document.getElementById("tab2");
+        const themeRadio = document.getElementById("tab3");
+        const dashboard = document.querySelector(".patient-account-dashboard");
+
+        themeRadio.addEventListener("change", function () {
+            if (themeRadio.checked) {
+                dashboard.style.height = "1600px";
+            }
+        })
+
+        passRadio.addEventListener("change", function () {
+            if (passRadio.checked) {
+                dashboard.style.height = "800px";
+            }
+        })
+
+        detailsRadio.addEventListener("change", function () {
+            if (detailsRadio.checked) {
+                dashboard.style.height = "800px";
+            }
+        })
+        
+    }
   });

@@ -1955,7 +1955,7 @@ hr.solid {
     width: 90%;
     margin-right: 5%;
     margin-left: 5%;
-    height: 1200px;
+    height: 1800px;
   }
 
   .patient-account-dashboard p {
@@ -2077,12 +2077,6 @@ hr.solid {
   .tabset {
     width: 100%;
   }
-
-  .patient-account-dashboard {
-    height: 1600px;
-  }
-
-
 }
 
 
