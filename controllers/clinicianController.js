@@ -769,6 +769,10 @@ const insertData = async (req, res, next) => {
 const getPatientComments = async (req, res, next) => {
     if (req.isAuthenticated()) {
         try{
+
+            const user = req.user 
+            const clinician = await Clinician.findById(user.role_id.toString()).lean();
+
             patientComments = []
 
             measurement = await Measurement.find().sort({"date": -1}).lean()
@@ -779,17 +783,19 @@ const getPatientComments = async (req, res, next) => {
 
             for (let i = 0; i < measurement.length; i++){
                 patient = await Patient.findById(measurement[i].patientId.toString()).lean()
-
-                if (measurement[i].comment != ""){
-                    patientComments.push({
-                        patient: patient.first_name+" "+ patient.last_name,
-                        id: measurement[i].patientId,
-                        type: measurement[i].type,
-                        value: measurement[i].value,
-                        comment: measurement[i].comment,
-                        date: measurement[i].date.toLocaleString("en-US", {timeZone: "Australia/Sydney"}),
-                    })
+                if ((clinician.patients).includes(measurement[i].patientId.toString())){
+                    if (measurement[i].comment != ""){
+                        patientComments.push({
+                            patient: patient.first_name+" "+ patient.last_name,
+                            id: measurement[i].patientId,
+                            type: measurement[i].type,
+                            value: measurement[i].value,
+                            comment: measurement[i].comment,
+                            date: measurement[i].date.toLocaleString("en-US", {timeZone: "Australia/Sydney"}),
+                        })
+                    }
                 }
+
             }
     
             return res.render('patientComments', {layout: "clinician.hbs", loggedIn: req.isAuthenticated(), data: patientComments})
