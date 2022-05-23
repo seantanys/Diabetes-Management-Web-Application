@@ -22,7 +22,7 @@ passport.deserializeUser((userId, done) => {
 
 var strategy = new LocalStrategy( (username, password, cb) => {
     // first, check if there is a user in the db with this username
-    User.findOne({username: username}, {}, {}, (err, user) => {
+    User.findOne({username: username.toLowerCase()}, {}, {}, (err, user) => {
         if (err) { return cb(null, false, { message: 'Unknown error.' }) }
         if (!user) { return cb(null, false, { message: 'Incorrect username or password' }) }
     // if there is a user with this username, check if the password matches
