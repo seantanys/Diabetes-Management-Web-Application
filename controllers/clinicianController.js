@@ -586,7 +586,7 @@ const insertData = async (req, res, next) => {
 
             // then we create the user document and save to db
             const newUser = new User({
-                username: req.body.email,
+                username: req.body.email.toLowerCase(),
                 password: req.body.password,
                 role: "patient",
                 role_id: patientId,
