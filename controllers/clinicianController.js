@@ -389,7 +389,10 @@ const manageDataBounds = async(req, res, next) => {
 
                 const thresholds = [];
                 thresholds.push('bcg');
-                if (minbcg) {
+                if(minbcg == ""){
+                    thresholds.push(0)
+                }
+                else{
                     thresholds.push(minbcg)
                 }
                 if (maxbcg) {
@@ -408,7 +411,10 @@ const manageDataBounds = async(req, res, next) => {
 
                 const thresholds = [];
                 thresholds.push('weight');
-                if (minweight) {
+                if(minweight == ""){
+                    thresholds.push(0)
+                }
+                else{
                     thresholds.push(minweight)
                 }
                 if (maxweight) {
@@ -427,7 +433,10 @@ const manageDataBounds = async(req, res, next) => {
 
                 const thresholds = [];
                 thresholds.push('insulin');
-                if (mindose) {
+                if(mindose == ""){
+                    thresholds.push(0)
+                }
+                else{
                     thresholds.push(mindose)
                 }
                 if (maxdose) {
@@ -446,7 +455,10 @@ const manageDataBounds = async(req, res, next) => {
 
                 const thresholds = [];
                 thresholds.push('exercise');
-                if (minsteps) {
+                if(minsteps == ""){
+                    thresholds.push(0)
+                }
+                else{
                     thresholds.push(minsteps)
                 }
                 if (maxsteps) {
