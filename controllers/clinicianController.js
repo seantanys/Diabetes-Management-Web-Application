@@ -187,7 +187,22 @@ const getPatientOverview = async(req, res, next) => {
 
             const measurementsForChart = await Measurement.find({patientId: patient._id}).sort({"date": 1}).lean(); 
             const measurementsByDate = groupMeasurementsByDate(measurementsForChart);
+
+            const clinician = await Clinician.findById(req.user.role_id.toString()).lean();
             
+            // check if patient is one of clinician's patients
+            if (clinician) {
+                if (clinician.patients.indexOf(req.params.patient_id.toString()) > -1) {
+                    // patient is one of the clinician's patients!
+                    // do nothing
+                }
+                else {
+                    // patient is not one of clinician's patients. you shall not pass!
+                    req.flash('error',"Error. You are not allowed to view this patient's data.");
+                    return res.redirect(`/clinician/dashboard`);
+                }
+            }
+
             return res.render('patientOverview', {loggedIn: req.isAuthenticated(), flash: req.flash('success'), 
                 errorFlash: req.flash('error'), layout: 'clinician.hbs', required: reqMeasurements, 
                 join_date: user.join_date, patient: patient, measurements: measurements, groupedByDate: measurementsByDate, notes: notes})
@@ -219,6 +234,20 @@ const getPatientBCG = async(req, res, next) => {
             if (!patient) {
                 // no patient found in database
                 return res.render('notfound')
+            }
+
+            const clinician = await Clinician.findById(req.user.role_id.toString()).lean();
+            // check if patient is one of clinician's patients
+            if (clinician) {
+                if (clinician.patients.indexOf(req.params.patient_id.toString()) > -1) {
+                    // patient is one of the clinician's patients!
+                    // do nothing
+                }
+                else {
+                    // patient is not one of clinician's patients. you shall not pass!
+                    req.flash('error',"Error. You are not allowed to view this patient's data.");
+                    return res.redirect(`/clinician/dashboard`);
+                }
             }
 
             return res.render('patientMeasurement', {loggedIn: req.isAuthenticated(), layout: 'clinician.hbs', 
@@ -255,6 +284,21 @@ const getPatientWeight = async(req, res, next) => {
                 return res.render('notfound')
             }
 
+            const clinician = await Clinician.findById(req.user.role_id.toString()).lean();
+
+            // check if patient is one of clinician's patients
+            if (clinician) {
+                if (clinician.patients.indexOf(req.params.patient_id.toString()) > -1) {
+                    // patient is one of the clinician's patients!
+                    // do nothing
+                }
+                else {
+                    // patient is not one of clinician's patients. you shall not pass!
+                    req.flash('error',"Error. You are not allowed to view this patient's data.");
+                    return res.redirect(`/clinician/dashboard`);
+                }
+            }
+
             return res.render('patientMeasurement', {loggedIn: req.isAuthenticated(), layout: 'clinician.hbs', 
                 join_date: user.join_date, patient: patient, required: reqMeasurements, measurement: formatted, 
                 type: type, max: max, min: min, unit: unit})
@@ -286,6 +330,21 @@ const getPatientInsulin = async(req, res, next) => {
             if (!patient) {
                 // no patient found in database
                 return res.render('notfound')
+            }
+
+            const clinician = await Clinician.findById(req.user.role_id.toString()).lean();
+
+            // check if patient is one of clinician's patients
+            if (clinician) {
+                if (clinician.patients.indexOf(req.params.patient_id.toString()) > -1) {
+                    // patient is one of the clinician's patients!
+                    // do nothing
+                }
+                else {
+                    // patient is not one of clinician's patients. you shall not pass!
+                    req.flash('error',"Error. You are not allowed to view this patient's data.");
+                    return res.redirect(`/clinician/dashboard`);
+                }
             }
 
             return res.render('patientMeasurement', {loggedIn: req.isAuthenticated(), layout: 'clinician.hbs', 
@@ -321,6 +380,21 @@ const getPatientExercise = async(req, res, next) => {
                 return res.render('notfound')
             }
 
+            const clinician = await Clinician.findById(req.user.role_id.toString()).lean();
+
+            // check if patient is one of clinician's patients
+            if (clinician) {
+                if (clinician.patients.indexOf(req.params.patient_id.toString()) > -1) {
+                    // patient is one of the clinician's patients!
+                    // do nothing
+                }
+                else {
+                    // patient is not one of clinician's patients. you shall not pass!
+                    req.flash('error',"Error. You are not allowed to view this patient's data.");
+                    return res.redirect(`/clinician/dashboard`);
+                }
+            }
+
             return res.render('patientMeasurement', {loggedIn: req.isAuthenticated(), layout: 'clinician.hbs', 
                 join_date: user.join_date, patient: patient, required: reqMeasurements, measurement: formatted, 
                 type: type, max: max, min: min, unit: unit})
@@ -341,6 +415,21 @@ const getDataBounds = async(req, res, next) => {
             const measurement = await Measurement.find({patientId: req.params.patient_id.toString()})
             const reqMeasurements = Object.keys(patient["measurements"])
             const user = await User.findOne({role_id: patient._id}).lean();
+
+            const clinician = await Clinician.findById(req.user.role_id.toString()).lean();
+
+            // check if patient is one of clinician's patients
+            if (clinician) {
+                if (clinician.patients.indexOf(req.params.patient_id.toString()) > -1) {
+                    // patient is one of the clinician's patients!
+                    // do nothing
+                }
+                else {
+                    // patient is not one of clinician's patients. you shall not pass!
+                    req.flash('error',"Error. You are not allowed to view this patient's data.");
+                    return res.redirect(`/clinician/dashboard`);
+                }
+            }
             
             //rendering to page
             res.render('clinicianManage', {layout: 'clinician.hbs', loggedIn: req.isAuthenticated(), 
@@ -555,11 +644,11 @@ const insertData = async (req, res, next) => {
             }
 
             // checking to see if this email is taken.
-            // const emailExists = await User.find({username: req.body.email}).lean();
-            // if (emailExists.length > 0) {
-            //     req.flash('error', `The email address has already been taken, please try another one.`)
-            //     return res.redirect('/clinician/create');
-            // }
+            const emailExists = await User.findOne({username: req.body.email.toLowerCase()}).lean();
+            if (emailExists) {
+                req.flash('error', `The email address has already been taken, please try another one.`)
+                return res.redirect('/clinician/create');
+            }
 
             // const screenNameExists = await Patient.find({screen_name: req.body.screen_name}).lean();
 
@@ -751,9 +840,21 @@ const getIndividualMessage = async (req, res) => {
             const user = req.user;
             const patient = await Patient.findById(req.params.patient_id).lean()
             const clinician = await Clinician.findById(user.role_id.toString()).lean();
-            const measurement = await Measurement.find({patientId: req.params.patient_id.toString(), type:'insulin'}).sort({"date": -1}).lean() 
             const reqMeasurements = Object.keys(patient["measurements"])
             const message = patient.supportMessage;
+
+            // check if patient is one of clinician's patients
+            if (clinician) {
+                if (clinician.patients.indexOf(req.params.patient_id.toString()) > -1) {
+                    // patient is one of the clinician's patients!
+                    // do nothing
+                }
+                else {
+                    // patient is not one of clinician's patients. you shall not pass!
+                    req.flash('error',"Error. You are not allowed to view this patient's data.");
+                    return res.redirect(`/clinician/dashboard`);
+                }
+            }
 
             res.render('individualSupportMessage', {layout: "clinician.hbs", loggedIn: req.isAuthenticated(), flash: req.flash('success'), 
                 errorFlash: req.flash('error'), patient: patient, join_date: user.join_date, clinician: clinician, 
