@@ -208,7 +208,9 @@ const getPatientOverview = async(req, res, next) => {
                 join_date: user.join_date, patient: patient, measurements: measurements, groupedByDate: measurementsByDate, notes: notes})
 
         } catch (err) {
-            return next(err)
+            console.log(err);
+            req.flash('error',"Error. Cannot find patient.");
+            return res.redirect(`/clinician/dashboard`);
         }
     } else {
         res.render('login');
@@ -255,7 +257,9 @@ const getPatientBCG = async(req, res, next) => {
                 type: type, max: max, min: min, unit: unit})
 
         } catch (err) {
-            return next(err)
+            console.log(err);
+            req.flash('error',"Error. Cannot find patient.");
+            return res.redirect(`/clinician/dashboard`);
         }
     } else {
         res.render('login');
@@ -304,7 +308,9 @@ const getPatientWeight = async(req, res, next) => {
                 type: type, max: max, min: min, unit: unit})
 
         } catch (err) {
-            return next(err)
+            console.log(err);
+            req.flash('error',"Error. Cannot find patient.");
+            return res.redirect(`/clinician/dashboard`);
         }
     } else {
         res.render('login');
@@ -352,7 +358,9 @@ const getPatientInsulin = async(req, res, next) => {
                 type: type, max: max, min: min, unit: unit})
 
         } catch (err) {
-            return next(err)
+            console.log(err);
+            req.flash('error',"Error. Cannot find patient.");
+            return res.redirect(`/clinician/dashboard`);
         }
     } else {
         res.render('login');
@@ -400,7 +408,9 @@ const getPatientExercise = async(req, res, next) => {
                 type: type, max: max, min: min, unit: unit})
 
         } catch (err) {
-            return next(err)
+            console.log(err);
+            req.flash('error',"Error. Cannot find patient.");
+            return res.redirect(`/clinician/dashboard`);
         }
     } else {
         res.render('login');
@@ -437,7 +447,9 @@ const getDataBounds = async(req, res, next) => {
                 patient: patient, required: reqMeasurements})
             
         } catch (err) {
-            return next(err)
+            console.log(err);
+            req.flash('error',"Error. Cannot find patient.");
+            return res.redirect(`/clinician/dashboard`);
         }
     } else {
         res.render('login');
