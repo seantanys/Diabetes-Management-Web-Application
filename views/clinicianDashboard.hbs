@@ -39,7 +39,11 @@
                     {{#if (and (gte this.bcg this.patient.measurements.bcg.minimum) (lte this.bcg this.patient.measurements.bcg.maximum))}}
                         {{this.bcg}}
                     {{else}}
-                        <p id ="red">{{this.bcg}}</p>
+                        {{#if this.patient.measurements.bcg.maximum}}
+                            <p id ="red">{{this.bcg}}</p>
+                        {{else}}
+                            {{this.bcg}}
+                        {{/if}}
                     {{/if}}
                     {{#if (isEmpty this.bcg)}}
                         <p id ="grey">Not updated</p>
@@ -55,7 +59,11 @@
                     {{#if (and (gte this.weight this.patient.measurements.weight.minimum) (lte this.weight this.patient.measurements.weight.maximum))}}
                         {{this.weight}}
                     {{else}}
-                        <p id ="red">{{this.weight}}</p>
+                        {{#if this.patient.measurements.weight.maximum}}
+                            <p id ="red">{{this.weight}}</p>     
+                        {{else}}
+                            {{this.weight}}
+                        {{/if}}                    
                     {{/if}}
                     {{#if (isEmpty this.weight)}}
                         <p id ="grey">Not updated</p>
@@ -71,7 +79,11 @@
                     {{#if (and (gte this.insulin this.patient.measurements.insulin.minimum) (lte this.insulin this.patient.measurements.insulin.maximum))}}
                         {{this.insulin}}
                     {{else}}
-                        <p id ="red">{{this.insulin}}</p>
+                        {{#if this.patient.measurements.insulin.maximum}}
+                            <p id ="red">{{this.insulin}}</p>
+                        {{else}}
+                            {{this.insulin}}
+                        {{/if}}    
                     {{/if}}
                     {{#if (isEmpty this.insulin)}}
                         <p id ="grey">Not updated</p>
@@ -87,7 +99,11 @@
                     {{#if (and (gte this.exercise this.patient.measurements.exercise.minimum) (lte this.exercise this.patient.measurements.exercise.maximum))}}
                         {{this.exercise}}
                     {{else}}
-                        <p id ="red">{{this.exercise}}</p>
+                        {{#if this.patient.measurements.exercise.maximum}}
+                            <p id ="red">{{this.exercise}}</p>
+                        {{else}}
+                            {{this.exercise}}
+                        {{/if}}                      
                     {{/if}}
                     {{#if (isEmpty this.exercise)}}
                         <p id ="grey">Not updated</p>
