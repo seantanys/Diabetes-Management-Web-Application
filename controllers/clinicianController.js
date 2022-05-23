@@ -841,7 +841,9 @@ const getSupportMessagesPage = async (req, res, next) => {
                 flash: req.flash('success'), errorFlash: req.flash('error'), clinician: clinician, messages: messages});
 
         } catch (err) {
-            return next(err);
+            console.log(err);
+            req.flash('error',"Error. Cannot find patient.");
+            return res.redirect(`/clinician/dashboard`);
         }
 
         
@@ -879,7 +881,9 @@ const getIndividualMessage = async (req, res) => {
                 message: message, required: reqMeasurements});
 
         } catch (err) {
-            return next(err);
+            console.log(err);
+            req.flash('error',"Error. Cannot find patient.");
+            return res.redirect(`/clinician/dashboard`);
         }
 
 
