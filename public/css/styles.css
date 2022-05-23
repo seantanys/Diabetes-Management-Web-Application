@@ -1302,31 +1302,6 @@ hr.solid {
   width: 150px;
 }
 }
-
-
-/* TABLET SIZE */
-@media screen 
-  and (min-width: 768px) 
-  and (max-width: 1024px) 
-  and (-webkit-min-device-pixel-ratio: 1) {
-  
-  .hero-section lottie-player {
-    width: 550px;
-    height: 550px;
-    margin-right: -50px
-  }
-
-  .feature-list-item .icon {
-    width: 50px;
-    height: 50px;
-  }
-
-  .tabset {
-    width: 100%;
-  }
-
-
-}
 /* Patient dashboard stuff */
 
 #patient-dashboard {
@@ -2080,6 +2055,34 @@ hr.solid {
   .patient-data-filters {
     display: none;
   }
+}
+
+/* TABLET SIZE */
+@media screen 
+  and (min-width: 768px) 
+  and (max-width: 1024px) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+  
+  .hero-section lottie-player {
+    width: 550px;
+    height: 550px;
+    margin-right: -50px
+  }
+
+  .feature-list-item .icon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .tabset {
+    width: 100%;
+  }
+
+  .patient-account-dashboard {
+    height: 1600px;
+  }
+
+
 }
 
 
