@@ -65,8 +65,10 @@ Scored 91.6% overall on this project.
 
 Heroku Link: https://info30005-diabetes-at-home.herokuapp.com/
 
-Note: This web app is only optimized for specific screen resolutions as per project specifications
+<b>Note</b> This web app is only optimized for specific screen resolutions as per project specifications
+<br>
 Patient Side: iPhone X (375x812), iPad (1024x768), Desktop (1920x1080)
+<br>
 Clinician Side: Desktop (1920x1080) ONLY
 
 
