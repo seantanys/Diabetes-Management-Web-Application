@@ -59,6 +59,12 @@ Maybe you can mention me or this repo in the acknowledgements too
 <!-- About the Project -->
 ## :star2: About the Project
 
+This is a web application developed for INFO30005 Web Information & Technology Semester 1 2022
+
+Scored 91.6% overall on this project. 
+
+Heroku Link: https://info30005-diabetes-at-home.herokuapp.com/
+
 
 <!-- Screenshots -->
 ### :camera: Screenshots
