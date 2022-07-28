@@ -14,17 +14,17 @@ Maybe you can mention me or this repo in the acknowledgements too
   <p>
    We are Team h1. Our team comprises of Kian, Sanskar, Anh, Sean and Nic. Together we are creating web-based software for Diabetes@Home, a startup who plan to sell      digital health solutions.
 
-   The first product we are designing is a web app which helps people to manage their diabetes in the conveniences of their own home.
+   The first product we are designing is a web app which helps people to manage their diabetes in the conveniences of their own mobile device, tablet or PC.
 
    Stay tuned for all future updates on this product.
   </p>
    
 <h4>
-    <a href="https://github.com/ncko10/Web-IT-group/">View Demo</a>
+    <a href="https://github.com/seantanys/Diabetes-Management-Web-Application/">View Demo</a>
   <span> · </span>
-    <a href="https://github.com/ncko10/Web-IT-group/">Documentation</a>
+    <a href="https://github.com/seantanys/Diabetes-Management-Web-Application/">Documentation</a>
   <span> · </span>
-    <a href="https://github.com/ncko10/Web-IT-group/">Report Bug</a>
+    <a href="https://github.com/seantanys/Diabetes-Management-Web-Application/">Report Bug</a>
   </h4>
 </div>
 
@@ -160,23 +160,19 @@ This project uses npm as package manager
 Clone the project
 
 ```bash
-  git clone https://github.com/ncko10/Web-IT-group/
+  git clone https://github.com/seantanys/Diabetes-Management-Web-Application
 ```
 
 Go to the project directory
 
 ```bash
-  cd Web-IT-group
+  cd Diabetes-Management-Web-Application
 ```
 
 Install dependencies
 
 ```bash
-  npm install luxon
-  npm install express-validator
-  npm install express
-  npm install passport
-  npm install bcrypt
+  npm install
 ```
 
 Start the server
@@ -198,7 +194,7 @@ Start the server
 <!-- Code of Conduct -->
 ### :scroll: Code of Conduct
 
-Please read the [Code of Conduct](https://github.com/ncko10/Web-IT-group/)
+Please read the [Code of Conduct](https://github.com/seantanys/Diabetes-Management-Web-Application)
 
 <!-- License -->
 ## :warning: License
@@ -215,12 +211,6 @@ This web app is only for use for INFO30005 Web Information Technologies 2022 Sem
 - Anh
 - Sanskar
 
-Project Link: [https://github.com/ncko10/Web-IT-group/](https://github.com/ncko10/Web-IT-group/)
-
-
-<!-- Acknowledgments -->
-## :gem: Acknowledgements
-
-Use this section to mention useful resources and libraries that you have used in your projects.
+Project Link: [https://github.com/seantanys/Diabetes-Management-Web-Application/](https://github.com/seantanys/Diabetes-Management-Web-Application)
 
 
