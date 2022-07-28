@@ -73,6 +73,10 @@ Heroku Link: https://info30005-diabetes-at-home.herokuapp.com/
   <img src="public/images/readme/homepage.jpg" alt="home-page" />
 </div>
 
+<div align="center"> 
+  <img src="public/images/screenshot-patient-dashboard.jpg" alt="dashboard-page" />
+</div>
+
 
 <!-- TechStack -->
 ### :space_invader: Tech Stack
