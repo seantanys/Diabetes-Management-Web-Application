@@ -70,11 +70,15 @@ Heroku Link: https://info30005-diabetes-at-home.herokuapp.com/
 ### :camera: Screenshots
 
 <div align="center"> 
-  <img src="public/images/readme/homepage.jpg" alt="home-page" />
+  <img src="public/images/readme/screenshot-homepage-1.jpg" alt="home-page" />
 </div>
 
 <div align="center"> 
-  <img src="public/images/screenshot-patient-dashboard.jpg" alt="dashboard-page" />
+  <img src="public/images/screenshot-patient-dashboard.jpg" alt="home-page" />
+</div>
+
+<div align="center"> 
+  <img src="public/images/readme/screenshot-patient-messages.jpg" alt="message-page" />
 </div>
 
 
